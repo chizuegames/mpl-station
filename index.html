@@ -2,19 +2,27 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   />
+
   <title>MPL - Estación Espacial</title>
 
   <style>
+
+    /* =========================================================
+       CONFIGURACIÓN GENERAL
+       ========================================================= */
+
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -37,6 +45,7 @@
       margin: 0 auto;
       overflow: hidden;
       background: #050713;
+
       user-select: none;
       -webkit-user-select: none;
     }
@@ -53,15 +62,19 @@
       pointer-events: none;
     }
 
-    /* =========================
-       CUARTOS TOCABLES
-       ========================= */
+
+    /* =========================================================
+       ZONAS INVISIBLES DE LOS CUARTOS
+       ========================================================= */
 
     .room {
       position: absolute;
       z-index: 20;
       cursor: pointer;
     }
+
+
+    /* A12 */
 
     #roomA12 {
       left: 42.7%;
@@ -70,12 +83,18 @@
       height: 7.8%;
     }
 
+
+    /* B5 */
+
     #roomB5 {
       left: 42.7%;
       top: 54.2%;
       width: 14.6%;
       height: 7.8%;
     }
+
+
+    /* B6 */
 
     #roomB6 {
       left: 27.9%;
@@ -84,6 +103,9 @@
       height: 7.8%;
     }
 
+
+    /* B7 */
+
     #roomB7 {
       left: 57.5%;
       top: 62.0%;
@@ -91,43 +113,1833 @@
       height: 7.8%;
     }
 
-    /* =========================
-       BOTÓN ESCÁNER
-       ========================= */
+
+
+    /* =========================================================
+       BOTÓN DEL ESCÁNER
+       ========================================================= */
 
     #scannerButton {
       position: absolute;
+
       left: 38%;
       top: 89.3%;
+
       width: 24%;
       height: 8.9%;
+
       z-index: 25;
+
       cursor: pointer;
+
       animation: scannerPulse 1.8s infinite ease-in-out;
     }
 
+
     @keyframes scannerPulse {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.2); }
+
+      0%,
+      100% {
+        filter: brightness(1);
+      }
+
+      50% {
+        filter: brightness(1.2);
+      }
+
     }
 
-    /* =========================
-       CAPAS E ICONOS
-       ========================= */
+
+
+    /* =========================================================
+       CAPA DE ICONOS
+       ========================================================= */
 
     #iconsLayer {
       position: absolute;
       inset: 0;
+
       z-index: 30;
+
       pointer-events: none;
     }
 
+
     .map-icon {
       position: absolute;
+
       transform: translate(-50%, -50%);
+
       pointer-events: none;
+
       object-fit: contain;
     }
+
+
+
+    /* =========================================================
+       CHECK
+       ========================================================= */
+
+    .check-icon {
+      width: 11.5%;
+
+      animation: checkEnter 0.45s ease-out;
+    }
+
+
+    @keyframes checkEnter {
+
+      from {
+        opacity: 0;
+        transform:
+          translate(-50%, -50%)
+          scale(1.8);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+    }
+
+
+
+    /* =========================================================
+       ONDAS DEL ESCÁNER
+       ========================================================= */
+
+    .scanner-wave {
+      width: 9%;
+
+      animation: waveGlow 1s infinite ease-in-out;
+    }
+
+
+    @keyframes waveGlow {
+
+      0%,
+      100% {
+        opacity: 0.62;
+        filter: brightness(0.95);
+      }
+
+      50% {
+        opacity: 1;
+        filter: brightness(1.22);
+      }
+
+    }
+
+
+
+    /* =========================================================
+       ICONOS DE MARCIANOS
+
+       Más grandes que en la versión anterior
+       ========================================================= */
+
+    .enemy-icon {
+      width: 12.5%;
+
+      animation: enemyAppear 0.35s ease-out;
+    }
+
+
+    @keyframes enemyAppear {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -50%)
+          scale(0.2);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+    }
+
+
+
+    /* =========================================================
+       CENTRO DE CADA CUARTO
+       ========================================================= */
+
+    .pos-A12 {
+      left: 50%;
+      top: 65.9%;
+    }
+
+    .pos-B5 {
+      left: 50%;
+      top: 58.1%;
+    }
+
+    .pos-B6 {
+      left: 35.2%;
+      top: 65.9%;
+    }
+
+    .pos-B7 {
+      left: 64.8%;
+      top: 65.9%;
+    }
+
+
+
+    /* =========================================================
+       DIRECCIÓN DE LAS ONDAS
+
+       Esc1.png originalmente apunta hacia arriba.
+       ========================================================= */
+
+    .dir-up {
+      transform:
+        translate(-50%, -50%)
+        rotate(0deg);
+    }
+
+    .dir-right {
+      transform:
+        translate(-50%, -50%)
+        rotate(90deg);
+    }
+
+    .dir-left {
+      transform:
+        translate(-50%, -50%)
+        rotate(-90deg);
+    }
+
+    .dir-down {
+      transform:
+        translate(-50%, -50%)
+        rotate(180deg);
+    }
+
+
+
+    /* =========================================================
+       OSCURECER MAPA CUANDO HAY ENCUENTRO
+       ========================================================= */
+
+    #darkOverlay {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: 80;
+
+      background: rgba(0, 0, 0, 0.58);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: opacity 0.25s ease;
+    }
+
+
+    #darkOverlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+
+    /* =========================================================
+       ENCUENTRO A12
+       ========================================================= */
+
+    #encounter {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 100;
+
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      padding: 12px;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: scale(0.94);
+
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+    }
+
+
+    #encounter.show {
+      opacity: 1;
+      visibility: visible;
+
+      transform: scale(1);
+    }
+
+
+    #encounterCard {
+      position: relative;
+
+      width: min(82vw, 650px);
+
+      max-height: 94vh;
+    }
+
+
+    #encounterImage {
+      display: block;
+
+      width: 100%;
+      height: auto;
+
+      max-height: 94vh;
+
+      object-fit: contain;
+
+      pointer-events: none;
+    }
+
+
+
+    /* =========================================================
+       ZONA DEL CORAZÓN
+       ========================================================= */
+
+    #heartButton {
+      position: absolute;
+
+      left: 76%;
+      top: 60%;
+
+      width: 21%;
+      height: 19%;
+
+      z-index: 120;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    #heartCounter {
+      position: absolute;
+
+      left: 50%;
+      top: 48%;
+
+      transform: translate(-50%, -50%);
+
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(0, 0, 0, 0.8);
+
+      border: 3px solid white;
+
+      color: white;
+
+      font-size: clamp(22px, 5vw, 34px);
+
+      font-weight: 900;
+
+      text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000;
+
+      pointer-events: none;
+    }
+
+
+    #heartButton.hit {
+      animation: heartHit 0.3s ease;
+    }
+
+
+    @keyframes heartHit {
+
+      0% {
+        transform: scale(1);
+      }
+
+      40% {
+        transform: scale(1.2);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+
+    }
+
+
+
+    /* =========================================================
+       MENSAJES
+       ========================================================= */
+
+    #message {
+      position: fixed;
+
+      left: 50%;
+      top: 44%;
+
+      transform:
+        translate(-50%, -50%)
+        scale(0.8);
+
+      z-index: 200;
+
+      min-width: 240px;
+
+      max-width: 85vw;
+
+      padding:
+        17px
+        25px;
+
+      border-radius: 18px;
+
+      background:
+        rgba(15, 18, 22, 0.95);
+
+      border:
+        3px solid
+        #a8d336;
+
+      color: white;
+
+      font-size:
+        clamp(
+          20px,
+          4.6vw,
+          36px
+        );
+
+      font-weight: 900;
+
+      line-height: 1.15;
+
+      text-align: center;
+
+      opacity: 0;
+      visibility: hidden;
+
+      box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(168, 211, 54, 0.45);
+
+      pointer-events: none;
+    }
+
+
+    #message.show {
+      visibility: visible;
+
+      animation:
+        messageAnimation
+        1.45s
+        ease
+        forwards;
+    }
+
+
+    @keyframes messageAnimation {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -20%)
+          scale(0.7);
+      }
+
+      18% {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1.06);
+      }
+
+      70% {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -60%)
+          scale(1);
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, -95%)
+          scale(0.95);
+      }
+
+    }
+
+
+
+    /* =========================================================
+       AJUSTES PARA PC
+       ========================================================= */
+
+    @media (min-width: 900px) {
+
+      #encounterCard {
+        width:
+          min(
+            58vh,
+            610px
+          );
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       MAPA
+       ========================================================= -->
+
+  <div id="game">
+
+    <div id="map">
+
+
+      <!-- FONDO PRINCIPAL -->
+
+      <img
+        id="mapImage"
+        src="FN1.png"
+        alt="Estación espacial MPL"
+        draggable="false"
+      />
+
+
+      <!-- A12 -->
+
+      <div
+        id="roomA12"
+        class="room"
+        aria-label="Habitación A12"
+      ></div>
+
+
+      <!-- B5 -->
+
+      <div
+        id="roomB5"
+        class="room"
+        aria-label="Habitación B5"
+      ></div>
+
+
+      <!-- B6 -->
+
+      <div
+        id="roomB6"
+        class="room"
+        aria-label="Habitación B6"
+      ></div>
+
+
+      <!-- B7 -->
+
+      <div
+        id="roomB7"
+        class="room"
+        aria-label="Habitación B7"
+      ></div>
+
+
+      <!-- BOTÓN ESCÁNER -->
+
+      <div
+        id="scannerButton"
+        aria-label="Escáner"
+      ></div>
+
+
+      <!-- ICONOS -->
+
+      <div id="iconsLayer"></div>
+
+
+      <!-- OSCURECIMIENTO -->
+
+      <div id="darkOverlay"></div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       ENCUENTRO DE A12
+       ========================================================= -->
+
+  <div id="encounter">
+
+    <div id="encounterCard">
+
+
+      <img
+        id="encounterImage"
+        src="A12.png"
+        alt="Marciano verde"
+        draggable="false"
+      />
+
+
+      <div id="heartButton">
+
+        <div id="heartCounter">
+          1
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       MENSAJES
+       ========================================================= -->
+
+  <div id="message"></div>
+
+
+
+  <script>
+
+    /* =========================================================
+       ESTADO DEL JUEGO
+       ========================================================= */
+
+    const state = {
+
+      currentRoom: "ENTRADA",
+
+      rooms: {
+
+        A12: {
+
+          status: "hidden",
+
+          encounter: "icoM1.png",
+
+          label: "MARCIANO VERDE"
+
+        },
+
+
+        B5: {
+
+          status: "hidden",
+
+          encounter: null,
+
+          label: ""
+
+        },
+
+
+        B6: {
+
+          status: "hidden",
+
+          encounter: null,
+
+          label: ""
+
+        },
+
+
+        B7: {
+
+          status: "hidden",
+
+          encounter: null,
+
+          label: ""
+
+        }
+
+      }
+
+    };
+
+
+
+    /* =========================================================
+       ELEMENTOS
+       ========================================================= */
+
+    const iconsLayer =
+      document.getElementById(
+        "iconsLayer"
+      );
+
+
+    const scannerButton =
+      document.getElementById(
+        "scannerButton"
+      );
+
+
+    const darkOverlay =
+      document.getElementById(
+        "darkOverlay"
+      );
+
+
+    const encounter =
+      document.getElementById(
+        "encounter"
+      );
+
+
+    const heartButton =
+      document.getElementById(
+        "heartButton"
+      );
+
+
+    const heartCounter =
+      document.getElementById(
+        "heartCounter"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+
+    /* =========================================================
+       VIDA MARCIANO A12
+       ========================================================= */
+
+    let enemyLife = 1;
+
+    let defeatingEnemy = false;
+
+
+
+    /* =========================================================
+       MENSAJES
+       ========================================================= */
+
+    let messageTimer;
+
+
+
+    function showMessage(html) {
+
+      clearTimeout(
+        messageTimer
+      );
+
+
+      message.classList.remove(
+        "show"
+      );
+
+
+      void message.offsetWidth;
+
+
+      message.innerHTML =
+        html;
+
+
+      message.classList.add(
+        "show"
+      );
+
+
+      messageTimer =
+        setTimeout(() => {
+
+          message.classList.remove(
+            "show"
+          );
+
+        }, 1450);
+
+    }
+
+
+
+    /* =========================================================
+       BARAJAR CUARTOS B
+       ========================================================= */
+
+    function shuffle(array) {
+
+      const result =
+        [...array];
+
+
+      for (
+        let i =
+          result.length - 1;
+
+        i > 0;
+
+        i--
+      ) {
+
+        const j =
+          Math.floor(
+            Math.random()
+            *
+            (i + 1)
+          );
+
+
+        [
+          result[i],
+          result[j]
+        ]
+        =
+        [
+          result[j],
+          result[i]
+        ];
+
+      }
+
+
+      return result;
+
+    }
+
+
+
+    function prepareBRooms() {
+
+      const deck =
+        shuffle([
+
+          {
+            img:
+              "icoM1.png",
+
+            label:
+              "MARCIANO VERDE"
+          },
+
+
+          {
+            img:
+              "icoM1.png",
+
+            label:
+              "MARCIANO VERDE"
+          },
+
+
+          {
+            img:
+              "icoM2.png",
+
+            label:
+              "MARCIANO MORADO"
+          }
+
+        ]);
+
+
+      const rooms =
+        [
+          "B5",
+          "B6",
+          "B7"
+        ];
+
+
+      rooms.forEach(
+        (room, index) => {
+
+          state.rooms[
+            room
+          ].encounter =
+            deck[index].img;
+
+
+          state.rooms[
+            room
+          ].label =
+            deck[index].label;
+
+        }
+      );
+
+    }
+
+
+
+    prepareBRooms();
+
+
+
+    /* =========================================================
+       AUDIO
+       ========================================================= */
+
+    function createAudioContext() {
+
+      const AudioContext =
+        window.AudioContext
+        ||
+        window.webkitAudioContext;
+
+
+      return new AudioContext();
+
+    }
+
+
+
+    function scannerSound() {
+
+      try {
+
+        const ctx =
+          createAudioContext();
+
+
+        const oscillator =
+          ctx.createOscillator();
+
+
+        const gain =
+          ctx.createGain();
+
+
+        oscillator.type =
+          "sine";
+
+
+        oscillator.frequency
+          .setValueAtTime(
+            480,
+            ctx.currentTime
+          );
+
+
+        oscillator.frequency
+          .linearRampToValueAtTime(
+            980,
+            ctx.currentTime + 0.28
+          );
+
+
+        gain.gain
+          .setValueAtTime(
+            0.08,
+            ctx.currentTime
+          );
+
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            0.001,
+            ctx.currentTime + 0.4
+          );
+
+
+        oscillator.connect(
+          gain
+        );
+
+
+        gain.connect(
+          ctx.destination
+        );
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+          ctx.currentTime + 0.4
+        );
+
+      }
+
+      catch (error) {}
+
+    }
+
+
+
+    function deathSound() {
+
+      try {
+
+        const ctx =
+          createAudioContext();
+
+
+        const now =
+          ctx.currentTime;
+
+
+        const frequencies =
+          [
+            430,
+            300,
+            180,
+            95
+          ];
+
+
+        frequencies.forEach(
+          (frequency, index) => {
+
+            const oscillator =
+              ctx.createOscillator();
+
+
+            const gain =
+              ctx.createGain();
+
+
+            oscillator.type =
+              index < 2
+                ?
+                "square"
+                :
+                "sawtooth";
+
+
+            oscillator.frequency
+              .setValueAtTime(
+                frequency,
+                now
+                +
+                index * 0.09
+              );
+
+
+            gain.gain
+              .setValueAtTime(
+                0.13,
+                now
+                +
+                index * 0.09
+              );
+
+
+            gain.gain
+              .exponentialRampToValueAtTime(
+                0.001,
+                now
+                +
+                0.22
+                +
+                index * 0.09
+              );
+
+
+            oscillator.connect(
+              gain
+            );
+
+
+            gain.connect(
+              ctx.destination
+            );
+
+
+            oscillator.start(
+              now
+              +
+              index * 0.09
+            );
+
+
+            oscillator.stop(
+              now
+              +
+              0.25
+              +
+              index * 0.09
+            );
+
+          }
+        );
+
+      }
+
+      catch (error) {}
+
+    }
+
+
+
+    /* =========================================================
+       CREAR ICONO
+       ========================================================= */
+
+    function addMapIcon(
+      id,
+      image,
+      room,
+      classes
+    ) {
+
+      const previous =
+        document.getElementById(
+          id
+        );
+
+
+      if (previous) {
+
+        previous.remove();
+
+      }
+
+
+      const icon =
+        document.createElement(
+          "img"
+        );
+
+
+      icon.id =
+        id;
+
+
+      icon.src =
+        image;
+
+
+      icon.draggable =
+        false;
+
+
+      icon.className =
+        `map-icon pos-${room} ${classes}`;
+
+
+      iconsLayer.appendChild(
+        icon
+      );
+
+
+      return icon;
+
+    }
+
+
+
+    function removeMapIcon(id) {
+
+      const icon =
+        document.getElementById(
+          id
+        );
+
+
+      if (icon) {
+
+        icon.remove();
+
+      }
+
+    }
+
+
+
+    /* =========================================================
+       HABITACIONES VECINAS
+       ========================================================= */
+
+    function getAdjacentRooms(
+      currentRoom
+    ) {
+
+
+      /* -------------------------
+         DESDE LA ENTRADA
+         ------------------------- */
+
+      if (
+        currentRoom ===
+        "ENTRADA"
+      ) {
+
+        return [
+
+          {
+            room:
+              "A12",
+
+            direction:
+              "up"
+          }
+
+        ];
+
+      }
+
+
+
+      /* -------------------------
+         DESDE A12
+         ------------------------- */
+
+      if (
+        currentRoom ===
+        "A12"
+      ) {
+
+        return [
+
+          {
+            room:
+              "B5",
+
+            direction:
+              "up"
+          },
+
+
+          {
+            room:
+              "B6",
+
+            direction:
+              "left"
+          },
+
+
+          {
+            room:
+              "B7",
+
+            direction:
+              "right"
+          }
+
+        ];
+
+      }
+
+
+      return [];
+
+    }
+
+
+
+    /* =========================================================
+       ESCANEAR
+       ========================================================= */
+
+    function scanNearbyRooms() {
+
+      const adjacent =
+        getAdjacentRooms(
+          state.currentRoom
+        );
+
+
+      if (
+        adjacent.length === 0
+      ) {
+
+        showMessage(
+          "ZONA NO<br>PROGRAMADA"
+        );
+
+        return;
+
+      }
+
+
+      scannerSound();
+
+
+      adjacent.forEach(
+        ({ room, direction }) => {
+
+
+          const roomData =
+            state.rooms[
+              room
+            ];
+
+
+          if (
+            !roomData
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+            Si aún no se ha explorado,
+            aparecen las ondas.
+          */
+
+          if (
+            roomData.status ===
+            "hidden"
+          ) {
+
+            roomData.status =
+              "scannable";
+
+
+            roomData.direction =
+              direction;
+
+
+            addMapIcon(
+
+              `scan-${room}`,
+
+              "Esc1.png",
+
+              room,
+
+              `scanner-wave dir-${direction}`
+
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+
+
+    scannerButton.addEventListener(
+      "click",
+      scanNearbyRooms
+    );
+
+
+
+    /* =========================================================
+       ABRIR A12
+       ========================================================= */
+
+    function openA12Encounter() {
+
+      enemyLife =
+        1;
+
+
+      defeatingEnemy =
+        false;
+
+
+      heartCounter.textContent =
+        enemyLife;
+
+
+      encounter.classList.add(
+        "show"
+      );
+
+
+      darkOverlay.classList.add(
+        "show"
+      );
+
+    }
+
+
+
+    /* =========================================================
+       COMPLETAR A12
+       ========================================================= */
+
+    function completeA12() {
+
+      encounter.classList.remove(
+        "show"
+      );
+
+
+      darkOverlay.classList.remove(
+        "show"
+      );
+
+
+      state.rooms.A12.status =
+        "completed";
+
+
+      state.currentRoom =
+        "A12";
+
+
+      removeMapIcon(
+        "scan-A12"
+      );
+
+
+      removeMapIcon(
+        "enemy-A12"
+      );
+
+
+      addMapIcon(
+
+        "check-A12",
+
+        "icocheck.png",
+
+        "A12",
+
+        "check-icon"
+
+      );
+
+    }
+
+
+
+    /* =========================================================
+       TOCAR CUARTO
+       ========================================================= */
+
+    function handleRoomClick(
+      roomName
+    ) {
+
+      const room =
+        state.rooms[
+          roomName
+        ];
+
+
+      if (!room) {
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+         SIN ESCANEAR
+         ===================================================== */
+
+      if (
+        room.status ===
+        "hidden"
+      ) {
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+         PRIMER TOQUE
+
+         REVELAR EL CUARTO
+         ===================================================== */
+
+      if (
+        room.status ===
+        "scannable"
+      ) {
+
+
+        room.status =
+          "revealed";
+
+
+        removeMapIcon(
+          `scan-${roomName}`
+        );
+
+
+        addMapIcon(
+
+          `enemy-${roomName}`,
+
+          room.encounter,
+
+          roomName,
+
+          "enemy-icon"
+
+        );
+
+
+        /*
+          TODO cuarto escaneado
+          cuesta 2 energías.
+
+          Incluye A12.
+        */
+
+        showMessage(
+          `${room.label}<br>−2 ENERGÍAS`
+        );
+
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+         SEGUNDO TOQUE
+
+         ENTRAR
+         ===================================================== */
+
+      if (
+        room.status ===
+        "revealed"
+      ) {
+
+
+        /*
+          A12 tiene encuentro programado.
+        */
+
+        if (
+          roomName ===
+          "A12"
+        ) {
+
+          openA12Encounter();
+
+          return;
+
+        }
+
+
+
+        /*
+          Por ahora los cuartos B
+          terminan aquí.
+        */
+
+        state.currentRoom =
+          roomName;
+
+
+        room.status =
+          "entered";
+
+
+        clearOtherScannerWaves();
+
+
+        showMessage(
+          `ENTRASTE A<br>${roomName}`
+        );
+
+
+        return;
+
+      }
+
+
+
+      /* =====================================================
+         CUARTO COMPLETADO
+         ===================================================== */
+
+      if (
+        room.status ===
+        "completed"
+      ) {
+
+        showMessage(
+          "CUARTO<br>COMPLETADO"
+        );
+
+      }
+
+    }
+
+
+
+    /* =========================================================
+       LIMPIAR ONDAS RESTANTES
+       ========================================================= */
+
+    function clearOtherScannerWaves() {
+
+      [
+        "A12",
+        "B5",
+        "B6",
+        "B7"
+      ]
+      .forEach(
+        roomName => {
+
+
+          removeMapIcon(
+            `scan-${roomName}`
+          );
+
+
+          const room =
+            state.rooms[
+              roomName
+            ];
+
+
+          if (
+            room
+            &&
+            room.status ===
+            "scannable"
+          ) {
+
+            room.status =
+              "hidden";
+
+          }
+
+        }
+      );
+
+    }
+
+
+
+    /* =========================================================
+       EVENTOS DE HABITACIONES
+       ========================================================= */
+
+    document
+      .getElementById(
+        "roomA12"
+      )
+      .addEventListener(
+        "click",
+        () =>
+          handleRoomClick(
+            "A12"
+          )
+      );
+
+
+    document
+      .getElementById(
+        "roomB5"
+      )
+      .addEventListener(
+        "click",
+        () =>
+          handleRoomClick(
+            "B5"
+          )
+      );
+
+
+    document
+      .getElementById(
+        "roomB6"
+      )
+      .addEventListener(
+        "click",
+        () =>
+          handleRoomClick(
+            "B6"
+          )
+      );
+
+
+    document
+      .getElementById(
+        "roomB7"
+      )
+      .addEventListener(
+        "click",
+        () =>
+          handleRoomClick(
+            "B7"
+          )
+      );
+
+
+
+    /* =========================================================
+       ATACAR MARCIANO A12
+       ========================================================= */
+
+    heartButton.addEventListener(
+      "click",
+      () => {
+
+
+        if (
+          defeatingEnemy
+          ||
+          enemyLife <= 0
+        ) {
+
+          return;
+
+        }
+
+
+        enemyLife--;
+
+
+        heartCounter.textContent =
+          enemyLife;
+
+
+        heartButton.classList.remove(
+          "hit"
+        );
+
+
+        void heartButton.offsetWidth;
+
+
+        heartButton.classList.add(
+          "hit"
+        );
+
+
+        /*
+          MARCIANO MUERTO
+        */
+
+        if (
+          enemyLife === 0
+        ) {
+
+
+          defeatingEnemy =
+            true;
+
+
+          deathSound();
+
+
+          setTimeout(
+            () => {
+
+              completeA12();
+
+            },
+
+            650
+          );
+
+        }
+
+      }
+    );
+
+
+
+    /* =========================================================
+       EVITAR DOBLE ZOOM EN MÓVIL
+       ========================================================= */
+
+    let lastTouchEnd =
+      0;
+
+
+    document.addEventListener(
+
+      "touchend",
+
+      function(event) {
+
+
+        const now =
+          Date.now();
+
+
+        if (
+          now
+          -
+          lastTouchEnd
+          <=
+          300
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        lastTouchEnd =
+          now;
+
+      },
+
+      {
+        passive:
+          false
+      }
+
+    );
+
+
+  </script>
+
+</body>
+</html>    }
 
     .check-icon {
       width: 10.8%;
