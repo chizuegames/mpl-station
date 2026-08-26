@@ -2,12 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   />
-
   <title>MPL - Estación Espacial</title>
 
   <style>
@@ -16,8 +14,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -34,14 +31,9 @@
       align-items: flex-start;
     }
 
-    /* ==========================================
-       CONTENEDOR GENERAL
-       ========================================== */
-
     #game {
       position: relative;
-      width: 100%;
-      max-width: 1066px;
+      width: min(100vw, 760px);
       margin: 0 auto;
       overflow: hidden;
       background: #050713;
@@ -61,154 +53,145 @@
       pointer-events: none;
     }
 
-    /* ==========================================
-       ZONAS DE HABITACIONES
-       ========================================== */
+    /* =========================
+       CUARTOS TOCABLES
+       ========================= */
 
     .room {
       position: absolute;
-      z-index: 10;
-      cursor: pointer;
-    }
-
-    /*
-      Estas zonas son invisibles.
-      Están ubicadas sobre los cuartos correspondientes.
-    */
-
-    #roomA12 {
-      left: 42.6%;
-      top: 62.0%;
-      width: 14.8%;
-      height: 7.8%;
-    }
-
-    #roomB5 {
-      left: 42.6%;
-      top: 54.3%;
-      width: 14.8%;
-      height: 7.8%;
-    }
-
-    #roomB6 {
-      left: 27.8%;
-      top: 62.0%;
-      width: 14.8%;
-      height: 7.8%;
-    }
-
-    #roomB7 {
-      left: 57.4%;
-      top: 62.0%;
-      width: 14.8%;
-      height: 7.8%;
-    }
-
-    /* ==========================================
-       BOTÓN DEL ESCÁNER
-       ========================================== */
-
-    #scannerButton {
-      position: absolute;
-      left: 38%;
-      top: 89.5%;
-      width: 24%;
-      height: 9%;
       z-index: 20;
       cursor: pointer;
     }
 
-    #scannerButton.enabled {
-      animation: scannerPulse 1.7s infinite ease-in-out;
+    #roomA12 {
+      left: 42.7%;
+      top: 62.0%;
+      width: 14.6%;
+      height: 7.8%;
+    }
+
+    #roomB5 {
+      left: 42.7%;
+      top: 54.2%;
+      width: 14.6%;
+      height: 7.8%;
+    }
+
+    #roomB6 {
+      left: 27.9%;
+      top: 62.0%;
+      width: 14.6%;
+      height: 7.8%;
+    }
+
+    #roomB7 {
+      left: 57.5%;
+      top: 62.0%;
+      width: 14.6%;
+      height: 7.8%;
+    }
+
+    /* =========================
+       BOTÓN ESCÁNER
+       ========================= */
+
+    #scannerButton {
+      position: absolute;
+      left: 38%;
+      top: 89.3%;
+      width: 24%;
+      height: 8.9%;
+      z-index: 25;
+      cursor: pointer;
+      animation: scannerPulse 1.8s infinite ease-in-out;
     }
 
     @keyframes scannerPulse {
-      0%,
-      100% {
-        filter: brightness(1);
-      }
-
-      50% {
-        filter: brightness(1.25);
-      }
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
     }
 
-    /* ==========================================
-       ICONOS SOBRE EL MAPA
-       ========================================== */
+    /* =========================
+       CAPAS E ICONOS
+       ========================= */
+
+    #iconsLayer {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      pointer-events: none;
+    }
 
     .map-icon {
       position: absolute;
-      z-index: 30;
-      pointer-events: none;
       transform: translate(-50%, -50%);
+      pointer-events: none;
       object-fit: contain;
     }
 
     .check-icon {
-      width: 11%;
+      width: 10.8%;
+      animation: checkEnter 0.45s ease-out;
     }
 
-    .scanner-icon {
-      width: 10%;
-      animation: scannerWave 1s infinite ease-in-out;
+    .scanner-wave {
+      width: 8.5%;
+      animation: waveGlow 1s infinite ease-in-out;
     }
 
     .enemy-icon {
-      width: 10%;
-      animation: revealEnemy 0.35s ease-out;
+      width: 8.7%;
+      animation: popIn 0.35s ease-out;
     }
 
-    @keyframes scannerWave {
-      0%,
-      100% {
-        transform: translate(-50%, -50%) scale(0.92);
+    @keyframes waveGlow {
+      0%, 100% {
         opacity: 0.65;
+        filter: brightness(0.95);
       }
-
       50% {
-        transform: translate(-50%, -50%) scale(1.08);
         opacity: 1;
+        filter: brightness(1.18);
       }
     }
 
-    @keyframes revealEnemy {
+    @keyframes popIn {
       from {
-        transform: translate(-50%, -50%) scale(0.2);
         opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
       }
-
       to {
-        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
       }
     }
 
-    /* CENTROS DE LOS CUARTOS */
-
-    .pos-A12 {
-      left: 50%;
-      top: 65.9%;
+    @keyframes checkEnter {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.8);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
 
-    .pos-B5 {
-      left: 50%;
-      top: 58.2%;
-    }
+    /* posiciones centradas */
+    .pos-A12 { left: 50%; top: 65.9%; }
+    .pos-B5  { left: 50%; top: 58.2%; }
+    .pos-B6  { left: 35.3%; top: 65.9%; }
+    .pos-B7  { left: 64.7%; top: 65.9%; }
 
-    .pos-B6 {
-      left: 35.2%;
-      top: 65.9%;
-    }
+    /* direcciones de las ondas */
+    .dir-up    { transform: translate(-50%, -50%) rotate(0deg); }
+    .dir-right { transform: translate(-50%, -50%) rotate(90deg); }
+    .dir-left  { transform: translate(-50%, -50%) rotate(-90deg); }
+    .dir-down  { transform: translate(-50%, -50%) rotate(180deg); }
 
-    .pos-B7 {
-      left: 64.8%;
-      top: 65.9%;
-    }
-
-    /* ==========================================
-       OSCURECER MAPA DURANTE ENCUENTRO
-       ========================================== */
+    /* =========================
+       OSCURECER FONDO
+       ========================= */
 
     #darkOverlay {
       position: absolute;
@@ -225,9 +208,9 @@
       visibility: visible;
     }
 
-    /* ==========================================
+    /* =========================
        ENCUENTRO A12
-       ========================================== */
+       ========================= */
 
     #encounter {
       position: fixed;
@@ -237,15 +220,10 @@
       justify-content: center;
       align-items: center;
       padding: 12px;
-
       opacity: 0;
       visibility: hidden;
-
-      transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
-
       transform: scale(0.94);
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
 
     #encounter.show {
@@ -269,122 +247,80 @@
       pointer-events: none;
     }
 
-    /* ==========================================
-       CORAZÓN DEL MARCIANO
-       ========================================== */
-
     #heartButton {
       position: absolute;
-
       left: 76%;
       top: 60%;
-
       width: 21%;
       height: 19%;
-
-      cursor: pointer;
       z-index: 120;
-
+      cursor: pointer;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
     #heartCounter {
       position: absolute;
-
       left: 50%;
       top: 48%;
-
       transform: translate(-50%, -50%);
-
       width: 44px;
       height: 44px;
-
       border-radius: 50%;
-
       display: flex;
       justify-content: center;
       align-items: center;
-
       background: rgba(0, 0, 0, 0.78);
-
       border: 3px solid white;
-
       color: white;
-
       font-size: clamp(22px, 5vw, 34px);
       font-weight: 900;
-
-      text-shadow:
-        2px 2px 0 #000,
-        -2px -2px 0 #000;
-
+      text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
       pointer-events: none;
     }
 
     #heartButton.hit {
-      animation: heartHit 0.32s ease;
+      animation: heartHit 0.3s ease;
     }
 
     @keyframes heartHit {
-      0% {
-        transform: scale(1);
-      }
-
-      40% {
-        transform: scale(1.22);
-      }
-
-      100% {
-        transform: scale(1);
-      }
+      0% { transform: scale(1); }
+      40% { transform: scale(1.2); }
+      100% { transform: scale(1); }
     }
 
-    /* ==========================================
-       AVISOS
-       ========================================== */
+    /* =========================
+       MENSAJES
+       ========================= */
 
     #message {
       position: fixed;
-
       left: 50%;
       top: 45%;
-
       transform: translate(-50%, -50%) scale(0.8);
-
       z-index: 200;
-
-      min-width: 220px;
-
-      padding: 16px 25px;
-
+      min-width: 240px;
+      padding: 16px 24px;
       border-radius: 18px;
-
       background: rgba(15, 18, 22, 0.94);
-
       border: 3px solid #a8d336;
-
       color: white;
-
-      font-size: clamp(22px, 5vw, 42px);
+      font-size: clamp(20px, 4.6vw, 36px);
       font-weight: 900;
-
       text-align: center;
-
+      line-height: 1.1;
       opacity: 0;
       visibility: hidden;
-
       box-shadow:
-        0 0 0 3px rgba(0, 0, 0, 0.55),
-        0 0 25px rgba(168, 211, 54, 0.45);
-
+        0 0 0 3px rgba(0,0,0,0.55),
+        0 0 25px rgba(168,211,54,0.45);
       pointer-events: none;
     }
 
     #message.show {
       visibility: visible;
-      animation: messageAnimation 1.2s ease forwards;
+      animation: messageAnimation 1.3s ease forwards;
     }
 
     @keyframes messageAnimation {
@@ -392,884 +328,341 @@
         opacity: 0;
         transform: translate(-50%, -20%) scale(0.7);
       }
-
       18% {
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1.08);
+        transform: translate(-50%, -50%) scale(1.06);
       }
-
       70% {
         opacity: 1;
         transform: translate(-50%, -60%) scale(1);
       }
-
       100% {
         opacity: 0;
         transform: translate(-50%, -95%) scale(0.95);
       }
     }
-
-    /* ==========================================
-       PEQUEÑA ANIMACIÓN AL COMPLETAR A12
-       ========================================== */
-
-    .check-enter {
-      animation: checkEnter 0.5s ease-out;
-    }
-
-    @keyframes checkEnter {
-      from {
-        transform: translate(-50%, -50%) scale(2);
-        opacity: 0;
-      }
-
-      to {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* ==========================================
-       PC
-       ========================================== */
-
-    @media (min-width: 900px) {
-      #game {
-        width: min(100vw, 760px);
-      }
-
-      #encounterCard {
-        width: min(58vh, 610px);
-      }
-    }
   </style>
 </head>
-
 <body>
 
   <div id="game">
-
     <div id="map">
+      <img id="mapImage" src="FN1.png" alt="Estación espacial MPL" draggable="false" />
 
-      <!-- FONDO -->
-      <img
-        id="mapImage"
-        src="FN1.png"
-        alt="Estación espacial MPL"
-        draggable="false"
-      />
+      <div id="roomA12" class="room" data-room="A12"></div>
+      <div id="roomB5" class="room" data-room="B5"></div>
+      <div id="roomB6" class="room" data-room="B6"></div>
+      <div id="roomB7" class="room" data-room="B7"></div>
 
-      <!-- HABITACIONES -->
-
-      <div
-        id="roomA12"
-        class="room"
-        data-room="A12"
-        aria-label="Habitación A12"
-      ></div>
-
-      <div
-        id="roomB5"
-        class="room"
-        data-room="B5"
-        aria-label="Habitación B5"
-      ></div>
-
-      <div
-        id="roomB6"
-        class="room"
-        data-room="B6"
-        aria-label="Habitación B6"
-      ></div>
-
-      <div
-        id="roomB7"
-        class="room"
-        data-room="B7"
-        aria-label="Habitación B7"
-      ></div>
-
-      <!-- BOTÓN ESCÁNER -->
-
-      <div
-        id="scannerButton"
-        aria-label="Escáner"
-      ></div>
-
-      <!-- CAPA PARA ICONOS -->
+      <div id="scannerButton" aria-label="Escáner"></div>
 
       <div id="iconsLayer"></div>
-
-      <!-- OSCURECIMIENTO -->
-
       <div id="darkOverlay"></div>
-
     </div>
-
   </div>
-
-  <!-- ======================================
-       ENCUENTRO A12
-       ====================================== -->
 
   <div id="encounter">
-
     <div id="encounterCard">
-
-      <img
-        id="encounterImage"
-        src="A12.png"
-        alt="Encuentro A12"
-        draggable="false"
-      />
-
+      <img id="encounterImage" src="A12.png" alt="Encuentro A12" draggable="false" />
       <div id="heartButton">
-
-        <div id="heartCounter">
-          1
-        </div>
-
+        <div id="heartCounter">1</div>
       </div>
-
     </div>
-
   </div>
-
-  <!-- AVISO -->
 
   <div id="message"></div>
 
   <script>
-
-    /* ==========================================
-       ESTADO GENERAL DEL JUEGO
-       ========================================== */
-
-    const gameState = {
-
+    const state = {
       currentRoom: "ENTRADA",
-
-      a12Completed: false,
-
-      scannerUnlocked: false,
-
-      scannerActive: false,
-
       rooms: {
-
+        A12: {
+          status: "hidden",
+          encounter: "icoM1.png",
+          label: "MARCIANO VERDE"
+        },
         B5: {
           status: "hidden",
-          encounter: null
+          encounter: null,
+          label: ""
         },
-
         B6: {
           status: "hidden",
-          encounter: null
+          encounter: null,
+          label: ""
         },
-
         B7: {
           status: "hidden",
-          encounter: null
+          encounter: null,
+          label: ""
         }
-
       }
-
     };
 
+    const iconsLayer = document.getElementById("iconsLayer");
+    const scannerButton = document.getElementById("scannerButton");
+    const darkOverlay = document.getElementById("darkOverlay");
+    const encounter = document.getElementById("encounter");
+    const heartButton = document.getElementById("heartButton");
+    const heartCounter = document.getElementById("heartCounter");
+    const message = document.getElementById("message");
 
-    /* ==========================================
-       ELEMENTOS
-       ========================================== */
-
-    const roomA12 =
-      document.getElementById("roomA12");
-
-    const scannerButton =
-      document.getElementById("scannerButton");
-
-    const encounter =
-      document.getElementById("encounter");
-
-    const darkOverlay =
-      document.getElementById("darkOverlay");
-
-    const heartButton =
-      document.getElementById("heartButton");
-
-    const heartCounter =
-      document.getElementById("heartCounter");
-
-    const iconsLayer =
-      document.getElementById("iconsLayer");
-
-    const message =
-      document.getElementById("message");
-
-
-    /* ==========================================
-       BARAJAR HABITACIONES B
-       ========================================== */
-
-    /*
-      Por ahora tenemos:
-
-      2 marcianos verdes
-      1 marciano morado
-
-      Se mezclan entre B5, B6 y B7.
-
-      Más adelante aquí pondremos el mazo
-      completo de encuentros B.
-    */
+    let enemyLife = 1;
+    let defeatingEnemy = false;
+    let messageTimer;
 
     function shuffle(array) {
-
       const result = [...array];
-
-      for (
-        let i = result.length - 1;
-        i > 0;
-        i--
-      ) {
-
-        const j =
-          Math.floor(
-            Math.random() * (i + 1)
-          );
-
-        [
-          result[i],
-          result[j]
-        ] =
-        [
-          result[j],
-          result[i]
-        ];
-
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
       }
-
       return result;
-
     }
-
 
     function prepareBRooms() {
+      const deck = shuffle([
+        { img: "icoM1.png", label: "MARCIANO VERDE" },
+        { img: "icoM1.png", label: "MARCIANO VERDE" },
+        { img: "icoM2.png", label: "MARCIANO MORADO" }
+      ]);
 
-      const encounters =
-        shuffle([
-          "icoM1.png",
-          "icoM1.png",
-          "icoM2.png"
-        ]);
-
-      gameState.rooms.B5.encounter =
-        encounters[0];
-
-      gameState.rooms.B6.encounter =
-        encounters[1];
-
-      gameState.rooms.B7.encounter =
-        encounters[2];
-
+      ["B5", "B6", "B7"].forEach((room, index) => {
+        state.rooms[room].encounter = deck[index].img;
+        state.rooms[room].label = deck[index].label;
+      });
     }
-
 
     prepareBRooms();
 
-
-    /* ==========================================
-       SONIDOS GENERADOS POR EL NAVEGADOR
-       ========================================== */
-
     function createAudioContext() {
-
-      const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
-
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
       return new AudioContext();
-
     }
-
 
     function deathSound() {
-
       try {
+        const ctx = createAudioContext();
+        const now = ctx.currentTime;
+        const frequencies = [430, 300, 180, 95];
 
-        const ctx =
-          createAudioContext();
+        frequencies.forEach((frequency, index) => {
+          const oscillator = ctx.createOscillator();
+          const gain = ctx.createGain();
 
-        const now =
-          ctx.currentTime;
+          oscillator.type = index < 2 ? "square" : "sawtooth";
+          oscillator.frequency.setValueAtTime(frequency, now + index * 0.09);
+          gain.gain.setValueAtTime(0.13, now + index * 0.09);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22 + index * 0.09);
 
-        const frequencies =
-          [430, 300, 180, 95];
+          oscillator.connect(gain);
+          gain.connect(ctx.destination);
 
-        frequencies.forEach(
-          (frequency, index) => {
-
-            const oscillator =
-              ctx.createOscillator();
-
-            const gain =
-              ctx.createGain();
-
-            oscillator.type =
-              index < 2
-                ? "square"
-                : "sawtooth";
-
-            oscillator.frequency.setValueAtTime(
-              frequency,
-              now + index * 0.09
-            );
-
-            gain.gain.setValueAtTime(
-              0.13,
-              now + index * 0.09
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-              0.001,
-              now + 0.22 + index * 0.09
-            );
-
-            oscillator.connect(gain);
-            gain.connect(ctx.destination);
-
-            oscillator.start(
-              now + index * 0.09
-            );
-
-            oscillator.stop(
-              now + 0.25 + index * 0.09
-            );
-
-          }
-        );
-
-      } catch (error) {
-
-        console.log(
-          "El navegador bloqueó el sonido."
-        );
-
-      }
-
+          oscillator.start(now + index * 0.09);
+          oscillator.stop(now + 0.25 + index * 0.09);
+        });
+      } catch (error) {}
     }
 
-
     function scannerSound() {
-
       try {
+        const ctx = createAudioContext();
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
 
-        const ctx =
-          createAudioContext();
+        oscillator.type = "sine";
+        oscillator.frequency.setValueAtTime(500, ctx.currentTime);
+        oscillator.frequency.linearRampToValueAtTime(950, ctx.currentTime + 0.25);
 
-        const oscillator =
-          ctx.createOscillator();
-
-        const gain =
-          ctx.createGain();
-
-        oscillator.type =
-          "sine";
-
-        oscillator.frequency
-          .setValueAtTime(
-            500,
-            ctx.currentTime
-          );
-
-        oscillator.frequency
-          .linearRampToValueAtTime(
-            950,
-            ctx.currentTime + 0.25
-          );
-
-        gain.gain
-          .setValueAtTime(
-            0.08,
-            ctx.currentTime
-          );
-
-        gain.gain
-          .exponentialRampToValueAtTime(
-            0.001,
-            ctx.currentTime + 0.35
-          );
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
 
         oscillator.connect(gain);
         gain.connect(ctx.destination);
 
         oscillator.start();
-
-        oscillator.stop(
-          ctx.currentTime + 0.35
-        );
-
+        oscillator.stop(ctx.currentTime + 0.35);
       } catch (error) {}
-
     }
 
-
-    /* ==========================================
-       MENSAJES
-       ========================================== */
-
-    let messageTimer;
-
-
-    function showMessage(text) {
-
+    function showMessage(html) {
       clearTimeout(messageTimer);
-
       message.classList.remove("show");
-
       void message.offsetWidth;
-
-      message.textContent =
-        text;
-
+      message.innerHTML = html;
       message.classList.add("show");
 
-      messageTimer =
-        setTimeout(() => {
-
-          message.classList.remove("show");
-
-        }, 1200);
-
+      messageTimer = setTimeout(() => {
+        message.classList.remove("show");
+      }, 1300);
     }
 
+    function addMapIcon(id, image, room, classes) {
+      const oldIcon = document.getElementById(id);
+      if (oldIcon) oldIcon.remove();
 
-    /* ==========================================
-       ABRIR A12
-       ========================================== */
+      const icon = document.createElement("img");
+      icon.id = id;
+      icon.src = image;
+      icon.draggable = false;
+      icon.className = `map-icon pos-${room} ${classes}`;
+      iconsLayer.appendChild(icon);
+      return icon;
+    }
 
-    roomA12.addEventListener(
-      "click",
-      () => {
+    function removeMapIcon(id) {
+      const icon = document.getElementById(id);
+      if (icon) icon.remove();
+    }
 
-        if (
-          gameState.a12Completed
-        ) {
-          return;
-        }
-
-        heartCounter.textContent =
-          "1";
-
-        encounter.classList.add(
-          "show"
-        );
-
-        darkOverlay.classList.add(
-          "show"
-        );
-
+    function getAdjacentRooms(currentRoom) {
+      if (currentRoom === "ENTRADA") {
+        return [
+          { room: "A12", direction: "up" }
+        ];
       }
-    );
 
-
-    /* ==========================================
-       ATACAR MARCIANO A12
-       ========================================== */
-
-    let enemyLife = 1;
-
-    let defeatingEnemy = false;
-
-
-    heartButton.addEventListener(
-      "click",
-      () => {
-
-        if (
-          defeatingEnemy ||
-          enemyLife <= 0
-        ) {
-          return;
-        }
-
-        enemyLife--;
-
-        heartCounter.textContent =
-          enemyLife;
-
-        heartButton.classList.remove(
-          "hit"
-        );
-
-        void heartButton.offsetWidth;
-
-        heartButton.classList.add(
-          "hit"
-        );
-
-        if (
-          enemyLife === 0
-        ) {
-
-          defeatingEnemy = true;
-
-          deathSound();
-
-          setTimeout(() => {
-
-            completeA12();
-
-          }, 650);
-
-        }
-
+      if (currentRoom === "A12") {
+        return [
+          { room: "B5", direction: "up" },
+          { room: "B6", direction: "left" },
+          { room: "B7", direction: "right" }
+        ];
       }
-    );
 
+      return [];
+    }
 
-    /* ==========================================
-       COMPLETAR A12
-       ========================================== */
+    function scanNearbyRooms() {
+      const adjacent = getAdjacentRooms(state.currentRoom);
+
+      if (!adjacent.length) {
+        showMessage("ZONA NO<br>PROGRAMADA");
+        return;
+      }
+
+      scannerSound();
+
+      adjacent.forEach(({ room, direction }) => {
+        const roomData = state.rooms[room];
+        if (!roomData) return;
+
+        if (roomData.status === "hidden") {
+          roomData.status = "scannable";
+          roomData.direction = direction;
+
+          addMapIcon(
+            `scan-${room}`,
+            "Esc1.png",
+            room,
+            `scanner-wave dir-${direction}`
+          );
+        }
+      });
+    }
+
+    function openA12Encounter() {
+      enemyLife = 1;
+      defeatingEnemy = false;
+      heartCounter.textContent = enemyLife;
+      encounter.classList.add("show");
+      darkOverlay.classList.add("show");
+    }
 
     function completeA12() {
+      encounter.classList.remove("show");
+      darkOverlay.classList.remove("show");
 
-      encounter.classList.remove(
-        "show"
-      );
+      state.rooms.A12.status = "completed";
+      state.currentRoom = "A12";
 
-      darkOverlay.classList.remove(
-        "show"
-      );
-
-      gameState.a12Completed =
-        true;
-
-      gameState.currentRoom =
-        "A12";
-
-      gameState.scannerUnlocked =
-        true;
-
-      scannerButton.classList.add(
-        "enabled"
-      );
+      removeMapIcon("scan-A12");
+      removeMapIcon("enemy-A12");
 
       addMapIcon(
         "check-A12",
         "icocheck.png",
         "A12",
-        "check-icon check-enter"
+        "check-icon"
       );
-
-      defeatingEnemy =
-        false;
-
     }
 
+    function handleRoomClick(roomName) {
+      const room = state.rooms[roomName];
+      if (!room) return;
 
-    /* ==========================================
-       AÑADIR ICONOS AL MAPA
-       ========================================== */
-
-    function addMapIcon(
-      id,
-      image,
-      room,
-      classes
-    ) {
-
-      const oldIcon =
-        document.getElementById(id);
-
-      if (oldIcon) {
-        oldIcon.remove();
+      if (room.status === "hidden") {
+        return;
       }
 
-      const icon =
-        document.createElement("img");
+      if (room.status === "scannable") {
+        room.status = "revealed";
+        removeMapIcon(`scan-${roomName}`);
+        addMapIcon(`enemy-${roomName}`, room.encounter, roomName, "enemy-icon");
 
-      icon.id =
-        id;
+        if (roomName === "A12") {
+          showMessage("HAY UN<br>MARCIANO VERDE");
+        } else {
+          showMessage(`${room.label}<br>−2 ENERGÍAS`);
+        }
+        return;
+      }
 
-      icon.src =
-        image;
+      if (room.status === "revealed") {
+        if (roomName === "A12") {
+          openA12Encounter();
+        } else {
+          state.currentRoom = roomName;
+          room.status = "entered";
+          showMessage(`ENTRASTE A<br>${roomName}`);
+        }
+        return;
+      }
 
-      icon.draggable =
-        false;
-
-      icon.className =
-        `map-icon pos-${room} ${classes}`;
-
-      iconsLayer.appendChild(
-        icon
-      );
-
-      return icon;
-
+      if (room.status === "completed") {
+        showMessage("CUARTO<br>COMPLETADO");
+      }
     }
 
+    scannerButton.addEventListener("click", scanNearbyRooms);
 
-    /* ==========================================
-       ELIMINAR ICONO
-       ========================================== */
+    document.getElementById("roomA12").addEventListener("click", () => handleRoomClick("A12"));
+    document.getElementById("roomB5").addEventListener("click", () => handleRoomClick("B5"));
+    document.getElementById("roomB6").addEventListener("click", () => handleRoomClick("B6"));
+    document.getElementById("roomB7").addEventListener("click", () => handleRoomClick("B7"));
 
-    function removeMapIcon(id) {
+    heartButton.addEventListener("click", () => {
+      if (defeatingEnemy || enemyLife <= 0) return;
 
-      const icon =
-        document.getElementById(id);
+      enemyLife--;
+      heartCounter.textContent = enemyLife;
 
-      if (icon) {
-        icon.remove();
+      heartButton.classList.remove("hit");
+      void heartButton.offsetWidth;
+      heartButton.classList.add("hit");
+
+      if (enemyLife === 0) {
+        defeatingEnemy = true;
+        deathSound();
+
+        setTimeout(() => {
+          completeA12();
+        }, 650);
       }
-
-    }
-
-
-    /* ==========================================
-       USAR ESCÁNER
-       ========================================== */
-
-    scannerButton.addEventListener(
-      "click",
-      () => {
-
-        if (
-          !gameState.scannerUnlocked
-        ) {
-          return;
-        }
-
-        /*
-          En esta primera versión
-          solo conocemos las conexiones
-          desde A12.
-        */
-
-        if (
-          gameState.currentRoom !== "A12"
-        ) {
-
-          showMessage(
-            "ZONA NO PROGRAMADA"
-          );
-
-          return;
-
-        }
-
-        scannerSound();
-
-        gameState.scannerActive =
-          true;
-
-        [
-          "B5",
-          "B6",
-          "B7"
-        ].forEach(room => {
-
-          const data =
-            gameState.rooms[room];
-
-          if (
-            data.status === "hidden"
-          ) {
-
-            data.status =
-              "scannable";
-
-            addMapIcon(
-              `scan-${room}`,
-              "Esc1.png",
-              room,
-              "scanner-icon"
-            );
-
-          }
-
-        });
-
-      }
-    );
-
-
-    /* ==========================================
-       HABITACIONES B
-       ========================================== */
-
-    [
-      "B5",
-      "B6",
-      "B7"
-    ].forEach(roomName => {
-
-      const element =
-        document.getElementById(
-          `room${roomName}`
-        );
-
-      element.addEventListener(
-        "click",
-        () => {
-
-          handleBRoom(
-            roomName
-          );
-
-        }
-      );
-
     });
 
-
-    function handleBRoom(roomName) {
-
-      const room =
-        gameState.rooms[
-          roomName
-        ];
-
-      /*
-        Todavía no ha sido
-        marcada por el escáner.
-      */
-
-      if (
-        room.status === "hidden"
-      ) {
-        return;
-      }
-
-
-      /*
-        PRIMER TOQUE:
-        revelar qué hay dentro.
-      */
-
-      if (
-        room.status === "scannable"
-      ) {
-
-        room.status =
-          "revealed";
-
-        removeMapIcon(
-          `scan-${roomName}`
-        );
-
-        addMapIcon(
-          `enemy-${roomName}`,
-          room.encounter,
-          roomName,
-          "enemy-icon"
-        );
-
-        showMessage(
-          "−2 ENERGÍAS"
-        );
-
-        return;
-
-      }
-
-
-      /*
-        SEGUNDO TOQUE:
-        entrar al cuarto.
-      */
-
-      if (
-        room.status === "revealed"
-      ) {
-
-        room.status =
-          "entered";
-
-        gameState.currentRoom =
-          roomName;
-
-        clearScannerWaves();
-
-        scannerButton
-          .classList
-          .remove("enabled");
-
-        showMessage(
-          `ENTRASTE A ${roomName}`
-        );
-
-        return;
-
-      }
-
-    }
-
-
-    /* ==========================================
-       QUITAR ONDAS CUANDO NOS MOVEMOS
-       ========================================== */
-
-    function clearScannerWaves() {
-
-      [
-        "B5",
-        "B6",
-        "B7"
-      ].forEach(room => {
-
-        removeMapIcon(
-          `scan-${room}`
-        );
-
-        if (
-          gameState.rooms[room]
-            .status === "scannable"
-        ) {
-
-          gameState.rooms[room]
-            .status = "hidden";
-
-        }
-
-      });
-
-      gameState.scannerActive =
-        false;
-
-    }
-
-
-    /* ==========================================
-       EVITAR DOBLE ZOOM EN ALGUNOS MÓVILES
-       ========================================== */
-
     let lastTouchEnd = 0;
-
     document.addEventListener(
       "touchend",
-      function(event) {
-
-        const now =
-          Date.now();
-
-        if (
-          now - lastTouchEnd <= 300
-        ) {
-
+      function (event) {
+        const now = Date.now();
+        if (now - lastTouchEnd <= 300) {
           event.preventDefault();
-
         }
-
-        lastTouchEnd =
-          now;
-
+        lastTouchEnd = now;
       },
-      {
-        passive: false
-      }
+      { passive: false }
     );
-
   </script>
-
 </body>
 </html>
