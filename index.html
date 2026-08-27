@@ -71,15 +71,14 @@ img{
   height:auto;
 }
 
-
-/* PANTALLA 1 */
-
 #introPage1{
   cursor:pointer;
 }
 
 
-/* BOTÓN ACEPTAR */
+/* =========================================================
+   BOTÓN ACEPTAR
+   ========================================================= */
 
 #acceptMissionButton{
   position:absolute;
@@ -166,9 +165,6 @@ img{
     cubic-bezier(.25,.75,.25,1)
     forwards;
 }
-
-
-/* PEQUEÑO DESTELLO CUANDO ACOPLA */
 
 #dockFlash{
   position:absolute;
@@ -280,13 +276,11 @@ img{
   -webkit-user-select:none;
 }
 
-
 #map{
   position:relative;
 
   width:100%;
 }
-
 
 #mapImage{
   display:block;
@@ -300,6 +294,8 @@ img{
 
 /* =========================================================
    HABITACIONES
+
+   BAJADAS PARA ADAPTARSE A MIc.png
    ========================================================= */
 
 .room{
@@ -315,7 +311,7 @@ img{
 
 #roomA12{
   left:43%;
-  top:61.4%;
+  top:63.6%;
 
   width:15.2%;
   height:7.6%;
@@ -326,7 +322,7 @@ img{
 
 #roomB5{
   left:43%;
-  top:51.7%;
+  top:53.9%;
 
   width:15.2%;
   height:7.6%;
@@ -337,7 +333,7 @@ img{
 
 #roomB6{
   left:26%;
-  top:61.4%;
+  top:63.6%;
 
   width:14.8%;
   height:7.6%;
@@ -348,7 +344,7 @@ img{
 
 #roomB7{
   left:60.2%;
-  top:61.4%;
+  top:63.6%;
 
   width:14.8%;
   height:7.6%;
@@ -378,7 +374,6 @@ img{
     infinite
     ease-in-out;
 }
-
 
 #scannerButton.scanner-on{
   animation:
@@ -465,11 +460,9 @@ img{
     0 0 12px rgba(168,211,54,.25);
 }
 
-
 #musicButton:active{
   transform:scale(.94);
 }
-
 
 #musicButton.music-on{
   background:
@@ -495,7 +488,6 @@ img{
   pointer-events:none;
 }
 
-
 .map-icon{
   position:absolute;
 
@@ -507,26 +499,28 @@ img{
 
 /* =========================================================
    CENTROS DE LAS HABITACIONES
+
+   TODOS BAJADOS PARA MIc.png
    ========================================================= */
 
 .pos-A12{
   left:50.6%;
-  top:65.2%;
+  top:67.4%;
 }
 
 .pos-B5{
   left:50.5%;
-  top:55.5%;
+  top:57.7%;
 }
 
 .pos-B6{
   left:33.4%;
-  top:65.1%;
+  top:67.4%;
 }
 
 .pos-B7{
   left:67.7%;
-  top:65.1%;
+  top:67.4%;
 }
 
 
@@ -643,8 +637,6 @@ img{
 }
 
 
-/* DIRECCIONES */
-
 .dir-up{
   transform:
     translate(-50%,-50%)
@@ -703,7 +695,6 @@ img{
     transform .2s ease;
 }
 
-
 #encounter.show{
   opacity:1;
 
@@ -712,7 +703,6 @@ img{
   transform:
     scale(1);
 }
-
 
 #encounterCard{
   position:relative;
@@ -727,7 +717,6 @@ img{
 
   cursor:default;
 }
-
 
 #encounterImage{
   display:block;
@@ -933,7 +922,6 @@ img{
   pointer-events:none;
 }
 
-
 #message.show{
   visibility:visible;
 
@@ -1042,7 +1030,7 @@ img{
 <div id="introOverlay">
 
 
-  <!-- PRIMER MENSAJE -->
+  <!-- MENSAJE ENTRANTE -->
 
   <section
     id="introPage1"
@@ -1128,8 +1116,6 @@ img{
   <div id="map">
 
 
-    <!-- NUEVO MAPA -->
-
     <img
       id="mapImage"
       src="MIc.png"
@@ -1138,18 +1124,14 @@ img{
     >
 
 
-    <!-- MÚSICA -->
-
     <button
       id="musicButton"
       type="button"
-      aria-label="Activar música"
+      aria-label="Desactivar música"
     >
-      ♫ MÚSICA
+      ♫ MÚSICA ON
     </button>
 
-
-    <!-- HABITACIONES -->
 
     <div
       id="roomA12"
@@ -1179,15 +1161,11 @@ img{
     ></div>
 
 
-    <!-- ESCÁNER -->
-
     <div
       id="scannerButton"
       aria-label="Escáner"
     ></div>
 
-
-    <!-- ICONOS -->
 
     <div id="iconsLayer"></div>
 
@@ -1199,8 +1177,22 @@ img{
 
 
 <!-- =========================================================
-     MÚSICA DE FONDO
+     AUDIOS
      ========================================================= -->
+
+<audio
+  id="introMusic"
+  loop
+  preload="auto"
+>
+
+  <source
+    src="Echoes in the Subway.mp3"
+    type="audio/mpeg"
+  >
+
+</audio>
+
 
 <audio
   id="bgMusic"
@@ -1313,11 +1305,6 @@ const ASSETS = {
 const DEFINITIONS = {
 
 
-  /* =====================================================
-     A12 - MARCIANO VERDE
-     1 VIDA
-     ===================================================== */
-
   A12: {
 
     card:
@@ -1340,10 +1327,6 @@ const DEFINITIONS = {
 
   },
 
-
-  /* =====================================================
-     EVENTOS SIMPLES
-     ===================================================== */
 
   B1: {
 
@@ -1413,11 +1396,6 @@ const DEFINITIONS = {
   },
 
 
-  /* =====================================================
-     NARANJA
-     3 VIDAS
-     ===================================================== */
-
   B5: {
 
     card:
@@ -1440,14 +1418,6 @@ const DEFINITIONS = {
 
   },
 
-
-  /* =====================================================
-     NARANJA
-     3 VIDAS
-
-     Se incluyen ambos posibles nombres
-     para la carta final.
-     ===================================================== */
 
   B6: {
 
@@ -1474,11 +1444,6 @@ const DEFINITIONS = {
 
   },
 
-
-  /* =====================================================
-     MORADO
-     2 VIDAS
-     ===================================================== */
 
   B7: {
 
@@ -1512,26 +1477,20 @@ const DEFINITIONS = {
 
 const state = {
 
-
   currentRoom:
     "ENTRADA",
-
 
   scannerActive:
     false,
 
-
   pendingRoom:
     null,
-
 
   encounterMode:
     null,
 
-
   combat:
     null,
-
 
   rooms: {
 
@@ -1598,7 +1557,7 @@ const state = {
 
 
 /* =========================================================
-   ELEMENTOS DE INTRO
+   ELEMENTOS
    ========================================================= */
 
 const introOverlay =
@@ -1606,125 +1565,105 @@ const introOverlay =
     "introOverlay"
   );
 
-
 const introPage1 =
   document.getElementById(
     "introPage1"
   );
-
 
 const introPage2 =
   document.getElementById(
     "introPage2"
   );
 
-
 const dockPage =
   document.getElementById(
     "dockPage"
   );
-
 
 const acceptMissionButton =
   document.getElementById(
     "acceptMissionButton"
   );
 
-
 const dockBaseImage =
   document.getElementById(
     "dockBaseImage"
   );
-
 
 const dockShip =
   document.getElementById(
     "dockShip"
   );
 
-
 const dockFlash =
   document.getElementById(
     "dockFlash"
   );
-
-
-
-/* =========================================================
-   ELEMENTOS DEL JUEGO
-   ========================================================= */
 
 const game =
   document.getElementById(
     "game"
   );
 
-
 const mapImage =
   document.getElementById(
     "mapImage"
   );
-
 
 const iconsLayer =
   document.getElementById(
     "iconsLayer"
   );
 
-
 const scannerButton =
   document.getElementById(
     "scannerButton"
   );
-
 
 const encounter =
   document.getElementById(
     "encounter"
   );
 
-
 const encounterCard =
   document.getElementById(
     "encounterCard"
   );
-
 
 const encounterImage =
   document.getElementById(
     "encounterImage"
   );
 
-
 const enemyHp =
   document.getElementById(
     "enemyHp"
   );
-
 
 const gunButton =
   document.getElementById(
     "gunButton"
   );
 
-
 const fistButton =
   document.getElementById(
     "fistButton"
   );
-
 
 const message =
   document.getElementById(
     "message"
   );
 
+const introMusic =
+  document.getElementById(
+    "introMusic"
+  );
 
 const bgMusic =
   document.getElementById(
     "bgMusic"
   );
-
 
 const musicButton =
   document.getElementById(
@@ -1740,19 +1679,22 @@ const musicButton =
 let messageTimer =
   null;
 
-
 let musicPlaying =
   false;
-
 
 let combatLocked =
   false;
 
-
 let introLocked =
   false;
 
+let gameAudioContext =
+  null;
 
+
+
+introMusic.volume =
+  .34;
 
 bgMusic.volume =
   .32;
@@ -1760,7 +1702,7 @@ bgMusic.volume =
 
 
 /* =========================================================
-   PRECARGAR IMÁGENES DE INTRO
+   PRECARGA
    ========================================================= */
 
 [
@@ -1786,6 +1728,50 @@ bgMusic.volume =
 
 
 /* =========================================================
+   AUDIO CONTEXT GENERAL
+   ========================================================= */
+
+function getAudioContext() {
+
+
+  if (
+    !gameAudioContext
+  ) {
+
+
+    const AudioContext =
+      window.AudioContext
+      ||
+      window.webkitAudioContext;
+
+
+    gameAudioContext =
+      new AudioContext();
+
+
+  }
+
+
+  if (
+    gameAudioContext.state ===
+    "suspended"
+  ) {
+
+
+    gameAudioContext.resume();
+
+
+  }
+
+
+  return gameAudioContext;
+
+
+}
+
+
+
+/* =========================================================
    INTRO
    ========================================================= */
 
@@ -1802,9 +1788,11 @@ function showIntroPage(
   .forEach(
     element => {
 
+
       element.classList.remove(
         "active"
       );
+
 
     }
   );
@@ -1820,30 +1808,58 @@ function showIntroPage(
 
 
 /* =========================================================
-   PRIMER MENSAJE
-
-   CUALQUIER TOQUE PASA A LA MISIÓN
+   MENSAJE ENTRANTE
    ========================================================= */
 
 introPage1.addEventListener(
 
   "click",
 
-  () => {
+  async () => {
 
 
     if (
       introLocked
     ) {
 
+
       return;
 
+
     }
+
+
+    /*
+      Este clic desbloquea también
+      el Web Audio API.
+    */
+
+    getAudioContext();
 
 
     showIntroPage(
       introPage2
     );
+
+
+    /*
+      Música de misión:
+      Echoes in the Subway.
+    */
+
+    try {
+
+
+      introMusic.currentTime =
+        0;
+
+
+      await introMusic.play();
+
+
+    }
+
+    catch(error) {}
 
 
   }
@@ -1853,7 +1869,141 @@ introPage1.addEventListener(
 
 
 /* =========================================================
-   BOTÓN ACEPTAR
+   TRANSICIÓN DE MÚSICA
+   ========================================================= */
+
+function crossfadeToGameMusic() {
+
+
+  /*
+    Bitácotas empieza muy bajo.
+  */
+
+  bgMusic.volume =
+    .03;
+
+
+  /*
+    Como esta función es llamada
+    directamente por ACEPTAR,
+    el navegador permite play().
+  */
+
+  bgMusic.play()
+    .then(
+      () => {
+
+
+        musicPlaying =
+          true;
+
+
+        musicButton.classList.add(
+          "music-on"
+        );
+
+
+        musicButton.textContent =
+          "♫ MÚSICA ON";
+
+
+      }
+    )
+    .catch(
+      () => {}
+    );
+
+
+  const steps =
+    18;
+
+
+  let currentStep =
+    0;
+
+
+  const introStart =
+    introMusic.volume;
+
+
+  const gameTarget =
+    .32;
+
+
+  const timer =
+    setInterval(
+      () => {
+
+
+        currentStep++;
+
+
+        const progress =
+          currentStep
+          /
+          steps;
+
+
+        introMusic.volume =
+          Math.max(
+            0,
+            introStart
+            *
+            (1 - progress)
+          );
+
+
+        bgMusic.volume =
+          .03
+          +
+          (
+            gameTarget - .03
+          )
+          *
+          progress;
+
+
+        if (
+          currentStep >=
+          steps
+        ) {
+
+
+          clearInterval(
+            timer
+          );
+
+
+          introMusic.pause();
+
+
+          introMusic.currentTime =
+            0;
+
+
+          introMusic.volume =
+            .34;
+
+
+          bgMusic.volume =
+            .32;
+
+
+        }
+
+
+      },
+
+      65
+    );
+
+
+}
+
+
+
+/* =========================================================
+   ACEPTAR MISIÓN
    ========================================================= */
 
 acceptMissionButton.addEventListener(
@@ -1870,13 +2020,33 @@ acceptMissionButton.addEventListener(
       introLocked
     ) {
 
+
       return;
+
 
     }
 
 
     introLocked =
       true;
+
+
+    getAudioContext();
+
+
+    /*
+      La música del juego empieza
+      automáticamente.
+    */
+
+    crossfadeToGameMusic();
+
+
+    /*
+      Sonido de motor de la nave.
+    */
+
+    dockingTravelSound();
 
 
     startDockingSequence();
@@ -1889,7 +2059,349 @@ acceptMissionButton.addEventListener(
 
 
 /* =========================================================
-   ACOPLE
+   SONIDO DE NAVE EN MOVIMIENTO
+   ========================================================= */
+
+function dockingTravelSound() {
+
+
+  try {
+
+
+    const ctx =
+      getAudioContext();
+
+
+    const master =
+      ctx.createGain();
+
+
+    const low =
+      ctx.createOscillator();
+
+
+    const high =
+      ctx.createOscillator();
+
+
+    const filter =
+      ctx.createBiquadFilter();
+
+
+    low.type =
+      "sawtooth";
+
+
+    high.type =
+      "triangle";
+
+
+    low.frequency
+      .setValueAtTime(
+        58,
+        ctx.currentTime
+      );
+
+
+    low.frequency
+      .linearRampToValueAtTime(
+        98,
+        ctx.currentTime
+        +
+        2.25
+      );
+
+
+    high.frequency
+      .setValueAtTime(
+        118,
+        ctx.currentTime
+      );
+
+
+    high.frequency
+      .linearRampToValueAtTime(
+        185,
+        ctx.currentTime
+        +
+        2.25
+      );
+
+
+    filter.type =
+      "lowpass";
+
+
+    filter.frequency
+      .setValueAtTime(
+        520,
+        ctx.currentTime
+      );
+
+
+    filter.frequency
+      .linearRampToValueAtTime(
+        900,
+        ctx.currentTime
+        +
+        2.1
+      );
+
+
+    master.gain
+      .setValueAtTime(
+        .001,
+        ctx.currentTime
+      );
+
+
+    master.gain
+      .linearRampToValueAtTime(
+        .11,
+        ctx.currentTime
+        +
+        .25
+      );
+
+
+    master.gain
+      .setValueAtTime(
+        .11,
+        ctx.currentTime
+        +
+        1.65
+      );
+
+
+    master.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        2.35
+      );
+
+
+    low.connect(
+      filter
+    );
+
+
+    high.connect(
+      filter
+    );
+
+
+    filter.connect(
+      master
+    );
+
+
+    master.connect(
+      ctx.destination
+    );
+
+
+    low.start();
+
+
+    high.start();
+
+
+    low.stop(
+      ctx.currentTime
+      +
+      2.4
+    );
+
+
+    high.stop(
+      ctx.currentTime
+      +
+      2.4
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   SONIDO DE ACOPLE
+   ========================================================= */
+
+function dockingImpactSound() {
+
+
+  try {
+
+
+    const ctx =
+      getAudioContext();
+
+
+    /*
+      Golpe mecánico grave.
+    */
+
+    const impact =
+      ctx.createOscillator();
+
+
+    const impactGain =
+      ctx.createGain();
+
+
+    impact.type =
+      "square";
+
+
+    impact.frequency
+      .setValueAtTime(
+        115,
+        ctx.currentTime
+      );
+
+
+    impact.frequency
+      .exponentialRampToValueAtTime(
+        42,
+        ctx.currentTime
+        +
+        .2
+      );
+
+
+    impactGain.gain
+      .setValueAtTime(
+        .24,
+        ctx.currentTime
+      );
+
+
+    impactGain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .25
+      );
+
+
+    impact.connect(
+      impactGain
+    );
+
+
+    impactGain.connect(
+      ctx.destination
+    );
+
+
+    impact.start();
+
+
+    impact.stop(
+      ctx.currentTime
+      +
+      .26
+    );
+
+
+    /*
+      Confirmación electrónica.
+    */
+
+    [
+      610,
+      830
+    ]
+    .forEach(
+      (frequency,index) => {
+
+
+        const beep =
+          ctx.createOscillator();
+
+
+        const beepGain =
+          ctx.createGain();
+
+
+        const start =
+          ctx.currentTime
+          +
+          .17
+          +
+          index * .1;
+
+
+        beep.type =
+          "sine";
+
+
+        beep.frequency.value =
+          frequency;
+
+
+        beepGain.gain
+          .setValueAtTime(
+            .08,
+            start
+          );
+
+
+        beepGain.gain
+          .exponentialRampToValueAtTime(
+            .001,
+            start
+            +
+            .11
+          );
+
+
+        beep.connect(
+          beepGain
+        );
+
+
+        beepGain.connect(
+          ctx.destination
+        );
+
+
+        beep.start(
+          start
+        );
+
+
+        beep.stop(
+          start
+          +
+          .12
+        );
+
+
+      }
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   ACOPLE VISUAL
    ========================================================= */
 
 function startDockingSequence() {
@@ -1899,11 +2411,6 @@ function startDockingSequence() {
     dockPage
   );
 
-
-  /*
-    Empezamos con MIa:
-    estación sin Astra.
-  */
 
   dockBaseImage.src =
     ASSETS.stationOnly;
@@ -1925,10 +2432,6 @@ function startDockingSequence() {
   void dockShip.offsetWidth;
 
 
-  /*
-    La nave comienza a acercarse.
-  */
-
   setTimeout(
     () => {
 
@@ -1944,14 +2447,11 @@ function startDockingSequence() {
   );
 
 
-  /*
-    Cuando llega, reemplazamos todo
-    por MIb para asegurar que quede
-    perfectamente alineada.
-  */
-
   setTimeout(
     () => {
+
+
+      dockingImpactSound();
 
 
       dockFlash.classList.remove(
@@ -1981,11 +2481,6 @@ function startDockingSequence() {
   );
 
 
-  /*
-    Después de una breve pausa
-    comienza el juego.
-  */
-
   setTimeout(
     startGame,
 
@@ -1998,16 +2493,11 @@ function startDockingSequence() {
 
 
 /* =========================================================
-   COMENZAR PARTIDA
+   COMENZAR JUEGO
    ========================================================= */
 
 function startGame() {
 
-
-  /*
-    MIc es ahora el mapa oficial
-    del juego.
-  */
 
   mapImage.src =
     ASSETS.playMap;
@@ -2032,7 +2522,7 @@ function startGame() {
 
 
 /* =========================================================
-   BARAJAR
+   MEZCLAR EVENTOS B
    ========================================================= */
 
 function shuffle(
@@ -2082,13 +2572,6 @@ function shuffle(
 }
 
 
-
-/* =========================================================
-   PREPARAR SALAS B
-
-   3 EVENTOS DIFERENTES
-   DE 7 POSIBLES
-   ========================================================= */
 
 function prepareBRooms() {
 
@@ -2190,7 +2673,7 @@ function showMessage(
 
 
 /* =========================================================
-   MÚSICA
+   BOTÓN DE MÚSICA
    ========================================================= */
 
 async function toggleMusic() {
@@ -2291,35 +2774,17 @@ musicButton.addEventListener(
 
 
 /* =========================================================
-   SONIDOS
+   EFECTO DE PUÑO
    ========================================================= */
 
-function createAudioContext() {
-
-
-  const AudioContext =
-    window.AudioContext
-    ||
-    window.webkitAudioContext;
-
-
-  return new AudioContext();
-
-
-}
-
-
-
-/* ESCÁNER */
-
-function scannerSound() {
+function punchSound() {
 
 
   try {
 
 
     const ctx =
-      createAudioContext();
+      getAudioContext();
 
 
     const oscillator =
@@ -2331,28 +2796,28 @@ function scannerSound() {
 
 
     oscillator.type =
-      "sine";
+      "triangle";
 
 
     oscillator.frequency
       .setValueAtTime(
-        480,
+        165,
         ctx.currentTime
       );
 
 
     oscillator.frequency
-      .linearRampToValueAtTime(
-        980,
+      .exponentialRampToValueAtTime(
+        48,
         ctx.currentTime
         +
-        .28
+        .15
       );
 
 
     gain.gain
       .setValueAtTime(
-        .08,
+        .33,
         ctx.currentTime
       );
 
@@ -2362,7 +2827,7 @@ function scannerSound() {
         .001,
         ctx.currentTime
         +
-        .4
+        .17
       );
 
 
@@ -2382,7 +2847,7 @@ function scannerSound() {
     oscillator.stop(
       ctx.currentTime
       +
-      .4
+      .18
     );
 
 
@@ -2395,7 +2860,405 @@ function scannerSound() {
 
 
 
-/* DERROTA */
+/* =========================================================
+   PERDER VIDA
+   ========================================================= */
+
+function lifeLossSound() {
+
+
+  try {
+
+
+    const ctx =
+      getAudioContext();
+
+
+    [
+      270,
+      195,
+      128
+    ]
+    .forEach(
+      (frequency,index) => {
+
+
+        const oscillator =
+          ctx.createOscillator();
+
+
+        const gain =
+          ctx.createGain();
+
+
+        const start =
+          ctx.currentTime
+          +
+          index * .065;
+
+
+        oscillator.type =
+          "square";
+
+
+        oscillator.frequency.value =
+          frequency;
+
+
+        gain.gain
+          .setValueAtTime(
+            .075,
+            start
+          );
+
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            .001,
+            start
+            +
+            .11
+          );
+
+
+        oscillator.connect(
+          gain
+        );
+
+
+        gain.connect(
+          ctx.destination
+        );
+
+
+        oscillator.start(
+          start
+        );
+
+
+        oscillator.stop(
+          start
+          +
+          .12
+        );
+
+
+      }
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   DISPARO
+   ========================================================= */
+
+function gunSound() {
+
+
+  try {
+
+
+    const ctx =
+      getAudioContext();
+
+
+    const oscillator =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator.type =
+      "sawtooth";
+
+
+    oscillator.frequency
+      .setValueAtTime(
+        1250,
+        ctx.currentTime
+      );
+
+
+    oscillator.frequency
+      .exponentialRampToValueAtTime(
+        170,
+        ctx.currentTime
+        +
+        .13
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        .2,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .15
+      );
+
+
+    oscillator.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator.start();
+
+
+    oscillator.stop(
+      ctx.currentTime
+      +
+      .16
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   PERDER ENERGÍA
+   ========================================================= */
+
+function energyLossSound() {
+
+
+  try {
+
+
+    const ctx =
+      getAudioContext();
+
+
+    const oscillator =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator.type =
+      "sine";
+
+
+    oscillator.frequency
+      .setValueAtTime(
+        720,
+        ctx.currentTime
+      );
+
+
+    oscillator.frequency
+      .exponentialRampToValueAtTime(
+        180,
+        ctx.currentTime
+        +
+        .31
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        .11,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .33
+      );
+
+
+    oscillator.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator.start();
+
+
+    oscillator.stop(
+      ctx.currentTime
+      +
+      .34
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   ESCÁNER
+   ========================================================= */
+
+function scannerSound() {
+
+
+  try {
+
+
+    const ctx =
+      getAudioContext();
+
+
+    const oscillator1 =
+      ctx.createOscillator();
+
+
+    const oscillator2 =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator1.type =
+      "sine";
+
+
+    oscillator2.type =
+      "triangle";
+
+
+    oscillator1.frequency
+      .setValueAtTime(
+        380,
+        ctx.currentTime
+      );
+
+
+    oscillator1.frequency
+      .linearRampToValueAtTime(
+        1240,
+        ctx.currentTime
+        +
+        .48
+      );
+
+
+    oscillator2.frequency
+      .setValueAtTime(
+        720,
+        ctx.currentTime
+      );
+
+
+    oscillator2.frequency
+      .linearRampToValueAtTime(
+        1510,
+        ctx.currentTime
+        +
+        .48
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        .085,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .5
+      );
+
+
+    oscillator1.connect(
+      gain
+    );
+
+
+    oscillator2.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator1.start();
+
+
+    oscillator2.start();
+
+
+    oscillator1.stop(
+      ctx.currentTime
+      +
+      .5
+    );
+
+
+    oscillator2.stop(
+      ctx.currentTime
+      +
+      .5
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   SONIDO DE DERROTA
+   ========================================================= */
 
 function deathSound() {
 
@@ -2404,7 +3267,7 @@ function deathSound() {
 
 
     const ctx =
-      createAudioContext();
+      getAudioContext();
 
 
     const now =
@@ -2583,17 +3446,13 @@ function removeMapIcon(
 
 
 /* =========================================================
-   CONEXIONES DEL MAPA
+   CONEXIONES
    ========================================================= */
 
 function getAdjacentRooms(
   room
 ) {
 
-
-  /*
-    ENTRADA -> A12
-  */
 
   if (
     room ===
@@ -2604,13 +3463,11 @@ function getAdjacentRooms(
     return [
 
       {
-
         room:
           "A12",
 
         direction:
           "up"
-
       }
 
     ];
@@ -2618,10 +3475,6 @@ function getAdjacentRooms(
 
   }
 
-
-  /*
-    A12
-  */
 
   if (
     room ===
@@ -2633,35 +3486,29 @@ function getAdjacentRooms(
 
 
       {
-
         room:
           "B5",
 
         direction:
           "up"
-
       },
 
 
       {
-
         room:
           "B6",
 
         direction:
           "left"
-
       },
 
 
       {
-
         room:
           "B7",
 
         direction:
           "right"
-
       }
 
 
@@ -2670,10 +3517,6 @@ function getAdjacentRooms(
 
   }
 
-
-  /*
-    REGRESOS
-  */
 
   if (
     room ===
@@ -2684,13 +3527,11 @@ function getAdjacentRooms(
     return [
 
       {
-
         room:
           "A12",
 
         direction:
           "down"
-
       }
 
     ];
@@ -2708,13 +3549,11 @@ function getAdjacentRooms(
     return [
 
       {
-
         room:
           "A12",
 
         direction:
           "right"
-
       }
 
     ];
@@ -2732,13 +3571,11 @@ function getAdjacentRooms(
     return [
 
       {
-
         room:
           "A12",
 
         direction:
           "left"
-
       }
 
     ];
@@ -2753,10 +3590,6 @@ function getAdjacentRooms(
 }
 
 
-
-/* =========================================================
-   SALA ADYACENTE
-   ========================================================= */
 
 function roomIsAdjacent(
   roomName
@@ -2776,10 +3609,6 @@ function roomIsAdjacent(
 }
 
 
-
-/* =========================================================
-   DEFINICIÓN DEL EVENTO
-   ========================================================= */
 
 function roomDefinition(
   roomName
@@ -2836,10 +3665,6 @@ function refreshMarkers() {
   );
 
 
-  /*
-    Personaje en ubicación actual.
-  */
-
   if (
     state.currentRoom !==
     "ENTRADA"
@@ -2861,11 +3686,6 @@ function refreshMarkers() {
 
   }
 
-
-  /*
-    Checks en cuartos ya revisados
-    que Astra abandonó.
-  */
 
   [
     "A12",
@@ -2911,10 +3731,6 @@ function refreshMarkers() {
 
 
 
-/* =========================================================
-   MOVER ASTRA
-   ========================================================= */
-
 function moveToRoom(
   roomName
 ) {
@@ -2942,7 +3758,7 @@ function moveToRoom(
 
 
 /* =========================================================
-   APAGAR ESCÁNER
+   ESCÁNER ON/OFF
    ========================================================= */
 
 function turnOffScanner() {
@@ -2980,17 +3796,8 @@ function turnOffScanner() {
 
 
 
-/* =========================================================
-   ESCÁNER ON / OFF
-   ========================================================= */
-
 function scanNearbyRooms() {
 
-
-  /*
-    SEGUNDO TOQUE:
-    APAGAR.
-  */
 
   if (
     state.scannerActive
@@ -3101,7 +3908,7 @@ scannerButton.addEventListener(
 
 
 /* =========================================================
-   REVELAR HABITACIÓN
+   REVELAR SALA
    ========================================================= */
 
 function revealRoom(
@@ -3156,6 +3963,9 @@ function revealRoom(
   );
 
 
+  energyLossSound();
+
+
   showMessage(
 
     `${definition.label}<br>−2 ENERGÍAS`
@@ -3169,8 +3979,6 @@ function revealRoom(
 
 /* =========================================================
    IMÁGENES CON RESPALDO
-
-   Sirve especialmente para B6F / BF6.
    ========================================================= */
 
 function setImageSource(
@@ -3232,7 +4040,7 @@ function setImageSource(
 
 
 /* =========================================================
-   LIMPIAR ENCUENTRO
+   ENCUENTROS
    ========================================================= */
 
 function resetEncounterUI() {
@@ -3269,10 +4077,6 @@ function resetEncounterUI() {
 }
 
 
-
-/* =========================================================
-   ABRIR ENCUENTRO
-   ========================================================= */
 
 function openEncounter(
   roomName
@@ -3324,10 +4128,6 @@ function openEncounter(
     "show"
   );
 
-
-  /* =====================================================
-     COMBATE
-     ===================================================== */
 
   if (
     definition.type ===
@@ -3382,11 +4182,6 @@ function openEncounter(
 
   }
 
-
-  /* =====================================================
-     EVENTO SIMPLE
-     ===================================================== */
-
   else {
 
 
@@ -3400,10 +4195,6 @@ function openEncounter(
 }
 
 
-
-/* =========================================================
-   COMPLETAR CUARTO
-   ========================================================= */
 
 function completeCurrentRoom() {
 
@@ -3463,11 +4254,6 @@ function completeCurrentRoom() {
   resetEncounterUI();
 
 
-  /*
-    Astra queda ubicada
-    en el cuarto resuelto.
-  */
-
   moveToRoom(
     roomName
   );
@@ -3478,7 +4264,7 @@ function completeCurrentRoom() {
 
 
 /* =========================================================
-   ANIMACIÓN DE ATAQUE
+   ATAQUES
    ========================================================= */
 
 function animateHit() {
@@ -3500,10 +4286,6 @@ function animateHit() {
 }
 
 
-
-/* =========================================================
-   ATACAR
-   ========================================================= */
 
 function attack(
   kind
@@ -3536,8 +4318,6 @@ function attack(
 
   /* =====================================================
      PUÑO
-
-     −1 VIDA DEL JUGADOR
      ===================================================== */
 
   if (
@@ -3547,6 +4327,15 @@ function attack(
 
 
     combat.fists++;
+
+
+    punchSound();
+
+
+    setTimeout(
+      lifeLossSound,
+      65
+    );
 
 
     showMessage(
@@ -3559,14 +4348,21 @@ function attack(
 
   /* =====================================================
      PISTOLA
-
-     −1 ENERGÍA DEL JUGADOR
      ===================================================== */
 
   else {
 
 
     combat.shots++;
+
+
+    gunSound();
+
+
+    setTimeout(
+      energyLossSound,
+      65
+    );
 
 
     showMessage(
@@ -3576,11 +4372,6 @@ function attack(
 
   }
 
-
-  /*
-    Ambos ataques quitan
-    1 vida al enemigo.
-  */
 
   combat.hp =
     Math.max(
@@ -3599,10 +4390,6 @@ function attack(
   setTimeout(
     () => {
 
-
-      /*
-        Aún sigue vivo.
-      */
 
       if (
         combat.hp > 0
@@ -3625,13 +4412,6 @@ function attack(
         ];
 
 
-      /* =================================================
-         ¿SE GANA LA PISTA?
-
-         Debe haber MÁS PUÑOS
-         que disparos.
-         ================================================= */
-
       const earnsClue =
 
         combat.fists >
@@ -3641,10 +4421,6 @@ function attack(
 
         !!definition.finalCard;
 
-
-      /* =================================================
-         MOSTRAR CARTA F
-         ================================================= */
 
       if (
         earnsClue
@@ -3696,10 +4472,6 @@ function attack(
       }
 
 
-      /* =================================================
-         SIN PISTA
-         ================================================= */
-
       deathSound();
 
 
@@ -3719,10 +4491,6 @@ function attack(
 }
 
 
-
-/* =========================================================
-   BOTONES DE ATAQUE
-   ========================================================= */
 
 gunButton.addEventListener(
 
@@ -3766,21 +4534,12 @@ fistButton.addEventListener(
 
 
 
-/* =========================================================
-   TOCAR CARTA
-   ========================================================= */
-
 encounterCard.addEventListener(
 
   "click",
 
   () => {
 
-
-    /*
-      EVENTO SIMPLE:
-      tocar y volver al mapa.
-    */
 
     if (
       state.encounterMode ===
@@ -3796,11 +4555,6 @@ encounterCard.addEventListener(
 
     }
 
-
-    /*
-      CARTA DE PISTA:
-      tocar y volver al mapa.
-    */
 
     if (
       state.encounterMode ===
@@ -3821,7 +4575,7 @@ encounterCard.addEventListener(
 
 
 /* =========================================================
-   TOCAR HABITACIÓN
+   HABITACIONES
    ========================================================= */
 
 function handleRoomClick(
@@ -3846,10 +4600,6 @@ function handleRoomClick(
   }
 
 
-  /* =====================================================
-     YA ESTAMOS ALLÍ
-     ===================================================== */
-
   if (
     state.currentRoom ===
     roomName
@@ -3867,10 +4617,6 @@ function handleRoomClick(
   }
 
 
-  /* =====================================================
-     DEBE SER ADYACENTE
-     ===================================================== */
-
   if (
     !roomIsAdjacent(
       roomName
@@ -3883,12 +4629,6 @@ function handleRoomClick(
 
   }
 
-
-  /* =====================================================
-     SALA YA COMPLETADA
-
-     SOLO MOVIMIENTO.
-     ===================================================== */
 
   if (
     room.completed
@@ -3909,12 +4649,6 @@ function handleRoomClick(
   }
 
 
-  /* =====================================================
-     ESCÁNER ENCENDIDO
-
-     TOCAR = REVELAR
-     ===================================================== */
-
   if (
     state.scannerActive
     &&
@@ -3933,13 +4667,6 @@ function handleRoomClick(
   }
 
 
-  /* =====================================================
-     ESCÁNER APAGADO
-
-     ENTRAR DIRECTAMENTE,
-     AUN SIN ESCANEAR.
-     ===================================================== */
-
   openEncounter(
     roomName
   );
@@ -3948,10 +4675,6 @@ function handleRoomClick(
 }
 
 
-
-/* =========================================================
-   EVENTOS DE LAS HABITACIONES
-   ========================================================= */
 
 [
   "A12",
