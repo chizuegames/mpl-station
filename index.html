@@ -3,18 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>MPL - Estación Espacial</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
   margin:0;
   padding:0;
   width:100%;
@@ -81,22 +78,16 @@ button{
   bottom:4.5%;
   transform:translateX(-50%);
   z-index:10;
-
   min-width:180px;
   padding:14px 28px;
-
   border:3px solid #ffc164;
   border-radius:18px;
-
   background:rgba(190,92,0,.93);
   color:#fff;
-
   font-size:clamp(19px,4vw,28px);
   font-weight:900;
   letter-spacing:.8px;
-
   cursor:pointer;
-
   box-shadow:
     0 0 0 3px rgba(0,0,0,.45),
     0 0 22px rgba(255,142,22,.65);
@@ -120,112 +111,60 @@ button{
 
 #dockShip{
   position:absolute;
-
   left:50%;
   top:111%;
-
   width:25%;
   height:auto;
-
   transform:translate(-50%,-50%);
-
-  filter:
-    drop-shadow(
-      0 0 14px
-      rgba(255,139,30,.6)
-    );
-
+  filter:drop-shadow(0 0 14px rgba(255,139,30,.6));
   z-index:5;
-
-  opacity:1;
 }
 
 #dockShip.docking{
-  animation:
-    dockMove
-    2.25s
-    cubic-bezier(.25,.75,.25,1)
-    forwards;
+  animation:dockMove 2.25s cubic-bezier(.25,.75,.25,1) forwards;
 }
 
 #dockFlash{
   position:absolute;
   inset:0;
-
   z-index:8;
-
   background:#fff;
-
   opacity:0;
-
   pointer-events:none;
 }
 
 #dockFlash.flash{
-  animation:
-    dockFlash
-    .28s
-    ease;
+  animation:dockFlash .28s ease;
 }
 
 @keyframes introFade{
-
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
 @keyframes dockMove{
-
   0%{
     top:112%;
-    transform:
-      translate(-50%,-50%)
-      scale(.92);
+    transform:translate(-50%,-50%) scale(.92);
   }
-
   22%{
     top:99%;
-    transform:
-      translate(-50%,-50%)
-      scale(.95);
+    transform:translate(-50%,-50%) scale(.95);
   }
-
   70%{
     top:81%;
-    transform:
-      translate(-50%,-50%)
-      scale(.99);
+    transform:translate(-50%,-50%) scale(.99);
   }
-
   100%{
     top:74.6%;
-    transform:
-      translate(-50%,-50%)
-      scale(1);
+    transform:translate(-50%,-50%) scale(1);
   }
-
 }
 
 @keyframes dockFlash{
-
-  0%{
-    opacity:0;
-  }
-
-  45%{
-    opacity:.35;
-  }
-
-  100%{
-    opacity:0;
-  }
-
+  0%{opacity:0;}
+  45%{opacity:.35;}
+  100%{opacity:0;}
 }
 
 
@@ -235,17 +174,11 @@ button{
 
 #game{
   display:none;
-
   position:relative;
-
   width:min(100vw,760px);
-
   margin:0 auto;
-
   overflow:hidden;
-
   background:#050713;
-
   user-select:none;
   -webkit-user-select:none;
 }
@@ -257,10 +190,8 @@ button{
 
 #mapImage{
   display:block;
-
   width:100%;
   height:auto;
-
   pointer-events:none;
 }
 
@@ -281,134 +212,84 @@ button{
 
 .room{
   position:absolute;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   cursor:pointer;
-
   background:transparent;
   border:0;
 }
 
 
 /* =========================================================
-   ICONS
+   MAP ICONS
    ========================================================= */
 
 .map-icon{
   position:absolute;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   pointer-events:none;
-
   object-fit:contain;
 }
 
 .player-icon{
   width:12.5%;
-
-  filter:
-    drop-shadow(
-      0 0 8px
-      rgba(255,255,255,.35)
-    );
-
-  animation:
-    pop
-    .3s
-    ease-out;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.35));
+  animation:pop .3s ease-out;
 }
 
 .event-icon{
   width:11.5%;
-
-  animation:
-    pop
-    .3s
-    ease-out;
+  animation:pop .3s ease-out;
 }
 
 .check-icon{
   width:10%;
-
-  animation:
-    pop
-    .3s
-    ease-out;
+  animation:pop .3s ease-out;
 }
 
 .scanner-wave{
   width:8.5%;
-
-  animation:
-    waveGlow
-    1s
-    infinite
-    ease-in-out;
+  animation:waveGlow 1s infinite ease-in-out;
 }
 
 .dir-up{
-  transform:
-    translate(-50%,-50%)
-    rotate(0deg);
+  transform:translate(-50%,-50%) rotate(0deg);
 }
 
 .dir-right{
-  transform:
-    translate(-50%,-50%)
-    rotate(90deg);
+  transform:translate(-50%,-50%) rotate(90deg);
 }
 
 .dir-left{
-  transform:
-    translate(-50%,-50%)
-    rotate(-90deg);
+  transform:translate(-50%,-50%) rotate(-90deg);
 }
 
 .dir-down{
-  transform:
-    translate(-50%,-50%)
-    rotate(180deg);
+  transform:translate(-50%,-50%) rotate(180deg);
 }
 
 @keyframes pop{
-
   from{
     opacity:0;
     scale:.35;
   }
-
   to{
     opacity:1;
     scale:1;
   }
-
 }
 
 @keyframes waveGlow{
-
-  0%,
-  100%{
+  0%,100%{
     opacity:.58;
-
-    filter:
-      brightness(.95);
+    filter:brightness(.95);
   }
 
   50%{
     opacity:1;
-
     filter:
       brightness(1.3)
-      drop-shadow(
-        0 0 7px
-        rgba(168,211,54,.65)
-      );
+      drop-shadow(0 0 7px rgba(168,211,54,.65));
   }
-
 }
 
 
@@ -418,76 +299,47 @@ button{
 
 #scannerButton{
   position:absolute;
-
   left:36%;
   top:88.4%;
-
   width:28%;
   height:10.8%;
-
   z-index:40;
-
   cursor:pointer;
-
   background:transparent;
   border:0;
 }
 
 #scannerButton.scanner-on{
-  filter:
-    drop-shadow(
-      0 0 12px
-      #a8d336
-    );
+  filter:drop-shadow(0 0 12px #a8d336);
 }
 
 #useObjectButton{
   position:absolute;
-
   left:77%;
   top:5.2%;
-
   width:20%;
   height:18%;
-
   z-index:40;
-
   cursor:pointer;
-
   background:transparent;
   border:0;
 }
 
 #musicButton{
   position:absolute;
-
   left:2.2%;
   bottom:1.3%;
-
   z-index:60;
-
   width:44px;
   height:44px;
-
-  border:
-    2px solid
-    rgba(255,255,255,.8);
-
+  border:2px solid rgba(255,255,255,.8);
   border-radius:50%;
-
-  background:
-    rgba(10,15,20,.76);
-
+  background:rgba(10,15,20,.76);
   color:#fff;
-
   font-size:20px;
   font-weight:900;
-
   cursor:pointer;
-
-  box-shadow:
-    0 0 10px
-    rgba(0,0,0,.5);
+  box-shadow:0 0 10px rgba(0,0,0,.5);
 }
 
 #musicButton.music-on{
@@ -498,48 +350,24 @@ button{
 
 
 /* =========================================================
-   OXYGEN COUNTER
+   OXYGEN
    ========================================================= */
 
 #oxygenCounter{
   position:absolute;
-
   left:5.1%;
   top:23.2%;
-
   width:12.4%;
-
   z-index:55;
-
-  padding:
-    5px
-    3px;
-
+  padding:5px 3px;
   border-radius:10px;
-
-  background:
-    rgba(9,13,18,.78);
-
-  border:
-    2px solid
-    rgba(255,255,255,.72);
-
+  background:rgba(9,13,18,.78);
+  border:2px solid rgba(255,255,255,.72);
   color:#fff;
-
   text-align:center;
-
-  font-size:
-    clamp(
-      13px,
-      2.9vw,
-      23px
-    );
-
+  font-size:clamp(13px,2.9vw,23px);
   font-weight:900;
-
-  text-shadow:
-    1px 2px 2px #000;
-
+  text-shadow:1px 2px 2px #000;
   pointer-events:none;
 }
 
@@ -560,20 +388,13 @@ button{
 
 #tutorialOverlay{
   position:fixed;
-
   inset:0;
-
   z-index:150;
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:20px;
-
-  background:
-    rgba(0,0,0,.62);
+  background:rgba(0,0,0,.62);
 }
 
 #tutorialOverlay.show{
@@ -582,62 +403,33 @@ button{
 
 #tutorialPanel{
   width:min(88vw,620px);
-
-  padding:
-    24px
-    22px;
-
+  padding:24px 22px;
   border-radius:20px;
-
-  background:
-    rgba(19,22,27,.97);
-
-  border:
-    3px solid
-    #a8d336;
-
+  background:rgba(19,22,27,.97);
+  border:3px solid #a8d336;
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
     0 0 26px rgba(168,211,54,.35);
-
   text-align:center;
-
   color:#fff;
 }
 
 #tutorialText{
-  font-size:
-    clamp(
-      20px,
-      4vw,
-      31px
-    );
-
+  font-size:clamp(20px,4vw,31px);
   font-weight:800;
-
   line-height:1.25;
-
   margin-bottom:20px;
 }
 
 #tutorialNext{
   min-width:150px;
-
-  padding:
-    11px
-    22px;
-
+  padding:11px 22px;
   border:0;
-
   border-radius:14px;
-
   background:#a8d336;
-
   color:#111;
-
   font-size:18px;
   font-weight:900;
-
   cursor:pointer;
 }
 
@@ -648,28 +440,16 @@ button{
 
 #encounter{
   position:fixed;
-
   inset:0;
-
   z-index:120;
-
   display:flex;
-
   justify-content:center;
   align-items:center;
-
   padding:12px;
-
-  background:
-    rgba(0,0,0,.66);
-
+  background:rgba(0,0,0,.66);
   opacity:0;
-
   visibility:hidden;
-
-  transform:
-    scale(.96);
-
+  transform:scale(.96);
   transition:
     opacity .18s ease,
     transform .18s ease;
@@ -677,63 +457,38 @@ button{
 
 #encounter.show{
   opacity:1;
-
   visibility:visible;
-
-  transform:
-    scale(1);
+  transform:scale(1);
 }
 
 #encounterCard{
   position:relative;
-
-  width:
-    min(
-      82vw,
-      650px
-    );
-
+  width:min(82vw,650px);
   max-height:94vh;
-
   cursor:default;
 }
 
 #encounterImage{
   display:block;
-
   width:100%;
   height:auto;
-
   max-height:94vh;
-
   object-fit:contain;
-
   pointer-events:none;
 }
 
-
-/* =========================================================
-   ATTACK ZONES
-   ========================================================= */
-
 .attack-zone{
   position:absolute;
-
   z-index:125;
-
   border:0;
-
   background:transparent;
-
   cursor:pointer;
-
   display:none;
 }
 
 #gunButton{
   left:6%;
   top:51%;
-
   width:35%;
   height:27%;
 }
@@ -741,7 +496,6 @@ button{
 #fistButton{
   left:62%;
   top:51%;
-
   width:35%;
   height:27%;
 }
@@ -749,47 +503,27 @@ button{
 
 /* =========================================================
    ENEMY HP
-   SOLO NÚMERO
    ========================================================= */
 
 #enemyHp{
   position:absolute;
-
   z-index:130;
-
   left:82%;
   top:12.5%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   display:none;
-
   align-items:center;
   justify-content:center;
-
   background:transparent;
-
   border:0;
-
   color:#fff;
-
-  font-size:
-    clamp(
-      25px,
-      6vw,
-      38px
-    );
-
+  font-size:clamp(25px,6vw,38px);
   font-weight:1000;
-
   line-height:1;
-
   text-shadow:
     2px 2px 0 #000,
     -2px -2px 0 #000,
     0 0 5px #000;
-
   pointer-events:none;
 }
 
@@ -801,59 +535,29 @@ button{
 
 #encounterBackButton{
   display:none;
-
   position:absolute;
-
   left:50%;
   bottom:3.5%;
-
-  transform:
-    translateX(-50%);
-
+  transform:translateX(-50%);
   z-index:135;
-
-  padding:
-    10px
-    20px;
-
-  border:
-    2px solid
-    #fff;
-
+  padding:10px 20px;
+  border:2px solid #fff;
   border-radius:14px;
-
-  background:
-    rgba(20,23,28,.9);
-
+  background:rgba(20,23,28,.9);
   color:#fff;
-
   font-size:17px;
   font-weight:900;
-
   cursor:pointer;
 }
 
 #encounterCard.hit{
-  animation:
-    cardHit
-    .2s
-    ease;
+  animation:cardHit .2s ease;
 }
 
 @keyframes cardHit{
-
-  0%{
-    transform:scale(1);
-  }
-
-  45%{
-    transform:scale(.985);
-  }
-
-  100%{
-    transform:scale(1);
-  }
-
+  0%{transform:scale(1);}
+  45%{transform:scale(.985);}
+  100%{transform:scale(1);}
 }
 
 
@@ -863,102 +567,54 @@ button{
 
 #message{
   position:fixed;
-
   left:50%;
   top:44%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
-
+  transform:translate(-50%,-50%) scale(.8);
   z-index:210;
-
   min-width:240px;
   max-width:85vw;
-
-  padding:
-    17px
-    25px;
-
+  padding:17px 25px;
   border-radius:18px;
-
-  background:
-    rgba(15,18,22,.96);
-
-  border:
-    3px solid
-    #a8d336;
-
+  background:rgba(15,18,22,.96);
+  border:3px solid #a8d336;
   color:#fff;
-
-  font-size:
-    clamp(
-      19px,
-      4.3vw,
-      33px
-    );
-
+  font-size:clamp(19px,4.3vw,33px);
   font-weight:900;
-
   line-height:1.15;
-
   text-align:center;
-
   opacity:0;
-
   visibility:hidden;
-
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
     0 0 25px rgba(168,211,54,.45);
-
   pointer-events:none;
 }
 
 #message.show{
   visibility:visible;
-
-  animation:
-    messageAnimation
-    1.4s
-    ease
-    forwards;
+  animation:messageAnimation 1.4s ease forwards;
 }
 
 @keyframes messageAnimation{
-
   0%{
     opacity:0;
-
-    transform:
-      translate(-50%,-20%)
-      scale(.7);
+    transform:translate(-50%,-20%) scale(.7);
   }
 
   18%{
     opacity:1;
-
-    transform:
-      translate(-50%,-50%)
-      scale(1.06);
+    transform:translate(-50%,-50%) scale(1.06);
   }
 
   72%{
     opacity:1;
-
-    transform:
-      translate(-50%,-60%)
-      scale(1);
+    transform:translate(-50%,-60%) scale(1);
   }
 
   100%{
     opacity:0;
-
-    transform:
-      translate(-50%,-95%)
-      scale(.95);
+    transform:translate(-50%,-95%) scale(.95);
   }
-
 }
 
 
@@ -968,20 +624,13 @@ button{
 
 #endOverlay{
   position:fixed;
-
   inset:0;
-
   z-index:300;
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:20px;
-
-  background:
-    rgba(3,5,12,.95);
+  background:rgba(3,5,12,.95);
 }
 
 #endOverlay.show{
@@ -990,70 +639,32 @@ button{
 
 #endPanel{
   width:min(88vw,640px);
-
-  padding:
-    36px
-    25px;
-
+  padding:36px 25px;
   border-radius:24px;
-
-  background:
-    rgba(17,20,25,.96);
-
-  border:
-    4px solid
-    #fff;
-
+  background:rgba(17,20,25,.96);
+  border:4px solid #fff;
   text-align:center;
-
-  box-shadow:
-    0 0 35px
-    rgba(255,255,255,.18);
+  box-shadow:0 0 35px rgba(255,255,255,.18);
 }
 
 #endTitle{
-  margin:
-    0
-    0
-    14px;
-
+  margin:0 0 14px;
   color:#fff;
-
-  font-size:
-    clamp(
-      40px,
-      9vw,
-      72px
-    );
-
+  font-size:clamp(40px,9vw,72px);
   font-weight:1000;
-
-  letter-spacing:1px;
 }
 
 #endSubtitle{
   margin:0;
-
   color:#ddd;
-
-  font-size:
-    clamp(
-      18px,
-      4vw,
-      28px
-    );
-
+  font-size:clamp(18px,4vw,28px);
   font-weight:700;
-
   line-height:1.25;
 }
 
 #endOverlay.mission #endPanel{
   border-color:#a8d336;
-
-  box-shadow:
-    0 0 36px
-    rgba(168,211,54,.38);
+  box-shadow:0 0 36px rgba(168,211,54,.38);
 }
 
 #endOverlay.mission #endTitle{
@@ -1062,31 +673,23 @@ button{
 
 #endOverlay.gameover #endPanel{
   border-color:#ff4141;
-
-  box-shadow:
-    0 0 36px
-    rgba(255,65,65,.4);
+  box-shadow:0 0 36px rgba(255,65,65,.4);
 }
 
 #endOverlay.gameover #endTitle{
   color:#ff5959;
 }
 
-
 @media(max-width:500px){
 
   #acceptMissionButton{
     min-width:145px;
-
-    padding:
-      11px
-      20px;
+    padding:11px 20px;
   }
 
   #musicButton{
     width:39px;
     height:39px;
-
     font-size:17px;
   }
 
@@ -1095,11 +698,7 @@ button{
 @media(min-width:900px){
 
   #encounterCard{
-    width:
-      min(
-        58vh,
-        610px
-      );
+    width:min(58vh,610px);
   }
 
 }
@@ -1117,50 +716,25 @@ button{
 
 <div id="introOverlay">
 
-
-  <section
-    id="introPage1"
-    class="intro-page active"
-  >
-
-    <img
-      class="intro-image"
-      src="M01a.png"
-      alt="Mensaje entrante"
-    >
-
+  <section id="introPage1" class="intro-page active">
+    <img class="intro-image" src="M01a.png" alt="Mensaje entrante">
   </section>
 
 
-  <section
-    id="introPage2"
-    class="intro-page"
-  >
+  <section id="introPage2" class="intro-page">
 
-    <img
-      class="intro-image"
-      src="M01b.png"
-      alt="Nueva misión"
-    >
+    <img class="intro-image" src="M01b.png" alt="Nueva misión">
 
-
-    <button
-      id="acceptMissionButton"
-      type="button"
-    >
+    <button id="acceptMissionButton" type="button">
       ACEPTAR
     </button>
 
   </section>
 
 
-  <section
-    id="dockPage"
-    class="intro-page"
-  >
+  <section id="dockPage" class="intro-page">
 
     <div id="dockScene">
-
 
       <img
         id="dockBaseImage"
@@ -1169,21 +743,17 @@ button{
         alt="Estación espacial"
       >
 
-
       <img
         id="dockShip"
         src="NvAstra.png"
         alt="Nave de Astra"
       >
 
-
       <div id="dockFlash"></div>
-
 
     </div>
 
   </section>
-
 
 </div>
 
@@ -1197,7 +767,6 @@ button{
 
   <div id="map">
 
-
     <img
       id="mapImage"
       src="MIc100.png"
@@ -1205,12 +774,8 @@ button{
       draggable="false"
     >
 
-
     <div id="roomsLayer"></div>
-
-
     <div id="iconsLayer"></div>
-
 
     <button
       id="scannerButton"
@@ -1218,13 +783,11 @@ button{
       aria-label="Escáner"
     ></button>
 
-
     <button
       id="useObjectButton"
       type="button"
       aria-label="Usar objeto"
     ></button>
-
 
     <button
       id="musicButton"
@@ -1234,11 +797,9 @@ button{
       ♫
     </button>
 
-
     <div id="oxygenCounter">
       100%
     </div>
-
 
   </div>
 
@@ -1250,31 +811,12 @@ button{
      AUDIO
      ========================================================= -->
 
-<audio
-  id="introMusic"
-  loop
-  preload="auto"
->
-
-  <source
-    src="Echoes in the Subway.mp3"
-    type="audio/mpeg"
-  >
-
+<audio id="introMusic" loop preload="auto">
+  <source src="Echoes in the Subway.mp3" type="audio/mpeg">
 </audio>
 
-
-<audio
-  id="bgMusic"
-  loop
-  preload="auto"
->
-
-  <source
-    src="Bitácotas Espaciales.mp3"
-    type="audio/mpeg"
-  >
-
+<audio id="bgMusic" loop preload="auto">
+  <source src="Bitácotas Espaciales.mp3" type="audio/mpeg">
 </audio>
 
 
@@ -1287,17 +829,11 @@ button{
 
   <div id="tutorialPanel">
 
-
     <div id="tutorialText"></div>
 
-
-    <button
-      id="tutorialNext"
-      type="button"
-    >
+    <button id="tutorialNext" type="button">
       SIGUIENTE
     </button>
-
 
   </div>
 
@@ -1313,7 +849,6 @@ button{
 
   <div id="encounterCard">
 
-
     <img
       id="encounterImage"
       src=""
@@ -1321,12 +856,7 @@ button{
       draggable="false"
     >
 
-
-    <div
-      id="enemyHp"
-      aria-live="polite"
-    ></div>
-
+    <div id="enemyHp" aria-live="polite"></div>
 
     <button
       id="gunButton"
@@ -1335,7 +865,6 @@ button{
       aria-label="Disparar"
     ></button>
 
-
     <button
       id="fistButton"
       class="attack-zone"
@@ -1343,19 +872,13 @@ button{
       aria-label="Golpear"
     ></button>
 
-
-    <button
-      id="encounterBackButton"
-      type="button"
-    >
+    <button id="encounterBackButton" type="button">
       VOLVER AL MAPA
     </button>
-
 
   </div>
 
 </div>
-
 
 
 <div id="message"></div>
@@ -1370,12 +893,9 @@ button{
 
   <div id="endPanel">
 
-
     <h1 id="endTitle"></h1>
 
-
     <p id="endSubtitle"></p>
-
 
   </div>
 
@@ -1385,45 +905,29 @@ button{
 
 <script>
 
-
 /* =========================================================
    ASSETS
    ========================================================= */
 
 const ASSETS = {
 
-  introIncoming:
-    "M01a.png",
+  introIncoming:"M01a.png",
+  introMission:"M01b.png",
 
-  introMission:
-    "M01b.png",
+  stationOnly:"MIa.png",
+  dockedStation:"MIb.png",
 
-  stationOnly:
-    "MIa.png",
+  playerShip:"NvAstra.png",
 
-  dockedStation:
-    "MIb.png",
+  map100:"MIc100.png",
+  map60:"MIc60.png",
+  map20:"MIc20.png",
 
-  playerShip:
-    "NvAstra.png",
+  playerIcon:"IcoAstra.png",
 
-  map100:
-    "MIc100.png",
+  scannerWave:"Esc1.png",
 
-  map60:
-    "MIc60.png",
-
-  map20:
-    "MIc20.png",
-
-  playerIcon:
-    "IcoAstra.png",
-
-  scannerWave:
-    "Esc1.png",
-
-  check:
-    "icocheck.png"
+  check:"icocheck.png"
 
 };
 
@@ -1435,145 +939,34 @@ const ASSETS = {
 
 const ROOM_LAYOUT = {
 
+  A1:{x:33.5,y:17.9},
+  A2:{x:50.8,y:17.9},
+  A3:{x:68.1,y:17.9},
 
-  A1:{
-    x:33.5,
-    y:17.9
-  },
+  B1:{x:50.8,y:27.2},
 
+  A4:{x:33.5,y:37.9},
+  B2:{x:50.8,y:37.9},
+  A5:{x:68.1,y:37.9},
 
-  A2:{
-    x:50.8,
-    y:17.9
-  },
+  A6:{x:16.4,y:47.8},
+  B3:{x:33.5,y:47.8},
+  A7:{x:50.8,y:47.8},
+  B4:{x:68.1,y:47.8},
+  A8:{x:85.2,y:47.8},
 
+  A9:{x:16.4,y:57.6},
+  B5:{x:50.8,y:57.6},
+  A10:{x:85.2,y:57.6},
 
-  A3:{
-    x:68.1,
-    y:17.9
-  },
+  A11:{x:16.4,y:67.6},
+  B6:{x:33.5,y:67.6},
+  A12:{x:50.8,y:67.6},
+  B7:{x:68.1,y:67.6},
+  A13:{x:85.2,y:67.6},
 
-
-  B1:{
-    x:50.8,
-    y:27.2
-  },
-
-
-  /*
-    A4 ahora contiene la TARJETA LLAVE.
-  */
-
-  A4:{
-    x:33.5,
-    y:37.9
-  },
-
-
-  B2:{
-    x:50.8,
-    y:37.9
-  },
-
-
-  A5:{
-    x:68.1,
-    y:37.9
-  },
-
-
-  A6:{
-    x:16.4,
-    y:47.8
-  },
-
-
-  B3:{
-    x:33.5,
-    y:47.8
-  },
-
-
-  A7:{
-    x:50.8,
-    y:47.8
-  },
-
-
-  B4:{
-    x:68.1,
-    y:47.8
-  },
-
-
-  A8:{
-    x:85.2,
-    y:47.8
-  },
-
-
-  A9:{
-    x:16.4,
-    y:57.6
-  },
-
-
-  B5:{
-    x:50.8,
-    y:57.6
-  },
-
-
-  A10:{
-    x:85.2,
-    y:57.6
-  },
-
-
-  A11:{
-    x:16.4,
-    y:67.6
-  },
-
-
-  B6:{
-    x:33.5,
-    y:67.6
-  },
-
-
-  A12:{
-    x:50.8,
-    y:67.6
-  },
-
-
-  B7:{
-    x:68.1,
-    y:67.6
-  },
-
-
-  A13:{
-    x:85.2,
-    y:67.6
-  },
-
-
-  A14:{
-    x:16.4,
-    y:77.5
-  },
-
-
-  /*
-    A15 ahora contiene VIDA.
-  */
-
-  A15:{
-    x:85.2,
-    y:77.5
-  }
+  A14:{x:16.4,y:77.5},
+  A15:{x:85.2,y:77.5}
 
 };
 
@@ -1581,10 +974,13 @@ const ROOM_LAYOUT = {
 
 /* =========================================================
    CONNECTIONS
+
+   IMPORTANTE:
+   B3 NO conecta con A4.
+   B4 NO conecta con A5.
    ========================================================= */
 
 const GRAPH = {
-
 
   ENTRADA:[
     "A12"
@@ -1614,9 +1010,13 @@ const GRAPH = {
   ],
 
 
+  /*
+    A4 SOLO conecta con B2.
+    NO conecta con B3.
+  */
+
   A4:[
-    "B2",
-    "B3"
+    "B2"
   ],
 
 
@@ -1628,9 +1028,13 @@ const GRAPH = {
   ],
 
 
+  /*
+    A5 SOLO conecta con B2.
+    NO conecta con B4.
+  */
+
   A5:[
-    "B2",
-    "B4"
+    "B2"
   ],
 
 
@@ -1640,8 +1044,11 @@ const GRAPH = {
   ],
 
 
+  /*
+    Se eliminó A4 de aquí.
+  */
+
   B3:[
-    "A4",
     "A6",
     "A7",
     "B6"
@@ -1656,8 +1063,11 @@ const GRAPH = {
   ],
 
 
+  /*
+    Se eliminó A5 de aquí.
+  */
+
   B4:[
-    "A5",
     "A7",
     "A8",
     "B7"
@@ -1745,40 +1155,30 @@ const DEFINITIONS = {
 
   A1:{
 
-    type:
-      "loot",
+    type:"loot",
 
-    label:
-      "SALA DEL BOTÍN",
+    label:"SALA DEL BOTÍN",
 
-    card:
-      "A1E.png",
+    card:"A1E.png",
 
-    finalCard:
-      "A1F.png",
+    finalCard:"A1F.png",
 
-    icon:
-      "ICOBT.png"
+    icon:"ICOBT.png"
 
   },
 
 
   A2:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO VERDE",
+    label:"MARCIANO VERDE",
 
-    card:
-      "A2E.png",
+    card:"A2E.png",
 
-    finalCard:
-      "A2F.png",
+    finalCard:"A2F.png",
 
-    icon:
-      "ICOMV.png",
+    icon:"ICOMV.png",
 
     hp:{
       100:2,
@@ -1791,116 +1191,98 @@ const DEFINITIONS = {
 
   A3:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "CAJA DE OBJETO",
+    label:"CAJA DE OBJETO",
 
-    card:
-      "CJO.png",
+    card:"CJO.png",
 
-    icon:
-      "ICOCO.png"
+    icon:"ICOCO.png"
+
+  },
+
+
+  A4:{
+
+    type:"key",
+
+    label:"TARJETA LLAVE",
+
+    card:"TLL.png",
+
+    icon:"ICOTL.png",
+
+    keySource:"A4"
 
   },
 
 
   /*
-    CAMBIO:
-    A4 ahora es tarjeta llave.
+    Excel nuevo:
+    100% = 4
+    60%  = 4
+    20%  = 5
   */
-
-  A4:{
-
-    type:
-      "key",
-
-    label:
-      "TARJETA LLAVE",
-
-    card:
-      "TLL.png",
-
-    icon:
-      "ICOTL.png",
-
-    keySource:
-      "A4"
-
-  },
-
 
   A5:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO ROJO",
+    label:"MARCIANO ROJO",
 
-    card:
-      "A5E.png",
+    card:"A5E.png",
 
-    finalCard:
-      "A5F.png",
+    finalCard:"A5F.png",
 
-    icon:
-      "ICOMR.png",
+    icon:"ICOMR.png",
 
     hp:{
       100:4,
-      60:5,
-      20:6
+      60:4,
+      20:5
     },
 
-    specialKey:
-      true
+    specialKey:true
 
   },
 
 
   A6:{
 
-    type:
-      "key",
+    type:"key",
 
-    label:
-      "TARJETA LLAVE",
+    label:"TARJETA LLAVE",
 
-    card:
-      "TLL.png",
+    card:"TLL.png",
 
-    icon:
-      "ICOTL.png",
+    icon:"ICOTL.png",
 
-    keySource:
-      "A6"
+    keySource:"A6"
 
   },
 
 
+  /*
+    Excel nuevo:
+    1 / 2 / 2
+  */
+
   A7:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO MORADO",
+    label:"MARCIANO MORADO",
 
-    card:
-      "A7E.png",
+    card:"A7E.png",
 
-    finalCard:
-      "A7F.png",
+    finalCard:"A7F.png",
 
-    icon:
-      "ICOMM.png",
+    icon:"ICOMM.png",
 
     hp:{
-      100:2,
+      100:1,
       60:2,
-      20:3
+      20:2
     }
 
   },
@@ -1908,42 +1290,38 @@ const DEFINITIONS = {
 
   A8:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "CAJA DE OBJETO",
+    label:"CAJA DE OBJETO",
 
-    card:
-      "CJO.png",
+    card:"CJO.png",
 
-    icon:
-      "ICOCO.png"
+    icon:"ICOCO.png"
 
   },
 
 
+  /*
+    Excel nuevo:
+    1 / 2 / 2
+  */
+
   A9:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO MORADO",
+    label:"MARCIANO MORADO",
 
-    card:
-      "A9E.png",
+    card:"A9E.png",
 
-    finalCard:
-      "A9F.png",
+    finalCard:"A9F.png",
 
-    icon:
-      "ICOMM.png",
+    icon:"ICOMM.png",
 
     hp:{
-      100:2,
+      100:1,
       60:2,
-      20:3
+      20:2
     }
 
   },
@@ -1951,54 +1329,41 @@ const DEFINITIONS = {
 
   A10:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "TRAMPA DE VIDA",
+    label:"TRAMPA DE VIDA",
 
-    card:
-      "TRV.png",
+    card:"TRV.png",
 
-    icon:
-      "ICOTR.png"
+    icon:"ICOTR.png"
 
   },
 
 
   A11:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "TRAMPA DE ENERGÍA",
+    label:"TRAMPA DE ENERGÍA",
 
-    card:
-      "TRE.png",
+    card:"TRE.png",
 
-    icon:
-      "ICOTR.png"
+    icon:"ICOTR.png"
 
   },
 
 
   A12:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO VERDE",
+    label:"MARCIANO VERDE",
 
-    card:
-      "A12E.png",
+    card:"A12E.png",
 
-    finalCard:
-      "A12F.png",
+    finalCard:"A12F.png",
 
-    icon:
-      "ICOMV.png",
+    icon:"ICOMV.png",
 
     hp:{
       100:1,
@@ -2011,17 +1376,13 @@ const DEFINITIONS = {
 
   A13:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO VERDE",
+    label:"MARCIANO VERDE",
 
-    card:
-      "A13E.png",
+    card:"A13E.png",
 
-    icon:
-      "ICOMV.png",
+    icon:"ICOMV.png",
 
     hp:{
       100:1,
@@ -2034,184 +1395,155 @@ const DEFINITIONS = {
 
   A14:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "CAJA DE OBJETO",
+    label:"CAJA DE OBJETO",
 
-    card:
-      "CJO.png",
+    card:"CJO.png",
 
-    icon:
-      "ICOCO.png"
+    icon:"ICOCO.png"
 
   },
 
 
-  /*
-    CAMBIO:
-    A15 ahora es vida.
-  */
-
   A15:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "RECUPERAR VIDA",
+    label:"RECUPERAR VIDA",
 
-    card:
-      "SDV.png",
+    card:"SDV.png",
 
-    icon:
-      "ICOV.png"
+    icon:"ICOV.png"
 
   },
 
 
   B1:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "TRAMPA DE ENERGÍA",
+    label:"TRAMPA DE ENERGÍA",
 
-    card:
-      "TRE.png",
+    card:"TRE.png",
 
-    icon:
-      "ICOTR.png"
+    icon:"ICOTR.png"
 
   },
 
 
   B2:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "TRAMPA DE VIDA",
+    label:"TRAMPA DE VIDA",
 
-    card:
-      "TRV.png",
+    card:"TRV.png",
 
-    icon:
-      "ICOTR.png"
+    icon:"ICOTR.png"
 
   },
 
 
   B3:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "CAJA DE OBJETO",
+    label:"CAJA DE OBJETO",
 
-    card:
-      "CJO.png",
+    card:"CJO.png",
 
-    icon:
-      "ICOCO.png"
+    icon:"ICOCO.png"
 
   },
 
 
   B4:{
 
-    type:
-      "simple",
+    type:"simple",
 
-    label:
-      "RECUPERAR VIDA",
+    label:"RECUPERAR VIDA",
 
-    card:
-      "SDV.png",
+    card:"SDV.png",
 
-    icon:
-      "ICOV.png"
+    icon:"ICOV.png"
 
   },
 
+
+  /*
+    Excel nuevo:
+    2 / 3 / 4
+  */
 
   B5:{
 
-    type:
-      "combat",
+    type:"combat",
 
-    label:
-      "MARCIANO ROJO",
+    label:"MARCIANO ROJO",
 
-    card:
-      "B5E.png",
+    card:"B5E.png",
 
-    finalCard:
-      "BF5.png",
+    finalCard:"BF5.png",
 
-    icon:
-      "ICOMR.png",
-
-    hp:{
-      100:3,
-      60:4,
-      20:4
-    }
-
-  },
-
-
-  B6:{
-
-    type:
-      "combat",
-
-    label:
-      "MARCIANO ROJO",
-
-    card:
-      "B6E.png",
-
-    finalCard:
-      "BF6.png",
-
-    icon:
-      "ICOMR.png",
-
-    hp:{
-      100:3,
-      60:4,
-      20:4
-    }
-
-  },
-
-
-  B7:{
-
-    type:
-      "combat",
-
-    label:
-      "MARCIANO MORADO",
-
-    card:
-      "B7E.png",
-
-    finalCard:
-      "BF7.png",
-
-    icon:
-      "ICOMM.png",
+    icon:"ICOMR.png",
 
     hp:{
       100:2,
+      60:3,
+      20:4
+    }
+
+  },
+
+
+  /*
+    Excel nuevo:
+    2 / 3 / 4
+  */
+
+  B6:{
+
+    type:"combat",
+
+    label:"MARCIANO ROJO",
+
+    card:"B6E.png",
+
+    finalCard:"BF6.png",
+
+    icon:"ICOMR.png",
+
+    hp:{
+      100:2,
+      60:3,
+      20:4
+    }
+
+  },
+
+
+  /*
+    Excel nuevo:
+    1 / 2 / 2
+  */
+
+  B7:{
+
+    type:"combat",
+
+    label:"MARCIANO MORADO",
+
+    card:"B7E.png",
+
+    finalCard:"BF7.png",
+
+    icon:"ICOMM.png",
+
+    hp:{
+      100:1,
       60:2,
-      20:3
+      20:2
     }
 
   }
@@ -2221,51 +1553,31 @@ const DEFINITIONS = {
 
 
 /* =========================================================
-   STATE
+   GAME STATE
    ========================================================= */
 
 const state = {
 
+  currentRoom:"ENTRADA",
 
-  currentRoom:
-    "ENTRADA",
+  oxygen:100,
 
+  scannerActive:false,
 
-  oxygen:
-    100,
+  pendingRoom:null,
 
+  encounterMode:null,
 
-  scannerActive:
-    false,
+  combat:null,
 
+  gameLocked:true,
 
-  pendingRoom:
-    null,
-
-
-  encounterMode:
-    null,
-
-
-  combat:
-    null,
-
-
-  gameLocked:
-    true,
-
-
-  ended:
-    false,
+  ended:false,
 
 
   /*
-    Llaves ocultas.
-
-    Ahora las ubicaciones son:
-    - A4
-    - A6
-    - A5 por combate físico
+    Llaves internas.
+    No se muestran en pantalla.
   */
 
   keySources:{
@@ -2292,22 +1604,17 @@ Object
   .forEach(
     room => {
 
-
       state.rooms[
         room
       ] = {
 
-        revealed:
-          false,
+        revealed:false,
 
-        completed:
-          false,
+        completed:false,
 
-        visited:
-          false
+        visited:false
 
       };
-
 
     }
   );
@@ -2319,192 +1626,120 @@ Object
    ========================================================= */
 
 const introOverlay =
-  document.getElementById(
-    "introOverlay"
-  );
+  document.getElementById("introOverlay");
 
 const introPage1 =
-  document.getElementById(
-    "introPage1"
-  );
+  document.getElementById("introPage1");
 
 const introPage2 =
-  document.getElementById(
-    "introPage2"
-  );
+  document.getElementById("introPage2");
 
 const dockPage =
-  document.getElementById(
-    "dockPage"
-  );
+  document.getElementById("dockPage");
 
 const acceptMissionButton =
-  document.getElementById(
-    "acceptMissionButton"
-  );
+  document.getElementById("acceptMissionButton");
 
 const dockBaseImage =
-  document.getElementById(
-    "dockBaseImage"
-  );
+  document.getElementById("dockBaseImage");
 
 const dockShip =
-  document.getElementById(
-    "dockShip"
-  );
+  document.getElementById("dockShip");
 
 const dockFlash =
-  document.getElementById(
-    "dockFlash"
-  );
+  document.getElementById("dockFlash");
 
 const game =
-  document.getElementById(
-    "game"
-  );
+  document.getElementById("game");
 
 const mapImage =
-  document.getElementById(
-    "mapImage"
-  );
+  document.getElementById("mapImage");
 
 const roomsLayer =
-  document.getElementById(
-    "roomsLayer"
-  );
+  document.getElementById("roomsLayer");
 
 const iconsLayer =
-  document.getElementById(
-    "iconsLayer"
-  );
+  document.getElementById("iconsLayer");
 
 const scannerButton =
-  document.getElementById(
-    "scannerButton"
-  );
+  document.getElementById("scannerButton");
 
 const useObjectButton =
-  document.getElementById(
-    "useObjectButton"
-  );
+  document.getElementById("useObjectButton");
 
 const musicButton =
-  document.getElementById(
-    "musicButton"
-  );
+  document.getElementById("musicButton");
 
 const oxygenCounter =
-  document.getElementById(
-    "oxygenCounter"
-  );
+  document.getElementById("oxygenCounter");
 
 const tutorialOverlay =
-  document.getElementById(
-    "tutorialOverlay"
-  );
+  document.getElementById("tutorialOverlay");
 
 const tutorialText =
-  document.getElementById(
-    "tutorialText"
-  );
+  document.getElementById("tutorialText");
 
 const tutorialNext =
-  document.getElementById(
-    "tutorialNext"
-  );
+  document.getElementById("tutorialNext");
 
 const encounter =
-  document.getElementById(
-    "encounter"
-  );
+  document.getElementById("encounter");
 
 const encounterCard =
-  document.getElementById(
-    "encounterCard"
-  );
+  document.getElementById("encounterCard");
 
 const encounterImage =
-  document.getElementById(
-    "encounterImage"
-  );
+  document.getElementById("encounterImage");
 
 const enemyHp =
-  document.getElementById(
-    "enemyHp"
-  );
+  document.getElementById("enemyHp");
 
 const gunButton =
-  document.getElementById(
-    "gunButton"
-  );
+  document.getElementById("gunButton");
 
 const fistButton =
-  document.getElementById(
-    "fistButton"
-  );
+  document.getElementById("fistButton");
 
 const encounterBackButton =
-  document.getElementById(
-    "encounterBackButton"
-  );
+  document.getElementById("encounterBackButton");
 
 const message =
-  document.getElementById(
-    "message"
-  );
+  document.getElementById("message");
 
 const endOverlay =
-  document.getElementById(
-    "endOverlay"
-  );
+  document.getElementById("endOverlay");
 
 const endTitle =
-  document.getElementById(
-    "endTitle"
-  );
+  document.getElementById("endTitle");
 
 const endSubtitle =
-  document.getElementById(
-    "endSubtitle"
-  );
+  document.getElementById("endSubtitle");
 
 const introMusic =
-  document.getElementById(
-    "introMusic"
-  );
+  document.getElementById("introMusic");
 
 const bgMusic =
-  document.getElementById(
-    "bgMusic"
-  );
+  document.getElementById("bgMusic");
 
 
 
-let messageTimer =
-  null;
+let messageTimer = null;
 
-let musicPlaying =
-  false;
+let musicPlaying = false;
 
-let combatLocked =
-  false;
+let combatLocked = false;
 
-let introLocked =
-  false;
+let introLocked = false;
 
-let gameAudioContext =
-  null;
+let gameAudioContext = null;
 
-let tutorialIndex =
-  0;
+let tutorialIndex = 0;
 
 
 
-introMusic.volume =
-  .34;
+introMusic.volume = .34;
 
-bgMusic.volume =
-  .32;
+bgMusic.volume = .32;
 
 
 
@@ -2514,7 +1749,6 @@ bgMusic.volume =
 
 function buildRooms(){
 
-
   Object
     .entries(
       ROOM_LAYOUT
@@ -2522,73 +1756,56 @@ function buildRooms(){
     .forEach(
       ([room,pos]) => {
 
-
         const button =
           document.createElement(
             "button"
           );
 
-
         button.type =
           "button";
-
 
         button.className =
           "room";
 
-
         button.id =
           `room-${room}`;
-
 
         button.setAttribute(
           "aria-label",
           `Habitación ${room}`
         );
 
-
         button.style.left =
           `${pos.x}%`;
-
 
         button.style.top =
           `${pos.y}%`;
 
-
         button.style.width =
           "15.2%";
 
-
         button.style.height =
           "7.6%";
-
 
         button.addEventListener(
           "click",
           () => {
 
-
             handleRoomClick(
               room
             );
 
-
           }
         );
-
 
         roomsLayer.appendChild(
           button
         );
 
-
       }
     );
 
-
 }
-
-
 
 buildRooms();
 
@@ -2631,14 +1848,11 @@ buildRooms();
 .forEach(
   src => {
 
-
     const image =
       new Image();
 
-
     image.src =
       src;
-
 
   }
 );
@@ -2646,44 +1860,35 @@ buildRooms();
 
 
 /* =========================================================
-   AUDIO CONTEXT
+   AUDIO
    ========================================================= */
 
 function getAudioContext(){
 
-
-  if (
+  if(
     !gameAudioContext
   ){
-
 
     const AudioContext =
       window.AudioContext
       ||
       window.webkitAudioContext;
 
-
     gameAudioContext =
       new AudioContext();
 
-
   }
 
-
-  if (
+  if(
     gameAudioContext.state ===
     "suspended"
   ){
 
-
     gameAudioContext.resume();
-
 
   }
 
-
   return gameAudioContext;
-
 
 }
 
@@ -2693,36 +1898,29 @@ function toneSweep(
   startFreq,
   endFreq,
   duration,
-  volume = .1,
-  type = "sine"
+  volume=.1,
+  type="sine"
 ){
 
-
   try{
-
 
     const ctx =
       getAudioContext();
 
-
     const oscillator =
       ctx.createOscillator();
-
 
     const gain =
       ctx.createGain();
 
-
     oscillator.type =
       type;
-
 
     oscillator.frequency
       .setValueAtTime(
         startFreq,
         ctx.currentTime
       );
-
 
     oscillator.frequency
       .exponentialRampToValueAtTime(
@@ -2735,13 +1933,11 @@ function toneSweep(
         duration
       );
 
-
     gain.gain
       .setValueAtTime(
         volume,
         ctx.currentTime
       );
-
 
     gain.gain
       .exponentialRampToValueAtTime(
@@ -2751,19 +1947,15 @@ function toneSweep(
         duration
       );
 
-
     oscillator.connect(
       gain
     );
-
 
     gain.connect(
       ctx.destination
     );
 
-
     oscillator.start();
-
 
     oscillator.stop(
       ctx.currentTime
@@ -2773,11 +1965,8 @@ function toneSweep(
       .02
     );
 
-
   }
-
   catch(error){}
-
 
 }
 
@@ -2785,40 +1974,31 @@ function toneSweep(
 
 function scannerSound(){
 
-
   try{
-
 
     const ctx =
       getAudioContext();
 
-
     const oscillator1 =
       ctx.createOscillator();
-
 
     const oscillator2 =
       ctx.createOscillator();
 
-
     const gain =
       ctx.createGain();
-
 
     oscillator1.type =
       "sine";
 
-
     oscillator2.type =
       "triangle";
-
 
     oscillator1.frequency
       .setValueAtTime(
         380,
         ctx.currentTime
       );
-
 
     oscillator1.frequency
       .linearRampToValueAtTime(
@@ -2828,13 +2008,11 @@ function scannerSound(){
         .48
       );
 
-
     oscillator2.frequency
       .setValueAtTime(
         720,
         ctx.currentTime
       );
-
 
     oscillator2.frequency
       .linearRampToValueAtTime(
@@ -2844,13 +2022,11 @@ function scannerSound(){
         .48
       );
 
-
     gain.gain
       .setValueAtTime(
         .085,
         ctx.currentTime
       );
-
 
     gain.gain
       .exponentialRampToValueAtTime(
@@ -2860,27 +2036,21 @@ function scannerSound(){
         .5
       );
 
-
     oscillator1.connect(
       gain
     );
-
 
     oscillator2.connect(
       gain
     );
 
-
     gain.connect(
       ctx.destination
     );
 
-
     oscillator1.start();
 
-
     oscillator2.start();
-
 
     oscillator1.stop(
       ctx.currentTime
@@ -2888,25 +2058,20 @@ function scannerSound(){
       .5
     );
 
-
     oscillator2.stop(
       ctx.currentTime
       +
       .5
     );
 
-
   }
-
   catch(error){}
-
 
 }
 
 
 
 function punchSound(){
-
 
   toneSweep(
     165,
@@ -2916,13 +2081,11 @@ function punchSound(){
     "triangle"
   );
 
-
 }
 
 
 
 function lifeLossSound(){
-
 
   [
     270,
@@ -2932,10 +2095,8 @@ function lifeLossSound(){
   .forEach(
     (frequency,index) => {
 
-
       setTimeout(
         () => {
-
 
           toneSweep(
             frequency,
@@ -2945,23 +2106,19 @@ function lifeLossSound(){
             "square"
           );
 
-
         },
 
         index * 60
       );
 
-
     }
   );
-
 
 }
 
 
 
 function gunSound(){
-
 
   toneSweep(
     1250,
@@ -2971,13 +2128,11 @@ function gunSound(){
     "sawtooth"
   );
 
-
 }
 
 
 
 function energyLossSound(){
-
 
   toneSweep(
     720,
@@ -2987,13 +2142,11 @@ function energyLossSound(){
     "sine"
   );
 
-
 }
 
 
 
 function itemSound(){
-
 
   toneSweep(
     520,
@@ -3003,13 +2156,11 @@ function itemSound(){
     "triangle"
   );
 
-
 }
 
 
 
 function deathSound(){
-
 
   [
     430,
@@ -3020,49 +2171,37 @@ function deathSound(){
   .forEach(
     (frequency,index) => {
 
-
       setTimeout(
         () => {
 
-
           toneSweep(
-
             frequency,
-
             Math.max(
               45,
               frequency * .55
             ),
-
             .2,
-
             .11,
-
             index < 2
               ?
               "square"
               :
               "sawtooth"
-
           );
-
 
         },
 
         index * 85
       );
 
-
     }
   );
-
 
 }
 
 
 
 function gameOverSound(){
-
 
   toneSweep(
     240,
@@ -3072,13 +2211,11 @@ function gameOverSound(){
     "sawtooth"
   );
 
-
 }
 
 
 
 function missionSound(){
-
 
   [
     520,
@@ -3089,10 +2226,8 @@ function missionSound(){
   .forEach(
     (frequency,index) => {
 
-
       setTimeout(
         () => {
-
 
           toneSweep(
             frequency,
@@ -3102,16 +2237,13 @@ function missionSound(){
             "sine"
           );
 
-
         },
 
         index * 120
       );
 
-
     }
   );
-
 
 }
 
@@ -3119,44 +2251,34 @@ function missionSound(){
 
 function dockingTravelSound(){
 
-
   try{
-
 
     const ctx =
       getAudioContext();
 
-
     const master =
       ctx.createGain();
-
 
     const low =
       ctx.createOscillator();
 
-
     const high =
       ctx.createOscillator();
-
 
     const filter =
       ctx.createBiquadFilter();
 
-
     low.type =
       "sawtooth";
 
-
     high.type =
       "triangle";
-
 
     low.frequency
       .setValueAtTime(
         58,
         ctx.currentTime
       );
-
 
     low.frequency
       .linearRampToValueAtTime(
@@ -3166,13 +2288,11 @@ function dockingTravelSound(){
         2.25
       );
 
-
     high.frequency
       .setValueAtTime(
         118,
         ctx.currentTime
       );
-
 
     high.frequency
       .linearRampToValueAtTime(
@@ -3182,17 +2302,14 @@ function dockingTravelSound(){
         2.25
       );
 
-
     filter.type =
       "lowpass";
-
 
     filter.frequency
       .setValueAtTime(
         520,
         ctx.currentTime
       );
-
 
     filter.frequency
       .linearRampToValueAtTime(
@@ -3202,13 +2319,11 @@ function dockingTravelSound(){
         2.1
       );
 
-
     master.gain
       .setValueAtTime(
         .001,
         ctx.currentTime
       );
-
 
     master.gain
       .linearRampToValueAtTime(
@@ -3218,7 +2333,6 @@ function dockingTravelSound(){
         .25
       );
 
-
     master.gain
       .setValueAtTime(
         .11,
@@ -3226,7 +2340,6 @@ function dockingTravelSound(){
         +
         1.65
       );
-
 
     master.gain
       .exponentialRampToValueAtTime(
@@ -3236,32 +2349,25 @@ function dockingTravelSound(){
         2.35
       );
 
-
     low.connect(
       filter
     );
-
 
     high.connect(
       filter
     );
 
-
     filter.connect(
       master
     );
-
 
     master.connect(
       ctx.destination
     );
 
-
     low.start();
 
-
     high.start();
-
 
     low.stop(
       ctx.currentTime
@@ -3269,25 +2375,20 @@ function dockingTravelSound(){
       2.4
     );
 
-
     high.stop(
       ctx.currentTime
       +
       2.4
     );
 
-
   }
-
   catch(error){}
-
 
 }
 
 
 
 function dockingImpactSound(){
-
 
   toneSweep(
     115,
@@ -3297,10 +2398,8 @@ function dockingImpactSound(){
     "square"
   );
 
-
   setTimeout(
     () => {
-
 
       toneSweep(
         610,
@@ -3309,17 +2408,14 @@ function dockingImpactSound(){
         .08,
         "sine"
       );
-
 
     },
 
     170
   );
 
-
   setTimeout(
     () => {
-
 
       toneSweep(
         830,
@@ -3329,12 +2425,10 @@ function dockingImpactSound(){
         "sine"
       );
 
-
     },
 
     270
   );
-
 
 }
 
@@ -3348,7 +2442,6 @@ function showIntroPage(
   page
 ){
 
-
   [
     introPage1,
     introPage2,
@@ -3357,20 +2450,16 @@ function showIntroPage(
   .forEach(
     element => {
 
-
       element.classList.remove(
         "active"
       );
 
-
     }
   );
-
 
   page.classList.add(
     "active"
   );
-
 
 }
 
@@ -3382,36 +2471,27 @@ introPage1.addEventListener(
 
   async () => {
 
-
-    if (
+    if(
       introLocked
     ){
       return;
     }
 
-
     getAudioContext();
-
 
     showIntroPage(
       introPage2
     );
 
-
     try{
-
 
       introMusic.currentTime =
         0;
 
-
       await introMusic.play();
 
-
     }
-
     catch(error){}
-
 
   }
 
@@ -3421,24 +2501,20 @@ introPage1.addEventListener(
 
 function crossfadeToGameMusic(){
 
-
   bgMusic.volume =
     .03;
 
-
-  bgMusic.play()
+  bgMusic
+    .play()
     .then(
       () => {
-
 
         musicPlaying =
           true;
 
-
         musicButton.classList.add(
           "music-on"
         );
-
 
       }
     )
@@ -3446,32 +2522,25 @@ function crossfadeToGameMusic(){
       () => {}
     );
 
-
   const steps =
     18;
-
 
   let current =
     0;
 
-
   const introStart =
     introMusic.volume;
-
 
   const timer =
     setInterval(
       () => {
 
-
         current++;
-
 
         const progress =
           current
           /
           steps;
-
 
         introMusic.volume =
           Math.max(
@@ -3485,7 +2554,6 @@ function crossfadeToGameMusic(){
             )
           );
 
-
         bgMusic.volume =
           .03
           +
@@ -3497,41 +2565,32 @@ function crossfadeToGameMusic(){
           *
           progress;
 
-
-        if (
+        if(
           current >=
           steps
         ){
-
 
           clearInterval(
             timer
           );
 
-
           introMusic.pause();
-
 
           introMusic.currentTime =
             0;
 
-
           introMusic.volume =
             .34;
-
 
           bgMusic.volume =
             .32;
 
-
         }
-
 
       },
 
       65
     );
-
 
 }
 
@@ -3543,32 +2602,24 @@ acceptMissionButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
 
-
-    if (
+    if(
       introLocked
     ){
       return;
     }
 
-
     introLocked =
       true;
 
-
     getAudioContext();
-
 
     crossfadeToGameMusic();
 
-
     dockingTravelSound();
 
-
     startDockingSequence();
-
 
   }
 
@@ -3578,86 +2629,67 @@ acceptMissionButton.addEventListener(
 
 function startDockingSequence(){
 
-
   showIntroPage(
     dockPage
   );
 
-
   dockBaseImage.src =
     ASSETS.stationOnly;
-
 
   dockShip.src =
     ASSETS.playerShip;
 
-
   dockShip.style.display =
     "block";
-
 
   dockShip.classList.remove(
     "docking"
   );
 
-
   void dockShip.offsetWidth;
-
 
   setTimeout(
     () => {
 
-
       dockShip.classList.add(
         "docking"
       );
-
 
     },
 
     180
   );
 
-
   setTimeout(
     () => {
 
-
       dockingImpactSound();
-
 
       dockFlash.classList.remove(
         "flash"
       );
 
-
       void dockFlash.offsetWidth;
-
 
       dockFlash.classList.add(
         "flash"
       );
 
-
       dockBaseImage.src =
         ASSETS.dockedStation;
 
-
       dockShip.style.display =
         "none";
-
 
     },
 
     2450
   );
 
-
   setTimeout(
     startGame,
     3150
   );
-
 
 }
 
@@ -3665,37 +2697,28 @@ function startDockingSequence(){
 
 function startGame(){
 
-
   mapImage.src =
     ASSETS.map100;
-
 
   state.oxygen =
     100;
 
-
   updateOxygenUI();
-
 
   introOverlay.style.display =
     "none";
 
-
   game.style.display =
     "block";
-
 
   window.scrollTo(
     0,
     0
   );
 
-
   refreshRoomMarkers();
 
-
   showTutorial();
-
 
 }
 
@@ -3703,57 +2726,42 @@ function startGame(){
 
 async function toggleMusic(){
 
-
-  if (
+  if(
     !musicPlaying
   ){
 
-
     try{
-
 
       await bgMusic.play();
 
-
       musicPlaying =
         true;
-
 
       musicButton.classList.add(
         "music-on"
       );
 
-
     }
-
     catch(error){
-
 
       showMessage(
         "NO SE PUDO ACTIVAR LA MÚSICA"
       );
 
-
     }
-
 
     return;
 
-
   }
 
-
   bgMusic.pause();
-
 
   musicPlaying =
     false;
 
-
   musicButton.classList.remove(
     "music-on"
   );
-
 
 }
 
@@ -3765,12 +2773,9 @@ musicButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
 
-
     toggleMusic();
-
 
   }
 
@@ -3796,29 +2801,23 @@ const TUTORIAL_MESSAGES = [
 
 function showTutorial(){
 
-
   state.gameLocked =
     true;
 
-
   tutorialIndex =
     0;
-
 
   tutorialText.textContent =
     TUTORIAL_MESSAGES[
       0
     ];
 
-
   tutorialNext.textContent =
     "SIGUIENTE";
-
 
   tutorialOverlay.classList.add(
     "show"
   );
-
 
 }
 
@@ -3830,36 +2829,28 @@ tutorialNext.addEventListener(
 
   () => {
 
-
     tutorialIndex++;
 
-
-    if (
+    if(
       tutorialIndex >=
       TUTORIAL_MESSAGES.length
     ){
-
 
       tutorialOverlay.classList.remove(
         "show"
       );
 
-
       state.gameLocked =
         false;
 
-
       return;
 
-
     }
-
 
     tutorialText.textContent =
       TUTORIAL_MESSAGES[
         tutorialIndex
       ];
-
 
     tutorialNext.textContent =
       tutorialIndex ===
@@ -3870,7 +2861,6 @@ tutorialNext.addEventListener(
         "ENTENDIDO"
         :
         "SIGUIENTE";
-
 
   }
 
@@ -3886,44 +2876,35 @@ function showMessage(
   html
 ){
 
-
   clearTimeout(
     messageTimer
   );
-
 
   message.classList.remove(
     "show"
   );
 
-
   void message.offsetWidth;
-
 
   message.innerHTML =
     html;
-
 
   message.classList.add(
     "show"
   );
 
-
   messageTimer =
     setTimeout(
       () => {
-
 
         message.classList.remove(
           "show"
         );
 
-
       },
 
       1400
     );
-
 
 }
 
@@ -3935,25 +2916,21 @@ function showMessage(
 
 function oxygenPhase(){
 
-
-  if (
+  if(
     state.oxygen <
     20
   ){
     return 20;
   }
 
-
-  if (
+  if(
     state.oxygen <
     60
   ){
     return 60;
   }
 
-
   return 100;
-
 
 }
 
@@ -3962,7 +2939,6 @@ function oxygenPhase(){
 function formatOxygen(
   value
 ){
-
 
   return `${
     Number.isInteger(
@@ -3979,78 +2955,62 @@ function formatOxygen(
         )
   }%`;
 
-
 }
 
 
 
 function updateOxygenUI(){
 
-
   const phase =
     oxygenPhase();
-
 
   oxygenCounter.textContent =
     formatOxygen(
       state.oxygen
     );
 
-
   oxygenCounter.classList.remove(
     "phase60",
     "phase20"
   );
 
-
-  if (
+  if(
     phase ===
     100
   ){
 
-
     mapImage.src =
       ASSETS.map100;
 
-
   }
 
-
-  if (
+  if(
     phase ===
     60
   ){
 
-
     mapImage.src =
       ASSETS.map60;
-
 
     oxygenCounter.classList.add(
       "phase60"
     );
 
-
   }
 
-
-  if (
+  if(
     phase ===
     20
   ){
 
-
     mapImage.src =
       ASSETS.map20;
-
 
     oxygenCounter.classList.add(
       "phase20"
     );
 
-
   }
-
 
 }
 
@@ -4060,13 +3020,11 @@ function consumeOxygen(
   amount
 ){
 
-
-  if (
+  if(
     state.ended
   ){
     return false;
   }
-
 
   state.oxygen =
     Math.max(
@@ -4084,76 +3042,53 @@ function consumeOxygen(
       10
     );
 
-
   updateOxygenUI();
 
-
-  if (
+  if(
     state.oxygen <=
     0
   ){
 
-
     triggerGameOver();
-
 
     return false;
 
-
   }
 
-
   return true;
-
 
 }
 
 
 
 /* =========================================================
-   MOVEMENT OXYGEN COST
+   MOVEMENT OXYGEN
    ========================================================= */
-
-/*
-  REGLAS:
-
-  Entrada -> A12 = 0 %
-
-  Moverse a una habitación NUEVA = 5 %
-
-  Volver a una habitación que ya había
-  sido visitada = 2,5 %
-
-  Entrar a A1 teniendo 2+ tarjetas = 0 %
-*/
 
 function getMovementOxygenCost(
   targetRoom
 ){
 
-
   /*
-    Primera entrada obligatoria.
+    Entrada inicial a A12.
   */
 
-  if (
+  if(
     state.currentRoom ===
     "ENTRADA"
   ){
 
-
     return 0;
-
 
   }
 
 
   /*
-    Si ya puede abrir el botín,
-    entrar a A1 no cuesta oxígeno.
+    A1 con dos llaves:
+    termina la misión.
   */
 
-  if (
+  if(
     targetRoom ===
       "A1"
     &&
@@ -4161,19 +3096,17 @@ function getMovementOxygenCost(
       2
   ){
 
-
     return 0;
-
 
   }
 
 
   /*
-    Regresar a una habitación
-    ya visitada.
+    Habitación visitada:
+    2,5%.
   */
 
-  if (
+  if(
     state.rooms[
       targetRoom
     ]
@@ -4183,19 +3116,17 @@ function getMovementOxygenCost(
     ].visited
   ){
 
-
     return 2.5;
-
 
   }
 
 
   /*
-    Habitación nueva.
+    Habitación nueva:
+    5%.
   */
 
   return 5;
-
 
 }
 
@@ -4211,8 +3142,7 @@ useObjectButton.addEventListener(
 
   () => {
 
-
-    if (
+    if(
       state.gameLocked
       ||
       state.ended
@@ -4224,28 +3154,22 @@ useObjectButton.addEventListener(
       return;
     }
 
-
     itemSound();
-
 
     const alive =
       consumeOxygen(
         5
       );
 
-
-    if (
+    if(
       alive
     ){
-
 
       showMessage(
         "OBJETO UTILIZADO<br>−5% O₂"
       );
 
-
     }
-
 
   }
 
@@ -4259,7 +3183,6 @@ useObjectButton.addEventListener(
 
 function keyCount(){
 
-
   return Object
     .values(
       state.keySources
@@ -4269,7 +3192,6 @@ function keyCount(){
     )
     .length;
 
-
 }
 
 
@@ -4278,27 +3200,22 @@ function grantKey(
   source
 ){
 
-
-  if (
+  if(
     !state.keySources[
       source
     ]
   ){
-
 
     state.keySources[
       source
     ] =
       true;
 
-
     showMessage(
       "TARJETA LLAVE OBTENIDA"
     );
 
-
   }
-
 
 }
 
@@ -4313,45 +3230,37 @@ function addMapIcon(
   image,
   room,
   classes,
-  direction = ""
+  direction=""
 ){
-
 
   removeMapIcon(
     id
   );
-
 
   const position =
     ROOM_LAYOUT[
       room
     ];
 
-
-  if (
+  if(
     !position
   ){
     return null;
   }
-
 
   const icon =
     document.createElement(
       "img"
     );
 
-
   icon.id =
     id;
-
 
   icon.src =
     image;
 
-
   icon.draggable =
     false;
-
 
   icon.className =
     `map-icon ${classes}${
@@ -4362,22 +3271,17 @@ function addMapIcon(
         ""
     }`;
 
-
   icon.style.left =
     `${position.x}%`;
 
-
   icon.style.top =
     `${position.y}%`;
-
 
   iconsLayer.appendChild(
     icon
   );
 
-
   return icon;
-
 
 }
 
@@ -4387,23 +3291,18 @@ function removeMapIcon(
   id
 ){
 
-
   const element =
     document.getElementById(
       id
     );
 
-
-  if (
+  if(
     element
   ){
 
-
     element.remove();
 
-
   }
-
 
 }
 
@@ -4411,11 +3310,9 @@ function removeMapIcon(
 
 function clearStandardMarkers(){
 
-
   removeMapIcon(
     "player-marker"
   );
-
 
   Object
     .keys(
@@ -4424,20 +3321,16 @@ function clearStandardMarkers(){
     .forEach(
       room => {
 
-
         removeMapIcon(
           `check-${room}`
         );
-
 
         removeMapIcon(
           `event-${room}`
         );
 
-
       }
     );
-
 
 }
 
@@ -4445,31 +3338,21 @@ function clearStandardMarkers(){
 
 function refreshRoomMarkers(){
 
-
   clearStandardMarkers();
 
-
-  if (
+  if(
     state.currentRoom !==
     "ENTRADA"
   ){
 
-
     addMapIcon(
-
       "player-marker",
-
       ASSETS.playerIcon,
-
       state.currentRoom,
-
       "player-icon"
-
     );
 
-
   }
-
 
   Object
     .keys(
@@ -4478,71 +3361,50 @@ function refreshRoomMarkers(){
     .forEach(
       room => {
 
-
         const roomState =
           state.rooms[
             room
           ];
 
-
-        if (
+        if(
           room ===
           state.currentRoom
         ){
           return;
         }
 
-
-        if (
+        if(
           roomState.completed
         ){
 
-
           addMapIcon(
-
             `check-${room}`,
-
             ASSETS.check,
-
             room,
-
             "check-icon"
-
           );
-
 
           return;
 
-
         }
 
-
-        if (
+        if(
           roomState.revealed
         ){
 
-
           addMapIcon(
-
             `event-${room}`,
-
             DEFINITIONS[
               room
             ].icon,
-
             room,
-
             "event-icon"
-
           );
-
 
         }
 
-
       }
     );
-
 
 }
 
@@ -4552,19 +3414,15 @@ function moveToRoom(
   room
 ){
 
-
   state.currentRoom =
     room;
-
 
   state.rooms[
     room
   ].visited =
     true;
 
-
   refreshRoomMarkers();
-
 
 }
 
@@ -4576,13 +3434,11 @@ function moveToRoom(
 
 function adjacentRooms(){
 
-
   return GRAPH[
     state.currentRoom
   ]
   ||
   [];
-
 
 }
 
@@ -4592,12 +3448,10 @@ function isAdjacent(
   target
 ){
 
-
   return adjacentRooms()
     .includes(
       target
     );
-
 
 }
 
@@ -4608,28 +3462,24 @@ function directionBetween(
   to
 ){
 
-
-  if (
+  if(
     from ===
     "ENTRADA"
   ){
     return "up";
   }
 
-
   const start =
     ROOM_LAYOUT[
       from
     ];
-
 
   const end =
     ROOM_LAYOUT[
       to
     ];
 
-
-  if (
+  if(
     !start
     ||
     !end
@@ -4637,20 +3487,17 @@ function directionBetween(
     return "up";
   }
 
-
   const dx =
     end.x
     -
     start.x;
-
 
   const dy =
     end.y
     -
     start.y;
 
-
-  if (
+  if(
     Math.abs(
       dx
     )
@@ -4660,16 +3507,13 @@ function directionBetween(
     )
   ){
 
-
     return dx > 0
       ?
       "right"
       :
       "left";
 
-
   }
-
 
   return dy > 0
     ?
@@ -4677,22 +3521,18 @@ function directionBetween(
     :
     "up";
 
-
 }
 
 
 
 function turnOffScanner(){
 
-
   state.scannerActive =
     false;
-
 
   scannerButton.classList.remove(
     "scanner-on"
   );
-
 
   Object
     .keys(
@@ -4701,15 +3541,12 @@ function turnOffScanner(){
     .forEach(
       room => {
 
-
         removeMapIcon(
           `scan-${room}`
         );
 
-
       }
     );
-
 
 }
 
@@ -4717,8 +3554,7 @@ function turnOffScanner(){
 
 function scanNearbyRooms(){
 
-
-  if (
+  if(
     state.gameLocked
     ||
     state.ended
@@ -4730,98 +3566,72 @@ function scanNearbyRooms(){
     return;
   }
 
-
-  if (
+  if(
     state.scannerActive
   ){
 
-
     turnOffScanner();
-
 
     return;
 
-
   }
-
 
   let count =
     0;
 
-
   adjacentRooms()
     .forEach(
       room => {
-
 
         const roomState =
           state.rooms[
             room
           ];
 
-
-        if (
+        if(
           !roomState.completed
           &&
           !roomState.revealed
         ){
 
-
           addMapIcon(
-
             `scan-${room}`,
-
             ASSETS.scannerWave,
-
             room,
-
             "scanner-wave",
-
             directionBetween(
               state.currentRoom,
               room
             )
-
           );
-
 
           count++;
 
-
         }
-
 
       }
     );
 
-
-  if (
+  if(
     !count
   ){
-
 
     showMessage(
       "SIN NUEVAS SEÑALES"
     );
 
-
     return;
-
 
   }
 
-
   state.scannerActive =
     true;
-
 
   scannerButton.classList.add(
     "scanner-on"
   );
 
-
   scannerSound();
-
 
 }
 
@@ -4841,20 +3651,17 @@ function revealRoom(
   room
 ){
 
-
   const roomState =
     state.rooms[
       room
     ];
-
 
   const definition =
     DEFINITIONS[
       room
     ];
 
-
-  if (
+  if(
     !roomState
     ||
     !definition
@@ -4862,59 +3669,43 @@ function revealRoom(
     return;
   }
 
-
   roomState.revealed =
     true;
-
 
   removeMapIcon(
     `scan-${room}`
   );
 
-
   addMapIcon(
-
     `event-${room}`,
-
     definition.icon,
-
     room,
-
     "event-icon"
-
   );
-
 
   energyLossSound();
 
-
   showMessage(
-
     `${definition.label}<br>−2 ENERGÍAS`
-
   );
-
 
 }
 
 
 
 /* =========================================================
-   ENCOUNTERS
+   ENCOUNTER
    ========================================================= */
 
 function setEncounterImage(
   src
 ){
 
-
   encounterImage.onerror =
     null;
 
-
   encounterImage.src =
     src;
-
 
 }
 
@@ -4922,38 +3713,29 @@ function setEncounterImage(
 
 function resetEncounterUI(){
 
-
   encounterCard.className =
     "";
-
 
   encounterCard.style.cursor =
     "default";
 
-
   enemyHp.style.display =
     "none";
-
 
   gunButton.style.display =
     "none";
 
-
   fistButton.style.display =
     "none";
-
 
   encounterBackButton.style.display =
     "none";
 
-
   combatLocked =
     false;
 
-
   state.combat =
     null;
-
 
 }
 
@@ -4963,10 +3745,8 @@ function currentEnemyHp(
   definition
 ){
 
-
   const phase =
     oxygenPhase();
-
 
   return definition.hp
     ?
@@ -4976,7 +3756,6 @@ function currentEnemyHp(
     :
     0;
 
-
 }
 
 
@@ -4985,172 +3764,151 @@ function openEncounter(
   room
 ){
 
-
   const definition =
     DEFINITIONS[
       room
     ];
 
-
-  if (
+  if(
     !definition
   ){
     return;
   }
 
-
   turnOffScanner();
-
 
   state.pendingRoom =
     room;
-
 
   state.rooms[
     room
   ].visited =
     true;
 
-
   resetEncounterUI();
-
 
   setEncounterImage(
     definition.card
   );
 
-
   encounterImage.alt =
     definition.label;
-
 
   encounter.classList.add(
     "show"
   );
 
 
-  /* COMBAT */
+  /*
+    COMBAT
+  */
 
-  if (
+  if(
     definition.type ===
     "combat"
   ){
 
-
     state.encounterMode =
       "combat";
-
 
     encounterCard.classList.add(
       "combat"
     );
 
-
     enemyHp.style.display =
       "flex";
-
 
     gunButton.style.display =
       "block";
 
-
     fistButton.style.display =
       "block";
-
 
     const hp =
       currentEnemyHp(
         definition
       );
 
-
     state.combat = {
-
 
       eventId:
         room,
 
-
       hp:
         hp,
-
 
       fists:
         0,
 
-
       shots:
-        0
+        0,
 
+      /*
+        Se calcula al morir.
+      */
+
+      specialKeyEarned:
+        false
 
     };
-
 
     enemyHp.textContent =
       hp;
 
-
     return;
-
 
   }
 
 
-  /* LOOT */
+  /*
+    LOOT
+  */
 
-  if (
+  if(
     definition.type ===
     "loot"
   ){
 
-
-    if (
+    if(
       keyCount() >=
       2
     ){
 
-
       state.encounterMode =
         "lootReady";
 
-
       encounterCard.style.cursor =
         "pointer";
-
 
     }
 
     else{
 
-
       state.encounterMode =
         "lootLocked";
-
 
       encounterCard.style.cursor =
         "pointer";
 
-
       encounterBackButton.style.display =
         "block";
 
-
     }
 
-
     return;
-
 
   }
 
 
+  /*
+    SIMPLE / KEY
+  */
+
   state.encounterMode =
     definition.type;
 
-
   encounterCard.style.cursor =
     "pointer";
-
 
 }
 
@@ -5158,50 +3916,40 @@ function openEncounter(
 
 function completeCurrentRoom(){
 
-
   const room =
     state.pendingRoom;
 
-
-  if (
+  if(
     !room
   ){
     return;
   }
-
 
   state.rooms[
     room
   ].completed =
     true;
 
-
   state.rooms[
     room
   ].revealed =
     true;
 
-
   encounter.classList.remove(
     "show"
   );
 
-
   state.pendingRoom =
     null;
-
 
   state.encounterMode =
     null;
 
-
   resetEncounterUI();
-
 
   moveToRoom(
     room
   );
-
 
 }
 
@@ -5209,44 +3957,35 @@ function completeCurrentRoom(){
 
 function closeUnresolvedRoomToMap(){
 
-
   const room =
     state.pendingRoom;
 
-
-  if (
+  if(
     !room
   ){
     return;
   }
-
 
   state.rooms[
     room
   ].revealed =
     true;
 
-
   encounter.classList.remove(
     "show"
   );
 
-
   state.pendingRoom =
     null;
-
 
   state.encounterMode =
     null;
 
-
   resetEncounterUI();
-
 
   moveToRoom(
     room
   );
-
 
 }
 
@@ -5254,19 +3993,15 @@ function closeUnresolvedRoomToMap(){
 
 function animateHit(){
 
-
   encounterCard.classList.remove(
     "hit"
   );
 
-
   void encounterCard.offsetWidth;
-
 
   encounterCard.classList.add(
     "hit"
   );
-
 
 }
 
@@ -5280,8 +4015,7 @@ function attack(
   kind
 ){
 
-
-  if (
+  if(
     state.encounterMode !==
       "combat"
     ||
@@ -5294,64 +4028,56 @@ function attack(
     return;
   }
 
-
   combatLocked =
     true;
-
 
   const combat =
     state.combat;
 
 
-  /* PUÑO */
+  /*
+    PUÑO
+  */
 
-  if (
+  if(
     kind ===
     "fist"
   ){
 
-
     combat.fists++;
 
-
     punchSound();
-
 
     setTimeout(
       lifeLossSound,
       65
     );
 
-
     showMessage(
       "−1 VIDA"
     );
 
-
   }
 
 
-  /* PISTOLA */
+  /*
+    PISTOLA
+  */
 
   else{
 
-
     combat.shots++;
 
-
     gunSound();
-
 
     setTimeout(
       energyLossSound,
       65
     );
 
-
     showMessage(
       "−1 ENERGÍA"
     );
-
 
   }
 
@@ -5364,10 +4090,8 @@ function attack(
       1
     );
 
-
   enemyHp.textContent =
     combat.hp;
-
 
   animateHit();
 
@@ -5375,19 +4099,15 @@ function attack(
   setTimeout(
     () => {
 
-
-      if (
+      if(
         combat.hp >
         0
       ){
 
-
         combatLocked =
           false;
 
-
         return;
-
 
       }
 
@@ -5398,112 +4118,104 @@ function attack(
         ];
 
 
-      const pureFists =
-        combat.fists >
-          0
-        &&
-        combat.shots ===
-          0;
-
-
       /*
-        REGLA GENERAL:
-        PUÑOS >= PISTOLAS
-        = pista / desenlace.
+        PISTA / DESENLACE:
 
-        A5:
-        únicamente puños.
+        PUÑOS >= PISTOLAS.
       */
 
       const earnsFinal =
 
+        combat.fists >=
+          combat.shots
+
+        &&
+
+        combat.fists >
+          0
+
+        &&
+
+        !!definition.finalCard;
+
+
+      /*
+        LLAVE ESPECIAL A5:
+
+        Solo si TODO el combate
+        fue realizado con puños.
+
+        Esto es independiente
+        de si aparece A5F.
+      */
+
+      if(
         combat.eventId ===
           "A5"
+      ){
 
-        ?
+        combat.specialKeyEarned =
 
-        (
-          pureFists
-          &&
-          !!definition.finalCard
-        )
-
-        :
-
-        (
-          combat.fists >=
-            combat.shots
-          &&
           combat.fists >
             0
+
           &&
-          !!definition.finalCard
-        );
+
+          combat.shots ===
+            0;
+
+      }
 
 
-      if (
+      if(
         earnsFinal
       ){
 
-
         state.encounterMode =
           "final";
-
 
         encounterCard.classList.remove(
           "combat"
         );
 
-
         enemyHp.style.display =
           "none";
-
 
         gunButton.style.display =
           "none";
 
-
         fistButton.style.display =
           "none";
-
 
         setEncounterImage(
           definition.finalCard
         );
 
-
         encounterImage.alt =
           `Desenlace ${combat.eventId}`;
-
 
         encounterCard.style.cursor =
           "pointer";
 
-
         combatLocked =
           false;
 
-
         return;
-
 
       }
 
 
       deathSound();
 
-
       setTimeout(
         completeCurrentRoom,
         430
       );
 
-
     },
 
     320
   );
-
 
 }
 
@@ -5515,14 +4227,11 @@ gunButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
-
 
     attack(
       "gun"
     );
-
 
   }
 
@@ -5536,14 +4245,11 @@ fistButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
-
 
     attack(
       "fist"
     );
-
 
   }
 
@@ -5557,27 +4263,26 @@ encounterBackButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
 
-
-    if (
+    if(
       state.encounterMode ===
       "lootLocked"
     ){
 
-
       closeUnresolvedRoomToMap();
 
-
     }
-
 
   }
 
 );
 
 
+
+/* =========================================================
+   ENCOUNTER CARD CLICK
+   ========================================================= */
 
 encounterCard.addEventListener(
 
@@ -5586,157 +4291,158 @@ encounterCard.addEventListener(
   () => {
 
 
-    /* SIMPLE */
+    /*
+      SIMPLE EVENT
+    */
 
-    if (
+    if(
       state.encounterMode ===
       "simple"
     ){
 
-
       completeCurrentRoom();
 
-
       return;
-
 
     }
 
 
-    /* KEY */
+    /*
+      KEY ROOM
+    */
 
-    if (
+    if(
       state.encounterMode ===
       "key"
     ){
 
-
       const room =
         state.pendingRoom;
-
 
       const definition =
         DEFINITIONS[
           room
         ];
 
-
       grantKey(
         definition.keySource
       );
 
-
       completeCurrentRoom();
 
-
       return;
-
 
     }
 
 
-    /* FINAL */
+    /*
+      FINAL / CLUE
+    */
 
-    if (
+    if(
       state.encounterMode ===
       "final"
     ){
-
 
       const room =
         state.pendingRoom;
 
 
-      if (
-        room ===
-        "A5"
-      ){
+      /*
+        A5 puede mostrar pista
+        con empate o mayoría de puños.
 
+        Pero la llave se concede
+        únicamente si todo fue puño.
+      */
+
+      if(
+        room ===
+          "A5"
+
+        &&
+
+        state.combat
+
+        &&
+
+        state.combat.specialKeyEarned
+      ){
 
         grantKey(
           "A5"
         );
-
 
       }
 
 
       completeCurrentRoom();
 
-
       return;
-
 
     }
 
 
-    /* LOOT LOCKED */
+    /*
+      LOOT LOCKED
+    */
 
-    if (
+    if(
       state.encounterMode ===
       "lootLocked"
     ){
-
 
       showMessage(
         "NECESITAS 2 TARJETAS LLAVE"
       );
 
-
       return;
-
 
     }
 
 
-    /* LOOT READY */
+    /*
+      LOOT READY
+    */
 
-    if (
+    if(
       state.encounterMode ===
       "lootReady"
     ){
 
-
       state.encounterMode =
         "missionFinal";
-
 
       setEncounterImage(
         DEFINITIONS.A1.finalCard
       );
 
-
       encounterBackButton.style.display =
         "none";
 
-
       return;
-
 
     }
 
 
-    /* MISSION FINAL */
+    /*
+      MISSION COMPLETE
+    */
 
-    if (
+    if(
       state.encounterMode ===
       "missionFinal"
     ){
 
-
       state.rooms.A1.completed =
         true;
-
 
       state.rooms.A1.revealed =
         true;
 
-
       missionComplete();
 
-
     }
-
 
   }
 
@@ -5752,8 +4458,7 @@ function handleRoomClick(
   room
 ){
 
-
-  if (
+  if(
     state.gameLocked
     ||
     state.ended
@@ -5766,48 +4471,53 @@ function handleRoomClick(
   }
 
 
-  if (
+  if(
     room ===
     state.currentRoom
   ){
-
 
     showMessage(
       "ESTÁS EN ESTA SALA"
     );
 
-
     return;
-
-
-  }
-
-
-  if (
-    !isAdjacent(
-      room
-    )
-  ){
-
-
-    showMessage(
-      "SOLO PUEDES IR A UNA SALA ALEDAÑA"
-    );
-
-
-    return;
-
 
   }
 
 
   /*
-    Escáner activo:
-    primer clic revela,
-    sin gastar oxígeno.
+    Aquí se valida el GRAPH.
+
+    Por tanto:
+    B3 -> A4 será rechazado.
+    A4 -> B3 será rechazado.
+
+    B4 -> A5 será rechazado.
+    A5 -> B4 será rechazado.
   */
 
-  if (
+  if(
+    !isAdjacent(
+      room
+    )
+  ){
+
+    showMessage(
+      "SOLO PUEDES IR A UNA SALA ALEDAÑA"
+    );
+
+    return;
+
+  }
+
+
+  /*
+    ESCÁNER:
+    primer clic revela
+    sin moverse.
+  */
+
+  if(
     state.scannerActive
     &&
     !state.rooms[
@@ -5815,22 +4525,17 @@ function handleRoomClick(
     ].revealed
   ){
 
-
     revealRoom(
       room
     );
 
-
     return;
-
 
   }
 
 
   /*
-    Calculamos el coste ANTES
-    de marcar la habitación
-    como visitada.
+    OXYGEN COST
   */
 
   const movementCost =
@@ -5839,62 +4544,54 @@ function handleRoomClick(
     );
 
 
-  if (
+  if(
     movementCost >
     0
   ){
-
 
     const alive =
       consumeOxygen(
         movementCost
       );
 
-
-    if (
+    if(
       !alive
     ){
       return;
     }
 
-
   }
 
 
   /*
-    Sala ya completada.
-    Solo nos desplazamos.
+    Habitación completada:
+    simplemente viajar.
   */
 
-  if (
+  if(
     state.rooms[
       room
     ].completed
   ){
 
-
     turnOffScanner();
-
 
     moveToRoom(
       room
     );
 
-
     return;
-
 
   }
 
 
   /*
-    Sala nueva o no resuelta.
+    Habitación pendiente.
   */
 
   openEncounter(
     room
   );
-
 
 }
 
@@ -5906,44 +4603,34 @@ function handleRoomClick(
 
 function triggerGameOver(){
 
-
-  if (
+  if(
     state.ended
   ){
     return;
   }
 
-
   state.ended =
     true;
-
 
   state.gameLocked =
     true;
 
-
   turnOffScanner();
-
 
   encounter.classList.remove(
     "show"
   );
 
-
   gameOverSound();
-
 
   endOverlay.className =
     "show gameover";
 
-
   endTitle.textContent =
     "GAME OVER";
 
-
   endSubtitle.textContent =
     "Te has quedado sin oxígeno.";
-
 
 }
 
@@ -5951,51 +4638,41 @@ function triggerGameOver(){
 
 function missionComplete(){
 
-
-  if (
+  if(
     state.ended
   ){
     return;
   }
 
-
   state.ended =
     true;
-
 
   state.gameLocked =
     true;
 
-
   turnOffScanner();
-
 
   encounter.classList.remove(
     "show"
   );
 
-
   missionSound();
-
 
   endOverlay.className =
     "show mission";
 
-
   endTitle.textContent =
     "MISIÓN CUMPLIDA";
 
-
   endSubtitle.textContent =
     "Has abierto la bóveda y recuperado el botín.";
-
 
 }
 
 
 
 /* =========================================================
-   MOBILE DOUBLE-ZOOM GUARD
+   MOBILE DOUBLE ZOOM
    ========================================================= */
 
 let lastTouchEnd =
@@ -6008,12 +4685,10 @@ document.addEventListener(
 
   event => {
 
-
     const now =
       Date.now();
 
-
-    if (
+    if(
       now
       -
       lastTouchEnd
@@ -6021,16 +4696,12 @@ document.addEventListener(
       300
     ){
 
-
       event.preventDefault();
-
 
     }
 
-
     lastTouchEnd =
       now;
-
 
   },
 
@@ -6039,7 +4710,6 @@ document.addEventListener(
   }
 
 );
-
 
 </script>
 
