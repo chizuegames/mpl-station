@@ -2,23 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>MPL - Estación Espacial</title>
 
 <style>
-
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent
 }
 
-html,
-body{
+html,body{
   margin:0;
   padding:0;
   width:100%;
@@ -26,18 +19,22 @@ body{
   background:#050713;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
-  touch-action:manipulation;
+  touch-action:manipulation
 }
 
 body{
   display:flex;
   justify-content:center;
-  align-items:flex-start;
+  align-items:flex-start
 }
 
 img{
   user-select:none;
-  -webkit-user-drag:none;
+  -webkit-user-drag:none
+}
+
+button{
+  font-family:inherit
 }
 
 
@@ -50,112 +47,73 @@ img{
   width:min(100vw,760px);
   margin:0 auto;
   background:#050713;
-  overflow:hidden;
+  overflow:hidden
 }
 
 .intro-page{
   display:none;
   position:relative;
   width:100%;
-  animation:introFade .28s ease;
+  animation:introFade .28s ease
 }
 
 .intro-page.active{
-  display:block;
+  display:block
 }
 
 .intro-image,
 .dock-base{
   display:block;
   width:100%;
-  height:auto;
+  height:auto
 }
 
 #introPage1{
-  cursor:pointer;
+  cursor:pointer
 }
-
-
-/* =========================================================
-   BOTÓN ACEPTAR
-   ========================================================= */
 
 #acceptMissionButton{
   position:absolute;
-
   left:50%;
   bottom:4.5%;
-
   transform:translateX(-50%);
-
   z-index:10;
-
   min-width:180px;
-
   padding:14px 28px;
-
   border:3px solid #ffc164;
   border-radius:18px;
-
   background:rgba(190,92,0,.93);
-
   color:#fff;
-
   font-size:clamp(19px,4vw,28px);
-
   font-weight:900;
-
   letter-spacing:.8px;
-
   cursor:pointer;
-
   box-shadow:
     0 0 0 3px rgba(0,0,0,.45),
-    0 0 22px rgba(255,142,22,.65);
+    0 0 22px rgba(255,142,22,.65)
 }
 
 #acceptMissionButton:active{
-  transform:
-    translateX(-50%)
-    scale(.96);
+  transform:translateX(-50%) scale(.96)
 }
-
-
-/* =========================================================
-   SECUENCIA DE ACOPLE
-   ========================================================= */
 
 #dockScene{
   position:relative;
-
   width:100%;
-
   overflow:hidden;
-
-  background:#050713;
+  background:#050713
 }
 
 #dockShip{
   position:absolute;
-
   left:50%;
   top:111%;
-
   width:25%;
   height:auto;
-
-  transform:
-    translate(-50%,-50%);
-
-  filter:
-    drop-shadow(
-      0 0 14px
-      rgba(255,139,30,.6)
-    );
-
+  transform:translate(-50%,-50%);
+  filter:drop-shadow(0 0 14px rgba(255,139,30,.6));
   z-index:5;
-
-  opacity:1;
+  opacity:1
 }
 
 #dockShip.docking{
@@ -163,858 +121,575 @@ img{
     dockMove
     2.25s
     cubic-bezier(.25,.75,.25,1)
-    forwards;
+    forwards
 }
 
 #dockFlash{
   position:absolute;
-
   inset:0;
-
   z-index:8;
-
   background:#fff;
-
   opacity:0;
-
-  pointer-events:none;
+  pointer-events:none
 }
 
 #dockFlash.flash{
-  animation:
-    dockFlash
-    .28s
-    ease;
+  animation:dockFlash .28s ease
 }
-
 
 @keyframes introFade{
-
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-
+  from{opacity:0}
+  to{opacity:1}
 }
 
-
 @keyframes dockMove{
-
   0%{
     top:112%;
-
-    transform:
-      translate(-50%,-50%)
-      scale(.92);
+    transform:translate(-50%,-50%) scale(.92)
   }
 
   22%{
     top:99%;
-
-    transform:
-      translate(-50%,-50%)
-      scale(.95);
+    transform:translate(-50%,-50%) scale(.95)
   }
 
   70%{
     top:81%;
-
-    transform:
-      translate(-50%,-50%)
-      scale(.99);
+    transform:translate(-50%,-50%) scale(.99)
   }
 
   100%{
     top:74.6%;
-
-    transform:
-      translate(-50%,-50%)
-      scale(1);
+    transform:translate(-50%,-50%) scale(1)
   }
-
 }
 
-
 @keyframes dockFlash{
-
-  0%{
-    opacity:0;
-  }
-
-  45%{
-    opacity:.35;
-  }
-
-  100%{
-    opacity:0;
-  }
-
+  0%{opacity:0}
+  45%{opacity:.35}
+  100%{opacity:0}
 }
 
 
 /* =========================================================
-   JUEGO
+   GAME
    ========================================================= */
 
 #game{
   display:none;
-
   position:relative;
-
   width:min(100vw,760px);
-
   margin:0 auto;
-
   overflow:hidden;
-
   background:#050713;
-
   user-select:none;
-  -webkit-user-select:none;
+  -webkit-user-select:none
 }
 
 #map{
   position:relative;
-
-  width:100%;
+  width:100%
 }
 
 #mapImage{
   display:block;
-
   width:100%;
   height:auto;
-
-  pointer-events:none;
+  pointer-events:none
 }
 
+#roomsLayer,
+#iconsLayer{
+  position:absolute;
+  inset:0
+}
 
-/* =========================================================
-   HABITACIONES
+#roomsLayer{
+  z-index:20
+}
 
-   BAJADAS PARA ADAPTARSE A MIc.png
-   ========================================================= */
+#iconsLayer{
+  z-index:30;
+  pointer-events:none
+}
 
 .room{
   position:absolute;
-
-  z-index:20;
-
+  transform:translate(-50%,-50%);
   cursor:pointer;
-}
-
-
-/* A12 */
-
-#roomA12{
-  left:43%;
-  top:63.6%;
-
-  width:15.2%;
-  height:7.6%;
-}
-
-
-/* B5 */
-
-#roomB5{
-  left:43%;
-  top:53.9%;
-
-  width:15.2%;
-  height:7.6%;
-}
-
-
-/* B6 */
-
-#roomB6{
-  left:26%;
-  top:63.6%;
-
-  width:14.8%;
-  height:7.6%;
-}
-
-
-/* B7 */
-
-#roomB7{
-  left:60.2%;
-  top:63.6%;
-
-  width:14.8%;
-  height:7.6%;
-}
-
-
-/* =========================================================
-   ESCÁNER
-   ========================================================= */
-
-#scannerButton{
-  position:absolute;
-
-  left:38%;
-  top:89.3%;
-
-  width:24%;
-  height:8.9%;
-
-  z-index:25;
-
-  cursor:pointer;
-
-  animation:
-    scannerPulse
-    1.8s
-    infinite
-    ease-in-out;
-}
-
-#scannerButton.scanner-on{
-  animation:
-    scannerOn
-    .9s
-    infinite
-    ease-in-out;
-}
-
-
-@keyframes scannerPulse{
-
-  0%,
-  100%{
-    filter:brightness(1);
-  }
-
-  50%{
-    filter:brightness(1.2);
-  }
-
-}
-
-
-@keyframes scannerOn{
-
-  0%,
-  100%{
-    filter:
-      brightness(1.15)
-      drop-shadow(
-        0 0 5px
-        #a8d336
-      );
-  }
-
-  50%{
-    filter:
-      brightness(1.4)
-      drop-shadow(
-        0 0 15px
-        #a8d336
-      );
-  }
-
-}
-
-
-/* =========================================================
-   MÚSICA
-   ========================================================= */
-
-#musicButton{
-  position:absolute;
-
-  top:12px;
-  right:12px;
-
-  z-index:70;
-
-  min-height:44px;
-
-  padding:8px 14px;
-
-  border:
-    2px solid
-    #a8d336;
-
-  border-radius:24px;
-
-  background:
-    rgba(10,15,20,.88);
-
-  color:#fff;
-
-  font-size:14px;
-
-  font-weight:900;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 0 0 2px rgba(0,0,0,.45),
-    0 0 12px rgba(168,211,54,.25);
-}
-
-#musicButton:active{
-  transform:scale(.94);
-}
-
-#musicButton.music-on{
-  background:
-    rgba(130,170,30,.92);
-
-  box-shadow:
-    0 0 0 2px rgba(0,0,0,.45),
-    0 0 18px rgba(168,211,54,.7);
-}
-
-
-/* =========================================================
-   ICONOS DEL MAPA
-   ========================================================= */
-
-#iconsLayer{
-  position:absolute;
-
-  inset:0;
-
-  z-index:30;
-
-  pointer-events:none;
+  background:transparent;
+  border:0
 }
 
 .map-icon{
   position:absolute;
-
+  transform:translate(-50%,-50%);
   pointer-events:none;
-
-  object-fit:contain;
+  object-fit:contain
 }
-
-
-/* =========================================================
-   CENTROS DE LAS HABITACIONES
-
-   TODOS BAJADOS PARA MIc.png
-   ========================================================= */
-
-.pos-A12{
-  left:50.6%;
-  top:67.4%;
-}
-
-.pos-B5{
-  left:50.5%;
-  top:57.7%;
-}
-
-.pos-B6{
-  left:33.4%;
-  top:67.4%;
-}
-
-.pos-B7{
-  left:67.7%;
-  top:67.4%;
-}
-
-
-/* =========================================================
-   ASTRA
-   ========================================================= */
 
 .player-icon{
-  width:13%;
-
-  transform:
-    translate(-50%,-50%);
-
-  animation:
-    pop
-    .35s
-    ease-out;
-
-  filter:
-    drop-shadow(
-      0 0 8px
-      rgba(255,255,255,.35)
-    );
+  width:12.5%;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.35));
+  animation:pop .3s ease-out
 }
-
-
-/* =========================================================
-   ICONOS DE EVENTOS
-   ========================================================= */
 
 .event-icon{
-  width:12.5%;
-
-  transform:
-    translate(-50%,-50%);
-
-  animation:
-    pop
-    .35s
-    ease-out;
+  width:11.5%;
+  animation:pop .3s ease-out
 }
-
-
-/* =========================================================
-   CHECK
-   ========================================================= */
 
 .check-icon{
-  width:11.5%;
-
-  transform:
-    translate(-50%,-50%);
-
-  animation:
-    pop
-    .35s
-    ease-out;
+  width:10%;
+  animation:pop .3s ease-out
 }
-
-
-/* =========================================================
-   ONDAS
-   ========================================================= */
 
 .scanner-wave{
-  width:9%;
-
-  animation:
-    waveGlow
-    1s
-    infinite
-    ease-in-out;
+  width:8.5%;
+  animation:waveGlow 1s infinite ease-in-out
 }
 
+.dir-up{
+  transform:translate(-50%,-50%) rotate(0deg)
+}
+
+.dir-right{
+  transform:translate(-50%,-50%) rotate(90deg)
+}
+
+.dir-left{
+  transform:translate(-50%,-50%) rotate(-90deg)
+}
+
+.dir-down{
+  transform:translate(-50%,-50%) rotate(180deg)
+}
 
 @keyframes pop{
-
   from{
     opacity:0;
-
-    transform:
-      translate(-50%,-50%)
-      scale(.25);
+    scale:.35
   }
 
   to{
     opacity:1;
-
-    transform:
-      translate(-50%,-50%)
-      scale(1);
+    scale:1
   }
-
 }
 
-
 @keyframes waveGlow{
-
-  0%,
-  100%{
-    opacity:.62;
-
-    filter:
-      brightness(.95);
+  0%,100%{
+    opacity:.58;
+    filter:brightness(.95)
   }
 
   50%{
     opacity:1;
-
     filter:
-      brightness(1.22);
+      brightness(1.3)
+      drop-shadow(0 0 7px rgba(168,211,54,.65))
   }
-
-}
-
-
-.dir-up{
-  transform:
-    translate(-50%,-50%)
-    rotate(0);
-}
-
-.dir-right{
-  transform:
-    translate(-50%,-50%)
-    rotate(90deg);
-}
-
-.dir-left{
-  transform:
-    translate(-50%,-50%)
-    rotate(-90deg);
-}
-
-.dir-down{
-  transform:
-    translate(-50%,-50%)
-    rotate(180deg);
 }
 
 
 /* =========================================================
-   PANTALLA DE ENCUENTRO
+   MAP CONTROLS
+   ========================================================= */
+
+#scannerButton{
+  position:absolute;
+  left:36%;
+  top:88.4%;
+  width:28%;
+  height:10.8%;
+  z-index:40;
+  cursor:pointer;
+  background:transparent;
+  border:0
+}
+
+#scannerButton.scanner-on{
+  filter:drop-shadow(0 0 12px #a8d336)
+}
+
+#useObjectButton{
+  position:absolute;
+  left:77%;
+  top:5.2%;
+  width:20%;
+  height:18%;
+  z-index:40;
+  cursor:pointer;
+  background:transparent;
+  border:0
+}
+
+#musicButton{
+  position:absolute;
+  left:2.2%;
+  bottom:1.3%;
+  z-index:60;
+  width:44px;
+  height:44px;
+  border:2px solid rgba(255,255,255,.8);
+  border-radius:50%;
+  background:rgba(10,15,20,.76);
+  color:#fff;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 0 10px rgba(0,0,0,.5)
+}
+
+#musicButton.music-on{
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,.4),
+    0 0 15px rgba(168,211,54,.65)
+}
+
+#oxygenCounter{
+  position:absolute;
+  left:5.1%;
+  top:23.2%;
+  width:12.4%;
+  z-index:55;
+  padding:5px 3px;
+  border-radius:10px;
+  background:rgba(9,13,18,.78);
+  border:2px solid rgba(255,255,255,.72);
+  color:#fff;
+  text-align:center;
+  font-size:clamp(13px,2.9vw,23px);
+  font-weight:900;
+  text-shadow:1px 2px 2px #000;
+  pointer-events:none
+}
+
+#oxygenCounter.phase60{
+  border-color:#ff9140;
+  color:#ffb176
+}
+
+#oxygenCounter.phase20{
+  border-color:#ff4141;
+  color:#ff7777
+}
+
+
+/* =========================================================
+   TUTORIAL
+   ========================================================= */
+
+#tutorialOverlay{
+  position:fixed;
+  inset:0;
+  z-index:150;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.62)
+}
+
+#tutorialOverlay.show{
+  display:flex
+}
+
+#tutorialPanel{
+  width:min(88vw,620px);
+  padding:24px 22px;
+  border-radius:20px;
+  background:rgba(19,22,27,.97);
+  border:3px solid #a8d336;
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.55),
+    0 0 26px rgba(168,211,54,.35);
+  text-align:center;
+  color:#fff
+}
+
+#tutorialText{
+  font-size:clamp(20px,4vw,31px);
+  font-weight:800;
+  line-height:1.25;
+  margin-bottom:20px
+}
+
+#tutorialNext{
+  min-width:150px;
+  padding:11px 22px;
+  border:0;
+  border-radius:14px;
+  background:#a8d336;
+  color:#111;
+  font-size:18px;
+  font-weight:900;
+  cursor:pointer
+}
+
+
+/* =========================================================
+   ENCOUNTER
    ========================================================= */
 
 #encounter{
   position:fixed;
-
   inset:0;
-
-  z-index:100;
-
+  z-index:120;
   display:flex;
-
   justify-content:center;
   align-items:center;
-
   padding:12px;
-
-  background:
-    rgba(0,0,0,.62);
-
+  background:rgba(0,0,0,.66);
   opacity:0;
-
   visibility:hidden;
-
-  transform:
-    scale(.96);
-
+  transform:scale(.96);
   transition:
-    opacity .2s ease,
-    transform .2s ease;
+    opacity .18s ease,
+    transform .18s ease
 }
 
 #encounter.show{
   opacity:1;
-
   visibility:visible;
-
-  transform:
-    scale(1);
+  transform:scale(1)
 }
 
 #encounterCard{
   position:relative;
-
-  width:
-    min(
-      82vw,
-      650px
-    );
-
+  width:min(82vw,650px);
   max-height:94vh;
-
-  cursor:default;
+  cursor:default
 }
 
 #encounterImage{
   display:block;
-
   width:100%;
   height:auto;
-
   max-height:94vh;
-
   object-fit:contain;
-
-  pointer-events:none;
+  pointer-events:none
 }
-
-
-/* =========================================================
-   ZONAS DE ATAQUE
-   ========================================================= */
 
 .attack-zone{
   position:absolute;
-
-  z-index:120;
-
+  z-index:125;
   border:0;
-
   background:transparent;
-
   cursor:pointer;
-
-  display:none;
+  display:none
 }
-
-
-/* PISTOLA */
 
 #gunButton{
   left:6%;
   top:51%;
-
   width:35%;
-  height:27%;
+  height:27%
 }
-
-
-/* PUÑO */
 
 #fistButton{
   left:62%;
   top:51%;
-
   width:35%;
-  height:27%;
+  height:27%
 }
-
-
-/* =========================================================
-   VIDA DEL ENEMIGO
-   ========================================================= */
 
 #enemyHp{
   position:absolute;
-
-  z-index:125;
-
+  z-index:130;
   left:82%;
   top:12.5%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   display:none;
-
   min-width:44px;
   height:44px;
-
-  padding:
-    0
-    10px;
-
+  padding:0 10px;
   border-radius:24px;
-
   align-items:center;
   justify-content:center;
-
-  background:
-    rgba(0,0,0,.82);
-
-  border:
-    3px solid
-    #fff;
-
+  background:rgba(0,0,0,.82);
+  border:3px solid #fff;
   color:#fff;
-
-  font-size:
-    clamp(
-      22px,
-      5vw,
-      34px
-    );
-
+  font-size:clamp(22px,5vw,34px);
   font-weight:900;
-
   text-shadow:
     2px 2px 0 #000,
     -2px -2px 0 #000;
-
-  pointer-events:none;
+  pointer-events:none
 }
-
 
 #encounterCard.combat #gunButton,
 #encounterCard.combat #fistButton,
 #encounterCard.combat #enemyHp{
-  display:flex;
+  display:flex
 }
 
-
-/* =========================================================
-   GOLPE
-   ========================================================= */
+#encounterBackButton{
+  display:none;
+  position:absolute;
+  left:50%;
+  bottom:3.5%;
+  transform:translateX(-50%);
+  z-index:135;
+  padding:10px 20px;
+  border:2px solid #fff;
+  border-radius:14px;
+  background:rgba(20,23,28,.9);
+  color:#fff;
+  font-size:17px;
+  font-weight:900;
+  cursor:pointer
+}
 
 #encounterCard.hit{
-  animation:
-    cardHit
-    .22s
-    ease;
+  animation:cardHit .2s ease
 }
 
-
 @keyframes cardHit{
-
-  0%{
-    transform:scale(1);
-  }
-
-  45%{
-    transform:scale(.985);
-  }
-
-  100%{
-    transform:scale(1);
-  }
-
+  0%{transform:scale(1)}
+  45%{transform:scale(.985)}
+  100%{transform:scale(1)}
 }
 
 
 /* =========================================================
-   MENSAJES
+   MESSAGE
    ========================================================= */
 
 #message{
   position:fixed;
-
   left:50%;
   top:44%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
-
-  z-index:200;
-
+  transform:translate(-50%,-50%) scale(.8);
+  z-index:210;
   min-width:240px;
   max-width:85vw;
-
-  padding:
-    17px
-    25px;
-
+  padding:17px 25px;
   border-radius:18px;
-
-  background:
-    rgba(15,18,22,.95);
-
-  border:
-    3px solid
-    #a8d336;
-
+  background:rgba(15,18,22,.96);
+  border:3px solid #a8d336;
   color:#fff;
-
-  font-size:
-    clamp(
-      20px,
-      4.6vw,
-      36px
-    );
-
+  font-size:clamp(19px,4.3vw,33px);
   font-weight:900;
-
   line-height:1.15;
-
   text-align:center;
-
   opacity:0;
-
   visibility:hidden;
-
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
     0 0 25px rgba(168,211,54,.45);
-
-  pointer-events:none;
+  pointer-events:none
 }
 
 #message.show{
   visibility:visible;
-
-  animation:
-    messageAnimation
-    1.35s
-    ease
-    forwards;
+  animation:messageAnimation 1.4s ease forwards
 }
 
-
 @keyframes messageAnimation{
-
   0%{
     opacity:0;
-
-    transform:
-      translate(-50%,-20%)
-      scale(.7);
+    transform:translate(-50%,-20%) scale(.7)
   }
 
   18%{
     opacity:1;
-
-    transform:
-      translate(-50%,-50%)
-      scale(1.06);
+    transform:translate(-50%,-50%) scale(1.06)
   }
 
   72%{
     opacity:1;
-
-    transform:
-      translate(-50%,-60%)
-      scale(1);
+    transform:translate(-50%,-60%) scale(1)
   }
 
   100%{
     opacity:0;
-
-    transform:
-      translate(-50%,-95%)
-      scale(.95);
+    transform:translate(-50%,-95%) scale(.95)
   }
-
 }
 
 
 /* =========================================================
-   MÓVIL
+   END
    ========================================================= */
+
+#endOverlay{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(3,5,12,.95)
+}
+
+#endOverlay.show{
+  display:flex
+}
+
+#endPanel{
+  width:min(88vw,640px);
+  padding:36px 25px;
+  border-radius:24px;
+  background:rgba(17,20,25,.96);
+  border:4px solid #fff;
+  text-align:center;
+  box-shadow:0 0 35px rgba(255,255,255,.18)
+}
+
+#endTitle{
+  margin:0 0 14px;
+  color:#fff;
+  font-size:clamp(40px,9vw,72px);
+  font-weight:1000;
+  letter-spacing:1px
+}
+
+#endSubtitle{
+  margin:0;
+  color:#ddd;
+  font-size:clamp(18px,4vw,28px);
+  font-weight:700;
+  line-height:1.25
+}
+
+#endOverlay.mission #endPanel{
+  border-color:#a8d336;
+  box-shadow:0 0 36px rgba(168,211,54,.38)
+}
+
+#endOverlay.mission #endTitle{
+  color:#b9e84a
+}
+
+#endOverlay.gameover #endPanel{
+  border-color:#ff4141;
+  box-shadow:0 0 36px rgba(255,65,65,.4)
+}
+
+#endOverlay.gameover #endTitle{
+  color:#ff5959
+}
+
 
 @media(max-width:500px){
-
-  #musicButton{
-    top:8px;
-    right:8px;
-
-    min-height:40px;
-
-    padding:
-      6px
-      10px;
-
-    font-size:12px;
-  }
-
-
   #acceptMissionButton{
     min-width:145px;
-
-    padding:
-      11px
-      20px;
+    padding:11px 20px
   }
 
+  #musicButton{
+    width:39px;
+    height:39px;
+    font-size:17px
+  }
 }
 
-
-/* =========================================================
-   PC
-   ========================================================= */
-
 @media(min-width:900px){
-
   #encounterCard{
-    width:
-      min(
-        58vh,
-        610px
-      );
+    width:min(58vh,610px)
   }
-
 }
 
 </style>
@@ -1029,24 +704,17 @@ img{
 
 <div id="introOverlay">
 
-
-  <!-- MENSAJE ENTRANTE -->
-
   <section
     id="introPage1"
     class="intro-page active"
   >
-
     <img
       class="intro-image"
       src="M01a.png"
       alt="Mensaje entrante"
     >
-
   </section>
 
-
-  <!-- MISIÓN -->
 
   <section
     id="introPage2"
@@ -1059,7 +727,6 @@ img{
       alt="Nueva misión"
     >
 
-
     <button
       id="acceptMissionButton"
       type="button"
@@ -1070,15 +737,12 @@ img{
   </section>
 
 
-  <!-- ACOPLE -->
-
   <section
     id="dockPage"
     class="intro-page"
   >
 
     <div id="dockScene">
-
 
       <img
         id="dockBaseImage"
@@ -1087,88 +751,64 @@ img{
         alt="Estación espacial"
       >
 
-
       <img
         id="dockShip"
         src="NvAstra.png"
         alt="Nave de Astra"
       >
 
-
       <div id="dockFlash"></div>
-
 
     </div>
 
   </section>
-
 
 </div>
 
 
 
 <!-- =========================================================
-     JUEGO
+     GAME
      ========================================================= -->
 
 <div id="game">
 
   <div id="map">
 
-
     <img
       id="mapImage"
-      src="MIc.png"
+      src="MIc100.png"
       alt="Estación espacial MPL"
       draggable="false"
     >
 
+    <div id="roomsLayer"></div>
+
+    <div id="iconsLayer"></div>
+
+    <button
+      id="scannerButton"
+      type="button"
+      aria-label="Escáner"
+    ></button>
+
+    <button
+      id="useObjectButton"
+      type="button"
+      aria-label="Usar objeto"
+    ></button>
 
     <button
       id="musicButton"
       type="button"
       aria-label="Desactivar música"
     >
-      ♫ MÚSICA ON
+      ♫
     </button>
 
-
-    <div
-      id="roomA12"
-      class="room"
-      aria-label="Habitación A12"
-    ></div>
-
-
-    <div
-      id="roomB5"
-      class="room"
-      aria-label="Habitación B5"
-    ></div>
-
-
-    <div
-      id="roomB6"
-      class="room"
-      aria-label="Habitación B6"
-    ></div>
-
-
-    <div
-      id="roomB7"
-      class="room"
-      aria-label="Habitación B7"
-    ></div>
-
-
-    <div
-      id="scannerButton"
-      aria-label="Escáner"
-    ></div>
-
-
-    <div id="iconsLayer"></div>
-
+    <div id="oxygenCounter">
+      100%
+    </div>
 
   </div>
 
@@ -1177,7 +817,7 @@ img{
 
 
 <!-- =========================================================
-     AUDIOS
+     AUDIO
      ========================================================= -->
 
 <audio
@@ -1185,12 +825,10 @@ img{
   loop
   preload="auto"
 >
-
   <source
     src="Echoes in the Subway.mp3"
     type="audio/mpeg"
   >
-
 </audio>
 
 
@@ -1199,24 +837,44 @@ img{
   loop
   preload="auto"
 >
-
   <source
     src="Bitácotas Espaciales.mp3"
     type="audio/mpeg"
   >
-
 </audio>
 
 
 
 <!-- =========================================================
-     ENCUENTRO
+     TUTORIAL
+     ========================================================= -->
+
+<div id="tutorialOverlay">
+
+  <div id="tutorialPanel">
+
+    <div id="tutorialText"></div>
+
+    <button
+      id="tutorialNext"
+      type="button"
+    >
+      SIGUIENTE
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     ENCOUNTER
      ========================================================= -->
 
 <div id="encounter">
 
   <div id="encounterCard">
-
 
     <img
       id="encounterImage"
@@ -1225,28 +883,31 @@ img{
       draggable="false"
     >
 
-
     <div
       id="enemyHp"
       aria-live="polite"
     ></div>
 
-
     <button
       id="gunButton"
       class="attack-zone"
       type="button"
-      aria-label="Disparar con la pistola"
+      aria-label="Disparar"
     ></button>
-
 
     <button
       id="fistButton"
       class="attack-zone"
       type="button"
-      aria-label="Golpear con el puño"
+      aria-label="Golpear"
     ></button>
 
+    <button
+      id="encounterBackButton"
+      type="button"
+    >
+      VOLVER AL MAPA
+    </button>
 
   </div>
 
@@ -1258,11 +919,29 @@ img{
 
 
 
+<!-- =========================================================
+     END
+     ========================================================= -->
+
+<div id="endOverlay">
+
+  <div id="endPanel">
+
+    <h1 id="endTitle"></h1>
+
+    <p id="endSubtitle"></p>
+
+  </div>
+
+</div>
+
+
+
 <script>
 
 
 /* =========================================================
-   ARCHIVOS
+   ASSETS
    ========================================================= */
 
 const ASSETS = {
@@ -1282,8 +961,14 @@ const ASSETS = {
   playerShip:
     "NvAstra.png",
 
-  playMap:
-    "MIc.png",
+  map100:
+    "MIc100.png",
+
+  map60:
+    "MIc60.png",
+
+  map20:
+    "MIc20.png",
 
   playerIcon:
     "IcoAstra.png",
@@ -1299,19 +984,329 @@ const ASSETS = {
 
 
 /* =========================================================
-   ENCUENTROS
+   ROOM LAYOUT
+
+   Las coordenadas representan el centro
+   de cada habitación.
+   ========================================================= */
+
+const ROOM_LAYOUT = {
+
+  A1:{
+    x:33.5,
+    y:17.9
+  },
+
+  A2:{
+    x:50.8,
+    y:17.9
+  },
+
+  A3:{
+    x:68.1,
+    y:17.9
+  },
+
+
+  B1:{
+    x:50.8,
+    y:27.2
+  },
+
+
+  A4:{
+    x:33.5,
+    y:37.9
+  },
+
+  B2:{
+    x:50.8,
+    y:37.9
+  },
+
+  A5:{
+    x:68.1,
+    y:37.9
+  },
+
+
+  A6:{
+    x:16.4,
+    y:47.8
+  },
+
+  B3:{
+    x:33.5,
+    y:47.8
+  },
+
+  A7:{
+    x:50.8,
+    y:47.8
+  },
+
+  B4:{
+    x:68.1,
+    y:47.8
+  },
+
+  A8:{
+    x:85.2,
+    y:47.8
+  },
+
+
+  A9:{
+    x:16.4,
+    y:57.6
+  },
+
+  B5:{
+    x:50.8,
+    y:57.6
+  },
+
+  A10:{
+    x:85.2,
+    y:57.6
+  },
+
+
+  A11:{
+    x:16.4,
+    y:67.6
+  },
+
+  B6:{
+    x:33.5,
+    y:67.6
+  },
+
+  A12:{
+    x:50.8,
+    y:67.6
+  },
+
+  B7:{
+    x:68.1,
+    y:67.6
+  },
+
+  A13:{
+    x:85.2,
+    y:67.6
+  },
+
+
+  A14:{
+    x:16.4,
+    y:77.5
+  },
+
+  A15:{
+    x:85.2,
+    y:77.5
+  }
+
+};
+
+
+
+/* =========================================================
+   CONNECTIONS
+
+   Solo se puede avanzar hacia
+   habitaciones conectadas.
+   ========================================================= */
+
+const GRAPH = {
+
+  ENTRADA:[
+    "A12"
+  ],
+
+
+  A1:[
+    "A2"
+  ],
+
+
+  A2:[
+    "A1",
+    "A3",
+    "B1"
+  ],
+
+
+  A3:[
+    "A2"
+  ],
+
+
+  B1:[
+    "A2",
+    "B2"
+  ],
+
+
+  A4:[
+    "B2",
+    "B3"
+  ],
+
+
+  B2:[
+    "B1",
+    "A4",
+    "A5",
+    "A7"
+  ],
+
+
+  A5:[
+    "B2",
+    "B4"
+  ],
+
+
+  A6:[
+    "B3",
+    "A9"
+  ],
+
+
+  B3:[
+    "A4",
+    "A6",
+    "A7",
+    "B6"
+  ],
+
+
+  A7:[
+    "B2",
+    "B3",
+    "B4",
+    "B5"
+  ],
+
+
+  B4:[
+    "A5",
+    "A7",
+    "A8",
+    "B7"
+  ],
+
+
+  A8:[
+    "B4",
+    "A10"
+  ],
+
+
+  A9:[
+    "A6",
+    "A11"
+  ],
+
+
+  B5:[
+    "A7",
+    "A12"
+  ],
+
+
+  A10:[
+    "A8",
+    "A13"
+  ],
+
+
+  A11:[
+    "A9",
+    "B6",
+    "A14"
+  ],
+
+
+  B6:[
+    "B3",
+    "A11",
+    "A12"
+  ],
+
+
+  A12:[
+    "B5",
+    "B6",
+    "B7"
+  ],
+
+
+  B7:[
+    "B4",
+    "A12",
+    "A13"
+  ],
+
+
+  A13:[
+    "A10",
+    "B7",
+    "A15"
+  ],
+
+
+  A14:[
+    "A11"
+  ],
+
+
+  A15:[
+    "A13"
+  ]
+
+};
+
+
+
+/* =========================================================
+   ROOM DEFINITIONS
+
+   Vida y energía del jugador NO son
+   contabilizadas por la programación.
+
+   Solo:
+   - oxígeno
+   - vida del enemigo
+   - tarjetas llave ocultas
    ========================================================= */
 
 const DEFINITIONS = {
 
 
-  A12: {
+  A1:{
+
+    type:
+      "loot",
+
+    label:
+      "SALA DEL BOTÍN",
 
     card:
-      "A12E.png",
+      "A1E.png",
+
+    finalCard:
+      "A1F.png",
 
     icon:
-      "ICOA12.png",
+      "ICOBT.png"
+
+  },
+
+
+  A2:{
 
     type:
       "combat",
@@ -1319,139 +1314,108 @@ const DEFINITIONS = {
     label:
       "MARCIANO VERDE",
 
-    hp:
-      1,
+    card:
+      "A2E.png",
 
     finalCard:
-      "A12F.png"
+      "A2F.png",
+
+    icon:
+      "ICOMV.png",
+
+    hp:{
+      100:2,
+      60:3,
+      20:3
+    }
 
   },
 
 
-  B1: {
-
-    card:
-      "B1E.png",
-
-    icon:
-      "ICOB1.png",
+  A3:{
 
     type:
       "simple",
 
     label:
-      "TRAMPA DE ENERGÍA"
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
 
   },
 
 
-  B2: {
-
-    card:
-      "B2E.png",
-
-    icon:
-      "ICOB2.png",
+  A4:{
 
     type:
       "simple",
 
     label:
-      "TRAMPA EXPLOSIVA"
+      "RECUPERAR VIDA",
+
+    card:
+      "SDV.png",
+
+    icon:
+      "ICOV.png"
 
   },
 
 
-  B3: {
-
-    card:
-      "B3E.png",
-
-    icon:
-      "ICOB3.png",
-
-    type:
-      "simple",
-
-    label:
-      "OBJETO MISTERIOSO"
-
-  },
-
-
-  B4: {
-
-    card:
-      "B4E.png",
-
-    icon:
-      "ICOB4.png",
-
-    type:
-      "simple",
-
-    label:
-      "KIT DE CURACIÓN"
-
-  },
-
-
-  B5: {
-
-    card:
-      "B5E.png",
-
-    icon:
-      "ICOB5.png",
+  A5:{
 
     type:
       "combat",
 
     label:
-      "MARCIANO NARANJA",
+      "MARCIANO ROJO",
 
-    hp:
-      3,
+    card:
+      "A5E.png",
 
     finalCard:
-      "B5F.png"
+      "A5F.png",
+
+    icon:
+      "ICOMR.png",
+
+    hp:{
+      100:4,
+      60:5,
+      20:6
+    },
+
+    specialKey:
+      true
 
   },
 
 
-  B6: {
-
-    card:
-      "B6E.png",
-
-    icon:
-      "ICOB6.png",
+  A6:{
 
     type:
-      "combat",
+      "key",
 
     label:
-      "MARCIANO NARANJA",
+      "TARJETA LLAVE",
 
-    hp:
-      3,
+    card:
+      "TLL.png",
 
-    finalCard:
-      [
-        "B6F.png",
-        "BF6.png"
-      ]
+    icon:
+      "ICOTL.png",
+
+    keySource:
+      "A6"
 
   },
 
 
-  B7: {
-
-    card:
-      "B7E.png",
-
-    icon:
-      "ICOB7.png",
+  A7:{
 
     type:
       "combat",
@@ -1459,11 +1423,329 @@ const DEFINITIONS = {
     label:
       "MARCIANO MORADO",
 
-    hp:
-      2,
+    card:
+      "A7E.png",
 
     finalCard:
-      "B7F.png"
+      "A7F.png",
+
+    icon:
+      "ICOMM.png",
+
+    hp:{
+      100:2,
+      60:2,
+      20:3
+    }
+
+  },
+
+
+  A8:{
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
+  },
+
+
+  A9:{
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO MORADO",
+
+    card:
+      "A9E.png",
+
+    finalCard:
+      "A9F.png",
+
+    icon:
+      "ICOMM.png",
+
+    hp:{
+      100:2,
+      60:2,
+      20:3
+    }
+
+  },
+
+
+  A10:{
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE VIDA",
+
+    card:
+      "TRV.png",
+
+    icon:
+      "ICOTR.png"
+
+  },
+
+
+  A11:{
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE ENERGÍA",
+
+    card:
+      "TRE.png",
+
+    icon:
+      "ICOTR.png"
+
+  },
+
+
+  A12:{
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO VERDE",
+
+    card:
+      "A12E.png",
+
+    finalCard:
+      "A12F.png",
+
+    icon:
+      "ICOMV.png",
+
+    hp:{
+      100:1,
+      60:1,
+      20:2
+    }
+
+  },
+
+
+  A13:{
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO VERDE",
+
+    card:
+      "A13E.png",
+
+    icon:
+      "ICOMV.png",
+
+    hp:{
+      100:1,
+      60:1,
+      20:2
+    }
+
+  },
+
+
+  A14:{
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
+  },
+
+
+  A15:{
+
+    type:
+      "key",
+
+    label:
+      "TARJETA LLAVE",
+
+    card:
+      "TLL.png",
+
+    icon:
+      "ICOTL.png",
+
+    keySource:
+      "A15"
+
+  },
+
+
+  B1:{
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE ENERGÍA",
+
+    card:
+      "TRE.png",
+
+    icon:
+      "ICOTR.png"
+
+  },
+
+
+  B2:{
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE VIDA",
+
+    card:
+      "TRV.png",
+
+    icon:
+      "ICOTR.png"
+
+  },
+
+
+  B3:{
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
+  },
+
+
+  B4:{
+
+    type:
+      "simple",
+
+    label:
+      "RECUPERAR VIDA",
+
+    card:
+      "SDV.png",
+
+    icon:
+      "ICOV.png"
+
+  },
+
+
+  B5:{
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO ROJO",
+
+    card:
+      "B5E.png",
+
+    finalCard:
+      "BF5.png",
+
+    icon:
+      "ICOMR.png",
+
+    hp:{
+      100:3,
+      60:4,
+      20:4
+    }
+
+  },
+
+
+  B6:{
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO ROJO",
+
+    card:
+      "B6E.png",
+
+    finalCard:
+      "BF6.png",
+
+    icon:
+      "ICOMR.png",
+
+    hp:{
+      100:3,
+      60:4,
+      20:4
+    }
+
+  },
+
+
+  B7:{
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO MORADO",
+
+    card:
+      "B7E.png",
+
+    finalCard:
+      "BF7.png",
+
+    icon:
+      "ICOMM.png",
+
+    hp:{
+      100:2,
+      60:2,
+      20:3
+    }
 
   }
 
@@ -1472,13 +1754,16 @@ const DEFINITIONS = {
 
 
 /* =========================================================
-   ESTADO
+   STATE
    ========================================================= */
 
 const state = {
 
   currentRoom:
     "ENTRADA",
+
+  oxygen:
+    100,
 
   scannerActive:
     false,
@@ -1492,72 +1777,64 @@ const state = {
   combat:
     null,
 
-  rooms: {
+  gameLocked:
+    true,
+
+  ended:
+    false,
 
 
-    A12: {
+  /*
+    Estas llaves se guardan internamente,
+    pero nunca se muestran al jugador.
+  */
 
-      eventId:
-        "A12",
+  keySources:{
 
-      revealed:
-        false,
+    A6:false,
 
-      completed:
-        false
+    A15:false,
 
-    },
+    A5:false
 
-
-    B5: {
-
-      eventId:
-        null,
-
-      revealed:
-        false,
-
-      completed:
-        false
-
-    },
+  },
 
 
-    B6: {
-
-      eventId:
-        null,
-
-      revealed:
-        false,
-
-      completed:
-        false
-
-    },
-
-
-    B7: {
-
-      eventId:
-        null,
-
-      revealed:
-        false,
-
-      completed:
-        false
-
-    }
-
-  }
+  rooms:{}
 
 };
 
 
 
+Object
+  .keys(
+    DEFINITIONS
+  )
+  .forEach(
+    room => {
+
+      state.rooms[
+        room
+      ] = {
+
+        revealed:
+          false,
+
+        completed:
+          false,
+
+        visited:
+          false
+
+      };
+
+    }
+  );
+
+
+
 /* =========================================================
-   ELEMENTOS
+   DOM
    ========================================================= */
 
 const introOverlay =
@@ -1610,6 +1887,11 @@ const mapImage =
     "mapImage"
   );
 
+const roomsLayer =
+  document.getElementById(
+    "roomsLayer"
+  );
+
 const iconsLayer =
   document.getElementById(
     "iconsLayer"
@@ -1618,6 +1900,36 @@ const iconsLayer =
 const scannerButton =
   document.getElementById(
     "scannerButton"
+  );
+
+const useObjectButton =
+  document.getElementById(
+    "useObjectButton"
+  );
+
+const musicButton =
+  document.getElementById(
+    "musicButton"
+  );
+
+const oxygenCounter =
+  document.getElementById(
+    "oxygenCounter"
+  );
+
+const tutorialOverlay =
+  document.getElementById(
+    "tutorialOverlay"
+  );
+
+const tutorialText =
+  document.getElementById(
+    "tutorialText"
+  );
+
+const tutorialNext =
+  document.getElementById(
+    "tutorialNext"
   );
 
 const encounter =
@@ -1650,9 +1962,29 @@ const fistButton =
     "fistButton"
   );
 
+const encounterBackButton =
+  document.getElementById(
+    "encounterBackButton"
+  );
+
 const message =
   document.getElementById(
     "message"
+  );
+
+const endOverlay =
+  document.getElementById(
+    "endOverlay"
+  );
+
+const endTitle =
+  document.getElementById(
+    "endTitle"
+  );
+
+const endSubtitle =
+  document.getElementById(
+    "endSubtitle"
   );
 
 const introMusic =
@@ -1665,16 +1997,7 @@ const bgMusic =
     "bgMusic"
   );
 
-const musicButton =
-  document.getElementById(
-    "musicButton"
-  );
 
-
-
-/* =========================================================
-   VARIABLES
-   ========================================================= */
 
 let messageTimer =
   null;
@@ -1691,6 +2014,9 @@ let introLocked =
 let gameAudioContext =
   null;
 
+let tutorialIndex =
+  0;
+
 
 
 introMusic.volume =
@@ -1702,7 +2028,91 @@ bgMusic.volume =
 
 
 /* =========================================================
-   PRECARGA
+   CREATE ALL ROOM HOTSPOTS
+   ========================================================= */
+
+function buildRooms(){
+
+
+  Object
+    .entries(
+      ROOM_LAYOUT
+    )
+    .forEach(
+      ([room,pos]) => {
+
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
+
+        button.className =
+          "room";
+
+
+        button.id =
+          `room-${room}`;
+
+
+        button.setAttribute(
+          "aria-label",
+          `Habitación ${room}`
+        );
+
+
+        button.style.left =
+          `${pos.x}%`;
+
+
+        button.style.top =
+          `${pos.y}%`;
+
+
+        button.style.width =
+          "15.2%";
+
+
+        button.style.height =
+          "7.6%";
+
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            handleRoomClick(
+              room
+            );
+
+          }
+        );
+
+
+        roomsLayer.appendChild(
+          button
+        );
+
+
+      }
+    );
+
+
+}
+
+
+
+buildRooms();
+
+
+
+/* =========================================================
+   PRELOAD IMAGES
    ========================================================= */
 
 [
@@ -1711,16 +2121,41 @@ bgMusic.volume =
   ASSETS.stationOnly,
   ASSETS.dockedStation,
   ASSETS.playerShip,
-  ASSETS.playMap
+  ASSETS.map100,
+  ASSETS.map60,
+  ASSETS.map20,
+
+  ...Object
+    .values(
+      DEFINITIONS
+    )
+    .flatMap(
+      definition => [
+
+        definition.card,
+
+        definition.finalCard,
+
+        definition.icon
+
+      ]
+    )
+    .filter(
+      Boolean
+    )
+
 ]
 .forEach(
   src => {
 
+
     const image =
       new Image();
 
+
     image.src =
       src;
+
 
   }
 );
@@ -1728,15 +2163,15 @@ bgMusic.volume =
 
 
 /* =========================================================
-   AUDIO CONTEXT GENERAL
+   AUDIO CONTEXT / SFX
    ========================================================= */
 
-function getAudioContext() {
+function getAudioContext(){
 
 
   if (
     !gameAudioContext
-  ) {
+  ){
 
 
     const AudioContext =
@@ -1755,7 +2190,7 @@ function getAudioContext() {
   if (
     gameAudioContext.state ===
     "suspended"
-  ) {
+  ){
 
 
     gameAudioContext.resume();
@@ -1771,26 +2206,264 @@ function getAudioContext() {
 
 
 
-/* =========================================================
-   INTRO
-   ========================================================= */
+function toneSweep(
+  startFreq,
+  endFreq,
+  duration,
+  volume = .1,
+  type = "sine"
+){
 
-function showIntroPage(
-  page
-) {
+
+  try{
+
+
+    const ctx =
+      getAudioContext();
+
+
+    const oscillator =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator.type =
+      type;
+
+
+    oscillator.frequency
+      .setValueAtTime(
+        startFreq,
+        ctx.currentTime
+      );
+
+
+    oscillator.frequency
+      .exponentialRampToValueAtTime(
+        Math.max(
+          20,
+          endFreq
+        ),
+        ctx.currentTime
+        +
+        duration
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        volume,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        duration
+      );
+
+
+    oscillator.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator.start();
+
+
+    oscillator.stop(
+      ctx.currentTime
+      +
+      duration
+      +
+      .02
+    );
+
+
+  }
+
+  catch(error){}
+
+
+}
+
+
+
+function scannerSound(){
+
+
+  try{
+
+
+    const ctx =
+      getAudioContext();
+
+
+    const oscillator1 =
+      ctx.createOscillator();
+
+
+    const oscillator2 =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator1.type =
+      "sine";
+
+
+    oscillator2.type =
+      "triangle";
+
+
+    oscillator1.frequency
+      .setValueAtTime(
+        380,
+        ctx.currentTime
+      );
+
+
+    oscillator1.frequency
+      .linearRampToValueAtTime(
+        1240,
+        ctx.currentTime
+        +
+        .48
+      );
+
+
+    oscillator2.frequency
+      .setValueAtTime(
+        720,
+        ctx.currentTime
+      );
+
+
+    oscillator2.frequency
+      .linearRampToValueAtTime(
+        1510,
+        ctx.currentTime
+        +
+        .48
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        .085,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .5
+      );
+
+
+    oscillator1.connect(
+      gain
+    );
+
+
+    oscillator2.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator1.start();
+
+
+    oscillator2.start();
+
+
+    oscillator1.stop(
+      ctx.currentTime
+      +
+      .5
+    );
+
+
+    oscillator2.stop(
+      ctx.currentTime
+      +
+      .5
+    );
+
+
+  }
+
+  catch(error){}
+
+
+}
+
+
+
+function punchSound(){
+
+  toneSweep(
+    165,
+    48,
+    .17,
+    .32,
+    "triangle"
+  );
+
+}
+
+
+
+function lifeLossSound(){
 
 
   [
-    introPage1,
-    introPage2,
-    dockPage
+    270,
+    195,
+    128
   ]
   .forEach(
-    element => {
+    (frequency,index) => {
 
 
-      element.classList.remove(
-        "active"
+      setTimeout(
+        () => {
+
+
+          toneSweep(
+            frequency,
+            frequency * .92,
+            .11,
+            .07,
+            "square"
+          );
+
+
+        },
+
+        index * 60
       );
 
 
@@ -1798,8 +2471,98 @@ function showIntroPage(
   );
 
 
-  page.classList.add(
-    "active"
+}
+
+
+
+function gunSound(){
+
+  toneSweep(
+    1250,
+    170,
+    .15,
+    .2,
+    "sawtooth"
+  );
+
+}
+
+
+
+function energyLossSound(){
+
+  toneSweep(
+    720,
+    180,
+    .33,
+    .11,
+    "sine"
+  );
+
+}
+
+
+
+function itemSound(){
+
+  toneSweep(
+    520,
+    900,
+    .24,
+    .08,
+    "triangle"
+  );
+
+}
+
+
+
+function deathSound(){
+
+
+  [
+    430,
+    300,
+    180,
+    95
+  ]
+  .forEach(
+    (frequency,index) => {
+
+
+      setTimeout(
+        () => {
+
+
+          toneSweep(
+
+            frequency,
+
+            Math.max(
+              45,
+              frequency * .55
+            ),
+
+            .2,
+
+            .11,
+
+            index < 2
+              ?
+              "square"
+              :
+              "sawtooth"
+
+          );
+
+
+        },
+
+        index * 85
+      );
+
+
+    }
   );
 
 
@@ -1807,265 +2570,64 @@ function showIntroPage(
 
 
 
-/* =========================================================
-   MENSAJE ENTRANTE
-   ========================================================= */
+function gameOverSound(){
 
-introPage1.addEventListener(
+  toneSweep(
+    240,
+    45,
+    1.1,
+    .18,
+    "sawtooth"
+  );
 
-  "click",
-
-  async () => {
-
-
-    if (
-      introLocked
-    ) {
-
-
-      return;
-
-
-    }
-
-
-    /*
-      Este clic desbloquea también
-      el Web Audio API.
-    */
-
-    getAudioContext();
-
-
-    showIntroPage(
-      introPage2
-    );
-
-
-    /*
-      Música de misión:
-      Echoes in the Subway.
-    */
-
-    try {
-
-
-      introMusic.currentTime =
-        0;
-
-
-      await introMusic.play();
-
-
-    }
-
-    catch(error) {}
-
-
-  }
-
-);
+}
 
 
 
-/* =========================================================
-   TRANSICIÓN DE MÚSICA
-   ========================================================= */
-
-function crossfadeToGameMusic() {
+function missionSound(){
 
 
-  /*
-    Bitácotas empieza muy bajo.
-  */
-
-  bgMusic.volume =
-    .03;
-
-
-  /*
-    Como esta función es llamada
-    directamente por ACEPTAR,
-    el navegador permite play().
-  */
-
-  bgMusic.play()
-    .then(
-      () => {
+  [
+    520,
+    690,
+    880,
+    1180
+  ]
+  .forEach(
+    (frequency,index) => {
 
 
-        musicPlaying =
-          true;
+      setTimeout(
+        () => {
 
 
-        musicButton.classList.add(
-          "music-on"
-        );
-
-
-        musicButton.textContent =
-          "♫ MÚSICA ON";
-
-
-      }
-    )
-    .catch(
-      () => {}
-    );
-
-
-  const steps =
-    18;
-
-
-  let currentStep =
-    0;
-
-
-  const introStart =
-    introMusic.volume;
-
-
-  const gameTarget =
-    .32;
-
-
-  const timer =
-    setInterval(
-      () => {
-
-
-        currentStep++;
-
-
-        const progress =
-          currentStep
-          /
-          steps;
-
-
-        introMusic.volume =
-          Math.max(
-            0,
-            introStart
-            *
-            (1 - progress)
+          toneSweep(
+            frequency,
+            frequency * 1.02,
+            .22,
+            .08,
+            "sine"
           );
 
 
-        bgMusic.volume =
-          .03
-          +
-          (
-            gameTarget - .03
-          )
-          *
-          progress;
+        },
+
+        index * 120
+      );
 
 
-        if (
-          currentStep >=
-          steps
-        ) {
-
-
-          clearInterval(
-            timer
-          );
-
-
-          introMusic.pause();
-
-
-          introMusic.currentTime =
-            0;
-
-
-          introMusic.volume =
-            .34;
-
-
-          bgMusic.volume =
-            .32;
-
-
-        }
-
-
-      },
-
-      65
-    );
+    }
+  );
 
 
 }
 
 
 
-/* =========================================================
-   ACEPTAR MISIÓN
-   ========================================================= */
-
-acceptMissionButton.addEventListener(
-
-  "click",
-
-  event => {
+function dockingTravelSound(){
 
 
-    event.stopPropagation();
-
-
-    if (
-      introLocked
-    ) {
-
-
-      return;
-
-
-    }
-
-
-    introLocked =
-      true;
-
-
-    getAudioContext();
-
-
-    /*
-      La música del juego empieza
-      automáticamente.
-    */
-
-    crossfadeToGameMusic();
-
-
-    /*
-      Sonido de motor de la nave.
-    */
-
-    dockingTravelSound();
-
-
-    startDockingSequence();
-
-
-  }
-
-);
-
-
-
-/* =========================================================
-   SONIDO DE NAVE EN MOVIMIENTO
-   ========================================================= */
-
-function dockingTravelSound() {
-
-
-  try {
+  try{
 
 
     const ctx =
@@ -2224,7 +2786,57 @@ function dockingTravelSound() {
 
   }
 
-  catch(error) {}
+  catch(error){}
+
+
+}
+
+
+
+function dockingImpactSound(){
+
+
+  toneSweep(
+    115,
+    42,
+    .25,
+    .24,
+    "square"
+  );
+
+
+  setTimeout(
+    () => {
+
+      toneSweep(
+        610,
+        610,
+        .11,
+        .08,
+        "sine"
+      );
+
+    },
+
+    170
+  );
+
+
+  setTimeout(
+    () => {
+
+      toneSweep(
+        830,
+        830,
+        .11,
+        .08,
+        "sine"
+      );
+
+    },
+
+    270
+  );
 
 
 }
@@ -2232,179 +2844,240 @@ function dockingTravelSound() {
 
 
 /* =========================================================
-   SONIDO DE ACOPLE
+   INTRO / MUSIC
    ========================================================= */
 
-function dockingImpactSound() {
+function showIntroPage(
+  page
+){
 
 
-  try {
+  [
+    introPage1,
+    introPage2,
+    dockPage
+  ]
+  .forEach(
+    element => {
 
-
-    const ctx =
-      getAudioContext();
-
-
-    /*
-      Golpe mecánico grave.
-    */
-
-    const impact =
-      ctx.createOscillator();
-
-
-    const impactGain =
-      ctx.createGain();
-
-
-    impact.type =
-      "square";
-
-
-    impact.frequency
-      .setValueAtTime(
-        115,
-        ctx.currentTime
+      element.classList.remove(
+        "active"
       );
 
-
-    impact.frequency
-      .exponentialRampToValueAtTime(
-        42,
-        ctx.currentTime
-        +
-        .2
-      );
+    }
+  );
 
 
-    impactGain.gain
-      .setValueAtTime(
-        .24,
-        ctx.currentTime
-      );
+  page.classList.add(
+    "active"
+  );
 
 
-    impactGain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        .25
-      );
+}
 
 
-    impact.connect(
-      impactGain
+
+introPage1.addEventListener(
+
+  "click",
+
+  async () => {
+
+
+    if (
+      introLocked
+    ){
+      return;
+    }
+
+
+    getAudioContext();
+
+
+    showIntroPage(
+      introPage2
     );
 
 
-    impactGain.connect(
-      ctx.destination
-    );
+    try{
 
 
-    impact.start();
+      introMusic.currentTime =
+        0;
 
 
-    impact.stop(
-      ctx.currentTime
-      +
-      .26
-    );
+      await introMusic.play();
 
 
-    /*
-      Confirmación electrónica.
-    */
+    }
 
-    [
-      610,
-      830
-    ]
-    .forEach(
-      (frequency,index) => {
-
-
-        const beep =
-          ctx.createOscillator();
-
-
-        const beepGain =
-          ctx.createGain();
-
-
-        const start =
-          ctx.currentTime
-          +
-          .17
-          +
-          index * .1;
-
-
-        beep.type =
-          "sine";
-
-
-        beep.frequency.value =
-          frequency;
-
-
-        beepGain.gain
-          .setValueAtTime(
-            .08,
-            start
-          );
-
-
-        beepGain.gain
-          .exponentialRampToValueAtTime(
-            .001,
-            start
-            +
-            .11
-          );
-
-
-        beep.connect(
-          beepGain
-        );
-
-
-        beepGain.connect(
-          ctx.destination
-        );
-
-
-        beep.start(
-          start
-        );
-
-
-        beep.stop(
-          start
-          +
-          .12
-        );
-
-
-      }
-    );
+    catch(error){}
 
 
   }
 
-  catch(error) {}
+);
+
+
+
+function crossfadeToGameMusic(){
+
+
+  bgMusic.volume =
+    .03;
+
+
+  bgMusic.play()
+    .then(
+      () => {
+
+
+        musicPlaying =
+          true;
+
+
+        musicButton.classList.add(
+          "music-on"
+        );
+
+
+      }
+    )
+    .catch(
+      () => {}
+    );
+
+
+  const steps =
+    18;
+
+
+  let current =
+    0;
+
+
+  const introStart =
+    introMusic.volume;
+
+
+  const timer =
+    setInterval(
+      () => {
+
+
+        current++;
+
+
+        const progress =
+          current
+          /
+          steps;
+
+
+        introMusic.volume =
+          Math.max(
+            0,
+            introStart
+            *
+            (
+              1
+              -
+              progress
+            )
+          );
+
+
+        bgMusic.volume =
+          .03
+          +
+          (
+            .32
+            -
+            .03
+          )
+          *
+          progress;
+
+
+        if (
+          current >=
+          steps
+        ){
+
+
+          clearInterval(
+            timer
+          );
+
+
+          introMusic.pause();
+
+
+          introMusic.currentTime =
+            0;
+
+
+          introMusic.volume =
+            .34;
+
+
+          bgMusic.volume =
+            .32;
+
+
+        }
+
+
+      },
+
+      65
+    );
 
 
 }
 
 
 
-/* =========================================================
-   ACOPLE VISUAL
-   ========================================================= */
+acceptMissionButton.addEventListener(
 
-function startDockingSequence() {
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    if (
+      introLocked
+    ){
+      return;
+    }
+
+
+    introLocked =
+      true;
+
+
+    getAudioContext();
+
+
+    crossfadeToGameMusic();
+
+
+    dockingTravelSound();
+
+
+    startDockingSequence();
+
+
+  }
+
+);
+
+
+
+function startDockingSequence(){
 
 
   showIntroPage(
@@ -2483,7 +3156,6 @@ function startDockingSequence() {
 
   setTimeout(
     startGame,
-
     3150
   );
 
@@ -2492,15 +3164,18 @@ function startDockingSequence() {
 
 
 
-/* =========================================================
-   COMENZAR JUEGO
-   ========================================================= */
-
-function startGame() {
+function startGame(){
 
 
   mapImage.src =
-    ASSETS.playMap;
+    ASSETS.map100;
+
+
+  state.oxygen =
+    100;
+
+
+  updateOxygenUI();
 
 
   introOverlay.style.display =
@@ -2517,99 +3192,67 @@ function startGame() {
   );
 
 
+  refreshRoomMarkers();
+
+
+  showTutorial();
+
+
 }
 
 
 
-/* =========================================================
-   MEZCLAR EVENTOS B
-   ========================================================= */
-
-function shuffle(
-  array
-) {
+async function toggleMusic(){
 
 
-  const result =
-    [...array];
+  if (
+    !musicPlaying
+  ){
 
 
-  for (
-    let i =
-      result.length - 1;
-
-    i > 0;
-
-    i--
-  ) {
+    try{
 
 
-    const j =
-      Math.floor(
-        Math.random()
-        *
-        (i + 1)
+      await bgMusic.play();
+
+
+      musicPlaying =
+        true;
+
+
+      musicButton.classList.add(
+        "music-on"
       );
 
 
-    [
-      result[i],
-      result[j]
-    ]
-    =
-    [
-      result[j],
-      result[i]
-    ];
+    }
+
+    catch(error){
+
+
+      showMessage(
+        "NO SE PUDO ACTIVAR LA MÚSICA"
+      );
+
+
+    }
+
+
+    return;
 
 
   }
 
 
-  return result;
+  bgMusic.pause();
 
 
-}
+  musicPlaying =
+    false;
 
 
-
-function prepareBRooms() {
-
-
-  const draw =
-    shuffle([
-
-      "B1",
-      "B2",
-      "B3",
-      "B4",
-      "B5",
-      "B6",
-      "B7"
-
-    ])
-    .slice(
-      0,
-      3
-    );
-
-
-  [
-    "B5",
-    "B6",
-    "B7"
-  ]
-  .forEach(
-    (room,index) => {
-
-
-      state.rooms[
-        room
-      ].eventId =
-        draw[index];
-
-
-    }
+  musicButton.classList.remove(
+    "music-on"
   );
 
 
@@ -2617,17 +3260,132 @@ function prepareBRooms() {
 
 
 
-prepareBRooms();
+musicButton.addEventListener(
+
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    toggleMusic();
+
+
+  }
+
+);
 
 
 
 /* =========================================================
-   MENSAJES
+   TUTORIAL AFTER DOCKING
+   ========================================================= */
+
+const TUTORIAL_MESSAGES = [
+
+  "Recuerda: tu oxígeno es limitado. Cuanto menos te quede, más difícil será combatir. Úsalo con prudencia.",
+
+  "No olvides llevar tu Intergalactic Purée y una batería de reserva.",
+
+  "Si necesitas usar un objeto da clic en USAR OBJETO."
+
+];
+
+
+
+function showTutorial(){
+
+
+  state.gameLocked =
+    true;
+
+
+  tutorialIndex =
+    0;
+
+
+  tutorialText.textContent =
+    TUTORIAL_MESSAGES[
+      0
+    ];
+
+
+  tutorialNext.textContent =
+    "SIGUIENTE";
+
+
+  tutorialOverlay.classList.add(
+    "show"
+  );
+
+
+}
+
+
+
+tutorialNext.addEventListener(
+
+  "click",
+
+  () => {
+
+
+    tutorialIndex++;
+
+
+    if (
+      tutorialIndex >=
+      TUTORIAL_MESSAGES.length
+    ){
+
+
+      tutorialOverlay.classList.remove(
+        "show"
+      );
+
+
+      state.gameLocked =
+        false;
+
+
+      return;
+
+
+    }
+
+
+    tutorialText.textContent =
+      TUTORIAL_MESSAGES[
+        tutorialIndex
+      ];
+
+
+    tutorialNext.textContent =
+      tutorialIndex ===
+      TUTORIAL_MESSAGES.length
+      -
+      1
+        ?
+        "ENTENDIDO"
+        :
+        "SIGUIENTE";
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   MESSAGES
    ========================================================= */
 
 function showMessage(
   html
-) {
+){
 
 
   clearTimeout(
@@ -2664,7 +3422,7 @@ function showMessage(
 
       },
 
-      1350
+      1400
     );
 
 
@@ -2673,98 +3431,270 @@ function showMessage(
 
 
 /* =========================================================
-   BOTÓN DE MÚSICA
+   OXYGEN
    ========================================================= */
 
-async function toggleMusic() {
+function oxygenPhase(){
 
 
   if (
-    !musicPlaying
-  ) {
-
-
-    try {
-
-
-      await bgMusic.play();
-
-
-      musicPlaying =
-        true;
-
-
-      musicButton.classList.add(
-        "music-on"
-      );
-
-
-      musicButton.textContent =
-        "♫ MÚSICA ON";
-
-
-      musicButton.setAttribute(
-        "aria-label",
-        "Desactivar música"
-      );
-
-
-    }
-
-    catch(error) {
-
-
-      showMessage(
-        "NO SE PUDO<br>ACTIVAR LA MÚSICA"
-      );
-
-
-    }
-
-
-    return;
-
-
+    state.oxygen <
+    20
+  ){
+    return 20;
   }
 
 
-  bgMusic.pause();
+  if (
+    state.oxygen <
+    60
+  ){
+    return 60;
+  }
 
 
-  musicPlaying =
-    false;
-
-
-  musicButton.classList.remove(
-    "music-on"
-  );
-
-
-  musicButton.textContent =
-    "♫ MÚSICA";
-
-
-  musicButton.setAttribute(
-    "aria-label",
-    "Activar música"
-  );
+  return 100;
 
 
 }
 
 
 
-musicButton.addEventListener(
+function formatOxygen(
+  value
+){
+
+
+  return `${
+    Number.isInteger(
+      value
+    )
+      ?
+      value
+      :
+      value
+        .toFixed(1)
+        .replace(
+          ".",
+          ","
+        )
+  }%`;
+
+
+}
+
+
+
+function updateOxygenUI(){
+
+
+  const phase =
+    oxygenPhase();
+
+
+  oxygenCounter.textContent =
+    formatOxygen(
+      state.oxygen
+    );
+
+
+  oxygenCounter.classList.remove(
+    "phase60",
+    "phase20"
+  );
+
+
+  if (
+    phase ===
+    100
+  ){
+
+
+    mapImage.src =
+      ASSETS.map100;
+
+
+  }
+
+
+  if (
+    phase ===
+    60
+  ){
+
+
+    mapImage.src =
+      ASSETS.map60;
+
+
+    oxygenCounter.classList.add(
+      "phase60"
+    );
+
+
+  }
+
+
+  if (
+    phase ===
+    20
+  ){
+
+
+    mapImage.src =
+      ASSETS.map20;
+
+
+    oxygenCounter.classList.add(
+      "phase20"
+    );
+
+
+  }
+
+
+}
+
+
+
+function consumeOxygen(
+  amount = 7.5
+){
+
+
+  if (
+    state.ended
+  ){
+    return false;
+  }
+
+
+  state.oxygen =
+    Math.max(
+      0,
+      Math.round(
+        (
+          state.oxygen
+          -
+          amount
+        )
+        *
+        10
+      )
+      /
+      10
+    );
+
+
+  updateOxygenUI();
+
+
+  if (
+    state.oxygen <=
+    0
+  ){
+
+
+    triggerGameOver();
+
+
+    return false;
+
+
+  }
+
+
+  return true;
+
+
+}
+
+
+
+/*
+  No se consume oxígeno:
+  - desde ENTRADA hacia A12
+  - al entrar a A1 si ya se tienen 2 llaves
+*/
+
+function shouldChargeMove(
+  targetRoom
+){
+
+
+  if (
+    state.currentRoom ===
+    "ENTRADA"
+  ){
+    return false;
+  }
+
+
+  if (
+    targetRoom ===
+      "A1"
+    &&
+    keyCount() >=
+      2
+  ){
+    return false;
+  }
+
+
+  return true;
+
+
+}
+
+
+
+/* =========================================================
+   USE OBJECT
+
+   No registra qué objeto fue usado.
+   Solo consume oxígeno.
+   ========================================================= */
+
+useObjectButton.addEventListener(
 
   "click",
 
-  event => {
+  () => {
 
 
-    event.stopPropagation();
+    if (
+      state.gameLocked
+      ||
+      state.ended
+      ||
+      encounter.classList.contains(
+        "show"
+      )
+    ){
+      return;
+    }
 
 
-    toggleMusic();
+    itemSound();
+
+
+    const alive =
+      consumeOxygen(
+        7.5
+      );
+
+
+    if (
+      alive
+    ){
+
+
+      showMessage(
+        "OBJETO UTILIZADO<br>−7,5% O₂"
+      );
+
+
+    }
 
 
   }
@@ -2774,182 +3704,50 @@ musicButton.addEventListener(
 
 
 /* =========================================================
-   EFECTO DE PUÑO
+   KEYS - HIDDEN
    ========================================================= */
 
-function punchSound() {
+function keyCount(){
 
 
-  try {
-
-
-    const ctx =
-      getAudioContext();
-
-
-    const oscillator =
-      ctx.createOscillator();
-
-
-    const gain =
-      ctx.createGain();
-
-
-    oscillator.type =
-      "triangle";
-
-
-    oscillator.frequency
-      .setValueAtTime(
-        165,
-        ctx.currentTime
-      );
-
-
-    oscillator.frequency
-      .exponentialRampToValueAtTime(
-        48,
-        ctx.currentTime
-        +
-        .15
-      );
-
-
-    gain.gain
-      .setValueAtTime(
-        .33,
-        ctx.currentTime
-      );
-
-
-    gain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        .17
-      );
-
-
-    oscillator.connect(
-      gain
-    );
-
-
-    gain.connect(
-      ctx.destination
-    );
-
-
-    oscillator.start();
-
-
-    oscillator.stop(
-      ctx.currentTime
-      +
-      .18
-    );
-
-
-  }
-
-  catch(error) {}
+  return Object
+    .values(
+      state.keySources
+    )
+    .filter(
+      Boolean
+    )
+    .length;
 
 
 }
 
 
 
-/* =========================================================
-   PERDER VIDA
-   ========================================================= */
-
-function lifeLossSound() {
+function grantKey(
+  source
+){
 
 
-  try {
-
-
-    const ctx =
-      getAudioContext();
-
-
-    [
-      270,
-      195,
-      128
+  if (
+    !state.keySources[
+      source
     ]
-    .forEach(
-      (frequency,index) => {
+  ){
 
 
-        const oscillator =
-          ctx.createOscillator();
+    state.keySources[
+      source
+    ] =
+      true;
 
 
-        const gain =
-          ctx.createGain();
-
-
-        const start =
-          ctx.currentTime
-          +
-          index * .065;
-
-
-        oscillator.type =
-          "square";
-
-
-        oscillator.frequency.value =
-          frequency;
-
-
-        gain.gain
-          .setValueAtTime(
-            .075,
-            start
-          );
-
-
-        gain.gain
-          .exponentialRampToValueAtTime(
-            .001,
-            start
-            +
-            .11
-          );
-
-
-        oscillator.connect(
-          gain
-        );
-
-
-        gain.connect(
-          ctx.destination
-        );
-
-
-        oscillator.start(
-          start
-        );
-
-
-        oscillator.stop(
-          start
-          +
-          .12
-        );
-
-
-      }
+    showMessage(
+      "TARJETA LLAVE OBTENIDA"
     );
 
 
   }
-
-  catch(error) {}
 
 
 }
@@ -2957,432 +3755,34 @@ function lifeLossSound() {
 
 
 /* =========================================================
-   DISPARO
-   ========================================================= */
-
-function gunSound() {
-
-
-  try {
-
-
-    const ctx =
-      getAudioContext();
-
-
-    const oscillator =
-      ctx.createOscillator();
-
-
-    const gain =
-      ctx.createGain();
-
-
-    oscillator.type =
-      "sawtooth";
-
-
-    oscillator.frequency
-      .setValueAtTime(
-        1250,
-        ctx.currentTime
-      );
-
-
-    oscillator.frequency
-      .exponentialRampToValueAtTime(
-        170,
-        ctx.currentTime
-        +
-        .13
-      );
-
-
-    gain.gain
-      .setValueAtTime(
-        .2,
-        ctx.currentTime
-      );
-
-
-    gain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        .15
-      );
-
-
-    oscillator.connect(
-      gain
-    );
-
-
-    gain.connect(
-      ctx.destination
-    );
-
-
-    oscillator.start();
-
-
-    oscillator.stop(
-      ctx.currentTime
-      +
-      .16
-    );
-
-
-  }
-
-  catch(error) {}
-
-
-}
-
-
-
-/* =========================================================
-   PERDER ENERGÍA
-   ========================================================= */
-
-function energyLossSound() {
-
-
-  try {
-
-
-    const ctx =
-      getAudioContext();
-
-
-    const oscillator =
-      ctx.createOscillator();
-
-
-    const gain =
-      ctx.createGain();
-
-
-    oscillator.type =
-      "sine";
-
-
-    oscillator.frequency
-      .setValueAtTime(
-        720,
-        ctx.currentTime
-      );
-
-
-    oscillator.frequency
-      .exponentialRampToValueAtTime(
-        180,
-        ctx.currentTime
-        +
-        .31
-      );
-
-
-    gain.gain
-      .setValueAtTime(
-        .11,
-        ctx.currentTime
-      );
-
-
-    gain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        .33
-      );
-
-
-    oscillator.connect(
-      gain
-    );
-
-
-    gain.connect(
-      ctx.destination
-    );
-
-
-    oscillator.start();
-
-
-    oscillator.stop(
-      ctx.currentTime
-      +
-      .34
-    );
-
-
-  }
-
-  catch(error) {}
-
-
-}
-
-
-
-/* =========================================================
-   ESCÁNER
-   ========================================================= */
-
-function scannerSound() {
-
-
-  try {
-
-
-    const ctx =
-      getAudioContext();
-
-
-    const oscillator1 =
-      ctx.createOscillator();
-
-
-    const oscillator2 =
-      ctx.createOscillator();
-
-
-    const gain =
-      ctx.createGain();
-
-
-    oscillator1.type =
-      "sine";
-
-
-    oscillator2.type =
-      "triangle";
-
-
-    oscillator1.frequency
-      .setValueAtTime(
-        380,
-        ctx.currentTime
-      );
-
-
-    oscillator1.frequency
-      .linearRampToValueAtTime(
-        1240,
-        ctx.currentTime
-        +
-        .48
-      );
-
-
-    oscillator2.frequency
-      .setValueAtTime(
-        720,
-        ctx.currentTime
-      );
-
-
-    oscillator2.frequency
-      .linearRampToValueAtTime(
-        1510,
-        ctx.currentTime
-        +
-        .48
-      );
-
-
-    gain.gain
-      .setValueAtTime(
-        .085,
-        ctx.currentTime
-      );
-
-
-    gain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        .5
-      );
-
-
-    oscillator1.connect(
-      gain
-    );
-
-
-    oscillator2.connect(
-      gain
-    );
-
-
-    gain.connect(
-      ctx.destination
-    );
-
-
-    oscillator1.start();
-
-
-    oscillator2.start();
-
-
-    oscillator1.stop(
-      ctx.currentTime
-      +
-      .5
-    );
-
-
-    oscillator2.stop(
-      ctx.currentTime
-      +
-      .5
-    );
-
-
-  }
-
-  catch(error) {}
-
-
-}
-
-
-
-/* =========================================================
-   SONIDO DE DERROTA
-   ========================================================= */
-
-function deathSound() {
-
-
-  try {
-
-
-    const ctx =
-      getAudioContext();
-
-
-    const now =
-      ctx.currentTime;
-
-
-    [
-      430,
-      300,
-      180,
-      95
-    ]
-    .forEach(
-      (frequency,index) => {
-
-
-        const oscillator =
-          ctx.createOscillator();
-
-
-        const gain =
-          ctx.createGain();
-
-
-        oscillator.type =
-          index < 2
-            ?
-            "square"
-            :
-            "sawtooth";
-
-
-        oscillator.frequency
-          .setValueAtTime(
-            frequency,
-            now
-            +
-            index * .09
-          );
-
-
-        gain.gain
-          .setValueAtTime(
-            .13,
-            now
-            +
-            index * .09
-          );
-
-
-        gain.gain
-          .exponentialRampToValueAtTime(
-            .001,
-            now
-            +
-            .22
-            +
-            index * .09
-          );
-
-
-        oscillator.connect(
-          gain
-        );
-
-
-        gain.connect(
-          ctx.destination
-        );
-
-
-        oscillator.start(
-          now
-          +
-          index * .09
-        );
-
-
-        oscillator.stop(
-          now
-          +
-          .25
-          +
-          index * .09
-        );
-
-
-      }
-    );
-
-
-  }
-
-  catch(error) {}
-
-
-}
-
-
-
-/* =========================================================
-   ICONOS
+   MAP MARKERS
    ========================================================= */
 
 function addMapIcon(
   id,
   image,
   room,
-  classes
-) {
+  classes,
+  direction = ""
+){
 
 
   removeMapIcon(
     id
   );
+
+
+  const position =
+    ROOM_LAYOUT[
+      room
+    ];
+
+
+  if (
+    !position
+  ){
+    return null;
+  }
 
 
   const icon =
@@ -3404,7 +3804,21 @@ function addMapIcon(
 
 
   icon.className =
-    `map-icon pos-${room} ${classes}`;
+    `map-icon ${classes}${
+      direction
+        ?
+        ` dir-${direction}`
+        :
+        ""
+    }`;
+
+
+  icon.style.left =
+    `${position.x}%`;
+
+
+  icon.style.top =
+    `${position.y}%`;
 
 
   iconsLayer.appendChild(
@@ -3421,7 +3835,7 @@ function addMapIcon(
 
 function removeMapIcon(
   id
-) {
+){
 
 
   const element =
@@ -3432,7 +3846,7 @@ function removeMapIcon(
 
   if (
     element
-  ) {
+  ){
 
 
     element.remove();
@@ -3445,200 +3859,7 @@ function removeMapIcon(
 
 
 
-/* =========================================================
-   CONEXIONES
-   ========================================================= */
-
-function getAdjacentRooms(
-  room
-) {
-
-
-  if (
-    room ===
-    "ENTRADA"
-  ) {
-
-
-    return [
-
-      {
-        room:
-          "A12",
-
-        direction:
-          "up"
-      }
-
-    ];
-
-
-  }
-
-
-  if (
-    room ===
-    "A12"
-  ) {
-
-
-    return [
-
-
-      {
-        room:
-          "B5",
-
-        direction:
-          "up"
-      },
-
-
-      {
-        room:
-          "B6",
-
-        direction:
-          "left"
-      },
-
-
-      {
-        room:
-          "B7",
-
-        direction:
-          "right"
-      }
-
-
-    ];
-
-
-  }
-
-
-  if (
-    room ===
-    "B5"
-  ) {
-
-
-    return [
-
-      {
-        room:
-          "A12",
-
-        direction:
-          "down"
-      }
-
-    ];
-
-
-  }
-
-
-  if (
-    room ===
-    "B6"
-  ) {
-
-
-    return [
-
-      {
-        room:
-          "A12",
-
-        direction:
-          "right"
-      }
-
-    ];
-
-
-  }
-
-
-  if (
-    room ===
-    "B7"
-  ) {
-
-
-    return [
-
-      {
-        room:
-          "A12",
-
-        direction:
-          "left"
-      }
-
-    ];
-
-
-  }
-
-
-  return [];
-
-
-}
-
-
-
-function roomIsAdjacent(
-  roomName
-) {
-
-
-  return getAdjacentRooms(
-    state.currentRoom
-  )
-  .some(
-    connection =>
-      connection.room ===
-      roomName
-  );
-
-
-}
-
-
-
-function roomDefinition(
-  roomName
-) {
-
-
-  const room =
-    state.rooms[
-      roomName
-    ];
-
-
-  return room
-    ?
-    DEFINITIONS[
-      room.eventId
-    ]
-    :
-    null;
-
-
-}
-
-
-
-/* =========================================================
-   ASTRA Y CHECKS
-   ========================================================= */
-
-function refreshMarkers() {
+function clearStandardMarkers(){
 
 
   removeMapIcon(
@@ -3646,29 +3867,42 @@ function refreshMarkers() {
   );
 
 
-  [
-    "A12",
-    "B5",
-    "B6",
-    "B7"
-  ]
-  .forEach(
-    room => {
+  Object
+    .keys(
+      DEFINITIONS
+    )
+    .forEach(
+      room => {
 
 
-      removeMapIcon(
-        `check-${room}`
-      );
+        removeMapIcon(
+          `check-${room}`
+        );
 
 
-    }
-  );
+        removeMapIcon(
+          `event-${room}`
+        );
+
+
+      }
+    );
+
+
+}
+
+
+
+function refreshRoomMarkers(){
+
+
+  clearStandardMarkers();
 
 
   if (
     state.currentRoom !==
     "ENTRADA"
-  ) {
+  ){
 
 
     addMapIcon(
@@ -3687,44 +3921,77 @@ function refreshMarkers() {
   }
 
 
-  [
-    "A12",
-    "B5",
-    "B6",
-    "B7"
-  ]
-  .forEach(
-    room => {
+  Object
+    .keys(
+      DEFINITIONS
+    )
+    .forEach(
+      room => {
 
 
-      if (
-        state.rooms[
-          room
-        ].completed
-        &&
-        state.currentRoom !==
-        room
-      ) {
+        const roomState =
+          state.rooms[
+            room
+          ];
 
 
-        addMapIcon(
+        if (
+          room ===
+          state.currentRoom
+        ){
+          return;
+        }
 
-          `check-${room}`,
 
-          ASSETS.check,
+        if (
+          roomState.completed
+        ){
 
-          room,
 
-          "check-icon"
+          addMapIcon(
 
-        );
+            `check-${room}`,
+
+            ASSETS.check,
+
+            room,
+
+            "check-icon"
+
+          );
+
+
+          return;
+
+
+        }
+
+
+        if (
+          roomState.revealed
+        ){
+
+
+          addMapIcon(
+
+            `event-${room}`,
+
+            DEFINITIONS[
+              room
+            ].icon,
+
+            room,
+
+            "event-icon"
+
+          );
+
+
+        }
 
 
       }
-
-
-    }
-  );
+    );
 
 
 }
@@ -3732,25 +3999,21 @@ function refreshMarkers() {
 
 
 function moveToRoom(
-  roomName
-) {
+  room
+){
 
 
   state.currentRoom =
-    roomName;
+    room;
 
 
-  removeMapIcon(
-    `event-${roomName}`
-  );
+  state.rooms[
+    room
+  ].visited =
+    true;
 
 
-  removeMapIcon(
-    `scan-${roomName}`
-  );
-
-
-  refreshMarkers();
+  refreshRoomMarkers();
 
 
 }
@@ -3758,10 +4021,118 @@ function moveToRoom(
 
 
 /* =========================================================
-   ESCÁNER ON/OFF
+   SCANNER
    ========================================================= */
 
-function turnOffScanner() {
+function adjacentRooms(){
+
+
+  return GRAPH[
+    state.currentRoom
+  ]
+  ||
+  [];
+
+
+}
+
+
+
+function isAdjacent(
+  target
+){
+
+
+  return adjacentRooms()
+    .includes(
+      target
+    );
+
+
+}
+
+
+
+function directionBetween(
+  from,
+  to
+){
+
+
+  if (
+    from ===
+    "ENTRADA"
+  ){
+    return "up";
+  }
+
+
+  const start =
+    ROOM_LAYOUT[
+      from
+    ];
+
+
+  const end =
+    ROOM_LAYOUT[
+      to
+    ];
+
+
+  if (
+    !start
+    ||
+    !end
+  ){
+    return "up";
+  }
+
+
+  const dx =
+    end.x
+    -
+    start.x;
+
+
+  const dy =
+    end.y
+    -
+    start.y;
+
+
+  if (
+    Math.abs(
+      dx
+    )
+    >
+    Math.abs(
+      dy
+    )
+  ){
+
+
+    return dx > 0
+      ?
+      "right"
+      :
+      "left";
+
+
+  }
+
+
+  return dy > 0
+    ?
+    "down"
+    :
+    "up";
+
+
+}
+
+
+
+function turnOffScanner(){
 
 
   state.scannerActive =
@@ -3773,35 +4144,46 @@ function turnOffScanner() {
   );
 
 
-  [
-    "A12",
-    "B5",
-    "B6",
-    "B7"
-  ]
-  .forEach(
-    room => {
+  Object
+    .keys(
+      DEFINITIONS
+    )
+    .forEach(
+      room => {
 
 
-      removeMapIcon(
-        `scan-${room}`
-      );
+        removeMapIcon(
+          `scan-${room}`
+        );
 
 
-    }
-  );
+      }
+    );
 
 
 }
 
 
 
-function scanNearbyRooms() {
+function scanNearbyRooms(){
+
+
+  if (
+    state.gameLocked
+    ||
+    state.ended
+    ||
+    encounter.classList.contains(
+      "show"
+    )
+  ){
+    return;
+  }
 
 
   if (
     state.scannerActive
-  ) {
+  ){
 
 
     turnOffScanner();
@@ -3813,68 +4195,63 @@ function scanNearbyRooms() {
   }
 
 
-  const adjacent =
-    getAdjacentRooms(
-      state.currentRoom
-    );
-
-
   let count =
     0;
 
 
-  adjacent.forEach(
-    ({
-      room,
-      direction
-    }) => {
+  adjacentRooms()
+    .forEach(
+      room => {
 
 
-      const roomData =
-        state.rooms[
-          room
-        ];
+        const roomState =
+          state.rooms[
+            room
+          ];
 
 
-      if (
-        roomData
-        &&
-        !roomData.completed
-        &&
-        !roomData.revealed
-      ) {
+        if (
+          !roomState.completed
+          &&
+          !roomState.revealed
+        ){
 
 
-        addMapIcon(
+          addMapIcon(
 
-          `scan-${room}`,
+            `scan-${room}`,
 
-          ASSETS.scannerWave,
+            ASSETS.scannerWave,
 
-          room,
+            room,
 
-          `scanner-wave dir-${direction}`
+            "scanner-wave",
 
-        );
+            directionBetween(
+              state.currentRoom,
+              room
+            )
+
+          );
 
 
-        count++;
+          count++;
+
+
+        }
 
 
       }
-
-
-    }
-  );
+    );
 
 
   if (
     !count
-  ) {
+  ){
 
 
     showMessage(
-      "SIN NUEVAS<br>SEÑALES"
+      "SIN NUEVAS SEÑALES"
     );
 
 
@@ -3901,62 +4278,57 @@ function scanNearbyRooms() {
 
 
 scannerButton.addEventListener(
+
   "click",
+
   scanNearbyRooms
+
 );
 
 
 
-/* =========================================================
-   REVELAR SALA
-   ========================================================= */
-
 function revealRoom(
-  roomName
-) {
+  room
+){
 
 
-  const room =
+  const roomState =
     state.rooms[
-      roomName
+      room
     ];
 
 
   const definition =
-    roomDefinition(
-      roomName
-    );
+    DEFINITIONS[
+      room
+    ];
 
 
   if (
-    !room
+    !roomState
     ||
     !definition
-  ) {
-
-
+  ){
     return;
-
-
   }
 
 
-  room.revealed =
+  roomState.revealed =
     true;
 
 
   removeMapIcon(
-    `scan-${roomName}`
+    `scan-${room}`
   );
 
 
   addMapIcon(
 
-    `event-${roomName}`,
+    `event-${room}`,
 
     definition.icon,
 
-    roomName,
+    room,
 
     "event-icon"
 
@@ -3978,72 +4350,27 @@ function revealRoom(
 
 
 /* =========================================================
-   IMÁGENES CON RESPALDO
+   ENCOUNTERS
    ========================================================= */
 
-function setImageSource(
-  imageElement,
-  source
-) {
+function setEncounterImage(
+  src
+){
 
 
-  const sources =
-    Array.isArray(source)
-      ?
-      source
-      :
-      [source];
+  encounterImage.onerror =
+    null;
 
 
-  let index =
-    0;
-
-
-  imageElement.onerror =
-    () => {
-
-
-      index++;
-
-
-      if (
-        index <
-        sources.length
-      ) {
-
-
-        imageElement.src =
-          sources[index];
-
-
-      }
-
-      else {
-
-
-        imageElement.onerror =
-          null;
-
-
-      }
-
-
-    };
-
-
-  imageElement.src =
-    sources[0];
+  encounterImage.src =
+    src;
 
 
 }
 
 
 
-/* =========================================================
-   ENCUENTROS
-   ========================================================= */
-
-function resetEncounterUI() {
+function resetEncounterUI(){
 
 
   encounterCard.className =
@@ -4066,6 +4393,10 @@ function resetEncounterUI() {
     "none";
 
 
+  encounterBackButton.style.display =
+    "none";
+
+
   combatLocked =
     false;
 
@@ -4078,25 +4409,43 @@ function resetEncounterUI() {
 
 
 
+function currentEnemyHp(
+  definition
+){
+
+
+  const phase =
+    oxygenPhase();
+
+
+  return definition.hp
+    ?
+    definition.hp[
+      phase
+    ]
+    :
+    0;
+
+
+}
+
+
+
 function openEncounter(
-  roomName
-) {
+  room
+){
 
 
   const definition =
-    roomDefinition(
-      roomName
-    );
+    DEFINITIONS[
+      room
+    ];
 
 
   if (
     !definition
-  ) {
-
-
+  ){
     return;
-
-
   }
 
 
@@ -4104,18 +4453,19 @@ function openEncounter(
 
 
   state.pendingRoom =
-    roomName;
+    room;
 
 
-  state.encounterMode =
-    definition.type;
+  state.rooms[
+    room
+  ].visited =
+    true;
 
 
   resetEncounterUI();
 
 
-  setImageSource(
-    encounterImage,
+  setEncounterImage(
     definition.card
   );
 
@@ -4129,10 +4479,16 @@ function openEncounter(
   );
 
 
+  /* COMBAT */
+
   if (
     definition.type ===
     "combat"
-  ) {
+  ){
+
+
+    state.encounterMode =
+      "combat";
 
 
     encounterCard.classList.add(
@@ -4152,60 +4508,31 @@ function openEncounter(
       "block";
 
 
+    const hp =
+      currentEnemyHp(
+        definition
+      );
+
+
     state.combat = {
 
-
       eventId:
-        state.rooms[
-          roomName
-        ].eventId,
-
+        room,
 
       hp:
-        definition.hp,
-
+        hp,
 
       fists:
         0,
 
-
       shots:
         0
-
 
     };
 
 
     enemyHp.textContent =
-      definition.hp;
-
-
-  }
-
-  else {
-
-
-    encounterCard.style.cursor =
-      "pointer";
-
-
-  }
-
-
-}
-
-
-
-function completeCurrentRoom() {
-
-
-  const roomName =
-    state.pendingRoom;
-
-
-  if (
-    !roomName
-  ) {
+      hp;
 
 
     return;
@@ -4214,28 +4541,92 @@ function completeCurrentRoom() {
   }
 
 
+  /* LOOT ROOM */
+
+  if (
+    definition.type ===
+    "loot"
+  ){
+
+
+    if (
+      keyCount() >=
+      2
+    ){
+
+
+      state.encounterMode =
+        "lootReady";
+
+
+      encounterCard.style.cursor =
+        "pointer";
+
+
+    }
+
+    else{
+
+
+      state.encounterMode =
+        "lootLocked";
+
+
+      encounterCard.style.cursor =
+        "pointer";
+
+
+      encounterBackButton.style.display =
+        "block";
+
+
+    }
+
+
+    return;
+
+
+  }
+
+
+  /* SIMPLE / KEY */
+
+  state.encounterMode =
+    definition.type;
+
+
+  encounterCard.style.cursor =
+    "pointer";
+
+
+}
+
+
+
+function completeCurrentRoom(){
+
+
   const room =
-    state.rooms[
-      roomName
-    ];
+    state.pendingRoom;
 
 
-  room.completed =
+  if (
+    !room
+  ){
+    return;
+  }
+
+
+  state.rooms[
+    room
+  ].completed =
     true;
 
 
-  room.revealed =
+  state.rooms[
+    room
+  ].revealed =
     true;
-
-
-  removeMapIcon(
-    `event-${roomName}`
-  );
-
-
-  removeMapIcon(
-    `scan-${roomName}`
-  );
 
 
   encounter.classList.remove(
@@ -4255,7 +4646,7 @@ function completeCurrentRoom() {
 
 
   moveToRoom(
-    roomName
+    room
   );
 
 
@@ -4263,11 +4654,52 @@ function completeCurrentRoom() {
 
 
 
-/* =========================================================
-   ATAQUES
-   ========================================================= */
+function closeUnresolvedRoomToMap(){
 
-function animateHit() {
+
+  const room =
+    state.pendingRoom;
+
+
+  if (
+    !room
+  ){
+    return;
+  }
+
+
+  state.rooms[
+    room
+  ].revealed =
+    true;
+
+
+  encounter.classList.remove(
+    "show"
+  );
+
+
+  state.pendingRoom =
+    null;
+
+
+  state.encounterMode =
+    null;
+
+
+  resetEncounterUI();
+
+
+  moveToRoom(
+    room
+  );
+
+
+}
+
+
+
+function animateHit(){
 
 
   encounterCard.classList.remove(
@@ -4287,9 +4719,13 @@ function animateHit() {
 
 
 
+/* =========================================================
+   COMBAT
+   ========================================================= */
+
 function attack(
   kind
-) {
+){
 
 
   if (
@@ -4299,12 +4735,10 @@ function attack(
     combatLocked
     ||
     !state.combat
-  ) {
-
-
+    ||
+    state.ended
+  ){
     return;
-
-
   }
 
 
@@ -4316,14 +4750,12 @@ function attack(
     state.combat;
 
 
-  /* =====================================================
-     PUÑO
-     ===================================================== */
+  /* PUÑO */
 
   if (
     kind ===
     "fist"
-  ) {
+  ){
 
 
     combat.fists++;
@@ -4346,11 +4778,9 @@ function attack(
   }
 
 
-  /* =====================================================
-     PISTOLA
-     ===================================================== */
+  /* PISTOLA */
 
-  else {
+  else{
 
 
     combat.shots++;
@@ -4376,7 +4806,9 @@ function attack(
   combat.hp =
     Math.max(
       0,
-      combat.hp - 1
+      combat.hp
+      -
+      1
     );
 
 
@@ -4392,8 +4824,9 @@ function attack(
 
 
       if (
-        combat.hp > 0
-      ) {
+        combat.hp >
+        0
+      ){
 
 
         combatLocked =
@@ -4412,19 +4845,48 @@ function attack(
         ];
 
 
-      const earnsClue =
-
+      const pureFists =
         combat.fists >
-          combat.shots
-
+          0
         &&
+        combat.shots ===
+          0;
 
-        !!definition.finalCard;
+
+      /*
+        A5 requiere derrotarlo
+        completamente con puños
+        para entregar la llave.
+
+        Los demás desenlaces se activan
+        cuando hubo más puños que disparos.
+      */
+
+      const earnsFinal =
+        combat.eventId ===
+          "A5"
+
+        ?
+
+        (
+          pureFists
+          &&
+          !!definition.finalCard
+        )
+
+        :
+
+        (
+          combat.fists >
+            combat.shots
+          &&
+          !!definition.finalCard
+        );
 
 
       if (
-        earnsClue
-      ) {
+        earnsFinal
+      ){
 
 
         state.encounterMode =
@@ -4448,14 +4910,13 @@ function attack(
           "none";
 
 
-        setImageSource(
-          encounterImage,
+        setEncounterImage(
           definition.finalCard
         );
 
 
         encounterImage.alt =
-          `Pista ${combat.eventId}`;
+          `Desenlace ${combat.eventId}`;
 
 
         encounterCard.style.cursor =
@@ -4477,14 +4938,13 @@ function attack(
 
       setTimeout(
         completeCurrentRoom,
-
-        450
+        430
       );
 
 
     },
 
-    330
+    320
   );
 
 
@@ -4534,6 +4994,38 @@ fistButton.addEventListener(
 
 
 
+encounterBackButton.addEventListener(
+
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    if (
+      state.encounterMode ===
+      "lootLocked"
+    ){
+
+
+      closeUnresolvedRoomToMap();
+
+
+    }
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   TOUCH EVENT CARD
+   ========================================================= */
+
 encounterCard.addEventListener(
 
   "click",
@@ -4541,10 +5033,12 @@ encounterCard.addEventListener(
   () => {
 
 
+    /* SIMPLE EVENT */
+
     if (
       state.encounterMode ===
       "simple"
-    ) {
+    ){
 
 
       completeCurrentRoom();
@@ -4556,13 +5050,136 @@ encounterCard.addEventListener(
     }
 
 
+    /* KEY ROOM */
+
     if (
       state.encounterMode ===
-      "final"
-    ) {
+      "key"
+    ){
+
+
+      const room =
+        state.pendingRoom;
+
+
+      const definition =
+        DEFINITIONS[
+          room
+        ];
+
+
+      grantKey(
+        definition.keySource
+      );
 
 
       completeCurrentRoom();
+
+
+      return;
+
+
+    }
+
+
+    /* CLUE / FINAL */
+
+    if (
+      state.encounterMode ===
+      "final"
+    ){
+
+
+      const room =
+        state.pendingRoom;
+
+
+      if (
+        room ===
+        "A5"
+      ){
+
+
+        grantKey(
+          "A5"
+        );
+
+
+      }
+
+
+      completeCurrentRoom();
+
+
+      return;
+
+
+    }
+
+
+    /* LOOT WITHOUT ENOUGH KEYS */
+
+    if (
+      state.encounterMode ===
+      "lootLocked"
+    ){
+
+
+      showMessage(
+        "NECESITAS 2 TARJETAS LLAVE"
+      );
+
+
+      return;
+
+
+    }
+
+
+    /* OPEN VAULT */
+
+    if (
+      state.encounterMode ===
+      "lootReady"
+    ){
+
+
+      state.encounterMode =
+        "missionFinal";
+
+
+      setEncounterImage(
+        DEFINITIONS.A1.finalCard
+      );
+
+
+      encounterBackButton.style.display =
+        "none";
+
+
+      return;
+
+
+    }
+
+
+    /* MISSION COMPLETE */
+
+    if (
+      state.encounterMode ===
+      "missionFinal"
+    ){
+
+
+      state.rooms.A1.completed =
+        true;
+
+
+      state.rooms.A1.revealed =
+        true;
+
+
+      missionComplete();
 
 
     }
@@ -4575,39 +5192,41 @@ encounterCard.addEventListener(
 
 
 /* =========================================================
-   HABITACIONES
+   ROOM MOVEMENT
+
+   El oxígeno se descuenta al SALIR
+   de una habitación.
+
+   Excepción:
+   entrar a A1 con 2+ llaves no cuesta O2.
    ========================================================= */
 
 function handleRoomClick(
-  roomName
-) {
-
-
-  const room =
-    state.rooms[
-      roomName
-    ];
+  room
+){
 
 
   if (
-    !room
-  ) {
-
-
+    state.gameLocked
+    ||
+    state.ended
+    ||
+    encounter.classList.contains(
+      "show"
+    )
+  ){
     return;
-
-
   }
 
 
   if (
-    state.currentRoom ===
-    roomName
-  ) {
+    room ===
+    state.currentRoom
+  ){
 
 
     showMessage(
-      "ESTÁS EN<br>ESTA SALA"
+      "ESTÁS EN ESTA SALA"
     );
 
 
@@ -4618,10 +5237,15 @@ function handleRoomClick(
 
 
   if (
-    !roomIsAdjacent(
-      roomName
+    !isAdjacent(
+      room
     )
-  ) {
+  ){
+
+
+    showMessage(
+      "SOLO PUEDES IR A UNA SALA ALEDAÑA"
+    );
 
 
     return;
@@ -4630,16 +5254,76 @@ function handleRoomClick(
   }
 
 
+  /*
+    Si el escáner está activo,
+    el primer toque revela.
+  */
+
   if (
-    room.completed
-  ) {
+    state.scannerActive
+    &&
+    !state.rooms[
+      room
+    ].revealed
+  ){
+
+
+    revealRoom(
+      room
+    );
+
+
+    return;
+
+
+  }
+
+
+  /*
+    Cobro de oxígeno al abandonar
+    la habitación actual.
+  */
+
+  if (
+    shouldChargeMove(
+      room
+    )
+  ){
+
+
+    const alive =
+      consumeOxygen(
+        7.5
+      );
+
+
+    if (
+      !alive
+    ){
+      return;
+    }
+
+
+  }
+
+
+  /*
+    Si la sala ya se resolvió,
+    solo nos movemos.
+  */
+
+  if (
+    state.rooms[
+      room
+    ].completed
+  ){
 
 
     turnOffScanner();
 
 
     moveToRoom(
-      roomName
+      room
     );
 
 
@@ -4649,26 +5333,12 @@ function handleRoomClick(
   }
 
 
-  if (
-    state.scannerActive
-    &&
-    !room.revealed
-  ) {
-
-
-    revealRoom(
-      roomName
-    );
-
-
-    return;
-
-
-  }
-
+  /*
+    Sala todavía no resuelta.
+  */
 
   openEncounter(
-    roomName
+    room
   );
 
 
@@ -4676,41 +5346,102 @@ function handleRoomClick(
 
 
 
-[
-  "A12",
-  "B5",
-  "B6",
-  "B7"
-]
-.forEach(
-  room => {
+/* =========================================================
+   END STATES
+   ========================================================= */
+
+function triggerGameOver(){
 
 
-    document
-      .getElementById(
-        `room${room}`
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-
-          handleRoomClick(
-            room
-          );
-
-
-        }
-      );
-
-
+  if (
+    state.ended
+  ){
+    return;
   }
-);
+
+
+  state.ended =
+    true;
+
+
+  state.gameLocked =
+    true;
+
+
+  turnOffScanner();
+
+
+  encounter.classList.remove(
+    "show"
+  );
+
+
+  gameOverSound();
+
+
+  endOverlay.className =
+    "show gameover";
+
+
+  endTitle.textContent =
+    "GAME OVER";
+
+
+  endSubtitle.textContent =
+    "Te has quedado sin oxígeno.";
+
+
+}
+
+
+
+function missionComplete(){
+
+
+  if (
+    state.ended
+  ){
+    return;
+  }
+
+
+  state.ended =
+    true;
+
+
+  state.gameLocked =
+    true;
+
+
+  turnOffScanner();
+
+
+  encounter.classList.remove(
+    "show"
+  );
+
+
+  missionSound();
+
+
+  endOverlay.className =
+    "show mission";
+
+
+  endTitle.textContent =
+    "MISIÓN CUMPLIDA";
+
+
+  endSubtitle.textContent =
+    "Has abierto la bóveda y recuperado el botín.";
+
+
+}
 
 
 
 /* =========================================================
-   EVITAR DOBLE ZOOM
+   MOBILE DOUBLE-ZOOM GUARD
    ========================================================= */
 
 let lastTouchEnd =
@@ -4734,7 +5465,7 @@ document.addEventListener(
       lastTouchEnd
       <=
       300
-    ) {
+    ){
 
 
       event.preventDefault();
@@ -4754,7 +5485,6 @@ document.addEventListener(
   }
 
 );
-
 
 </script>
 
