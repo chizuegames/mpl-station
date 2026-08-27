@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>MPL - Estación Espacial</title>
 
 <style>
+
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent
+  -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   width:100%;
@@ -19,22 +22,22 @@ html,body{
   background:#050713;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
-  touch-action:manipulation
+  touch-action:manipulation;
 }
 
 body{
   display:flex;
   justify-content:center;
-  align-items:flex-start
+  align-items:flex-start;
 }
 
 img{
   user-select:none;
-  -webkit-user-drag:none
+  -webkit-user-drag:none;
 }
 
 button{
-  font-family:inherit
+  font-family:inherit;
 }
 
 
@@ -47,29 +50,29 @@ button{
   width:min(100vw,760px);
   margin:0 auto;
   background:#050713;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .intro-page{
   display:none;
   position:relative;
   width:100%;
-  animation:introFade .28s ease
+  animation:introFade .28s ease;
 }
 
 .intro-page.active{
-  display:block
+  display:block;
 }
 
 .intro-image,
 .dock-base{
   display:block;
   width:100%;
-  height:auto
+  height:auto;
 }
 
 #introPage1{
-  cursor:pointer
+  cursor:pointer;
 }
 
 #acceptMissionButton{
@@ -78,89 +81,151 @@ button{
   bottom:4.5%;
   transform:translateX(-50%);
   z-index:10;
+
   min-width:180px;
   padding:14px 28px;
+
   border:3px solid #ffc164;
   border-radius:18px;
+
   background:rgba(190,92,0,.93);
   color:#fff;
+
   font-size:clamp(19px,4vw,28px);
   font-weight:900;
   letter-spacing:.8px;
+
   cursor:pointer;
+
   box-shadow:
     0 0 0 3px rgba(0,0,0,.45),
-    0 0 22px rgba(255,142,22,.65)
+    0 0 22px rgba(255,142,22,.65);
 }
 
 #acceptMissionButton:active{
-  transform:translateX(-50%) scale(.96)
+  transform:translateX(-50%) scale(.96);
 }
+
+
+/* =========================================================
+   DOCKING
+   ========================================================= */
 
 #dockScene{
   position:relative;
   width:100%;
   overflow:hidden;
-  background:#050713
+  background:#050713;
 }
 
 #dockShip{
   position:absolute;
+
   left:50%;
   top:111%;
+
   width:25%;
   height:auto;
+
   transform:translate(-50%,-50%);
-  filter:drop-shadow(0 0 14px rgba(255,139,30,.6));
+
+  filter:
+    drop-shadow(
+      0 0 14px
+      rgba(255,139,30,.6)
+    );
+
   z-index:5;
-  opacity:1
+
+  opacity:1;
 }
 
 #dockShip.docking{
-  animation:dockMove 2.25s cubic-bezier(.25,.75,.25,1) forwards
+  animation:
+    dockMove
+    2.25s
+    cubic-bezier(.25,.75,.25,1)
+    forwards;
 }
 
 #dockFlash{
   position:absolute;
   inset:0;
+
   z-index:8;
+
   background:#fff;
+
   opacity:0;
-  pointer-events:none
+
+  pointer-events:none;
 }
 
 #dockFlash.flash{
-  animation:dockFlash .28s ease
+  animation:
+    dockFlash
+    .28s
+    ease;
 }
 
 @keyframes introFade{
-  from{opacity:0}
-  to{opacity:1}
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
 }
 
 @keyframes dockMove{
+
   0%{
     top:112%;
-    transform:translate(-50%,-50%) scale(.92)
+    transform:
+      translate(-50%,-50%)
+      scale(.92);
   }
+
   22%{
     top:99%;
-    transform:translate(-50%,-50%) scale(.95)
+    transform:
+      translate(-50%,-50%)
+      scale(.95);
   }
+
   70%{
     top:81%;
-    transform:translate(-50%,-50%) scale(.99)
+    transform:
+      translate(-50%,-50%)
+      scale(.99);
   }
+
   100%{
     top:74.6%;
-    transform:translate(-50%,-50%) scale(1)
+    transform:
+      translate(-50%,-50%)
+      scale(1);
   }
+
 }
 
 @keyframes dockFlash{
-  0%{opacity:0}
-  45%{opacity:.35}
-  100%{opacity:0}
+
+  0%{
+    opacity:0;
+  }
+
+  45%{
+    opacity:.35;
+  }
+
+  100%{
+    opacity:0;
+  }
+
 }
 
 
@@ -170,116 +235,180 @@ button{
 
 #game{
   display:none;
+
   position:relative;
+
   width:min(100vw,760px);
+
   margin:0 auto;
+
   overflow:hidden;
+
   background:#050713;
+
   user-select:none;
-  -webkit-user-select:none
+  -webkit-user-select:none;
 }
 
 #map{
   position:relative;
-  width:100%
+  width:100%;
 }
 
 #mapImage{
   display:block;
+
   width:100%;
   height:auto;
-  pointer-events:none
+
+  pointer-events:none;
 }
 
 #roomsLayer,
 #iconsLayer{
   position:absolute;
-  inset:0
+  inset:0;
 }
 
 #roomsLayer{
-  z-index:20
+  z-index:20;
 }
 
 #iconsLayer{
   z-index:30;
-  pointer-events:none
+  pointer-events:none;
 }
 
 .room{
   position:absolute;
-  transform:translate(-50%,-50%);
+
+  transform:
+    translate(-50%,-50%);
+
   cursor:pointer;
+
   background:transparent;
-  border:0
+  border:0;
 }
+
+
+/* =========================================================
+   ICONS
+   ========================================================= */
 
 .map-icon{
   position:absolute;
-  transform:translate(-50%,-50%);
+
+  transform:
+    translate(-50%,-50%);
+
   pointer-events:none;
-  object-fit:contain
+
+  object-fit:contain;
 }
 
 .player-icon{
   width:12.5%;
-  filter:drop-shadow(0 0 8px rgba(255,255,255,.35));
-  animation:pop .3s ease-out
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      rgba(255,255,255,.35)
+    );
+
+  animation:
+    pop
+    .3s
+    ease-out;
 }
 
 .event-icon{
   width:11.5%;
-  animation:pop .3s ease-out
+
+  animation:
+    pop
+    .3s
+    ease-out;
 }
 
 .check-icon{
   width:10%;
-  animation:pop .3s ease-out
+
+  animation:
+    pop
+    .3s
+    ease-out;
 }
 
 .scanner-wave{
   width:8.5%;
-  animation:waveGlow 1s infinite ease-in-out
+
+  animation:
+    waveGlow
+    1s
+    infinite
+    ease-in-out;
 }
 
 .dir-up{
-  transform:translate(-50%,-50%) rotate(0deg)
+  transform:
+    translate(-50%,-50%)
+    rotate(0deg);
 }
 
 .dir-right{
-  transform:translate(-50%,-50%) rotate(90deg)
+  transform:
+    translate(-50%,-50%)
+    rotate(90deg);
 }
 
 .dir-left{
-  transform:translate(-50%,-50%) rotate(-90deg)
+  transform:
+    translate(-50%,-50%)
+    rotate(-90deg);
 }
 
 .dir-down{
-  transform:translate(-50%,-50%) rotate(180deg)
+  transform:
+    translate(-50%,-50%)
+    rotate(180deg);
 }
 
 @keyframes pop{
+
   from{
     opacity:0;
-    scale:.35
+    scale:.35;
   }
+
   to{
     opacity:1;
-    scale:1
+    scale:1;
   }
+
 }
 
 @keyframes waveGlow{
-  0%,100%{
+
+  0%,
+  100%{
     opacity:.58;
-    filter:brightness(.95)
+
+    filter:
+      brightness(.95);
   }
+
   50%{
     opacity:1;
+
     filter:
       brightness(1.3)
-      drop-shadow(0 0 7px rgba(168,211,54,.65))
+      drop-shadow(
+        0 0 7px
+        rgba(168,211,54,.65)
+      );
   }
+
 }
 
 
@@ -289,81 +418,139 @@ button{
 
 #scannerButton{
   position:absolute;
+
   left:36%;
   top:88.4%;
+
   width:28%;
   height:10.8%;
+
   z-index:40;
+
   cursor:pointer;
+
   background:transparent;
-  border:0
+  border:0;
 }
 
 #scannerButton.scanner-on{
-  filter:drop-shadow(0 0 12px #a8d336)
+  filter:
+    drop-shadow(
+      0 0 12px
+      #a8d336
+    );
 }
 
 #useObjectButton{
   position:absolute;
+
   left:77%;
   top:5.2%;
+
   width:20%;
   height:18%;
+
   z-index:40;
+
   cursor:pointer;
+
   background:transparent;
-  border:0
+  border:0;
 }
 
 #musicButton{
   position:absolute;
+
   left:2.2%;
   bottom:1.3%;
+
   z-index:60;
+
   width:44px;
   height:44px;
-  border:2px solid rgba(255,255,255,.8);
+
+  border:
+    2px solid
+    rgba(255,255,255,.8);
+
   border-radius:50%;
-  background:rgba(10,15,20,.76);
+
+  background:
+    rgba(10,15,20,.76);
+
   color:#fff;
+
   font-size:20px;
   font-weight:900;
+
   cursor:pointer;
-  box-shadow:0 0 10px rgba(0,0,0,.5)
+
+  box-shadow:
+    0 0 10px
+    rgba(0,0,0,.5);
 }
 
 #musicButton.music-on{
   box-shadow:
     0 0 0 2px rgba(0,0,0,.4),
-    0 0 15px rgba(168,211,54,.65)
+    0 0 15px rgba(168,211,54,.65);
 }
+
+
+/* =========================================================
+   OXYGEN COUNTER
+   ========================================================= */
 
 #oxygenCounter{
   position:absolute;
+
   left:5.1%;
   top:23.2%;
+
   width:12.4%;
+
   z-index:55;
-  padding:5px 3px;
+
+  padding:
+    5px
+    3px;
+
   border-radius:10px;
-  background:rgba(9,13,18,.78);
-  border:2px solid rgba(255,255,255,.72);
+
+  background:
+    rgba(9,13,18,.78);
+
+  border:
+    2px solid
+    rgba(255,255,255,.72);
+
   color:#fff;
+
   text-align:center;
-  font-size:clamp(13px,2.9vw,23px);
+
+  font-size:
+    clamp(
+      13px,
+      2.9vw,
+      23px
+    );
+
   font-weight:900;
-  text-shadow:1px 2px 2px #000;
-  pointer-events:none
+
+  text-shadow:
+    1px 2px 2px #000;
+
+  pointer-events:none;
 }
 
 #oxygenCounter.phase60{
   border-color:#ff9140;
-  color:#ffb176
+  color:#ffb176;
 }
 
 #oxygenCounter.phase20{
   border-color:#ff4141;
-  color:#ff7777
+  color:#ff7777;
 }
 
 
@@ -373,49 +560,85 @@ button{
 
 #tutorialOverlay{
   position:fixed;
+
   inset:0;
+
   z-index:150;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:20px;
-  background:rgba(0,0,0,.62)
+
+  background:
+    rgba(0,0,0,.62);
 }
 
 #tutorialOverlay.show{
-  display:flex
+  display:flex;
 }
 
 #tutorialPanel{
   width:min(88vw,620px);
-  padding:24px 22px;
+
+  padding:
+    24px
+    22px;
+
   border-radius:20px;
-  background:rgba(19,22,27,.97);
-  border:3px solid #a8d336;
+
+  background:
+    rgba(19,22,27,.97);
+
+  border:
+    3px solid
+    #a8d336;
+
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
     0 0 26px rgba(168,211,54,.35);
+
   text-align:center;
-  color:#fff
+
+  color:#fff;
 }
 
 #tutorialText{
-  font-size:clamp(20px,4vw,31px);
+  font-size:
+    clamp(
+      20px,
+      4vw,
+      31px
+    );
+
   font-weight:800;
+
   line-height:1.25;
-  margin-bottom:20px
+
+  margin-bottom:20px;
 }
 
 #tutorialNext{
   min-width:150px;
-  padding:11px 22px;
+
+  padding:
+    11px
+    22px;
+
   border:0;
+
   border-radius:14px;
+
   background:#a8d336;
+
   color:#111;
+
   font-size:18px;
   font-weight:900;
-  cursor:pointer
+
+  cursor:pointer;
 }
 
 
@@ -425,122 +648,212 @@ button{
 
 #encounter{
   position:fixed;
+
   inset:0;
+
   z-index:120;
+
   display:flex;
+
   justify-content:center;
   align-items:center;
+
   padding:12px;
-  background:rgba(0,0,0,.66);
+
+  background:
+    rgba(0,0,0,.66);
+
   opacity:0;
+
   visibility:hidden;
-  transform:scale(.96);
+
+  transform:
+    scale(.96);
+
   transition:
     opacity .18s ease,
-    transform .18s ease
+    transform .18s ease;
 }
 
 #encounter.show{
   opacity:1;
+
   visibility:visible;
-  transform:scale(1)
+
+  transform:
+    scale(1);
 }
 
 #encounterCard{
   position:relative;
-  width:min(82vw,650px);
+
+  width:
+    min(
+      82vw,
+      650px
+    );
+
   max-height:94vh;
-  cursor:default
+
+  cursor:default;
 }
 
 #encounterImage{
   display:block;
+
   width:100%;
   height:auto;
+
   max-height:94vh;
+
   object-fit:contain;
-  pointer-events:none
+
+  pointer-events:none;
 }
+
+
+/* =========================================================
+   ATTACK ZONES
+   ========================================================= */
 
 .attack-zone{
   position:absolute;
+
   z-index:125;
+
   border:0;
+
   background:transparent;
+
   cursor:pointer;
-  display:none
+
+  display:none;
 }
 
 #gunButton{
   left:6%;
   top:51%;
+
   width:35%;
-  height:27%
+  height:27%;
 }
 
 #fistButton{
   left:62%;
   top:51%;
+
   width:35%;
-  height:27%
+  height:27%;
 }
 
 
-/* SOLO NÚMERO, SIN CÍRCULO */
+/* =========================================================
+   ENEMY HP
+   SOLO NÚMERO
+   ========================================================= */
 
 #enemyHp{
   position:absolute;
+
   z-index:130;
+
   left:82%;
   top:12.5%;
-  transform:translate(-50%,-50%);
+
+  transform:
+    translate(-50%,-50%);
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   background:transparent;
+
   border:0;
+
   color:#fff;
-  font-size:clamp(25px,6vw,38px);
+
+  font-size:
+    clamp(
+      25px,
+      6vw,
+      38px
+    );
+
   font-weight:1000;
+
   line-height:1;
+
   text-shadow:
     2px 2px 0 #000,
     -2px -2px 0 #000,
     0 0 5px #000;
-  pointer-events:none
+
+  pointer-events:none;
 }
 
 #encounterCard.combat #gunButton,
 #encounterCard.combat #fistButton,
 #encounterCard.combat #enemyHp{
-  display:flex
+  display:flex;
 }
 
 #encounterBackButton{
   display:none;
+
   position:absolute;
+
   left:50%;
   bottom:3.5%;
-  transform:translateX(-50%);
+
+  transform:
+    translateX(-50%);
+
   z-index:135;
-  padding:10px 20px;
-  border:2px solid #fff;
+
+  padding:
+    10px
+    20px;
+
+  border:
+    2px solid
+    #fff;
+
   border-radius:14px;
-  background:rgba(20,23,28,.9);
+
+  background:
+    rgba(20,23,28,.9);
+
   color:#fff;
+
   font-size:17px;
   font-weight:900;
-  cursor:pointer
+
+  cursor:pointer;
 }
 
 #encounterCard.hit{
-  animation:cardHit .2s ease
+  animation:
+    cardHit
+    .2s
+    ease;
 }
 
 @keyframes cardHit{
-  0%{transform:scale(1)}
-  45%{transform:scale(.985)}
-  100%{transform:scale(1)}
+
+  0%{
+    transform:scale(1);
+  }
+
+  45%{
+    transform:scale(.985);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
 }
 
 
@@ -550,51 +863,102 @@ button{
 
 #message{
   position:fixed;
+
   left:50%;
   top:44%;
-  transform:translate(-50%,-50%) scale(.8);
+
+  transform:
+    translate(-50%,-50%)
+    scale(.8);
+
   z-index:210;
+
   min-width:240px;
   max-width:85vw;
-  padding:17px 25px;
+
+  padding:
+    17px
+    25px;
+
   border-radius:18px;
-  background:rgba(15,18,22,.96);
-  border:3px solid #a8d336;
+
+  background:
+    rgba(15,18,22,.96);
+
+  border:
+    3px solid
+    #a8d336;
+
   color:#fff;
-  font-size:clamp(19px,4.3vw,33px);
+
+  font-size:
+    clamp(
+      19px,
+      4.3vw,
+      33px
+    );
+
   font-weight:900;
+
   line-height:1.15;
+
   text-align:center;
+
   opacity:0;
+
   visibility:hidden;
+
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
     0 0 25px rgba(168,211,54,.45);
-  pointer-events:none
+
+  pointer-events:none;
 }
 
 #message.show{
   visibility:visible;
-  animation:messageAnimation 1.4s ease forwards
+
+  animation:
+    messageAnimation
+    1.4s
+    ease
+    forwards;
 }
 
 @keyframes messageAnimation{
+
   0%{
     opacity:0;
-    transform:translate(-50%,-20%) scale(.7)
+
+    transform:
+      translate(-50%,-20%)
+      scale(.7);
   }
+
   18%{
     opacity:1;
-    transform:translate(-50%,-50%) scale(1.06)
+
+    transform:
+      translate(-50%,-50%)
+      scale(1.06);
   }
+
   72%{
     opacity:1;
-    transform:translate(-50%,-60%) scale(1)
+
+    transform:
+      translate(-50%,-60%)
+      scale(1);
   }
+
   100%{
     opacity:0;
-    transform:translate(-50%,-95%) scale(.95)
+
+    transform:
+      translate(-50%,-95%)
+      scale(.95);
   }
+
 }
 
 
@@ -604,61 +968,108 @@ button{
 
 #endOverlay{
   position:fixed;
+
   inset:0;
+
   z-index:300;
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   padding:20px;
-  background:rgba(3,5,12,.95)
+
+  background:
+    rgba(3,5,12,.95);
 }
 
 #endOverlay.show{
-  display:flex
+  display:flex;
 }
 
 #endPanel{
   width:min(88vw,640px);
-  padding:36px 25px;
+
+  padding:
+    36px
+    25px;
+
   border-radius:24px;
-  background:rgba(17,20,25,.96);
-  border:4px solid #fff;
+
+  background:
+    rgba(17,20,25,.96);
+
+  border:
+    4px solid
+    #fff;
+
   text-align:center;
-  box-shadow:0 0 35px rgba(255,255,255,.18)
+
+  box-shadow:
+    0 0 35px
+    rgba(255,255,255,.18);
 }
 
 #endTitle{
-  margin:0 0 14px;
+  margin:
+    0
+    0
+    14px;
+
   color:#fff;
-  font-size:clamp(40px,9vw,72px);
+
+  font-size:
+    clamp(
+      40px,
+      9vw,
+      72px
+    );
+
   font-weight:1000;
-  letter-spacing:1px
+
+  letter-spacing:1px;
 }
 
 #endSubtitle{
   margin:0;
+
   color:#ddd;
-  font-size:clamp(18px,4vw,28px);
+
+  font-size:
+    clamp(
+      18px,
+      4vw,
+      28px
+    );
+
   font-weight:700;
-  line-height:1.25
+
+  line-height:1.25;
 }
 
 #endOverlay.mission #endPanel{
   border-color:#a8d336;
-  box-shadow:0 0 36px rgba(168,211,54,.38)
+
+  box-shadow:
+    0 0 36px
+    rgba(168,211,54,.38);
 }
 
 #endOverlay.mission #endTitle{
-  color:#b9e84a
+  color:#b9e84a;
 }
 
 #endOverlay.gameover #endPanel{
   border-color:#ff4141;
-  box-shadow:0 0 36px rgba(255,65,65,.4)
+
+  box-shadow:
+    0 0 36px
+    rgba(255,65,65,.4);
 }
 
 #endOverlay.gameover #endTitle{
-  color:#ff5959
+  color:#ff5959;
 }
 
 
@@ -666,13 +1077,17 @@ button{
 
   #acceptMissionButton{
     min-width:145px;
-    padding:11px 20px
+
+    padding:
+      11px
+      20px;
   }
 
   #musicButton{
     width:39px;
     height:39px;
-    font-size:17px
+
+    font-size:17px;
   }
 
 }
@@ -680,13 +1095,18 @@ button{
 @media(min-width:900px){
 
   #encounterCard{
-    width:min(58vh,610px)
+    width:
+      min(
+        58vh,
+        610px
+      );
   }
 
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -697,7 +1117,11 @@ button{
 
 <div id="introOverlay">
 
-  <section id="introPage1" class="intro-page active">
+
+  <section
+    id="introPage1"
+    class="intro-page active"
+  >
 
     <img
       class="intro-image"
@@ -708,13 +1132,17 @@ button{
   </section>
 
 
-  <section id="introPage2" class="intro-page">
+  <section
+    id="introPage2"
+    class="intro-page"
+  >
 
     <img
       class="intro-image"
       src="M01b.png"
       alt="Nueva misión"
     >
+
 
     <button
       id="acceptMissionButton"
@@ -726,9 +1154,13 @@ button{
   </section>
 
 
-  <section id="dockPage" class="intro-page">
+  <section
+    id="dockPage"
+    class="intro-page"
+  >
 
     <div id="dockScene">
+
 
       <img
         id="dockBaseImage"
@@ -737,17 +1169,21 @@ button{
         alt="Estación espacial"
       >
 
+
       <img
         id="dockShip"
         src="NvAstra.png"
         alt="Nave de Astra"
       >
 
+
       <div id="dockFlash"></div>
+
 
     </div>
 
   </section>
+
 
 </div>
 
@@ -761,6 +1197,7 @@ button{
 
   <div id="map">
 
+
     <img
       id="mapImage"
       src="MIc100.png"
@@ -768,9 +1205,12 @@ button{
       draggable="false"
     >
 
+
     <div id="roomsLayer"></div>
 
+
     <div id="iconsLayer"></div>
+
 
     <button
       id="scannerButton"
@@ -778,11 +1218,13 @@ button{
       aria-label="Escáner"
     ></button>
 
+
     <button
       id="useObjectButton"
       type="button"
       aria-label="Usar objeto"
     ></button>
+
 
     <button
       id="musicButton"
@@ -792,9 +1234,11 @@ button{
       ♫
     </button>
 
+
     <div id="oxygenCounter">
       100%
     </div>
+
 
   </div>
 
@@ -806,19 +1250,31 @@ button{
      AUDIO
      ========================================================= -->
 
-<audio id="introMusic" loop preload="auto">
+<audio
+  id="introMusic"
+  loop
+  preload="auto"
+>
+
   <source
     src="Echoes in the Subway.mp3"
     type="audio/mpeg"
   >
+
 </audio>
 
 
-<audio id="bgMusic" loop preload="auto">
+<audio
+  id="bgMusic"
+  loop
+  preload="auto"
+>
+
   <source
     src="Bitácotas Espaciales.mp3"
     type="audio/mpeg"
   >
+
 </audio>
 
 
@@ -831,7 +1287,9 @@ button{
 
   <div id="tutorialPanel">
 
+
     <div id="tutorialText"></div>
+
 
     <button
       id="tutorialNext"
@@ -839,6 +1297,7 @@ button{
     >
       SIGUIENTE
     </button>
+
 
   </div>
 
@@ -854,6 +1313,7 @@ button{
 
   <div id="encounterCard">
 
+
     <img
       id="encounterImage"
       src=""
@@ -861,10 +1321,12 @@ button{
       draggable="false"
     >
 
+
     <div
       id="enemyHp"
       aria-live="polite"
     ></div>
+
 
     <button
       id="gunButton"
@@ -873,6 +1335,7 @@ button{
       aria-label="Disparar"
     ></button>
 
+
     <button
       id="fistButton"
       class="attack-zone"
@@ -880,12 +1343,14 @@ button{
       aria-label="Golpear"
     ></button>
 
+
     <button
       id="encounterBackButton"
       type="button"
     >
       VOLVER AL MAPA
     </button>
+
 
   </div>
 
@@ -905,9 +1370,12 @@ button{
 
   <div id="endPanel">
 
+
     <h1 id="endTitle"></h1>
 
+
     <p id="endSubtitle"></p>
+
 
   </div>
 
@@ -924,19 +1392,38 @@ button{
 
 const ASSETS = {
 
-  introIncoming:"M01a.png",
-  introMission:"M01b.png",
-  stationOnly:"MIa.png",
-  dockedStation:"MIb.png",
-  playerShip:"NvAstra.png",
+  introIncoming:
+    "M01a.png",
 
-  map100:"MIc100.png",
-  map60:"MIc60.png",
-  map20:"MIc20.png",
+  introMission:
+    "M01b.png",
 
-  playerIcon:"IcoAstra.png",
-  scannerWave:"Esc1.png",
-  check:"icocheck.png"
+  stationOnly:
+    "MIa.png",
+
+  dockedStation:
+    "MIb.png",
+
+  playerShip:
+    "NvAstra.png",
+
+  map100:
+    "MIc100.png",
+
+  map60:
+    "MIc60.png",
+
+  map20:
+    "MIc20.png",
+
+  playerIcon:
+    "IcoAstra.png",
+
+  scannerWave:
+    "Esc1.png",
+
+  check:
+    "icocheck.png"
 
 };
 
@@ -948,34 +1435,145 @@ const ASSETS = {
 
 const ROOM_LAYOUT = {
 
-  A1:{x:33.5,y:17.9},
-  A2:{x:50.8,y:17.9},
-  A3:{x:68.1,y:17.9},
 
-  B1:{x:50.8,y:27.2},
+  A1:{
+    x:33.5,
+    y:17.9
+  },
 
-  A4:{x:33.5,y:37.9},
-  B2:{x:50.8,y:37.9},
-  A5:{x:68.1,y:37.9},
 
-  A6:{x:16.4,y:47.8},
-  B3:{x:33.5,y:47.8},
-  A7:{x:50.8,y:47.8},
-  B4:{x:68.1,y:47.8},
-  A8:{x:85.2,y:47.8},
+  A2:{
+    x:50.8,
+    y:17.9
+  },
 
-  A9:{x:16.4,y:57.6},
-  B5:{x:50.8,y:57.6},
-  A10:{x:85.2,y:57.6},
 
-  A11:{x:16.4,y:67.6},
-  B6:{x:33.5,y:67.6},
-  A12:{x:50.8,y:67.6},
-  B7:{x:68.1,y:67.6},
-  A13:{x:85.2,y:67.6},
+  A3:{
+    x:68.1,
+    y:17.9
+  },
 
-  A14:{x:16.4,y:77.5},
-  A15:{x:85.2,y:77.5}
+
+  B1:{
+    x:50.8,
+    y:27.2
+  },
+
+
+  /*
+    A4 ahora contiene la TARJETA LLAVE.
+  */
+
+  A4:{
+    x:33.5,
+    y:37.9
+  },
+
+
+  B2:{
+    x:50.8,
+    y:37.9
+  },
+
+
+  A5:{
+    x:68.1,
+    y:37.9
+  },
+
+
+  A6:{
+    x:16.4,
+    y:47.8
+  },
+
+
+  B3:{
+    x:33.5,
+    y:47.8
+  },
+
+
+  A7:{
+    x:50.8,
+    y:47.8
+  },
+
+
+  B4:{
+    x:68.1,
+    y:47.8
+  },
+
+
+  A8:{
+    x:85.2,
+    y:47.8
+  },
+
+
+  A9:{
+    x:16.4,
+    y:57.6
+  },
+
+
+  B5:{
+    x:50.8,
+    y:57.6
+  },
+
+
+  A10:{
+    x:85.2,
+    y:57.6
+  },
+
+
+  A11:{
+    x:16.4,
+    y:67.6
+  },
+
+
+  B6:{
+    x:33.5,
+    y:67.6
+  },
+
+
+  A12:{
+    x:50.8,
+    y:67.6
+  },
+
+
+  B7:{
+    x:68.1,
+    y:67.6
+  },
+
+
+  A13:{
+    x:85.2,
+    y:67.6
+  },
+
+
+  A14:{
+    x:16.4,
+    y:77.5
+  },
+
+
+  /*
+    A15 ahora contiene VIDA.
+  */
+
+  A15:{
+    x:85.2,
+    y:77.5
+  }
 
 };
 
@@ -987,9 +1585,16 @@ const ROOM_LAYOUT = {
 
 const GRAPH = {
 
-  ENTRADA:["A12"],
 
-  A1:["A2"],
+  ENTRADA:[
+    "A12"
+  ],
+
+
+  A1:[
+    "A2"
+  ],
+
 
   A2:[
     "A1",
@@ -997,17 +1602,23 @@ const GRAPH = {
     "B1"
   ],
 
-  A3:["A2"],
+
+  A3:[
+    "A2"
+  ],
+
 
   B1:[
     "A2",
     "B2"
   ],
 
+
   A4:[
     "B2",
     "B3"
   ],
+
 
   B2:[
     "B1",
@@ -1016,15 +1627,18 @@ const GRAPH = {
     "A7"
   ],
 
+
   A5:[
     "B2",
     "B4"
   ],
 
+
   A6:[
     "B3",
     "A9"
   ],
+
 
   B3:[
     "A4",
@@ -1033,12 +1647,14 @@ const GRAPH = {
     "B6"
   ],
 
+
   A7:[
     "B2",
     "B3",
     "B4",
     "B5"
   ],
+
 
   B4:[
     "A5",
@@ -1047,25 +1663,30 @@ const GRAPH = {
     "B7"
   ],
 
+
   A8:[
     "B4",
     "A10"
   ],
+
 
   A9:[
     "A6",
     "A11"
   ],
 
+
   B5:[
     "A7",
     "A12"
   ],
 
+
   A10:[
     "A8",
     "A13"
   ],
+
 
   A11:[
     "A9",
@@ -1073,11 +1694,13 @@ const GRAPH = {
     "A14"
   ],
 
+
   B6:[
     "B3",
     "A11",
     "A12"
   ],
+
 
   A12:[
     "B5",
@@ -1085,11 +1708,13 @@ const GRAPH = {
     "B7"
   ],
 
+
   B7:[
     "B4",
     "A12",
     "A13"
   ],
+
 
   A13:[
     "A10",
@@ -1097,9 +1722,15 @@ const GRAPH = {
     "A15"
   ],
 
-  A14:["A11"],
 
-  A15:["A13"]
+  A14:[
+    "A11"
+  ],
+
+
+  A15:[
+    "A13"
+  ]
 
 };
 
@@ -1113,51 +1744,109 @@ const DEFINITIONS = {
 
 
   A1:{
-    type:"loot",
-    label:"SALA DEL BOTÍN",
-    card:"A1E.png",
-    finalCard:"A1F.png",
-    icon:"ICOBT.png"
+
+    type:
+      "loot",
+
+    label:
+      "SALA DEL BOTÍN",
+
+    card:
+      "A1E.png",
+
+    finalCard:
+      "A1F.png",
+
+    icon:
+      "ICOBT.png"
+
   },
 
 
   A2:{
-    type:"combat",
-    label:"MARCIANO VERDE",
-    card:"A2E.png",
-    finalCard:"A2F.png",
-    icon:"ICOMV.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO VERDE",
+
+    card:
+      "A2E.png",
+
+    finalCard:
+      "A2F.png",
+
+    icon:
+      "ICOMV.png",
 
     hp:{
       100:2,
       60:3,
       20:3
     }
+
   },
 
 
   A3:{
-    type:"simple",
-    label:"CAJA DE OBJETO",
-    card:"CJO.png",
-    icon:"ICOCO.png"
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
   },
 
 
+  /*
+    CAMBIO:
+    A4 ahora es tarjeta llave.
+  */
+
   A4:{
-    type:"simple",
-    label:"RECUPERAR VIDA",
-    card:"SDV.png",
-    icon:"ICOV.png"
+
+    type:
+      "key",
+
+    label:
+      "TARJETA LLAVE",
+
+    card:
+      "TLL.png",
+
+    icon:
+      "ICOTL.png",
+
+    keySource:
+      "A4"
+
   },
 
 
   A5:{
-    type:"combat",
-    label:"MARCIANO ROJO",
-    card:"A5E.png",
-    finalCard:"A5F.png",
-    icon:"ICOMR.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO ROJO",
+
+    card:
+      "A5E.png",
+
+    finalCard:
+      "A5F.png",
+
+    icon:
+      "ICOMR.png",
 
     hp:{
       100:4,
@@ -1165,193 +1854,366 @@ const DEFINITIONS = {
       20:6
     },
 
-    specialKey:true
+    specialKey:
+      true
+
   },
 
 
   A6:{
-    type:"key",
-    label:"TARJETA LLAVE",
-    card:"TLL.png",
-    icon:"ICOTL.png",
-    keySource:"A6"
+
+    type:
+      "key",
+
+    label:
+      "TARJETA LLAVE",
+
+    card:
+      "TLL.png",
+
+    icon:
+      "ICOTL.png",
+
+    keySource:
+      "A6"
+
   },
 
 
   A7:{
-    type:"combat",
-    label:"MARCIANO MORADO",
-    card:"A7E.png",
-    finalCard:"A7F.png",
-    icon:"ICOMM.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO MORADO",
+
+    card:
+      "A7E.png",
+
+    finalCard:
+      "A7F.png",
+
+    icon:
+      "ICOMM.png",
 
     hp:{
       100:2,
       60:2,
       20:3
     }
+
   },
 
 
   A8:{
-    type:"simple",
-    label:"CAJA DE OBJETO",
-    card:"CJO.png",
-    icon:"ICOCO.png"
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
   },
 
 
   A9:{
-    type:"combat",
-    label:"MARCIANO MORADO",
-    card:"A9E.png",
-    finalCard:"A9F.png",
-    icon:"ICOMM.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO MORADO",
+
+    card:
+      "A9E.png",
+
+    finalCard:
+      "A9F.png",
+
+    icon:
+      "ICOMM.png",
 
     hp:{
       100:2,
       60:2,
       20:3
     }
+
   },
 
 
   A10:{
-    type:"simple",
-    label:"TRAMPA DE VIDA",
-    card:"TRV.png",
-    icon:"ICOTR.png"
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE VIDA",
+
+    card:
+      "TRV.png",
+
+    icon:
+      "ICOTR.png"
+
   },
 
 
   A11:{
-    type:"simple",
-    label:"TRAMPA DE ENERGÍA",
-    card:"TRE.png",
-    icon:"ICOTR.png"
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE ENERGÍA",
+
+    card:
+      "TRE.png",
+
+    icon:
+      "ICOTR.png"
+
   },
 
 
   A12:{
-    type:"combat",
-    label:"MARCIANO VERDE",
-    card:"A12E.png",
-    finalCard:"A12F.png",
-    icon:"ICOMV.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO VERDE",
+
+    card:
+      "A12E.png",
+
+    finalCard:
+      "A12F.png",
+
+    icon:
+      "ICOMV.png",
 
     hp:{
       100:1,
       60:1,
       20:2
     }
+
   },
 
 
   A13:{
-    type:"combat",
-    label:"MARCIANO VERDE",
-    card:"A13E.png",
-    icon:"ICOMV.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO VERDE",
+
+    card:
+      "A13E.png",
+
+    icon:
+      "ICOMV.png",
 
     hp:{
       100:1,
       60:1,
       20:2
     }
+
   },
 
 
   A14:{
-    type:"simple",
-    label:"CAJA DE OBJETO",
-    card:"CJO.png",
-    icon:"ICOCO.png"
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
   },
 
 
+  /*
+    CAMBIO:
+    A15 ahora es vida.
+  */
+
   A15:{
-    type:"key",
-    label:"TARJETA LLAVE",
-    card:"TLL.png",
-    icon:"ICOTL.png",
-    keySource:"A15"
+
+    type:
+      "simple",
+
+    label:
+      "RECUPERAR VIDA",
+
+    card:
+      "SDV.png",
+
+    icon:
+      "ICOV.png"
+
   },
 
 
   B1:{
-    type:"simple",
-    label:"TRAMPA DE ENERGÍA",
-    card:"TRE.png",
-    icon:"ICOTR.png"
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE ENERGÍA",
+
+    card:
+      "TRE.png",
+
+    icon:
+      "ICOTR.png"
+
   },
 
 
   B2:{
-    type:"simple",
-    label:"TRAMPA DE VIDA",
-    card:"TRV.png",
-    icon:"ICOTR.png"
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE VIDA",
+
+    card:
+      "TRV.png",
+
+    icon:
+      "ICOTR.png"
+
   },
 
 
   B3:{
-    type:"simple",
-    label:"CAJA DE OBJETO",
-    card:"CJO.png",
-    icon:"ICOCO.png"
+
+    type:
+      "simple",
+
+    label:
+      "CAJA DE OBJETO",
+
+    card:
+      "CJO.png",
+
+    icon:
+      "ICOCO.png"
+
   },
 
 
   B4:{
-    type:"simple",
-    label:"RECUPERAR VIDA",
-    card:"SDV.png",
-    icon:"ICOV.png"
+
+    type:
+      "simple",
+
+    label:
+      "RECUPERAR VIDA",
+
+    card:
+      "SDV.png",
+
+    icon:
+      "ICOV.png"
+
   },
 
 
   B5:{
-    type:"combat",
-    label:"MARCIANO ROJO",
-    card:"B5E.png",
-    finalCard:"BF5.png",
-    icon:"ICOMR.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO ROJO",
+
+    card:
+      "B5E.png",
+
+    finalCard:
+      "BF5.png",
+
+    icon:
+      "ICOMR.png",
 
     hp:{
       100:3,
       60:4,
       20:4
     }
+
   },
 
 
   B6:{
-    type:"combat",
-    label:"MARCIANO ROJO",
-    card:"B6E.png",
-    finalCard:"BF6.png",
-    icon:"ICOMR.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO ROJO",
+
+    card:
+      "B6E.png",
+
+    finalCard:
+      "BF6.png",
+
+    icon:
+      "ICOMR.png",
 
     hp:{
       100:3,
       60:4,
       20:4
     }
+
   },
 
 
   B7:{
-    type:"combat",
-    label:"MARCIANO MORADO",
-    card:"B7E.png",
-    finalCard:"BF7.png",
-    icon:"ICOMM.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO MORADO",
+
+    card:
+      "B7E.png",
+
+    finalCard:
+      "BF7.png",
+
+    icon:
+      "ICOMM.png",
 
     hp:{
       100:2,
       60:2,
       20:3
     }
+
   }
 
 };
@@ -1364,27 +2226,58 @@ const DEFINITIONS = {
 
 const state = {
 
-  currentRoom:"ENTRADA",
 
-  oxygen:100,
+  currentRoom:
+    "ENTRADA",
 
-  scannerActive:false,
 
-  pendingRoom:null,
+  oxygen:
+    100,
 
-  encounterMode:null,
 
-  combat:null,
+  scannerActive:
+    false,
 
-  gameLocked:true,
 
-  ended:false,
+  pendingRoom:
+    null,
+
+
+  encounterMode:
+    null,
+
+
+  combat:
+    null,
+
+
+  gameLocked:
+    true,
+
+
+  ended:
+    false,
+
+
+  /*
+    Llaves ocultas.
+
+    Ahora las ubicaciones son:
+    - A4
+    - A6
+    - A5 por combate físico
+  */
 
   keySources:{
+
+    A4:false,
+
     A6:false,
-    A15:false,
+
     A5:false
+
   },
+
 
   rooms:{}
 
@@ -1392,15 +2285,32 @@ const state = {
 
 
 
-Object.keys(DEFINITIONS).forEach(room=>{
+Object
+  .keys(
+    DEFINITIONS
+  )
+  .forEach(
+    room => {
 
-  state.rooms[room] = {
-    revealed:false,
-    completed:false,
-    visited:false
-  };
 
-});
+      state.rooms[
+        room
+      ] = {
+
+        revealed:
+          false,
+
+        completed:
+          false,
+
+        visited:
+          false
+
+      };
+
+
+    }
+  );
 
 
 
@@ -1409,112 +2319,192 @@ Object.keys(DEFINITIONS).forEach(room=>{
    ========================================================= */
 
 const introOverlay =
-  document.getElementById("introOverlay");
+  document.getElementById(
+    "introOverlay"
+  );
 
 const introPage1 =
-  document.getElementById("introPage1");
+  document.getElementById(
+    "introPage1"
+  );
 
 const introPage2 =
-  document.getElementById("introPage2");
+  document.getElementById(
+    "introPage2"
+  );
 
 const dockPage =
-  document.getElementById("dockPage");
+  document.getElementById(
+    "dockPage"
+  );
 
 const acceptMissionButton =
-  document.getElementById("acceptMissionButton");
+  document.getElementById(
+    "acceptMissionButton"
+  );
 
 const dockBaseImage =
-  document.getElementById("dockBaseImage");
+  document.getElementById(
+    "dockBaseImage"
+  );
 
 const dockShip =
-  document.getElementById("dockShip");
+  document.getElementById(
+    "dockShip"
+  );
 
 const dockFlash =
-  document.getElementById("dockFlash");
+  document.getElementById(
+    "dockFlash"
+  );
 
 const game =
-  document.getElementById("game");
+  document.getElementById(
+    "game"
+  );
 
 const mapImage =
-  document.getElementById("mapImage");
+  document.getElementById(
+    "mapImage"
+  );
 
 const roomsLayer =
-  document.getElementById("roomsLayer");
+  document.getElementById(
+    "roomsLayer"
+  );
 
 const iconsLayer =
-  document.getElementById("iconsLayer");
+  document.getElementById(
+    "iconsLayer"
+  );
 
 const scannerButton =
-  document.getElementById("scannerButton");
+  document.getElementById(
+    "scannerButton"
+  );
 
 const useObjectButton =
-  document.getElementById("useObjectButton");
+  document.getElementById(
+    "useObjectButton"
+  );
 
 const musicButton =
-  document.getElementById("musicButton");
+  document.getElementById(
+    "musicButton"
+  );
 
 const oxygenCounter =
-  document.getElementById("oxygenCounter");
+  document.getElementById(
+    "oxygenCounter"
+  );
 
 const tutorialOverlay =
-  document.getElementById("tutorialOverlay");
+  document.getElementById(
+    "tutorialOverlay"
+  );
 
 const tutorialText =
-  document.getElementById("tutorialText");
+  document.getElementById(
+    "tutorialText"
+  );
 
 const tutorialNext =
-  document.getElementById("tutorialNext");
+  document.getElementById(
+    "tutorialNext"
+  );
 
 const encounter =
-  document.getElementById("encounter");
+  document.getElementById(
+    "encounter"
+  );
 
 const encounterCard =
-  document.getElementById("encounterCard");
+  document.getElementById(
+    "encounterCard"
+  );
 
 const encounterImage =
-  document.getElementById("encounterImage");
+  document.getElementById(
+    "encounterImage"
+  );
 
 const enemyHp =
-  document.getElementById("enemyHp");
+  document.getElementById(
+    "enemyHp"
+  );
 
 const gunButton =
-  document.getElementById("gunButton");
+  document.getElementById(
+    "gunButton"
+  );
 
 const fistButton =
-  document.getElementById("fistButton");
+  document.getElementById(
+    "fistButton"
+  );
 
 const encounterBackButton =
-  document.getElementById("encounterBackButton");
+  document.getElementById(
+    "encounterBackButton"
+  );
 
 const message =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
 
 const endOverlay =
-  document.getElementById("endOverlay");
+  document.getElementById(
+    "endOverlay"
+  );
 
 const endTitle =
-  document.getElementById("endTitle");
+  document.getElementById(
+    "endTitle"
+  );
 
 const endSubtitle =
-  document.getElementById("endSubtitle");
+  document.getElementById(
+    "endSubtitle"
+  );
 
 const introMusic =
-  document.getElementById("introMusic");
+  document.getElementById(
+    "introMusic"
+  );
 
 const bgMusic =
-  document.getElementById("bgMusic");
+  document.getElementById(
+    "bgMusic"
+  );
 
 
-let messageTimer=null;
-let musicPlaying=false;
-let combatLocked=false;
-let introLocked=false;
-let gameAudioContext=null;
-let tutorialIndex=0;
+
+let messageTimer =
+  null;
+
+let musicPlaying =
+  false;
+
+let combatLocked =
+  false;
+
+let introLocked =
+  false;
+
+let gameAudioContext =
+  null;
+
+let tutorialIndex =
+  0;
 
 
-introMusic.volume=.34;
-bgMusic.volume=.32;
+
+introMusic.volume =
+  .34;
+
+bgMusic.volume =
+  .32;
 
 
 
@@ -1524,36 +2514,81 @@ bgMusic.volume=.32;
 
 function buildRooms(){
 
-  Object.entries(ROOM_LAYOUT).forEach(([room,pos])=>{
 
-    const button=
-      document.createElement("button");
+  Object
+    .entries(
+      ROOM_LAYOUT
+    )
+    .forEach(
+      ([room,pos]) => {
 
-    button.type="button";
-    button.className="room";
-    button.id=`room-${room}`;
 
-    button.setAttribute(
-      "aria-label",
-      `Habitación ${room}`
+        const button =
+          document.createElement(
+            "button"
+          );
+
+
+        button.type =
+          "button";
+
+
+        button.className =
+          "room";
+
+
+        button.id =
+          `room-${room}`;
+
+
+        button.setAttribute(
+          "aria-label",
+          `Habitación ${room}`
+        );
+
+
+        button.style.left =
+          `${pos.x}%`;
+
+
+        button.style.top =
+          `${pos.y}%`;
+
+
+        button.style.width =
+          "15.2%";
+
+
+        button.style.height =
+          "7.6%";
+
+
+        button.addEventListener(
+          "click",
+          () => {
+
+
+            handleRoomClick(
+              room
+            );
+
+
+          }
+        );
+
+
+        roomsLayer.appendChild(
+          button
+        );
+
+
+      }
     );
 
-    button.style.left=`${pos.x}%`;
-    button.style.top=`${pos.y}%`;
-
-    button.style.width="15.2%";
-    button.style.height="7.6%";
-
-    button.addEventListener(
-      "click",
-      ()=>handleRoomClick(room)
-    );
-
-    roomsLayer.appendChild(button);
-
-  });
 
 }
+
+
 
 buildRooms();
 
@@ -1573,45 +2608,82 @@ buildRooms();
   ASSETS.map60,
   ASSETS.map20,
 
-  ...Object.values(DEFINITIONS)
-    .flatMap(d=>[
-      d.card,
-      d.finalCard,
-      d.icon
-    ])
-    .filter(Boolean)
+  ...Object
+    .values(
+      DEFINITIONS
+    )
+    .flatMap(
+      definition => [
 
-].forEach(src=>{
+        definition.card,
 
-  const img=new Image();
-  img.src=src;
+        definition.finalCard,
 
-});
+        definition.icon
+
+      ]
+    )
+    .filter(
+      Boolean
+    )
+
+]
+.forEach(
+  src => {
+
+
+    const image =
+      new Image();
+
+
+    image.src =
+      src;
+
+
+  }
+);
 
 
 
 /* =========================================================
-   AUDIO
+   AUDIO CONTEXT
    ========================================================= */
 
 function getAudioContext(){
 
-  if(!gameAudioContext){
 
-    const C=
+  if (
+    !gameAudioContext
+  ){
+
+
+    const AudioContext =
       window.AudioContext
       ||
       window.webkitAudioContext;
 
-    gameAudioContext=new C();
+
+    gameAudioContext =
+      new AudioContext();
+
 
   }
 
-  if(gameAudioContext.state==="suspended"){
+
+  if (
+    gameAudioContext.state ===
+    "suspended"
+  ){
+
+
     gameAudioContext.resume();
+
+
   }
+
 
   return gameAudioContext;
+
 
 }
 
@@ -1621,55 +2693,91 @@ function toneSweep(
   startFreq,
   endFreq,
   duration,
-  volume=.1,
-  type="sine"
+  volume = .1,
+  type = "sine"
 ){
+
 
   try{
 
-    const ctx=getAudioContext();
 
-    const oscillator=
+    const ctx =
+      getAudioContext();
+
+
+    const oscillator =
       ctx.createOscillator();
 
-    const gain=
+
+    const gain =
       ctx.createGain();
 
-    oscillator.type=type;
 
-    oscillator.frequency.setValueAtTime(
-      startFreq,
-      ctx.currentTime
+    oscillator.type =
+      type;
+
+
+    oscillator.frequency
+      .setValueAtTime(
+        startFreq,
+        ctx.currentTime
+      );
+
+
+    oscillator.frequency
+      .exponentialRampToValueAtTime(
+        Math.max(
+          20,
+          endFreq
+        ),
+        ctx.currentTime
+        +
+        duration
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        volume,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        duration
+      );
+
+
+    oscillator.connect(
+      gain
     );
 
-    oscillator.frequency.exponentialRampToValueAtTime(
-      Math.max(20,endFreq),
-      ctx.currentTime+duration
+
+    gain.connect(
+      ctx.destination
     );
 
-    gain.gain.setValueAtTime(
-      volume,
-      ctx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      .001,
-      ctx.currentTime+duration
-    );
-
-    oscillator.connect(gain);
-    gain.connect(ctx.destination);
 
     oscillator.start();
 
+
     oscillator.stop(
-      ctx.currentTime+
-      duration+
+      ctx.currentTime
+      +
+      duration
+      +
       .02
     );
 
+
   }
+
   catch(error){}
+
 
 }
 
@@ -1677,65 +2785,128 @@ function toneSweep(
 
 function scannerSound(){
 
+
   try{
 
-    const ctx=getAudioContext();
 
-    const o1=ctx.createOscillator();
-    const o2=ctx.createOscillator();
-    const gain=ctx.createGain();
+    const ctx =
+      getAudioContext();
 
-    o1.type="sine";
-    o2.type="triangle";
 
-    o1.frequency.setValueAtTime(
-      380,
+    const oscillator1 =
+      ctx.createOscillator();
+
+
+    const oscillator2 =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator1.type =
+      "sine";
+
+
+    oscillator2.type =
+      "triangle";
+
+
+    oscillator1.frequency
+      .setValueAtTime(
+        380,
+        ctx.currentTime
+      );
+
+
+    oscillator1.frequency
+      .linearRampToValueAtTime(
+        1240,
+        ctx.currentTime
+        +
+        .48
+      );
+
+
+    oscillator2.frequency
+      .setValueAtTime(
+        720,
+        ctx.currentTime
+      );
+
+
+    oscillator2.frequency
+      .linearRampToValueAtTime(
+        1510,
+        ctx.currentTime
+        +
+        .48
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        .085,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .5
+      );
+
+
+    oscillator1.connect(
+      gain
+    );
+
+
+    oscillator2.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator1.start();
+
+
+    oscillator2.start();
+
+
+    oscillator1.stop(
       ctx.currentTime
+      +
+      .5
     );
 
-    o1.frequency.linearRampToValueAtTime(
-      1240,
-      ctx.currentTime+.48
-    );
 
-    o2.frequency.setValueAtTime(
-      720,
+    oscillator2.stop(
       ctx.currentTime
+      +
+      .5
     );
 
-    o2.frequency.linearRampToValueAtTime(
-      1510,
-      ctx.currentTime+.48
-    );
-
-    gain.gain.setValueAtTime(
-      .085,
-      ctx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-      .001,
-      ctx.currentTime+.5
-    );
-
-    o1.connect(gain);
-    o2.connect(gain);
-    gain.connect(ctx.destination);
-
-    o1.start();
-    o2.start();
-
-    o1.stop(ctx.currentTime+.5);
-    o2.stop(ctx.currentTime+.5);
 
   }
+
   catch(error){}
+
 
 }
 
 
 
 function punchSound(){
+
 
   toneSweep(
     165,
@@ -1745,33 +2916,52 @@ function punchSound(){
     "triangle"
   );
 
+
 }
 
 
 
 function lifeLossSound(){
 
-  [270,195,128].forEach((frequency,index)=>{
 
-    setTimeout(()=>{
+  [
+    270,
+    195,
+    128
+  ]
+  .forEach(
+    (frequency,index) => {
 
-      toneSweep(
-        frequency,
-        frequency*.92,
-        .11,
-        .07,
-        "square"
+
+      setTimeout(
+        () => {
+
+
+          toneSweep(
+            frequency,
+            frequency * .92,
+            .11,
+            .07,
+            "square"
+          );
+
+
+        },
+
+        index * 60
       );
 
-    },index*60);
 
-  });
+    }
+  );
+
 
 }
 
 
 
 function gunSound(){
+
 
   toneSweep(
     1250,
@@ -1781,11 +2971,13 @@ function gunSound(){
     "sawtooth"
   );
 
+
 }
 
 
 
 function energyLossSound(){
+
 
   toneSweep(
     720,
@@ -1795,11 +2987,13 @@ function energyLossSound(){
     "sine"
   );
 
+
 }
 
 
 
 function itemSound(){
+
 
   toneSweep(
     520,
@@ -1809,40 +3003,66 @@ function itemSound(){
     "triangle"
   );
 
+
 }
 
 
 
 function deathSound(){
 
-  [430,300,180,95].forEach((frequency,index)=>{
 
-    setTimeout(()=>{
+  [
+    430,
+    300,
+    180,
+    95
+  ]
+  .forEach(
+    (frequency,index) => {
 
-      toneSweep(
-        frequency,
-        Math.max(
-          45,
-          frequency*.55
-        ),
-        .2,
-        .11,
-        index<2
-          ?
-          "square"
-          :
-          "sawtooth"
+
+      setTimeout(
+        () => {
+
+
+          toneSweep(
+
+            frequency,
+
+            Math.max(
+              45,
+              frequency * .55
+            ),
+
+            .2,
+
+            .11,
+
+            index < 2
+              ?
+              "square"
+              :
+              "sawtooth"
+
+          );
+
+
+        },
+
+        index * 85
       );
 
-    },index*85);
 
-  });
+    }
+  );
+
 
 }
 
 
 
 function gameOverSound(){
+
 
   toneSweep(
     240,
@@ -1852,27 +3072,46 @@ function gameOverSound(){
     "sawtooth"
   );
 
+
 }
 
 
 
 function missionSound(){
 
-  [520,690,880,1180].forEach((frequency,index)=>{
 
-    setTimeout(()=>{
+  [
+    520,
+    690,
+    880,
+    1180
+  ]
+  .forEach(
+    (frequency,index) => {
 
-      toneSweep(
-        frequency,
-        frequency*1.02,
-        .22,
-        .08,
-        "sine"
+
+      setTimeout(
+        () => {
+
+
+          toneSweep(
+            frequency,
+            frequency * 1.02,
+            .22,
+            .08,
+            "sine"
+          );
+
+
+        },
+
+        index * 120
       );
 
-    },index*120);
 
-  });
+    }
+  );
+
 
 }
 
@@ -1880,97 +3119,175 @@ function missionSound(){
 
 function dockingTravelSound(){
 
+
   try{
 
-    const ctx=getAudioContext();
 
-    const master=
+    const ctx =
+      getAudioContext();
+
+
+    const master =
       ctx.createGain();
 
-    const low=
+
+    const low =
       ctx.createOscillator();
 
-    const high=
+
+    const high =
       ctx.createOscillator();
 
-    const filter=
+
+    const filter =
       ctx.createBiquadFilter();
 
-    low.type="sawtooth";
-    high.type="triangle";
 
-    low.frequency.setValueAtTime(
-      58,
-      ctx.currentTime
+    low.type =
+      "sawtooth";
+
+
+    high.type =
+      "triangle";
+
+
+    low.frequency
+      .setValueAtTime(
+        58,
+        ctx.currentTime
+      );
+
+
+    low.frequency
+      .linearRampToValueAtTime(
+        98,
+        ctx.currentTime
+        +
+        2.25
+      );
+
+
+    high.frequency
+      .setValueAtTime(
+        118,
+        ctx.currentTime
+      );
+
+
+    high.frequency
+      .linearRampToValueAtTime(
+        185,
+        ctx.currentTime
+        +
+        2.25
+      );
+
+
+    filter.type =
+      "lowpass";
+
+
+    filter.frequency
+      .setValueAtTime(
+        520,
+        ctx.currentTime
+      );
+
+
+    filter.frequency
+      .linearRampToValueAtTime(
+        900,
+        ctx.currentTime
+        +
+        2.1
+      );
+
+
+    master.gain
+      .setValueAtTime(
+        .001,
+        ctx.currentTime
+      );
+
+
+    master.gain
+      .linearRampToValueAtTime(
+        .11,
+        ctx.currentTime
+        +
+        .25
+      );
+
+
+    master.gain
+      .setValueAtTime(
+        .11,
+        ctx.currentTime
+        +
+        1.65
+      );
+
+
+    master.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        2.35
+      );
+
+
+    low.connect(
+      filter
     );
 
-    low.frequency.linearRampToValueAtTime(
-      98,
-      ctx.currentTime+2.25
+
+    high.connect(
+      filter
     );
 
-    high.frequency.setValueAtTime(
-      118,
-      ctx.currentTime
+
+    filter.connect(
+      master
     );
 
-    high.frequency.linearRampToValueAtTime(
-      185,
-      ctx.currentTime+2.25
+
+    master.connect(
+      ctx.destination
     );
 
-    filter.type="lowpass";
-
-    filter.frequency.setValueAtTime(
-      520,
-      ctx.currentTime
-    );
-
-    filter.frequency.linearRampToValueAtTime(
-      900,
-      ctx.currentTime+2.1
-    );
-
-    master.gain.setValueAtTime(
-      .001,
-      ctx.currentTime
-    );
-
-    master.gain.linearRampToValueAtTime(
-      .11,
-      ctx.currentTime+.25
-    );
-
-    master.gain.setValueAtTime(
-      .11,
-      ctx.currentTime+1.65
-    );
-
-    master.gain.exponentialRampToValueAtTime(
-      .001,
-      ctx.currentTime+2.35
-    );
-
-    low.connect(filter);
-    high.connect(filter);
-
-    filter.connect(master);
-    master.connect(ctx.destination);
 
     low.start();
+
+
     high.start();
 
-    low.stop(ctx.currentTime+2.4);
-    high.stop(ctx.currentTime+2.4);
+
+    low.stop(
+      ctx.currentTime
+      +
+      2.4
+    );
+
+
+    high.stop(
+      ctx.currentTime
+      +
+      2.4
+    );
+
 
   }
+
   catch(error){}
+
 
 }
 
 
 
 function dockingImpactSound(){
+
 
   toneSweep(
     115,
@@ -1980,29 +3297,44 @@ function dockingImpactSound(){
     "square"
   );
 
-  setTimeout(()=>{
 
-    toneSweep(
-      610,
-      610,
-      .11,
-      .08,
-      "sine"
-    );
+  setTimeout(
+    () => {
 
-  },170);
 
-  setTimeout(()=>{
+      toneSweep(
+        610,
+        610,
+        .11,
+        .08,
+        "sine"
+      );
 
-    toneSweep(
-      830,
-      830,
-      .11,
-      .08,
-      "sine"
-    );
 
-  },270);
+    },
+
+    170
+  );
+
+
+  setTimeout(
+    () => {
+
+
+      toneSweep(
+        830,
+        830,
+        .11,
+        .08,
+        "sine"
+      );
+
+
+    },
+
+    270
+  );
+
 
 }
 
@@ -2012,186 +3344,320 @@ function dockingImpactSound(){
    INTRO / MUSIC
    ========================================================= */
 
-function showIntroPage(page){
+function showIntroPage(
+  page
+){
+
 
   [
     introPage1,
     introPage2,
     dockPage
-  ].forEach(element=>{
+  ]
+  .forEach(
+    element => {
 
-    element.classList.remove("active");
 
-  });
+      element.classList.remove(
+        "active"
+      );
 
-  page.classList.add("active");
+
+    }
+  );
+
+
+  page.classList.add(
+    "active"
+  );
+
 
 }
 
 
 
 introPage1.addEventListener(
-  "click",
-  async()=>{
 
-    if(introLocked){
+  "click",
+
+  async () => {
+
+
+    if (
+      introLocked
+    ){
       return;
     }
 
+
     getAudioContext();
 
-    showIntroPage(introPage2);
+
+    showIntroPage(
+      introPage2
+    );
+
 
     try{
 
-      introMusic.currentTime=0;
+
+      introMusic.currentTime =
+        0;
+
 
       await introMusic.play();
 
+
     }
+
     catch(error){}
 
+
   }
+
 );
 
 
 
 function crossfadeToGameMusic(){
 
-  bgMusic.volume=.03;
+
+  bgMusic.volume =
+    .03;
+
 
   bgMusic.play()
-    .then(()=>{
+    .then(
+      () => {
 
-      musicPlaying=true;
 
-      musicButton.classList.add(
-        "music-on"
-      );
+        musicPlaying =
+          true;
 
-    })
-    .catch(()=>{});
 
-  const steps=18;
-  let current=0;
+        musicButton.classList.add(
+          "music-on"
+        );
 
-  const introStart=
+
+      }
+    )
+    .catch(
+      () => {}
+    );
+
+
+  const steps =
+    18;
+
+
+  let current =
+    0;
+
+
+  const introStart =
     introMusic.volume;
 
-  const timer=setInterval(()=>{
 
-    current++;
+  const timer =
+    setInterval(
+      () => {
 
-    const progress=
-      current/steps;
 
-    introMusic.volume=
-      Math.max(
-        0,
-        introStart*
-        (1-progress)
-      );
+        current++;
 
-    bgMusic.volume=
-      .03+
-      (.32-.03)*
-      progress;
 
-    if(current>=steps){
+        const progress =
+          current
+          /
+          steps;
 
-      clearInterval(timer);
 
-      introMusic.pause();
-      introMusic.currentTime=0;
-      introMusic.volume=.34;
+        introMusic.volume =
+          Math.max(
+            0,
+            introStart
+            *
+            (
+              1
+              -
+              progress
+            )
+          );
 
-      bgMusic.volume=.32;
 
-    }
+        bgMusic.volume =
+          .03
+          +
+          (
+            .32
+            -
+            .03
+          )
+          *
+          progress;
 
-  },65);
+
+        if (
+          current >=
+          steps
+        ){
+
+
+          clearInterval(
+            timer
+          );
+
+
+          introMusic.pause();
+
+
+          introMusic.currentTime =
+            0;
+
+
+          introMusic.volume =
+            .34;
+
+
+          bgMusic.volume =
+            .32;
+
+
+        }
+
+
+      },
+
+      65
+    );
+
 
 }
 
 
 
 acceptMissionButton.addEventListener(
+
   "click",
-  event=>{
+
+  event => {
+
 
     event.stopPropagation();
 
-    if(introLocked){
+
+    if (
+      introLocked
+    ){
       return;
     }
 
-    introLocked=true;
+
+    introLocked =
+      true;
+
 
     getAudioContext();
 
+
     crossfadeToGameMusic();
+
 
     dockingTravelSound();
 
+
     startDockingSequence();
 
+
   }
+
 );
 
 
 
 function startDockingSequence(){
 
-  showIntroPage(dockPage);
 
-  dockBaseImage.src=
+  showIntroPage(
+    dockPage
+  );
+
+
+  dockBaseImage.src =
     ASSETS.stationOnly;
 
-  dockShip.src=
+
+  dockShip.src =
     ASSETS.playerShip;
 
-  dockShip.style.display="block";
+
+  dockShip.style.display =
+    "block";
+
 
   dockShip.classList.remove(
     "docking"
   );
 
+
   void dockShip.offsetWidth;
 
-  setTimeout(()=>{
 
-    dockShip.classList.add(
-      "docking"
-    );
+  setTimeout(
+    () => {
 
-  },180);
 
-  setTimeout(()=>{
+      dockShip.classList.add(
+        "docking"
+      );
 
-    dockingImpactSound();
 
-    dockFlash.classList.remove(
-      "flash"
-    );
+    },
 
-    void dockFlash.offsetWidth;
+    180
+  );
 
-    dockFlash.classList.add(
-      "flash"
-    );
 
-    dockBaseImage.src=
-      ASSETS.dockedStation;
+  setTimeout(
+    () => {
 
-    dockShip.style.display=
-      "none";
 
-  },2450);
+      dockingImpactSound();
+
+
+      dockFlash.classList.remove(
+        "flash"
+      );
+
+
+      void dockFlash.offsetWidth;
+
+
+      dockFlash.classList.add(
+        "flash"
+      );
+
+
+      dockBaseImage.src =
+        ASSETS.dockedStation;
+
+
+      dockShip.style.display =
+        "none";
+
+
+    },
+
+    2450
+  );
+
 
   setTimeout(
     startGame,
     3150
   );
+
 
 }
 
@@ -2199,27 +3665,37 @@ function startDockingSequence(){
 
 function startGame(){
 
-  mapImage.src=
+
+  mapImage.src =
     ASSETS.map100;
 
-  state.oxygen=100;
+
+  state.oxygen =
+    100;
+
 
   updateOxygenUI();
 
-  introOverlay.style.display=
+
+  introOverlay.style.display =
     "none";
 
-  game.style.display=
+
+  game.style.display =
     "block";
+
 
   window.scrollTo(
     0,
     0
   );
 
+
   refreshRoomMarkers();
 
+
   showTutorial();
+
 
 }
 
@@ -2227,51 +3703,77 @@ function startGame(){
 
 async function toggleMusic(){
 
-  if(!musicPlaying){
+
+  if (
+    !musicPlaying
+  ){
+
 
     try{
 
+
       await bgMusic.play();
 
-      musicPlaying=true;
+
+      musicPlaying =
+        true;
+
 
       musicButton.classList.add(
         "music-on"
       );
 
+
     }
+
     catch(error){
+
 
       showMessage(
         "NO SE PUDO ACTIVAR LA MÚSICA"
       );
 
+
     }
 
+
     return;
+
+
   }
+
 
   bgMusic.pause();
 
-  musicPlaying=false;
+
+  musicPlaying =
+    false;
+
 
   musicButton.classList.remove(
     "music-on"
   );
+
 
 }
 
 
 
 musicButton.addEventListener(
+
   "click",
-  event=>{
+
+  event => {
+
 
     event.stopPropagation();
 
+
     toggleMusic();
 
+
   }
+
 );
 
 
@@ -2280,7 +3782,7 @@ musicButton.addEventListener(
    TUTORIAL
    ========================================================= */
 
-const TUTORIAL_MESSAGES=[
+const TUTORIAL_MESSAGES = [
 
   "Recuerda: tu oxígeno es limitado. Cuanto menos te quede, más difícil será combatir. Úsalo con prudencia.",
 
@@ -2294,90 +3796,134 @@ const TUTORIAL_MESSAGES=[
 
 function showTutorial(){
 
-  state.gameLocked=true;
 
-  tutorialIndex=0;
+  state.gameLocked =
+    true;
 
-  tutorialText.textContent=
-    TUTORIAL_MESSAGES[0];
 
-  tutorialNext.textContent=
+  tutorialIndex =
+    0;
+
+
+  tutorialText.textContent =
+    TUTORIAL_MESSAGES[
+      0
+    ];
+
+
+  tutorialNext.textContent =
     "SIGUIENTE";
+
 
   tutorialOverlay.classList.add(
     "show"
   );
+
 
 }
 
 
 
 tutorialNext.addEventListener(
+
   "click",
-  ()=>{
+
+  () => {
+
 
     tutorialIndex++;
 
-    if(
-      tutorialIndex>=
+
+    if (
+      tutorialIndex >=
       TUTORIAL_MESSAGES.length
     ){
+
 
       tutorialOverlay.classList.remove(
         "show"
       );
 
-      state.gameLocked=false;
+
+      state.gameLocked =
+        false;
+
 
       return;
 
+
     }
 
-    tutorialText.textContent=
+
+    tutorialText.textContent =
       TUTORIAL_MESSAGES[
         tutorialIndex
       ];
 
-    tutorialNext.textContent=
-      tutorialIndex===
-      TUTORIAL_MESSAGES.length-1
+
+    tutorialNext.textContent =
+      tutorialIndex ===
+      TUTORIAL_MESSAGES.length
+      -
+      1
         ?
         "ENTENDIDO"
         :
         "SIGUIENTE";
 
+
   }
+
 );
 
 
 
 /* =========================================================
-   MESSAGES
+   MESSAGE
    ========================================================= */
 
-function showMessage(html){
+function showMessage(
+  html
+){
 
-  clearTimeout(messageTimer);
+
+  clearTimeout(
+    messageTimer
+  );
+
 
   message.classList.remove(
     "show"
   );
 
+
   void message.offsetWidth;
 
-  message.innerHTML=html;
+
+  message.innerHTML =
+    html;
+
 
   message.classList.add(
     "show"
   );
 
-  messageTimer=setTimeout(()=>{
 
-    message.classList.remove(
-      "show"
+  messageTimer =
+    setTimeout(
+      () => {
+
+
+        message.classList.remove(
+          "show"
+        );
+
+
+      },
+
+      1400
     );
 
-  },1400);
 
 }
 
@@ -2389,31 +3935,50 @@ function showMessage(html){
 
 function oxygenPhase(){
 
-  if(state.oxygen<20){
+
+  if (
+    state.oxygen <
+    20
+  ){
     return 20;
   }
 
-  if(state.oxygen<60){
+
+  if (
+    state.oxygen <
+    60
+  ){
     return 60;
   }
 
+
   return 100;
+
 
 }
 
 
 
-function formatOxygen(value){
+function formatOxygen(
+  value
+){
+
 
   return `${
-    Number.isInteger(value)
+    Number.isInteger(
+      value
+    )
       ?
       value
       :
       value
         .toFixed(1)
-        .replace(".",",")
+        .replace(
+          ".",
+          ","
+        )
   }%`;
+
 
 }
 
@@ -2421,117 +3986,233 @@ function formatOxygen(value){
 
 function updateOxygenUI(){
 
-  const phase=
+
+  const phase =
     oxygenPhase();
 
-  oxygenCounter.textContent=
+
+  oxygenCounter.textContent =
     formatOxygen(
       state.oxygen
     );
+
 
   oxygenCounter.classList.remove(
     "phase60",
     "phase20"
   );
 
-  if(phase===100){
 
-    mapImage.src=
+  if (
+    phase ===
+    100
+  ){
+
+
+    mapImage.src =
       ASSETS.map100;
+
 
   }
 
-  if(phase===60){
 
-    mapImage.src=
+  if (
+    phase ===
+    60
+  ){
+
+
+    mapImage.src =
       ASSETS.map60;
+
 
     oxygenCounter.classList.add(
       "phase60"
     );
 
+
   }
 
-  if(phase===20){
 
-    mapImage.src=
+  if (
+    phase ===
+    20
+  ){
+
+
+    mapImage.src =
       ASSETS.map20;
+
 
     oxygenCounter.classList.add(
       "phase20"
     );
 
+
   }
+
 
 }
 
 
 
 function consumeOxygen(
-  amount=5
+  amount
 ){
 
-  if(state.ended){
+
+  if (
+    state.ended
+  ){
     return false;
   }
 
-  state.oxygen=
+
+  state.oxygen =
     Math.max(
       0,
       Math.round(
         (
-          state.oxygen-
+          state.oxygen
+          -
           amount
-        )*10
-      )/10
+        )
+        *
+        10
+      )
+      /
+      10
     );
+
 
   updateOxygenUI();
 
-  if(state.oxygen<=0){
+
+  if (
+    state.oxygen <=
+    0
+  ){
+
 
     triggerGameOver();
 
+
     return false;
+
 
   }
 
+
   return true;
+
 
 }
 
 
 
-function shouldChargeMove(
+/* =========================================================
+   MOVEMENT OXYGEN COST
+   ========================================================= */
+
+/*
+  REGLAS:
+
+  Entrada -> A12 = 0 %
+
+  Moverse a una habitación NUEVA = 5 %
+
+  Volver a una habitación que ya había
+  sido visitada = 2,5 %
+
+  Entrar a A1 teniendo 2+ tarjetas = 0 %
+*/
+
+function getMovementOxygenCost(
   targetRoom
 ){
 
-  if(
-    state.currentRoom===
+
+  /*
+    Primera entrada obligatoria.
+  */
+
+  if (
+    state.currentRoom ===
     "ENTRADA"
   ){
-    return false;
+
+
+    return 0;
+
+
   }
 
-  if(
-    targetRoom==="A1"
+
+  /*
+    Si ya puede abrir el botín,
+    entrar a A1 no cuesta oxígeno.
+  */
+
+  if (
+    targetRoom ===
+      "A1"
     &&
-    keyCount()>=2
+    keyCount() >=
+      2
   ){
-    return false;
+
+
+    return 0;
+
+
   }
 
-  return true;
+
+  /*
+    Regresar a una habitación
+    ya visitada.
+  */
+
+  if (
+    state.rooms[
+      targetRoom
+    ]
+    &&
+    state.rooms[
+      targetRoom
+    ].visited
+  ){
+
+
+    return 2.5;
+
+
+  }
+
+
+  /*
+    Habitación nueva.
+  */
+
+  return 5;
+
 
 }
 
 
 
-useObjectButton.addEventListener(
-  "click",
-  ()=>{
+/* =========================================================
+   USE OBJECT
+   ========================================================= */
 
-    if(
+useObjectButton.addEventListener(
+
+  "click",
+
+  () => {
+
+
+    if (
       state.gameLocked
       ||
       state.ended
@@ -2543,20 +4224,31 @@ useObjectButton.addEventListener(
       return;
     }
 
+
     itemSound();
 
-    const alive=
-      consumeOxygen(5);
 
-    if(alive){
+    const alive =
+      consumeOxygen(
+        5
+      );
+
+
+    if (
+      alive
+    ){
+
 
       showMessage(
         "OBJETO UTILIZADO<br>−5% O₂"
       );
 
+
     }
 
+
   }
+
 );
 
 
@@ -2567,30 +4259,46 @@ useObjectButton.addEventListener(
 
 function keyCount(){
 
+
   return Object
     .values(
       state.keySources
     )
-    .filter(Boolean)
+    .filter(
+      Boolean
+    )
     .length;
+
 
 }
 
 
 
-function grantKey(source){
+function grantKey(
+  source
+){
 
-  if(
-    !state.keySources[source]
+
+  if (
+    !state.keySources[
+      source
+    ]
   ){
 
-    state.keySources[source]=true;
+
+    state.keySources[
+      source
+    ] =
+      true;
+
 
     showMessage(
       "TARJETA LLAVE OBTENIDA"
     );
 
+
   }
+
 
 }
 
@@ -2605,26 +4313,47 @@ function addMapIcon(
   image,
   room,
   classes,
-  direction=""
+  direction = ""
 ){
 
-  removeMapIcon(id);
 
-  const position=
-    ROOM_LAYOUT[room];
+  removeMapIcon(
+    id
+  );
 
-  if(!position){
+
+  const position =
+    ROOM_LAYOUT[
+      room
+    ];
+
+
+  if (
+    !position
+  ){
     return null;
   }
 
-  const icon=
-    document.createElement("img");
 
-  icon.id=id;
-  icon.src=image;
-  icon.draggable=false;
+  const icon =
+    document.createElement(
+      "img"
+    );
 
-  icon.className=
+
+  icon.id =
+    id;
+
+
+  icon.src =
+    image;
+
+
+  icon.draggable =
+    false;
+
+
+  icon.className =
     `map-icon ${classes}${
       direction
         ?
@@ -2633,28 +4362,48 @@ function addMapIcon(
         ""
     }`;
 
-  icon.style.left=
+
+  icon.style.left =
     `${position.x}%`;
 
-  icon.style.top=
+
+  icon.style.top =
     `${position.y}%`;
 
-  iconsLayer.appendChild(icon);
+
+  iconsLayer.appendChild(
+    icon
+  );
+
 
   return icon;
+
 
 }
 
 
 
-function removeMapIcon(id){
+function removeMapIcon(
+  id
+){
 
-  const element=
-    document.getElementById(id);
 
-  if(element){
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (
+    element
+  ){
+
+
     element.remove();
+
+
   }
+
 
 }
 
@@ -2662,21 +4411,33 @@ function removeMapIcon(id){
 
 function clearStandardMarkers(){
 
+
   removeMapIcon(
     "player-marker"
   );
 
-  Object.keys(DEFINITIONS).forEach(room=>{
 
-    removeMapIcon(
-      `check-${room}`
+  Object
+    .keys(
+      DEFINITIONS
+    )
+    .forEach(
+      room => {
+
+
+        removeMapIcon(
+          `check-${room}`
+        );
+
+
+        removeMapIcon(
+          `event-${room}`
+        );
+
+
+      }
     );
 
-    removeMapIcon(
-      `event-${room}`
-    );
-
-  });
 
 }
 
@@ -2684,71 +4445,126 @@ function clearStandardMarkers(){
 
 function refreshRoomMarkers(){
 
+
   clearStandardMarkers();
 
-  if(
-    state.currentRoom!==
+
+  if (
+    state.currentRoom !==
     "ENTRADA"
   ){
 
+
     addMapIcon(
+
       "player-marker",
+
       ASSETS.playerIcon,
+
       state.currentRoom,
+
       "player-icon"
+
     );
+
 
   }
 
-  Object.keys(DEFINITIONS).forEach(room=>{
 
-    const roomState=
-      state.rooms[room];
+  Object
+    .keys(
+      DEFINITIONS
+    )
+    .forEach(
+      room => {
 
-    if(
-      room===
-      state.currentRoom
-    ){
-      return;
-    }
 
-    if(roomState.completed){
+        const roomState =
+          state.rooms[
+            room
+          ];
 
-      addMapIcon(
-        `check-${room}`,
-        ASSETS.check,
-        room,
-        "check-icon"
-      );
 
-      return;
+        if (
+          room ===
+          state.currentRoom
+        ){
+          return;
+        }
 
-    }
 
-    if(roomState.revealed){
+        if (
+          roomState.completed
+        ){
 
-      addMapIcon(
-        `event-${room}`,
-        DEFINITIONS[room].icon,
-        room,
-        "event-icon"
-      );
 
-    }
+          addMapIcon(
 
-  });
+            `check-${room}`,
+
+            ASSETS.check,
+
+            room,
+
+            "check-icon"
+
+          );
+
+
+          return;
+
+
+        }
+
+
+        if (
+          roomState.revealed
+        ){
+
+
+          addMapIcon(
+
+            `event-${room}`,
+
+            DEFINITIONS[
+              room
+            ].icon,
+
+            room,
+
+            "event-icon"
+
+          );
+
+
+        }
+
+
+      }
+    );
+
 
 }
 
 
 
-function moveToRoom(room){
+function moveToRoom(
+  room
+){
 
-  state.currentRoom=room;
 
-  state.rooms[room].visited=true;
+  state.currentRoom =
+    room;
+
+
+  state.rooms[
+    room
+  ].visited =
+    true;
+
 
   refreshRoomMarkers();
+
 
 }
 
@@ -2760,18 +4576,28 @@ function moveToRoom(room){
 
 function adjacentRooms(){
 
+
   return GRAPH[
     state.currentRoom
-  ] || [];
+  ]
+  ||
+  [];
+
 
 }
 
 
 
-function isAdjacent(target){
+function isAdjacent(
+  target
+){
+
 
   return adjacentRooms()
-    .includes(target);
+    .includes(
+      target
+    );
+
 
 }
 
@@ -2782,44 +4608,75 @@ function directionBetween(
   to
 ){
 
-  if(from==="ENTRADA"){
+
+  if (
+    from ===
+    "ENTRADA"
+  ){
     return "up";
   }
 
-  const start=
-    ROOM_LAYOUT[from];
 
-  const end=
-    ROOM_LAYOUT[to];
+  const start =
+    ROOM_LAYOUT[
+      from
+    ];
 
-  if(!start || !end){
+
+  const end =
+    ROOM_LAYOUT[
+      to
+    ];
+
+
+  if (
+    !start
+    ||
+    !end
+  ){
     return "up";
   }
 
-  const dx=
-    end.x-start.x;
 
-  const dy=
-    end.y-start.y;
+  const dx =
+    end.x
+    -
+    start.x;
 
-  if(
-    Math.abs(dx)>
-    Math.abs(dy)
+
+  const dy =
+    end.y
+    -
+    start.y;
+
+
+  if (
+    Math.abs(
+      dx
+    )
+    >
+    Math.abs(
+      dy
+    )
   ){
 
-    return dx>0
+
+    return dx > 0
       ?
       "right"
       :
       "left";
 
+
   }
 
-  return dy>0
+
+  return dy > 0
     ?
     "down"
     :
     "up";
+
 
 }
 
@@ -2827,19 +4684,32 @@ function directionBetween(
 
 function turnOffScanner(){
 
-  state.scannerActive=false;
+
+  state.scannerActive =
+    false;
+
 
   scannerButton.classList.remove(
     "scanner-on"
   );
 
-  Object.keys(DEFINITIONS).forEach(room=>{
 
-    removeMapIcon(
-      `scan-${room}`
+  Object
+    .keys(
+      DEFINITIONS
+    )
+    .forEach(
+      room => {
+
+
+        removeMapIcon(
+          `scan-${room}`
+        );
+
+
+      }
     );
 
-  });
 
 }
 
@@ -2847,7 +4717,8 @@ function turnOffScanner(){
 
 function scanNearbyRooms(){
 
-  if(
+
+  if (
     state.gameLocked
     ||
     state.ended
@@ -2859,82 +4730,131 @@ function scanNearbyRooms(){
     return;
   }
 
-  if(state.scannerActive){
+
+  if (
+    state.scannerActive
+  ){
+
 
     turnOffScanner();
 
+
     return;
+
 
   }
 
-  let count=0;
 
-  adjacentRooms().forEach(room=>{
+  let count =
+    0;
 
-    const roomState=
-      state.rooms[room];
 
-    if(
-      !roomState.completed
-      &&
-      !roomState.revealed
-    ){
+  adjacentRooms()
+    .forEach(
+      room => {
 
-      addMapIcon(
-        `scan-${room}`,
-        ASSETS.scannerWave,
-        room,
-        "scanner-wave",
-        directionBetween(
-          state.currentRoom,
-          room
-        )
-      );
 
-      count++;
+        const roomState =
+          state.rooms[
+            room
+          ];
 
-    }
 
-  });
+        if (
+          !roomState.completed
+          &&
+          !roomState.revealed
+        ){
 
-  if(!count){
+
+          addMapIcon(
+
+            `scan-${room}`,
+
+            ASSETS.scannerWave,
+
+            room,
+
+            "scanner-wave",
+
+            directionBetween(
+              state.currentRoom,
+              room
+            )
+
+          );
+
+
+          count++;
+
+
+        }
+
+
+      }
+    );
+
+
+  if (
+    !count
+  ){
+
 
     showMessage(
       "SIN NUEVAS SEÑALES"
     );
 
+
     return;
+
 
   }
 
-  state.scannerActive=true;
+
+  state.scannerActive =
+    true;
+
 
   scannerButton.classList.add(
     "scanner-on"
   );
 
+
   scannerSound();
+
 
 }
 
 
 
 scannerButton.addEventListener(
+
   "click",
+
   scanNearbyRooms
+
 );
 
 
 
-function revealRoom(room){
+function revealRoom(
+  room
+){
 
-  const roomState=
-    state.rooms[room];
 
-  const definition=
-    DEFINITIONS[room];
+  const roomState =
+    state.rooms[
+      room
+    ];
 
-  if(
+
+  const definition =
+    DEFINITIONS[
+      room
+    ];
+
+
+  if (
     !roomState
     ||
     !definition
@@ -2942,24 +4862,38 @@ function revealRoom(room){
     return;
   }
 
-  roomState.revealed=true;
+
+  roomState.revealed =
+    true;
+
 
   removeMapIcon(
     `scan-${room}`
   );
 
+
   addMapIcon(
+
     `event-${room}`,
+
     definition.icon,
+
     room,
+
     "event-icon"
+
   );
+
 
   energyLossSound();
 
+
   showMessage(
+
     `${definition.label}<br>−2 ENERGÍAS`
+
   );
+
 
 }
 
@@ -2969,11 +4903,18 @@ function revealRoom(room){
    ENCOUNTERS
    ========================================================= */
 
-function setEncounterImage(src){
+function setEncounterImage(
+  src
+){
 
-  encounterImage.onerror=null;
 
-  encounterImage.src=src;
+  encounterImage.onerror =
+    null;
+
+
+  encounterImage.src =
+    src;
+
 
 }
 
@@ -2981,26 +4922,38 @@ function setEncounterImage(src){
 
 function resetEncounterUI(){
 
-  encounterCard.className="";
 
-  encounterCard.style.cursor=
+  encounterCard.className =
+    "";
+
+
+  encounterCard.style.cursor =
     "default";
 
-  enemyHp.style.display=
+
+  enemyHp.style.display =
     "none";
 
-  gunButton.style.display=
+
+  gunButton.style.display =
     "none";
 
-  fistButton.style.display=
+
+  fistButton.style.display =
     "none";
 
-  encounterBackButton.style.display=
+
+  encounterBackButton.style.display =
     "none";
 
-  combatLocked=false;
 
-  state.combat=null;
+  combatLocked =
+    false;
+
+
+  state.combat =
+    null;
+
 
 }
 
@@ -3010,42 +4963,66 @@ function currentEnemyHp(
   definition
 ){
 
-  const phase=
+
+  const phase =
     oxygenPhase();
+
 
   return definition.hp
     ?
-    definition.hp[phase]
+    definition.hp[
+      phase
+    ]
     :
     0;
+
 
 }
 
 
 
-function openEncounter(room){
+function openEncounter(
+  room
+){
 
-  const definition=
-    DEFINITIONS[room];
 
-  if(!definition){
+  const definition =
+    DEFINITIONS[
+      room
+    ];
+
+
+  if (
+    !definition
+  ){
     return;
   }
 
+
   turnOffScanner();
 
-  state.pendingRoom=room;
 
-  state.rooms[room].visited=true;
+  state.pendingRoom =
+    room;
+
+
+  state.rooms[
+    room
+  ].visited =
+    true;
+
 
   resetEncounterUI();
+
 
   setEncounterImage(
     definition.card
   );
 
-  encounterImage.alt=
+
+  encounterImage.alt =
     definition.label;
+
 
   encounter.classList.add(
     "show"
@@ -3054,92 +5031,126 @@ function openEncounter(room){
 
   /* COMBAT */
 
-  if(
-    definition.type===
+  if (
+    definition.type ===
     "combat"
   ){
 
-    state.encounterMode=
+
+    state.encounterMode =
       "combat";
+
 
     encounterCard.classList.add(
       "combat"
     );
 
-    enemyHp.style.display=
+
+    enemyHp.style.display =
       "flex";
 
-    gunButton.style.display=
+
+    gunButton.style.display =
       "block";
 
-    fistButton.style.display=
+
+    fistButton.style.display =
       "block";
 
-    const hp=
+
+    const hp =
       currentEnemyHp(
         definition
       );
 
-    state.combat={
 
-      eventId:room,
+    state.combat = {
 
-      hp:hp,
 
-      fists:0,
+      eventId:
+        room,
 
-      shots:0
+
+      hp:
+        hp,
+
+
+      fists:
+        0,
+
+
+      shots:
+        0
+
 
     };
 
-    enemyHp.textContent=hp;
+
+    enemyHp.textContent =
+      hp;
+
 
     return;
+
 
   }
 
 
   /* LOOT */
 
-  if(
-    definition.type===
+  if (
+    definition.type ===
     "loot"
   ){
 
-    if(
-      keyCount()>=2
+
+    if (
+      keyCount() >=
+      2
     ){
 
-      state.encounterMode=
+
+      state.encounterMode =
         "lootReady";
 
-      encounterCard.style.cursor=
+
+      encounterCard.style.cursor =
         "pointer";
 
+
     }
+
     else{
 
-      state.encounterMode=
+
+      state.encounterMode =
         "lootLocked";
 
-      encounterCard.style.cursor=
+
+      encounterCard.style.cursor =
         "pointer";
 
-      encounterBackButton.style.display=
+
+      encounterBackButton.style.display =
         "block";
+
 
     }
 
+
     return;
+
 
   }
 
 
-  state.encounterMode=
+  state.encounterMode =
     definition.type;
 
-  encounterCard.style.cursor=
+
+  encounterCard.style.cursor =
     "pointer";
+
 
 }
 
@@ -3147,26 +5158,50 @@ function openEncounter(room){
 
 function completeCurrentRoom(){
 
-  const room=
+
+  const room =
     state.pendingRoom;
 
-  if(!room){
+
+  if (
+    !room
+  ){
     return;
   }
 
-  state.rooms[room].completed=true;
-  state.rooms[room].revealed=true;
+
+  state.rooms[
+    room
+  ].completed =
+    true;
+
+
+  state.rooms[
+    room
+  ].revealed =
+    true;
+
 
   encounter.classList.remove(
     "show"
   );
 
-  state.pendingRoom=null;
-  state.encounterMode=null;
+
+  state.pendingRoom =
+    null;
+
+
+  state.encounterMode =
+    null;
+
 
   resetEncounterUI();
 
-  moveToRoom(room);
+
+  moveToRoom(
+    room
+  );
+
 
 }
 
@@ -3174,25 +5209,44 @@ function completeCurrentRoom(){
 
 function closeUnresolvedRoomToMap(){
 
-  const room=
+
+  const room =
     state.pendingRoom;
 
-  if(!room){
+
+  if (
+    !room
+  ){
     return;
   }
 
-  state.rooms[room].revealed=true;
+
+  state.rooms[
+    room
+  ].revealed =
+    true;
+
 
   encounter.classList.remove(
     "show"
   );
 
-  state.pendingRoom=null;
-  state.encounterMode=null;
+
+  state.pendingRoom =
+    null;
+
+
+  state.encounterMode =
+    null;
+
 
   resetEncounterUI();
 
-  moveToRoom(room);
+
+  moveToRoom(
+    room
+  );
+
 
 }
 
@@ -3200,15 +5254,19 @@ function closeUnresolvedRoomToMap(){
 
 function animateHit(){
 
+
   encounterCard.classList.remove(
     "hit"
   );
 
+
   void encounterCard.offsetWidth;
+
 
   encounterCard.classList.add(
     "hit"
   );
+
 
 }
 
@@ -3218,10 +5276,13 @@ function animateHit(){
    COMBAT
    ========================================================= */
 
-function attack(kind){
+function attack(
+  kind
+){
 
-  if(
-    state.encounterMode!==
+
+  if (
+    state.encounterMode !==
       "combat"
     ||
     combatLocked
@@ -3233,28 +5294,39 @@ function attack(kind){
     return;
   }
 
-  combatLocked=true;
 
-  const combat=
+  combatLocked =
+    true;
+
+
+  const combat =
     state.combat;
 
 
   /* PUÑO */
 
-  if(kind==="fist"){
+  if (
+    kind ===
+    "fist"
+  ){
+
 
     combat.fists++;
 
+
     punchSound();
+
 
     setTimeout(
       lifeLossSound,
       65
     );
 
+
     showMessage(
       "−1 VIDA"
     );
+
 
   }
 
@@ -3263,308 +5335,411 @@ function attack(kind){
 
   else{
 
+
     combat.shots++;
 
+
     gunSound();
+
 
     setTimeout(
       energyLossSound,
       65
     );
 
+
     showMessage(
       "−1 ENERGÍA"
     );
 
+
   }
 
 
-  combat.hp=
+  combat.hp =
     Math.max(
       0,
-      combat.hp-1
+      combat.hp
+      -
+      1
     );
 
-  enemyHp.textContent=
+
+  enemyHp.textContent =
     combat.hp;
+
 
   animateHit();
 
 
-  setTimeout(()=>{
-
-    if(combat.hp>0){
-
-      combatLocked=false;
-
-      return;
-
-    }
+  setTimeout(
+    () => {
 
 
-    const definition=
-      DEFINITIONS[
-        combat.eventId
-      ];
+      if (
+        combat.hp >
+        0
+      ){
 
 
-    const pureFists=
-      combat.fists>0
-      &&
-      combat.shots===0;
+        combatLocked =
+          false;
 
 
-    /*
-      REGLA GENERAL:
-      se obtiene pista/desenlace si
-      PUÑOS >= PISTOLAS.
+        return;
 
-      A5 es la excepción:
-      solo obtiene A5F y la tarjeta
-      si todo el combate fue con puños.
-    */
 
-    const earnsFinal=
+      }
 
-      combat.eventId==="A5"
 
-      ?
+      const definition =
+        DEFINITIONS[
+          combat.eventId
+        ];
 
-      (
-        pureFists
+
+      const pureFists =
+        combat.fists >
+          0
         &&
-        !!definition.finalCard
-      )
+        combat.shots ===
+          0;
 
-      :
 
-      (
-        combat.fists>=
-          combat.shots
+      /*
+        REGLA GENERAL:
+        PUÑOS >= PISTOLAS
+        = pista / desenlace.
 
-        &&
+        A5:
+        únicamente puños.
+      */
 
-        combat.fists>0
+      const earnsFinal =
 
-        &&
+        combat.eventId ===
+          "A5"
 
-        !!definition.finalCard
+        ?
+
+        (
+          pureFists
+          &&
+          !!definition.finalCard
+        )
+
+        :
+
+        (
+          combat.fists >=
+            combat.shots
+          &&
+          combat.fists >
+            0
+          &&
+          !!definition.finalCard
+        );
+
+
+      if (
+        earnsFinal
+      ){
+
+
+        state.encounterMode =
+          "final";
+
+
+        encounterCard.classList.remove(
+          "combat"
+        );
+
+
+        enemyHp.style.display =
+          "none";
+
+
+        gunButton.style.display =
+          "none";
+
+
+        fistButton.style.display =
+          "none";
+
+
+        setEncounterImage(
+          definition.finalCard
+        );
+
+
+        encounterImage.alt =
+          `Desenlace ${combat.eventId}`;
+
+
+        encounterCard.style.cursor =
+          "pointer";
+
+
+        combatLocked =
+          false;
+
+
+        return;
+
+
+      }
+
+
+      deathSound();
+
+
+      setTimeout(
+        completeCurrentRoom,
+        430
       );
 
 
-    if(earnsFinal){
+    },
 
-      state.encounterMode=
-        "final";
+    320
+  );
 
-      encounterCard.classList.remove(
-        "combat"
-      );
-
-      enemyHp.style.display=
-        "none";
-
-      gunButton.style.display=
-        "none";
-
-      fistButton.style.display=
-        "none";
-
-      setEncounterImage(
-        definition.finalCard
-      );
-
-      encounterImage.alt=
-        `Desenlace ${combat.eventId}`;
-
-      encounterCard.style.cursor=
-        "pointer";
-
-      combatLocked=false;
-
-      return;
-
-    }
-
-
-    deathSound();
-
-    setTimeout(
-      completeCurrentRoom,
-      430
-    );
-
-  },320);
 
 }
 
 
 
 gunButton.addEventListener(
+
   "click",
-  event=>{
+
+  event => {
+
 
     event.stopPropagation();
 
-    attack("gun");
+
+    attack(
+      "gun"
+    );
+
 
   }
+
 );
 
 
 
 fistButton.addEventListener(
+
   "click",
-  event=>{
+
+  event => {
+
 
     event.stopPropagation();
 
-    attack("fist");
+
+    attack(
+      "fist"
+    );
+
 
   }
+
 );
 
 
 
 encounterBackButton.addEventListener(
+
   "click",
-  event=>{
+
+  event => {
+
 
     event.stopPropagation();
 
-    if(
-      state.encounterMode===
+
+    if (
+      state.encounterMode ===
       "lootLocked"
     ){
 
+
       closeUnresolvedRoomToMap();
+
 
     }
 
+
   }
+
 );
 
 
 
 encounterCard.addEventListener(
+
   "click",
-  ()=>{
+
+  () => {
 
 
     /* SIMPLE */
 
-    if(
-      state.encounterMode===
+    if (
+      state.encounterMode ===
       "simple"
     ){
 
+
       completeCurrentRoom();
 
+
       return;
+
 
     }
 
 
     /* KEY */
 
-    if(
-      state.encounterMode===
+    if (
+      state.encounterMode ===
       "key"
     ){
 
-      const room=
+
+      const room =
         state.pendingRoom;
 
-      const definition=
-        DEFINITIONS[room];
+
+      const definition =
+        DEFINITIONS[
+          room
+        ];
+
 
       grantKey(
         definition.keySource
       );
 
+
       completeCurrentRoom();
 
+
       return;
+
 
     }
 
 
     /* FINAL */
 
-    if(
-      state.encounterMode===
+    if (
+      state.encounterMode ===
       "final"
     ){
 
-      const room=
+
+      const room =
         state.pendingRoom;
 
-      if(room==="A5"){
 
-        grantKey("A5");
+      if (
+        room ===
+        "A5"
+      ){
+
+
+        grantKey(
+          "A5"
+        );
+
 
       }
 
+
       completeCurrentRoom();
 
+
       return;
+
 
     }
 
 
     /* LOOT LOCKED */
 
-    if(
-      state.encounterMode===
+    if (
+      state.encounterMode ===
       "lootLocked"
     ){
+
 
       showMessage(
         "NECESITAS 2 TARJETAS LLAVE"
       );
 
+
       return;
+
 
     }
 
 
     /* LOOT READY */
 
-    if(
-      state.encounterMode===
+    if (
+      state.encounterMode ===
       "lootReady"
     ){
 
-      state.encounterMode=
+
+      state.encounterMode =
         "missionFinal";
+
 
       setEncounterImage(
         DEFINITIONS.A1.finalCard
       );
 
-      encounterBackButton.style.display=
+
+      encounterBackButton.style.display =
         "none";
 
+
       return;
+
 
     }
 
 
     /* MISSION FINAL */
 
-    if(
-      state.encounterMode===
+    if (
+      state.encounterMode ===
       "missionFinal"
     ){
 
-      state.rooms.A1.completed=true;
-      state.rooms.A1.revealed=true;
+
+      state.rooms.A1.completed =
+        true;
+
+
+      state.rooms.A1.revealed =
+        true;
+
 
       missionComplete();
 
+
     }
 
+
   }
+
 );
 
 
@@ -3573,9 +5748,12 @@ encounterCard.addEventListener(
    MOVEMENT
    ========================================================= */
 
-function handleRoomClick(room){
+function handleRoomClick(
+  room
+){
 
-  if(
+
+  if (
     state.gameLocked
     ||
     state.ended
@@ -3588,89 +5766,135 @@ function handleRoomClick(room){
   }
 
 
-  if(
-    room===
+  if (
+    room ===
     state.currentRoom
   ){
+
 
     showMessage(
       "ESTÁS EN ESTA SALA"
     );
 
+
     return;
+
 
   }
 
 
-  if(
-    !isAdjacent(room)
+  if (
+    !isAdjacent(
+      room
+    )
   ){
+
 
     showMessage(
       "SOLO PUEDES IR A UNA SALA ALEDAÑA"
     );
 
+
     return;
+
 
   }
 
 
   /*
-    Scanner activo:
-    el primer clic solo revela.
+    Escáner activo:
+    primer clic revela,
+    sin gastar oxígeno.
   */
 
-  if(
+  if (
     state.scannerActive
     &&
-    !state.rooms[room].revealed
+    !state.rooms[
+      room
+    ].revealed
   ){
 
-    revealRoom(room);
+
+    revealRoom(
+      room
+    );
+
 
     return;
+
 
   }
 
 
   /*
-    Oxígeno al salir:
-    5 %
+    Calculamos el coste ANTES
+    de marcar la habitación
+    como visitada.
   */
 
-  if(
-    shouldChargeMove(room)
+  const movementCost =
+    getMovementOxygenCost(
+      room
+    );
+
+
+  if (
+    movementCost >
+    0
   ){
 
-    const alive=
-      consumeOxygen(5);
 
-    if(!alive){
+    const alive =
+      consumeOxygen(
+        movementCost
+      );
+
+
+    if (
+      !alive
+    ){
       return;
     }
 
+
   }
 
 
   /*
-    Sala ya completada:
-    solo mover.
+    Sala ya completada.
+    Solo nos desplazamos.
   */
 
-  if(
-    state.rooms[room].completed
+  if (
+    state.rooms[
+      room
+    ].completed
   ){
+
 
     turnOffScanner();
 
-    moveToRoom(room);
+
+    moveToRoom(
+      room
+    );
+
 
     return;
+
 
   }
 
 
-  openEncounter(room);
+  /*
+    Sala nueva o no resuelta.
+  */
+
+  openEncounter(
+    room
+  );
+
 
 }
 
@@ -3682,29 +5906,44 @@ function handleRoomClick(room){
 
 function triggerGameOver(){
 
-  if(state.ended){
+
+  if (
+    state.ended
+  ){
     return;
   }
 
-  state.ended=true;
-  state.gameLocked=true;
+
+  state.ended =
+    true;
+
+
+  state.gameLocked =
+    true;
+
 
   turnOffScanner();
+
 
   encounter.classList.remove(
     "show"
   );
 
+
   gameOverSound();
 
-  endOverlay.className=
+
+  endOverlay.className =
     "show gameover";
 
-  endTitle.textContent=
+
+  endTitle.textContent =
     "GAME OVER";
 
-  endSubtitle.textContent=
+
+  endSubtitle.textContent =
     "Te has quedado sin oxígeno.";
+
 
 }
 
@@ -3712,29 +5951,44 @@ function triggerGameOver(){
 
 function missionComplete(){
 
-  if(state.ended){
+
+  if (
+    state.ended
+  ){
     return;
   }
 
-  state.ended=true;
-  state.gameLocked=true;
+
+  state.ended =
+    true;
+
+
+  state.gameLocked =
+    true;
+
 
   turnOffScanner();
+
 
   encounter.classList.remove(
     "show"
   );
 
+
   missionSound();
 
-  endOverlay.className=
+
+  endOverlay.className =
     "show mission";
 
-  endTitle.textContent=
+
+  endTitle.textContent =
     "MISIÓN CUMPLIDA";
 
-  endSubtitle.textContent=
+
+  endSubtitle.textContent =
     "Has abierto la bóveda y recuperado el botín.";
+
 
 }
 
@@ -3744,33 +5998,48 @@ function missionComplete(){
    MOBILE DOUBLE-ZOOM GUARD
    ========================================================= */
 
-let lastTouchEnd=0;
+let lastTouchEnd =
+  0;
+
 
 document.addEventListener(
-  "touchend",
-  event=>{
 
-    const now=
+  "touchend",
+
+  event => {
+
+
+    const now =
       Date.now();
 
-    if(
-      now-
+
+    if (
+      now
+      -
       lastTouchEnd
       <=
       300
     ){
 
+
       event.preventDefault();
+
 
     }
 
-    lastTouchEnd=now;
+
+    lastTouchEnd =
+      now;
+
 
   },
+
   {
     passive:false
   }
+
 );
+
 
 </script>
 
