@@ -494,6 +494,10 @@ button{
   height:27%
 }
 
+
+/* CONTADOR ENEMIGO:
+   SOLO NÚMERO, SIN CÍRCULO */
+
 #enemyHp{
   position:absolute;
   z-index:130;
@@ -501,20 +505,18 @@ button{
   top:12.5%;
   transform:translate(-50%,-50%);
   display:none;
-  min-width:44px;
-  height:44px;
-  padding:0 10px;
-  border-radius:24px;
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,.82);
-  border:3px solid #fff;
+  background:transparent;
+  border:0;
   color:#fff;
-  font-size:clamp(22px,5vw,34px);
-  font-weight:900;
+  font-size:clamp(25px,6vw,38px);
+  font-weight:1000;
+  line-height:1;
   text-shadow:
     2px 2px 0 #000,
-    -2px -2px 0 #000;
+    -2px -2px 0 #000,
+    0 0 5px #000;
   pointer-events:none
 }
 
@@ -674,6 +676,7 @@ button{
 
 
 @media(max-width:500px){
+
   #acceptMissionButton{
     min-width:145px;
     padding:11px 20px
@@ -684,12 +687,15 @@ button{
     height:39px;
     font-size:17px
   }
+
 }
 
 @media(min-width:900px){
+
   #encounterCard{
     width:min(58vh,610px)
   }
+
 }
 
 </style>
@@ -708,11 +714,13 @@ button{
     id="introPage1"
     class="intro-page active"
   >
+
     <img
       class="intro-image"
       src="M01a.png"
       alt="Mensaje entrante"
     >
+
   </section>
 
 
@@ -985,138 +993,66 @@ const ASSETS = {
 
 /* =========================================================
    ROOM LAYOUT
-
-   Las coordenadas representan el centro
-   de cada habitación.
    ========================================================= */
 
 const ROOM_LAYOUT = {
 
-  A1:{
-    x:33.5,
-    y:17.9
-  },
+  A1:{x:33.5,y:17.9},
 
-  A2:{
-    x:50.8,
-    y:17.9
-  },
+  A2:{x:50.8,y:17.9},
 
-  A3:{
-    x:68.1,
-    y:17.9
-  },
+  A3:{x:68.1,y:17.9},
 
 
-  B1:{
-    x:50.8,
-    y:27.2
-  },
+  B1:{x:50.8,y:27.2},
 
 
-  A4:{
-    x:33.5,
-    y:37.9
-  },
+  A4:{x:33.5,y:37.9},
 
-  B2:{
-    x:50.8,
-    y:37.9
-  },
+  B2:{x:50.8,y:37.9},
 
-  A5:{
-    x:68.1,
-    y:37.9
-  },
+  A5:{x:68.1,y:37.9},
 
 
-  A6:{
-    x:16.4,
-    y:47.8
-  },
+  A6:{x:16.4,y:47.8},
 
-  B3:{
-    x:33.5,
-    y:47.8
-  },
+  B3:{x:33.5,y:47.8},
 
-  A7:{
-    x:50.8,
-    y:47.8
-  },
+  A7:{x:50.8,y:47.8},
 
-  B4:{
-    x:68.1,
-    y:47.8
-  },
+  B4:{x:68.1,y:47.8},
 
-  A8:{
-    x:85.2,
-    y:47.8
-  },
+  A8:{x:85.2,y:47.8},
 
 
-  A9:{
-    x:16.4,
-    y:57.6
-  },
+  A9:{x:16.4,y:57.6},
 
-  B5:{
-    x:50.8,
-    y:57.6
-  },
+  B5:{x:50.8,y:57.6},
 
-  A10:{
-    x:85.2,
-    y:57.6
-  },
+  A10:{x:85.2,y:57.6},
 
 
-  A11:{
-    x:16.4,
-    y:67.6
-  },
+  A11:{x:16.4,y:67.6},
 
-  B6:{
-    x:33.5,
-    y:67.6
-  },
+  B6:{x:33.5,y:67.6},
 
-  A12:{
-    x:50.8,
-    y:67.6
-  },
+  A12:{x:50.8,y:67.6},
 
-  B7:{
-    x:68.1,
-    y:67.6
-  },
+  B7:{x:68.1,y:67.6},
 
-  A13:{
-    x:85.2,
-    y:67.6
-  },
+  A13:{x:85.2,y:67.6},
 
 
-  A14:{
-    x:16.4,
-    y:77.5
-  },
+  A14:{x:16.4,y:77.5},
 
-  A15:{
-    x:85.2,
-    y:77.5
-  }
+  A15:{x:85.2,y:77.5}
 
 };
 
 
 
 /* =========================================================
-   CONNECTIONS
-
-   Solo se puede avanzar hacia
-   habitaciones conectadas.
+   ADJACENCY GRAPH
    ========================================================= */
 
 const GRAPH = {
@@ -1272,15 +1208,7 @@ const GRAPH = {
 
 
 /* =========================================================
-   ROOM DEFINITIONS
-
-   Vida y energía del jugador NO son
-   contabilizadas por la programación.
-
-   Solo:
-   - oxígeno
-   - vida del enemigo
-   - tarjetas llave ocultas
+   EVENT DEFINITIONS
    ========================================================= */
 
 const DEFINITIONS = {
@@ -1783,12 +1711,6 @@ const state = {
   ended:
     false,
 
-
-  /*
-    Estas llaves se guardan internamente,
-    pero nunca se muestran al jugador.
-  */
-
   keySources:{
 
     A6:false,
@@ -1798,7 +1720,6 @@ const state = {
     A5:false
 
   },
-
 
   rooms:{}
 
@@ -1817,14 +1738,11 @@ Object
         room
       ] = {
 
-        revealed:
-          false,
+        revealed:false,
 
-        completed:
-          false,
+        completed:false,
 
-        visited:
-          false
+        visited:false
 
       };
 
@@ -2028,11 +1946,10 @@ bgMusic.volume =
 
 
 /* =========================================================
-   CREATE ALL ROOM HOTSPOTS
+   BUILD ROOM HOTSPOTS
    ========================================================= */
 
 function buildRooms(){
-
 
   Object
     .entries(
@@ -2041,46 +1958,36 @@ function buildRooms(){
     .forEach(
       ([room,pos]) => {
 
-
         const button =
           document.createElement(
             "button"
           );
 
-
         button.type =
           "button";
-
 
         button.className =
           "room";
 
-
         button.id =
           `room-${room}`;
-
 
         button.setAttribute(
           "aria-label",
           `Habitación ${room}`
         );
 
-
         button.style.left =
           `${pos.x}%`;
-
 
         button.style.top =
           `${pos.y}%`;
 
-
         button.style.width =
           "15.2%";
 
-
         button.style.height =
           "7.6%";
-
 
         button.addEventListener(
           "click",
@@ -2093,15 +2000,12 @@ function buildRooms(){
           }
         );
 
-
         roomsLayer.appendChild(
           button
         );
 
-
       }
     );
-
 
 }
 
@@ -2112,7 +2016,7 @@ buildRooms();
 
 
 /* =========================================================
-   PRELOAD IMAGES
+   PRELOAD
    ========================================================= */
 
 [
@@ -2130,13 +2034,13 @@ buildRooms();
       DEFINITIONS
     )
     .flatMap(
-      definition => [
+      d => [
 
-        definition.card,
+        d.card,
 
-        definition.finalCard,
+        d.finalCard,
 
-        definition.icon
+        d.icon
 
       ]
     )
@@ -2148,14 +2052,11 @@ buildRooms();
 .forEach(
   src => {
 
-
-    const image =
+    const img =
       new Image();
 
-
-    image.src =
+    img.src =
       src;
-
 
   }
 );
@@ -2168,39 +2069,30 @@ buildRooms();
 
 function getAudioContext(){
 
-
-  if (
+  if(
     !gameAudioContext
   ){
 
-
-    const AudioContext =
+    const C =
       window.AudioContext
       ||
       window.webkitAudioContext;
 
-
     gameAudioContext =
-      new AudioContext();
-
+      new C();
 
   }
 
-
-  if (
+  if(
     gameAudioContext.state ===
     "suspended"
   ){
 
-
     gameAudioContext.resume();
-
 
   }
 
-
   return gameAudioContext;
-
 
 }
 
@@ -2210,36 +2102,29 @@ function toneSweep(
   startFreq,
   endFreq,
   duration,
-  volume = .1,
-  type = "sine"
+  volume=.1,
+  type="sine"
 ){
 
-
   try{
-
 
     const ctx =
       getAudioContext();
 
-
     const oscillator =
       ctx.createOscillator();
-
 
     const gain =
       ctx.createGain();
 
-
     oscillator.type =
       type;
-
 
     oscillator.frequency
       .setValueAtTime(
         startFreq,
         ctx.currentTime
       );
-
 
     oscillator.frequency
       .exponentialRampToValueAtTime(
@@ -2252,13 +2137,11 @@ function toneSweep(
         duration
       );
 
-
     gain.gain
       .setValueAtTime(
         volume,
         ctx.currentTime
       );
-
 
     gain.gain
       .exponentialRampToValueAtTime(
@@ -2268,19 +2151,15 @@ function toneSweep(
         duration
       );
 
-
     oscillator.connect(
       gain
     );
-
 
     gain.connect(
       ctx.destination
     );
 
-
     oscillator.start();
-
 
     oscillator.stop(
       ctx.currentTime
@@ -2290,11 +2169,8 @@ function toneSweep(
       .02
     );
 
-
   }
-
   catch(error){}
-
 
 }
 
@@ -2302,40 +2178,31 @@ function toneSweep(
 
 function scannerSound(){
 
-
   try{
-
 
     const ctx =
       getAudioContext();
 
-
     const oscillator1 =
       ctx.createOscillator();
-
 
     const oscillator2 =
       ctx.createOscillator();
 
-
     const gain =
       ctx.createGain();
-
 
     oscillator1.type =
       "sine";
 
-
     oscillator2.type =
       "triangle";
-
 
     oscillator1.frequency
       .setValueAtTime(
         380,
         ctx.currentTime
       );
-
 
     oscillator1.frequency
       .linearRampToValueAtTime(
@@ -2345,13 +2212,11 @@ function scannerSound(){
         .48
       );
 
-
     oscillator2.frequency
       .setValueAtTime(
         720,
         ctx.currentTime
       );
-
 
     oscillator2.frequency
       .linearRampToValueAtTime(
@@ -2361,13 +2226,11 @@ function scannerSound(){
         .48
       );
 
-
     gain.gain
       .setValueAtTime(
         .085,
         ctx.currentTime
       );
-
 
     gain.gain
       .exponentialRampToValueAtTime(
@@ -2377,27 +2240,21 @@ function scannerSound(){
         .5
       );
 
-
     oscillator1.connect(
       gain
     );
-
 
     oscillator2.connect(
       gain
     );
 
-
     gain.connect(
       ctx.destination
     );
 
-
     oscillator1.start();
 
-
     oscillator2.start();
-
 
     oscillator1.stop(
       ctx.currentTime
@@ -2405,18 +2262,14 @@ function scannerSound(){
       .5
     );
 
-
     oscillator2.stop(
       ctx.currentTime
       +
       .5
     );
 
-
   }
-
   catch(error){}
-
 
 }
 
@@ -2438,7 +2291,6 @@ function punchSound(){
 
 function lifeLossSound(){
 
-
   [
     270,
     195,
@@ -2447,10 +2299,8 @@ function lifeLossSound(){
   .forEach(
     (frequency,index) => {
 
-
       setTimeout(
         () => {
-
 
           toneSweep(
             frequency,
@@ -2460,16 +2310,12 @@ function lifeLossSound(){
             "square"
           );
 
-
         },
-
         index * 60
       );
 
-
     }
   );
-
 
 }
 
@@ -2519,7 +2365,6 @@ function itemSound(){
 
 function deathSound(){
 
-
   [
     430,
     300,
@@ -2529,10 +2374,8 @@ function deathSound(){
   .forEach(
     (frequency,index) => {
 
-
       setTimeout(
         () => {
-
 
           toneSweep(
 
@@ -2555,16 +2398,13 @@ function deathSound(){
 
           );
 
-
         },
 
         index * 85
       );
 
-
     }
   );
-
 
 }
 
@@ -2586,7 +2426,6 @@ function gameOverSound(){
 
 function missionSound(){
 
-
   [
     520,
     690,
@@ -2596,10 +2435,8 @@ function missionSound(){
   .forEach(
     (frequency,index) => {
 
-
       setTimeout(
         () => {
-
 
           toneSweep(
             frequency,
@@ -2609,16 +2446,12 @@ function missionSound(){
             "sine"
           );
 
-
         },
-
         index * 120
       );
 
-
     }
   );
-
 
 }
 
@@ -2626,44 +2459,34 @@ function missionSound(){
 
 function dockingTravelSound(){
 
-
   try{
-
 
     const ctx =
       getAudioContext();
 
-
     const master =
       ctx.createGain();
-
 
     const low =
       ctx.createOscillator();
 
-
     const high =
       ctx.createOscillator();
-
 
     const filter =
       ctx.createBiquadFilter();
 
-
     low.type =
       "sawtooth";
 
-
     high.type =
       "triangle";
-
 
     low.frequency
       .setValueAtTime(
         58,
         ctx.currentTime
       );
-
 
     low.frequency
       .linearRampToValueAtTime(
@@ -2673,13 +2496,11 @@ function dockingTravelSound(){
         2.25
       );
 
-
     high.frequency
       .setValueAtTime(
         118,
         ctx.currentTime
       );
-
 
     high.frequency
       .linearRampToValueAtTime(
@@ -2689,17 +2510,14 @@ function dockingTravelSound(){
         2.25
       );
 
-
     filter.type =
       "lowpass";
-
 
     filter.frequency
       .setValueAtTime(
         520,
         ctx.currentTime
       );
-
 
     filter.frequency
       .linearRampToValueAtTime(
@@ -2709,13 +2527,11 @@ function dockingTravelSound(){
         2.1
       );
 
-
     master.gain
       .setValueAtTime(
         .001,
         ctx.currentTime
       );
-
 
     master.gain
       .linearRampToValueAtTime(
@@ -2725,7 +2541,6 @@ function dockingTravelSound(){
         .25
       );
 
-
     master.gain
       .setValueAtTime(
         .11,
@@ -2733,7 +2548,6 @@ function dockingTravelSound(){
         +
         1.65
       );
-
 
     master.gain
       .exponentialRampToValueAtTime(
@@ -2743,32 +2557,25 @@ function dockingTravelSound(){
         2.35
       );
 
-
     low.connect(
       filter
     );
-
 
     high.connect(
       filter
     );
 
-
     filter.connect(
       master
     );
-
 
     master.connect(
       ctx.destination
     );
 
-
     low.start();
 
-
     high.start();
-
 
     low.stop(
       ctx.currentTime
@@ -2776,25 +2583,20 @@ function dockingTravelSound(){
       2.4
     );
 
-
     high.stop(
       ctx.currentTime
       +
       2.4
     );
 
-
   }
-
   catch(error){}
-
 
 }
 
 
 
 function dockingImpactSound(){
-
 
   toneSweep(
     115,
@@ -2804,7 +2606,6 @@ function dockingImpactSound(){
     "square"
   );
 
-
   setTimeout(
     () => {
 
@@ -2817,11 +2618,9 @@ function dockingImpactSound(){
       );
 
     },
-
     170
   );
 
-
   setTimeout(
     () => {
 
@@ -2834,10 +2633,8 @@ function dockingImpactSound(){
       );
 
     },
-
     270
   );
-
 
 }
 
@@ -2850,7 +2647,6 @@ function dockingImpactSound(){
 function showIntroPage(
   page
 ){
-
 
   [
     introPage1,
@@ -2867,11 +2663,9 @@ function showIntroPage(
     }
   );
 
-
   page.classList.add(
     "active"
   );
-
 
 }
 
@@ -2883,36 +2677,27 @@ introPage1.addEventListener(
 
   async () => {
 
-
-    if (
+    if(
       introLocked
     ){
       return;
     }
 
-
     getAudioContext();
-
 
     showIntroPage(
       introPage2
     );
 
-
     try{
-
 
       introMusic.currentTime =
         0;
 
-
       await introMusic.play();
 
-
     }
-
     catch(error){}
-
 
   }
 
@@ -2922,24 +2707,19 @@ introPage1.addEventListener(
 
 function crossfadeToGameMusic(){
 
-
   bgMusic.volume =
     .03;
-
 
   bgMusic.play()
     .then(
       () => {
 
-
         musicPlaying =
           true;
-
 
         musicButton.classList.add(
           "music-on"
         );
-
 
       }
     )
@@ -2947,32 +2727,25 @@ function crossfadeToGameMusic(){
       () => {}
     );
 
-
   const steps =
     18;
-
 
   let current =
     0;
 
-
   const introStart =
     introMusic.volume;
-
 
   const timer =
     setInterval(
       () => {
 
-
         current++;
-
 
         const progress =
           current
           /
           steps;
-
 
         introMusic.volume =
           Math.max(
@@ -2986,7 +2759,6 @@ function crossfadeToGameMusic(){
             )
           );
 
-
         bgMusic.volume =
           .03
           +
@@ -2998,41 +2770,32 @@ function crossfadeToGameMusic(){
           *
           progress;
 
-
-        if (
+        if(
           current >=
           steps
         ){
-
 
           clearInterval(
             timer
           );
 
-
           introMusic.pause();
-
 
           introMusic.currentTime =
             0;
 
-
           introMusic.volume =
             .34;
-
 
           bgMusic.volume =
             .32;
 
-
         }
-
 
       },
 
       65
     );
-
 
 }
 
@@ -3044,32 +2807,24 @@ acceptMissionButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
 
-
-    if (
+    if(
       introLocked
     ){
       return;
     }
 
-
     introLocked =
       true;
 
-
     getAudioContext();
-
 
     crossfadeToGameMusic();
 
-
     dockingTravelSound();
 
-
     startDockingSequence();
-
 
   }
 
@@ -3079,86 +2834,65 @@ acceptMissionButton.addEventListener(
 
 function startDockingSequence(){
 
-
   showIntroPage(
     dockPage
   );
 
-
   dockBaseImage.src =
     ASSETS.stationOnly;
-
 
   dockShip.src =
     ASSETS.playerShip;
 
-
   dockShip.style.display =
     "block";
-
 
   dockShip.classList.remove(
     "docking"
   );
 
-
   void dockShip.offsetWidth;
-
 
   setTimeout(
     () => {
-
 
       dockShip.classList.add(
         "docking"
       );
 
-
     },
-
     180
   );
-
 
   setTimeout(
     () => {
 
-
       dockingImpactSound();
-
 
       dockFlash.classList.remove(
         "flash"
       );
 
-
       void dockFlash.offsetWidth;
-
 
       dockFlash.classList.add(
         "flash"
       );
 
-
       dockBaseImage.src =
         ASSETS.dockedStation;
-
 
       dockShip.style.display =
         "none";
 
-
     },
-
     2450
   );
-
 
   setTimeout(
     startGame,
     3150
   );
-
 
 }
 
@@ -3166,37 +2900,28 @@ function startDockingSequence(){
 
 function startGame(){
 
-
   mapImage.src =
     ASSETS.map100;
-
 
   state.oxygen =
     100;
 
-
   updateOxygenUI();
-
 
   introOverlay.style.display =
     "none";
 
-
   game.style.display =
     "block";
-
 
   window.scrollTo(
     0,
     0
   );
 
-
   refreshRoomMarkers();
 
-
   showTutorial();
-
 
 }
 
@@ -3204,57 +2929,41 @@ function startGame(){
 
 async function toggleMusic(){
 
-
-  if (
+  if(
     !musicPlaying
   ){
 
-
     try{
-
 
       await bgMusic.play();
 
-
       musicPlaying =
         true;
-
 
       musicButton.classList.add(
         "music-on"
       );
 
-
     }
-
     catch(error){
-
 
       showMessage(
         "NO SE PUDO ACTIVAR LA MÚSICA"
       );
 
-
     }
 
-
     return;
-
-
   }
 
-
   bgMusic.pause();
-
 
   musicPlaying =
     false;
 
-
   musicButton.classList.remove(
     "music-on"
   );
-
 
 }
 
@@ -3266,12 +2975,9 @@ musicButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
 
-
     toggleMusic();
-
 
   }
 
@@ -3297,29 +3003,23 @@ const TUTORIAL_MESSAGES = [
 
 function showTutorial(){
 
-
   state.gameLocked =
     true;
 
-
   tutorialIndex =
     0;
-
 
   tutorialText.textContent =
     TUTORIAL_MESSAGES[
       0
     ];
 
-
   tutorialNext.textContent =
     "SIGUIENTE";
-
 
   tutorialOverlay.classList.add(
     "show"
   );
-
 
 }
 
@@ -3331,36 +3031,27 @@ tutorialNext.addEventListener(
 
   () => {
 
-
     tutorialIndex++;
 
-
-    if (
+    if(
       tutorialIndex >=
       TUTORIAL_MESSAGES.length
     ){
-
 
       tutorialOverlay.classList.remove(
         "show"
       );
 
-
       state.gameLocked =
         false;
 
-
       return;
-
-
     }
-
 
     tutorialText.textContent =
       TUTORIAL_MESSAGES[
         tutorialIndex
       ];
-
 
     tutorialNext.textContent =
       tutorialIndex ===
@@ -3371,7 +3062,6 @@ tutorialNext.addEventListener(
         "ENTENDIDO"
         :
         "SIGUIENTE";
-
 
   }
 
@@ -3387,44 +3077,34 @@ function showMessage(
   html
 ){
 
-
   clearTimeout(
     messageTimer
   );
-
 
   message.classList.remove(
     "show"
   );
 
-
   void message.offsetWidth;
-
 
   message.innerHTML =
     html;
-
 
   message.classList.add(
     "show"
   );
 
-
   messageTimer =
     setTimeout(
       () => {
-
 
         message.classList.remove(
           "show"
         );
 
-
       },
-
       1400
     );
-
 
 }
 
@@ -3436,25 +3116,21 @@ function showMessage(
 
 function oxygenPhase(){
 
-
-  if (
+  if(
     state.oxygen <
     20
   ){
     return 20;
   }
 
-
-  if (
+  if(
     state.oxygen <
     60
   ){
     return 60;
   }
 
-
   return 100;
-
 
 }
 
@@ -3463,7 +3139,6 @@ function oxygenPhase(){
 function formatOxygen(
   value
 ){
-
 
   return `${
     Number.isInteger(
@@ -3480,94 +3155,77 @@ function formatOxygen(
         )
   }%`;
 
-
 }
 
 
 
 function updateOxygenUI(){
 
-
   const phase =
     oxygenPhase();
-
 
   oxygenCounter.textContent =
     formatOxygen(
       state.oxygen
     );
 
-
   oxygenCounter.classList.remove(
     "phase60",
     "phase20"
   );
 
-
-  if (
+  if(
     phase ===
     100
   ){
 
-
     mapImage.src =
       ASSETS.map100;
 
-
   }
 
-
-  if (
+  if(
     phase ===
     60
   ){
 
-
     mapImage.src =
       ASSETS.map60;
-
 
     oxygenCounter.classList.add(
       "phase60"
     );
 
-
   }
 
-
-  if (
+  if(
     phase ===
     20
   ){
 
-
     mapImage.src =
       ASSETS.map20;
-
 
     oxygenCounter.classList.add(
       "phase20"
     );
 
-
   }
-
 
 }
 
 
 
 function consumeOxygen(
-  amount = 7.5
+  amount=5,
+  reason=""
 ){
 
-
-  if (
+  if(
     state.ended
   ){
     return false;
   }
-
 
   state.oxygen =
     Math.max(
@@ -3585,52 +3243,37 @@ function consumeOxygen(
       10
     );
 
-
   updateOxygenUI();
 
-
-  if (
+  if(
     state.oxygen <=
     0
   ){
 
-
     triggerGameOver();
-
 
     return false;
 
-
   }
 
-
   return true;
-
 
 }
 
 
 
-/*
-  No se consume oxígeno:
-  - desde ENTRADA hacia A12
-  - al entrar a A1 si ya se tienen 2 llaves
-*/
-
 function shouldChargeMove(
   targetRoom
 ){
 
-
-  if (
+  if(
     state.currentRoom ===
     "ENTRADA"
   ){
     return false;
   }
 
-
-  if (
+  if(
     targetRoom ===
       "A1"
     &&
@@ -3640,20 +3283,11 @@ function shouldChargeMove(
     return false;
   }
 
-
   return true;
-
 
 }
 
 
-
-/* =========================================================
-   USE OBJECT
-
-   No registra qué objeto fue usado.
-   Solo consume oxígeno.
-   ========================================================= */
 
 useObjectButton.addEventListener(
 
@@ -3661,8 +3295,7 @@ useObjectButton.addEventListener(
 
   () => {
 
-
-    if (
+    if(
       state.gameLocked
       ||
       state.ended
@@ -3674,28 +3307,23 @@ useObjectButton.addEventListener(
       return;
     }
 
-
     itemSound();
-
 
     const alive =
       consumeOxygen(
-        7.5
+        5,
+        "item"
       );
 
-
-    if (
+    if(
       alive
     ){
 
-
       showMessage(
-        "OBJETO UTILIZADO<br>−7,5% O₂"
+        "OBJETO UTILIZADO<br>−5% O₂"
       );
 
-
     }
-
 
   }
 
@@ -3704,11 +3332,10 @@ useObjectButton.addEventListener(
 
 
 /* =========================================================
-   KEYS - HIDDEN
+   KEYS
    ========================================================= */
 
 function keyCount(){
-
 
   return Object
     .values(
@@ -3719,7 +3346,6 @@ function keyCount(){
     )
     .length;
 
-
 }
 
 
@@ -3728,27 +3354,22 @@ function grantKey(
   source
 ){
 
-
-  if (
+  if(
     !state.keySources[
       source
     ]
   ){
-
 
     state.keySources[
       source
     ] =
       true;
 
-
     showMessage(
       "TARJETA LLAVE OBTENIDA"
     );
 
-
   }
-
 
 }
 
@@ -3763,45 +3384,37 @@ function addMapIcon(
   image,
   room,
   classes,
-  direction = ""
+  direction=""
 ){
-
 
   removeMapIcon(
     id
   );
-
 
   const position =
     ROOM_LAYOUT[
       room
     ];
 
-
-  if (
+  if(
     !position
   ){
     return null;
   }
-
 
   const icon =
     document.createElement(
       "img"
     );
 
-
   icon.id =
     id;
-
 
   icon.src =
     image;
 
-
   icon.draggable =
     false;
-
 
   icon.className =
     `map-icon ${classes}${
@@ -3812,22 +3425,17 @@ function addMapIcon(
         ""
     }`;
 
-
   icon.style.left =
     `${position.x}%`;
 
-
   icon.style.top =
     `${position.y}%`;
-
 
   iconsLayer.appendChild(
     icon
   );
 
-
   return icon;
-
 
 }
 
@@ -3837,23 +3445,18 @@ function removeMapIcon(
   id
 ){
 
-
   const element =
     document.getElementById(
       id
     );
 
-
-  if (
+  if(
     element
   ){
 
-
     element.remove();
 
-
   }
-
 
 }
 
@@ -3861,11 +3464,9 @@ function removeMapIcon(
 
 function clearStandardMarkers(){
 
-
   removeMapIcon(
     "player-marker"
   );
-
 
   Object
     .keys(
@@ -3874,20 +3475,16 @@ function clearStandardMarkers(){
     .forEach(
       room => {
 
-
         removeMapIcon(
           `check-${room}`
         );
-
 
         removeMapIcon(
           `event-${room}`
         );
 
-
       }
     );
-
 
 }
 
@@ -3895,15 +3492,12 @@ function clearStandardMarkers(){
 
 function refreshRoomMarkers(){
 
-
   clearStandardMarkers();
 
-
-  if (
+  if(
     state.currentRoom !==
     "ENTRADA"
   ){
-
 
     addMapIcon(
 
@@ -3917,9 +3511,7 @@ function refreshRoomMarkers(){
 
     );
 
-
   }
-
 
   Object
     .keys(
@@ -3928,25 +3520,21 @@ function refreshRoomMarkers(){
     .forEach(
       room => {
 
-
         const roomState =
           state.rooms[
             room
           ];
 
-
-        if (
+        if(
           room ===
           state.currentRoom
         ){
           return;
         }
 
-
-        if (
+        if(
           roomState.completed
         ){
-
 
           addMapIcon(
 
@@ -3960,17 +3548,12 @@ function refreshRoomMarkers(){
 
           );
 
-
           return;
-
-
         }
 
-
-        if (
+        if(
           roomState.revealed
         ){
-
 
           addMapIcon(
 
@@ -3986,13 +3569,10 @@ function refreshRoomMarkers(){
 
           );
 
-
         }
-
 
       }
     );
-
 
 }
 
@@ -4002,19 +3582,15 @@ function moveToRoom(
   room
 ){
 
-
   state.currentRoom =
     room;
-
 
   state.rooms[
     room
   ].visited =
     true;
 
-
   refreshRoomMarkers();
-
 
 }
 
@@ -4026,13 +3602,11 @@ function moveToRoom(
 
 function adjacentRooms(){
 
-
   return GRAPH[
     state.currentRoom
   ]
   ||
   [];
-
 
 }
 
@@ -4042,12 +3616,10 @@ function isAdjacent(
   target
 ){
 
-
   return adjacentRooms()
     .includes(
       target
     );
-
 
 }
 
@@ -4058,28 +3630,24 @@ function directionBetween(
   to
 ){
 
-
-  if (
+  if(
     from ===
     "ENTRADA"
   ){
     return "up";
   }
 
-
   const start =
     ROOM_LAYOUT[
       from
     ];
-
 
   const end =
     ROOM_LAYOUT[
       to
     ];
 
-
-  if (
+  if(
     !start
     ||
     !end
@@ -4087,20 +3655,17 @@ function directionBetween(
     return "up";
   }
 
-
   const dx =
     end.x
     -
     start.x;
-
 
   const dy =
     end.y
     -
     start.y;
 
-
-  if (
+  if(
     Math.abs(
       dx
     )
@@ -4110,16 +3675,13 @@ function directionBetween(
     )
   ){
 
-
     return dx > 0
       ?
       "right"
       :
       "left";
 
-
   }
-
 
   return dy > 0
     ?
@@ -4127,22 +3689,18 @@ function directionBetween(
     :
     "up";
 
-
 }
 
 
 
 function turnOffScanner(){
 
-
   state.scannerActive =
     false;
-
 
   scannerButton.classList.remove(
     "scanner-on"
   );
-
 
   Object
     .keys(
@@ -4151,15 +3709,12 @@ function turnOffScanner(){
     .forEach(
       room => {
 
-
         removeMapIcon(
           `scan-${room}`
         );
 
-
       }
     );
-
 
 }
 
@@ -4167,8 +3722,7 @@ function turnOffScanner(){
 
 function scanNearbyRooms(){
 
-
-  if (
+  if(
     state.gameLocked
     ||
     state.ended
@@ -4180,42 +3734,32 @@ function scanNearbyRooms(){
     return;
   }
 
-
-  if (
+  if(
     state.scannerActive
   ){
 
-
     turnOffScanner();
 
-
     return;
-
-
   }
-
 
   let count =
     0;
 
-
   adjacentRooms()
     .forEach(
       room => {
-
 
         const roomState =
           state.rooms[
             room
           ];
 
-
-        if (
+        if(
           !roomState.completed
           &&
           !roomState.revealed
         ){
-
 
           addMapIcon(
 
@@ -4234,44 +3778,32 @@ function scanNearbyRooms(){
 
           );
 
-
           count++;
 
-
         }
-
 
       }
     );
 
-
-  if (
+  if(
     !count
   ){
-
 
     showMessage(
       "SIN NUEVAS SEÑALES"
     );
 
-
     return;
-
-
   }
-
 
   state.scannerActive =
     true;
-
 
   scannerButton.classList.add(
     "scanner-on"
   );
 
-
   scannerSound();
-
 
 }
 
@@ -4291,20 +3823,17 @@ function revealRoom(
   room
 ){
 
-
   const roomState =
     state.rooms[
       room
     ];
-
 
   const definition =
     DEFINITIONS[
       room
     ];
 
-
-  if (
+  if(
     !roomState
     ||
     !definition
@@ -4312,15 +3841,12 @@ function revealRoom(
     return;
   }
 
-
   roomState.revealed =
     true;
-
 
   removeMapIcon(
     `scan-${room}`
   );
-
 
   addMapIcon(
 
@@ -4334,16 +3860,11 @@ function revealRoom(
 
   );
 
-
   energyLossSound();
 
-
   showMessage(
-
     `${definition.label}<br>−2 ENERGÍAS`
-
   );
-
 
 }
 
@@ -4357,14 +3878,11 @@ function setEncounterImage(
   src
 ){
 
-
   encounterImage.onerror =
     null;
 
-
   encounterImage.src =
     src;
-
 
 }
 
@@ -4372,38 +3890,29 @@ function setEncounterImage(
 
 function resetEncounterUI(){
 
-
   encounterCard.className =
     "";
-
 
   encounterCard.style.cursor =
     "default";
 
-
   enemyHp.style.display =
     "none";
-
 
   gunButton.style.display =
     "none";
 
-
   fistButton.style.display =
     "none";
-
 
   encounterBackButton.style.display =
     "none";
 
-
   combatLocked =
     false;
 
-
   state.combat =
     null;
-
 
 }
 
@@ -4413,10 +3922,8 @@ function currentEnemyHp(
   definition
 ){
 
-
   const phase =
     oxygenPhase();
-
 
   return definition.hp
     ?
@@ -4426,7 +3933,6 @@ function currentEnemyHp(
     :
     0;
 
-
 }
 
 
@@ -4435,44 +3941,35 @@ function openEncounter(
   room
 ){
 
-
   const definition =
     DEFINITIONS[
       room
     ];
 
-
-  if (
+  if(
     !definition
   ){
     return;
   }
 
-
   turnOffScanner();
-
 
   state.pendingRoom =
     room;
-
 
   state.rooms[
     room
   ].visited =
     true;
 
-
   resetEncounterUI();
-
 
   setEncounterImage(
     definition.card
   );
 
-
   encounterImage.alt =
     definition.label;
-
 
   encounter.classList.add(
     "show"
@@ -4481,38 +3978,31 @@ function openEncounter(
 
   /* COMBAT */
 
-  if (
+  if(
     definition.type ===
     "combat"
   ){
 
-
     state.encounterMode =
       "combat";
-
 
     encounterCard.classList.add(
       "combat"
     );
 
-
     enemyHp.style.display =
       "flex";
-
 
     gunButton.style.display =
       "block";
 
-
     fistButton.style.display =
       "block";
-
 
     const hp =
       currentEnemyHp(
         definition
       );
-
 
     state.combat = {
 
@@ -4530,74 +4020,56 @@ function openEncounter(
 
     };
 
-
     enemyHp.textContent =
       hp;
 
-
     return;
-
 
   }
 
 
-  /* LOOT ROOM */
+  /* LOOT */
 
-  if (
+  if(
     definition.type ===
     "loot"
   ){
 
-
-    if (
+    if(
       keyCount() >=
       2
     ){
 
-
       state.encounterMode =
         "lootReady";
-
 
       encounterCard.style.cursor =
         "pointer";
 
-
     }
-
     else{
-
 
       state.encounterMode =
         "lootLocked";
 
-
       encounterCard.style.cursor =
         "pointer";
-
 
       encounterBackButton.style.display =
         "block";
 
-
     }
 
-
     return;
-
 
   }
 
 
-  /* SIMPLE / KEY */
-
   state.encounterMode =
     definition.type;
 
-
   encounterCard.style.cursor =
     "pointer";
-
 
 }
 
@@ -4605,50 +4077,40 @@ function openEncounter(
 
 function completeCurrentRoom(){
 
-
   const room =
     state.pendingRoom;
 
-
-  if (
+  if(
     !room
   ){
     return;
   }
-
 
   state.rooms[
     room
   ].completed =
     true;
 
-
   state.rooms[
     room
   ].revealed =
     true;
 
-
   encounter.classList.remove(
     "show"
   );
 
-
   state.pendingRoom =
     null;
-
 
   state.encounterMode =
     null;
 
-
   resetEncounterUI();
-
 
   moveToRoom(
     room
   );
-
 
 }
 
@@ -4656,44 +4118,35 @@ function completeCurrentRoom(){
 
 function closeUnresolvedRoomToMap(){
 
-
   const room =
     state.pendingRoom;
 
-
-  if (
+  if(
     !room
   ){
     return;
   }
-
 
   state.rooms[
     room
   ].revealed =
     true;
 
-
   encounter.classList.remove(
     "show"
   );
 
-
   state.pendingRoom =
     null;
-
 
   state.encounterMode =
     null;
 
-
   resetEncounterUI();
-
 
   moveToRoom(
     room
   );
-
 
 }
 
@@ -4701,19 +4154,15 @@ function closeUnresolvedRoomToMap(){
 
 function animateHit(){
 
-
   encounterCard.classList.remove(
     "hit"
   );
 
-
   void encounterCard.offsetWidth;
-
 
   encounterCard.classList.add(
     "hit"
   );
-
 
 }
 
@@ -4727,8 +4176,7 @@ function attack(
   kind
 ){
 
-
-  if (
+  if(
     state.encounterMode !==
       "combat"
     ||
@@ -4741,10 +4189,8 @@ function attack(
     return;
   }
 
-
   combatLocked =
     true;
-
 
   const combat =
     state.combat;
@@ -4752,28 +4198,23 @@ function attack(
 
   /* PUÑO */
 
-  if (
+  if(
     kind ===
     "fist"
   ){
 
-
     combat.fists++;
 
-
     punchSound();
-
 
     setTimeout(
       lifeLossSound,
       65
     );
 
-
     showMessage(
       "−1 VIDA"
     );
-
 
   }
 
@@ -4782,23 +4223,18 @@ function attack(
 
   else{
 
-
     combat.shots++;
 
-
     gunSound();
-
 
     setTimeout(
       energyLossSound,
       65
     );
 
-
     showMessage(
       "−1 ENERGÍA"
     );
-
 
   }
 
@@ -4811,10 +4247,8 @@ function attack(
       1
     );
 
-
   enemyHp.textContent =
     combat.hp;
-
 
   animateHit();
 
@@ -4822,22 +4256,16 @@ function attack(
   setTimeout(
     () => {
 
-
-      if (
+      if(
         combat.hp >
         0
       ){
 
-
         combatLocked =
           false;
 
-
         return;
-
-
       }
-
 
       const definition =
         DEFINITIONS[
@@ -4854,15 +4282,16 @@ function attack(
 
 
       /*
-        A5 requiere derrotarlo
-        completamente con puños
-        para entregar la llave.
+        A5 conserva su condición especial:
+        la llave se consigue solo si fue
+        derrotado completamente con puños.
 
-        Los demás desenlaces se activan
-        cuando hubo más puños que disparos.
+        El resto activa desenlace cuando
+        puños y disparos quedan iguales.
       */
 
       const earnsFinal =
+
         combat.eventId ===
           "A5"
 
@@ -4877,76 +4306,63 @@ function attack(
         :
 
         (
-          combat.fists >
+          combat.fists ===
             combat.shots
+          &&
+          combat.fists >
+            0
           &&
           !!definition.finalCard
         );
 
 
-      if (
+      if(
         earnsFinal
       ){
 
-
         state.encounterMode =
           "final";
-
 
         encounterCard.classList.remove(
           "combat"
         );
 
-
         enemyHp.style.display =
           "none";
-
 
         gunButton.style.display =
           "none";
 
-
         fistButton.style.display =
           "none";
-
 
         setEncounterImage(
           definition.finalCard
         );
 
-
         encounterImage.alt =
           `Desenlace ${combat.eventId}`;
-
 
         encounterCard.style.cursor =
           "pointer";
 
-
         combatLocked =
           false;
 
-
         return;
-
-
       }
 
 
       deathSound();
-
 
       setTimeout(
         completeCurrentRoom,
         430
       );
 
-
     },
-
     320
   );
-
 
 }
 
@@ -4958,14 +4374,11 @@ gunButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
-
 
     attack(
       "gun"
     );
-
 
   }
 
@@ -4979,14 +4392,11 @@ fistButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
-
 
     attack(
       "fist"
     );
-
 
   }
 
@@ -5000,31 +4410,22 @@ encounterBackButton.addEventListener(
 
   event => {
 
-
     event.stopPropagation();
 
-
-    if (
+    if(
       state.encounterMode ===
       "lootLocked"
     ){
 
-
       closeUnresolvedRoomToMap();
 
-
     }
-
 
   }
 
 );
 
 
-
-/* =========================================================
-   TOUCH EVENT CARD
-   ========================================================= */
 
 encounterCard.addEventListener(
 
@@ -5033,157 +4434,123 @@ encounterCard.addEventListener(
   () => {
 
 
-    /* SIMPLE EVENT */
+    /* SIMPLE */
 
-    if (
+    if(
       state.encounterMode ===
       "simple"
     ){
 
-
       completeCurrentRoom();
 
-
       return;
-
-
     }
 
 
-    /* KEY ROOM */
+    /* KEY */
 
-    if (
+    if(
       state.encounterMode ===
       "key"
     ){
 
-
       const room =
         state.pendingRoom;
-
 
       const definition =
         DEFINITIONS[
           room
         ];
 
-
       grantKey(
         definition.keySource
       );
 
-
       completeCurrentRoom();
 
-
       return;
-
-
     }
 
 
-    /* CLUE / FINAL */
+    /* FINAL */
 
-    if (
+    if(
       state.encounterMode ===
       "final"
     ){
 
-
       const room =
         state.pendingRoom;
 
-
-      if (
+      if(
         room ===
         "A5"
       ){
-
 
         grantKey(
           "A5"
         );
 
-
       }
-
 
       completeCurrentRoom();
 
-
       return;
-
-
     }
 
 
-    /* LOOT WITHOUT ENOUGH KEYS */
+    /* LOOT LOCKED */
 
-    if (
+    if(
       state.encounterMode ===
       "lootLocked"
     ){
-
 
       showMessage(
         "NECESITAS 2 TARJETAS LLAVE"
       );
 
-
       return;
-
-
     }
 
 
-    /* OPEN VAULT */
+    /* LOOT READY */
 
-    if (
+    if(
       state.encounterMode ===
       "lootReady"
     ){
 
-
       state.encounterMode =
         "missionFinal";
-
 
       setEncounterImage(
         DEFINITIONS.A1.finalCard
       );
 
-
       encounterBackButton.style.display =
         "none";
 
-
       return;
-
-
     }
 
 
-    /* MISSION COMPLETE */
+    /* MISSION FINAL */
 
-    if (
+    if(
       state.encounterMode ===
       "missionFinal"
     ){
 
-
       state.rooms.A1.completed =
         true;
-
 
       state.rooms.A1.revealed =
         true;
 
-
       missionComplete();
 
-
     }
-
 
   }
 
@@ -5193,20 +4560,15 @@ encounterCard.addEventListener(
 
 /* =========================================================
    ROOM MOVEMENT
-
-   El oxígeno se descuenta al SALIR
-   de una habitación.
-
-   Excepción:
-   entrar a A1 con 2+ llaves no cuesta O2.
+   Oxygen se descuenta al salir.
+   Consumo general: 5%.
    ========================================================= */
 
 function handleRoomClick(
   room
 ){
 
-
-  if (
+  if(
     state.gameLocked
     ||
     state.ended
@@ -5219,47 +4581,39 @@ function handleRoomClick(
   }
 
 
-  if (
+  if(
     room ===
     state.currentRoom
   ){
-
 
     showMessage(
       "ESTÁS EN ESTA SALA"
     );
 
-
     return;
-
-
   }
 
 
-  if (
+  if(
     !isAdjacent(
       room
     )
   ){
 
-
     showMessage(
       "SOLO PUEDES IR A UNA SALA ALEDAÑA"
     );
 
-
     return;
-
-
   }
 
 
   /*
-    Si el escáner está activo,
-    el primer toque revela.
+    Si escáner está activo:
+    primer toque revela.
   */
 
-  if (
+  if(
     state.scannerActive
     &&
     !state.rooms[
@@ -5267,80 +4621,64 @@ function handleRoomClick(
     ].revealed
   ){
 
-
     revealRoom(
       room
     );
 
-
     return;
-
-
   }
 
 
   /*
-    Cobro de oxígeno al abandonar
-    la habitación actual.
+    Consumo de oxígeno al salir
+    de la habitación actual.
   */
 
-  if (
+  if(
     shouldChargeMove(
       room
     )
   ){
 
-
     const alive =
       consumeOxygen(
-        7.5
+        5,
+        "move"
       );
 
-
-    if (
+    if(
       !alive
     ){
       return;
     }
 
-
   }
 
 
   /*
-    Si la sala ya se resolvió,
-    solo nos movemos.
+    Sala ya completada:
+    solo movimiento.
   */
 
-  if (
+  if(
     state.rooms[
       room
     ].completed
   ){
 
-
     turnOffScanner();
-
 
     moveToRoom(
       room
     );
 
-
     return;
-
-
   }
 
-
-  /*
-    Sala todavía no resuelta.
-  */
 
   openEncounter(
     room
   );
-
 
 }
 
@@ -5352,44 +4690,34 @@ function handleRoomClick(
 
 function triggerGameOver(){
 
-
-  if (
+  if(
     state.ended
   ){
     return;
   }
 
-
   state.ended =
     true;
-
 
   state.gameLocked =
     true;
 
-
   turnOffScanner();
-
 
   encounter.classList.remove(
     "show"
   );
 
-
   gameOverSound();
-
 
   endOverlay.className =
     "show gameover";
 
-
   endTitle.textContent =
     "GAME OVER";
 
-
   endSubtitle.textContent =
     "Te has quedado sin oxígeno.";
-
 
 }
 
@@ -5397,44 +4725,34 @@ function triggerGameOver(){
 
 function missionComplete(){
 
-
-  if (
+  if(
     state.ended
   ){
     return;
   }
 
-
   state.ended =
     true;
-
 
   state.gameLocked =
     true;
 
-
   turnOffScanner();
-
 
   encounter.classList.remove(
     "show"
   );
 
-
   missionSound();
-
 
   endOverlay.className =
     "show mission";
 
-
   endTitle.textContent =
     "MISIÓN CUMPLIDA";
 
-
   endSubtitle.textContent =
     "Has abierto la bóveda y recuperado el botín.";
-
 
 }
 
@@ -5447,19 +4765,16 @@ function missionComplete(){
 let lastTouchEnd =
   0;
 
-
 document.addEventListener(
 
   "touchend",
 
   event => {
 
-
     const now =
       Date.now();
 
-
-    if (
+    if(
       now
       -
       lastTouchEnd
@@ -5467,16 +4782,12 @@ document.addEventListener(
       300
     ){
 
-
       event.preventDefault();
-
 
     }
 
-
     lastTouchEnd =
       now;
-
 
   },
 
