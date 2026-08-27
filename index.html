@@ -2,130 +2,4038 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
 <title>MPL - Estación Espacial</title>
+
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;padding:0;width:100%;min-height:100%;background:#050713;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden;touch-action:manipulation}
-body{display:flex;justify-content:center;align-items:flex-start}
-#game{position:relative;width:min(100vw,760px);margin:0 auto;overflow:hidden;background:#050713;user-select:none;-webkit-user-select:none}
-#map{position:relative;width:100%}
-#mapImage{display:block;width:100%;height:auto;pointer-events:none}
-.room{position:absolute;z-index:20;cursor:pointer}
-#roomA12{left:43%;top:61.4%;width:15.2%;height:7.6%}
-#roomB5{left:43%;top:51.7%;width:15.2%;height:7.6%}
-#roomB6{left:26%;top:61.4%;width:14.8%;height:7.6%}
-#roomB7{left:60.2%;top:61.4%;width:14.8%;height:7.6%}
-#scannerButton{position:absolute;left:38%;top:89.3%;width:24%;height:8.9%;z-index:25;cursor:pointer;animation:scannerPulse 1.8s infinite ease-in-out}
-#scannerButton.scanner-on{animation:scannerOn .9s infinite ease-in-out}
-@keyframes scannerPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.2)}}
-@keyframes scannerOn{0%,100%{filter:brightness(1.15) drop-shadow(0 0 5px #a8d336)}50%{filter:brightness(1.4) drop-shadow(0 0 15px #a8d336)}}
-#musicButton{position:absolute;top:12px;right:12px;z-index:70;min-height:44px;padding:8px 14px;border:2px solid #a8d336;border-radius:24px;background:rgba(10,15,20,.88);color:#fff;font-size:14px;font-weight:900;cursor:pointer;box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 12px rgba(168,211,54,.25)}
-#musicButton:active{transform:scale(.94)}
-#musicButton.music-on{background:rgba(130,170,30,.92);box-shadow:0 0 0 2px rgba(0,0,0,.45),0 0 18px rgba(168,211,54,.7)}
-#iconsLayer{position:absolute;inset:0;z-index:30;pointer-events:none}
-.map-icon{position:absolute;pointer-events:none;object-fit:contain}
-.pos-A12{left:50.6%;top:65.2%}.pos-B5{left:50.5%;top:55.5%}.pos-B6{left:33.4%;top:65.1%}.pos-B7{left:67.7%;top:65.1%}
-.player-icon{width:13%;transform:translate(-50%,-50%);animation:pop .35s ease-out;filter:drop-shadow(0 0 8px rgba(255,255,255,.35))}
-.event-icon{width:12.5%;transform:translate(-50%,-50%);animation:pop .35s ease-out}
-.check-icon{width:11.5%;transform:translate(-50%,-50%);animation:pop .35s ease-out}
-.scanner-wave{width:9%;animation:waveGlow 1s infinite ease-in-out}
-@keyframes pop{from{opacity:0;transform:translate(-50%,-50%) scale(.25)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-@keyframes waveGlow{0%,100%{opacity:.62;filter:brightness(.95)}50%{opacity:1;filter:brightness(1.22)}}
-.dir-up{transform:translate(-50%,-50%) rotate(0)}.dir-right{transform:translate(-50%,-50%) rotate(90deg)}.dir-left{transform:translate(-50%,-50%) rotate(-90deg)}.dir-down{transform:translate(-50%,-50%) rotate(180deg)}
-#encounter{position:fixed;inset:0;z-index:100;display:flex;justify-content:center;align-items:center;padding:12px;background:rgba(0,0,0,.62);opacity:0;visibility:hidden;transform:scale(.96);transition:opacity .2s ease,transform .2s ease}
-#encounter.show{opacity:1;visibility:visible;transform:scale(1)}
-#encounterCard{position:relative;width:min(82vw,650px);max-height:94vh;cursor:default}
-#encounterImage{display:block;width:100%;height:auto;max-height:94vh;object-fit:contain;pointer-events:none}
-.attack-zone{position:absolute;z-index:120;border:0;background:transparent;cursor:pointer;display:none}
-#gunButton{left:8%;top:54%;width:30%;height:22%}
-#fistButton{left:66%;top:54%;width:29%;height:22%}
-#enemyHp{position:absolute;z-index:125;left:82.2%;top:13.8%;transform:translate(-50%,-50%);display:none;min-width:44px;height:44px;padding:0 10px;border-radius:24px;align-items:center;justify-content:center;background:rgba(0,0,0,.82);border:3px solid #fff;color:#fff;font-size:clamp(22px,5vw,34px);font-weight:900;text-shadow:2px 2px 0 #000,-2px -2px 0 #000;pointer-events:none}
-#encounterCard.combat #gunButton,#encounterCard.combat #fistButton,#encounterCard.combat #enemyHp{display:flex}
-#encounterCard.hit{animation:cardHit .22s ease}
-@keyframes cardHit{0%{transform:scale(1)}45%{transform:scale(.985)}100%{transform:scale(1)}}
-#message{position:fixed;left:50%;top:44%;transform:translate(-50%,-50%) scale(.8);z-index:200;min-width:240px;max-width:85vw;padding:17px 25px;border-radius:18px;background:rgba(15,18,22,.95);border:3px solid #a8d336;color:#fff;font-size:clamp(20px,4.6vw,36px);font-weight:900;line-height:1.15;text-align:center;opacity:0;visibility:hidden;box-shadow:0 0 0 3px rgba(0,0,0,.55),0 0 25px rgba(168,211,54,.45);pointer-events:none}
-#message.show{visibility:visible;animation:messageAnimation 1.35s ease forwards}
-@keyframes messageAnimation{0%{opacity:0;transform:translate(-50%,-20%) scale(.7)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}72%{opacity:1;transform:translate(-50%,-60%) scale(1)}100%{opacity:0;transform:translate(-50%,-95%) scale(.95)}}
-@media(max-width:500px){#musicButton{top:8px;right:8px;min-height:40px;padding:6px 10px;font-size:12px}}
-@media(min-width:900px){#encounterCard{width:min(58vh,610px)}}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  background:#050713;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+  touch-action:manipulation;
+}
+
+body{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+img{
+  user-select:none;
+  -webkit-user-drag:none;
+}
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+#introOverlay{
+  position:relative;
+  width:min(100vw,760px);
+  margin:0 auto;
+  background:#050713;
+  overflow:hidden;
+}
+
+.intro-page{
+  display:none;
+  position:relative;
+  width:100%;
+  animation:introFade .28s ease;
+}
+
+.intro-page.active{
+  display:block;
+}
+
+.intro-image,
+.dock-base{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+
+/* PANTALLA 1 */
+
+#introPage1{
+  cursor:pointer;
+}
+
+
+/* BOTÓN ACEPTAR */
+
+#acceptMissionButton{
+  position:absolute;
+
+  left:50%;
+  bottom:4.5%;
+
+  transform:translateX(-50%);
+
+  z-index:10;
+
+  min-width:180px;
+
+  padding:14px 28px;
+
+  border:3px solid #ffc164;
+  border-radius:18px;
+
+  background:rgba(190,92,0,.93);
+
+  color:#fff;
+
+  font-size:clamp(19px,4vw,28px);
+
+  font-weight:900;
+
+  letter-spacing:.8px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.45),
+    0 0 22px rgba(255,142,22,.65);
+}
+
+#acceptMissionButton:active{
+  transform:
+    translateX(-50%)
+    scale(.96);
+}
+
+
+/* =========================================================
+   SECUENCIA DE ACOPLE
+   ========================================================= */
+
+#dockScene{
+  position:relative;
+
+  width:100%;
+
+  overflow:hidden;
+
+  background:#050713;
+}
+
+#dockShip{
+  position:absolute;
+
+  left:50%;
+  top:111%;
+
+  width:25%;
+  height:auto;
+
+  transform:
+    translate(-50%,-50%);
+
+  filter:
+    drop-shadow(
+      0 0 14px
+      rgba(255,139,30,.6)
+    );
+
+  z-index:5;
+
+  opacity:1;
+}
+
+#dockShip.docking{
+  animation:
+    dockMove
+    2.25s
+    cubic-bezier(.25,.75,.25,1)
+    forwards;
+}
+
+
+/* PEQUEÑO DESTELLO CUANDO ACOPLA */
+
+#dockFlash{
+  position:absolute;
+
+  inset:0;
+
+  z-index:8;
+
+  background:#fff;
+
+  opacity:0;
+
+  pointer-events:none;
+}
+
+#dockFlash.flash{
+  animation:
+    dockFlash
+    .28s
+    ease;
+}
+
+
+@keyframes introFade{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+
+@keyframes dockMove{
+
+  0%{
+    top:112%;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.92);
+  }
+
+  22%{
+    top:99%;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.95);
+  }
+
+  70%{
+    top:81%;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.99);
+  }
+
+  100%{
+    top:74.6%;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1);
+  }
+
+}
+
+
+@keyframes dockFlash{
+
+  0%{
+    opacity:0;
+  }
+
+  45%{
+    opacity:.35;
+  }
+
+  100%{
+    opacity:0;
+  }
+
+}
+
+
+/* =========================================================
+   JUEGO
+   ========================================================= */
+
+#game{
+  display:none;
+
+  position:relative;
+
+  width:min(100vw,760px);
+
+  margin:0 auto;
+
+  overflow:hidden;
+
+  background:#050713;
+
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+
+#map{
+  position:relative;
+
+  width:100%;
+}
+
+
+#mapImage{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   HABITACIONES
+   ========================================================= */
+
+.room{
+  position:absolute;
+
+  z-index:20;
+
+  cursor:pointer;
+}
+
+
+/* A12 */
+
+#roomA12{
+  left:43%;
+  top:61.4%;
+
+  width:15.2%;
+  height:7.6%;
+}
+
+
+/* B5 */
+
+#roomB5{
+  left:43%;
+  top:51.7%;
+
+  width:15.2%;
+  height:7.6%;
+}
+
+
+/* B6 */
+
+#roomB6{
+  left:26%;
+  top:61.4%;
+
+  width:14.8%;
+  height:7.6%;
+}
+
+
+/* B7 */
+
+#roomB7{
+  left:60.2%;
+  top:61.4%;
+
+  width:14.8%;
+  height:7.6%;
+}
+
+
+/* =========================================================
+   ESCÁNER
+   ========================================================= */
+
+#scannerButton{
+  position:absolute;
+
+  left:38%;
+  top:89.3%;
+
+  width:24%;
+  height:8.9%;
+
+  z-index:25;
+
+  cursor:pointer;
+
+  animation:
+    scannerPulse
+    1.8s
+    infinite
+    ease-in-out;
+}
+
+
+#scannerButton.scanner-on{
+  animation:
+    scannerOn
+    .9s
+    infinite
+    ease-in-out;
+}
+
+
+@keyframes scannerPulse{
+
+  0%,
+  100%{
+    filter:brightness(1);
+  }
+
+  50%{
+    filter:brightness(1.2);
+  }
+
+}
+
+
+@keyframes scannerOn{
+
+  0%,
+  100%{
+    filter:
+      brightness(1.15)
+      drop-shadow(
+        0 0 5px
+        #a8d336
+      );
+  }
+
+  50%{
+    filter:
+      brightness(1.4)
+      drop-shadow(
+        0 0 15px
+        #a8d336
+      );
+  }
+
+}
+
+
+/* =========================================================
+   MÚSICA
+   ========================================================= */
+
+#musicButton{
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  z-index:70;
+
+  min-height:44px;
+
+  padding:8px 14px;
+
+  border:
+    2px solid
+    #a8d336;
+
+  border-radius:24px;
+
+  background:
+    rgba(10,15,20,.88);
+
+  color:#fff;
+
+  font-size:14px;
+
+  font-weight:900;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,.45),
+    0 0 12px rgba(168,211,54,.25);
+}
+
+
+#musicButton:active{
+  transform:scale(.94);
+}
+
+
+#musicButton.music-on{
+  background:
+    rgba(130,170,30,.92);
+
+  box-shadow:
+    0 0 0 2px rgba(0,0,0,.45),
+    0 0 18px rgba(168,211,54,.7);
+}
+
+
+/* =========================================================
+   ICONOS DEL MAPA
+   ========================================================= */
+
+#iconsLayer{
+  position:absolute;
+
+  inset:0;
+
+  z-index:30;
+
+  pointer-events:none;
+}
+
+
+.map-icon{
+  position:absolute;
+
+  pointer-events:none;
+
+  object-fit:contain;
+}
+
+
+/* =========================================================
+   CENTROS DE LAS HABITACIONES
+   ========================================================= */
+
+.pos-A12{
+  left:50.6%;
+  top:65.2%;
+}
+
+.pos-B5{
+  left:50.5%;
+  top:55.5%;
+}
+
+.pos-B6{
+  left:33.4%;
+  top:65.1%;
+}
+
+.pos-B7{
+  left:67.7%;
+  top:65.1%;
+}
+
+
+/* =========================================================
+   ASTRA
+   ========================================================= */
+
+.player-icon{
+  width:13%;
+
+  transform:
+    translate(-50%,-50%);
+
+  animation:
+    pop
+    .35s
+    ease-out;
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      rgba(255,255,255,.35)
+    );
+}
+
+
+/* =========================================================
+   ICONOS DE EVENTOS
+   ========================================================= */
+
+.event-icon{
+  width:12.5%;
+
+  transform:
+    translate(-50%,-50%);
+
+  animation:
+    pop
+    .35s
+    ease-out;
+}
+
+
+/* =========================================================
+   CHECK
+   ========================================================= */
+
+.check-icon{
+  width:11.5%;
+
+  transform:
+    translate(-50%,-50%);
+
+  animation:
+    pop
+    .35s
+    ease-out;
+}
+
+
+/* =========================================================
+   ONDAS
+   ========================================================= */
+
+.scanner-wave{
+  width:9%;
+
+  animation:
+    waveGlow
+    1s
+    infinite
+    ease-in-out;
+}
+
+
+@keyframes pop{
+
+  from{
+    opacity:0;
+
+    transform:
+      translate(-50%,-50%)
+      scale(.25);
+  }
+
+  to{
+    opacity:1;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1);
+  }
+
+}
+
+
+@keyframes waveGlow{
+
+  0%,
+  100%{
+    opacity:.62;
+
+    filter:
+      brightness(.95);
+  }
+
+  50%{
+    opacity:1;
+
+    filter:
+      brightness(1.22);
+  }
+
+}
+
+
+/* DIRECCIONES */
+
+.dir-up{
+  transform:
+    translate(-50%,-50%)
+    rotate(0);
+}
+
+.dir-right{
+  transform:
+    translate(-50%,-50%)
+    rotate(90deg);
+}
+
+.dir-left{
+  transform:
+    translate(-50%,-50%)
+    rotate(-90deg);
+}
+
+.dir-down{
+  transform:
+    translate(-50%,-50%)
+    rotate(180deg);
+}
+
+
+/* =========================================================
+   PANTALLA DE ENCUENTRO
+   ========================================================= */
+
+#encounter{
+  position:fixed;
+
+  inset:0;
+
+  z-index:100;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  padding:12px;
+
+  background:
+    rgba(0,0,0,.62);
+
+  opacity:0;
+
+  visibility:hidden;
+
+  transform:
+    scale(.96);
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+}
+
+
+#encounter.show{
+  opacity:1;
+
+  visibility:visible;
+
+  transform:
+    scale(1);
+}
+
+
+#encounterCard{
+  position:relative;
+
+  width:
+    min(
+      82vw,
+      650px
+    );
+
+  max-height:94vh;
+
+  cursor:default;
+}
+
+
+#encounterImage{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  max-height:94vh;
+
+  object-fit:contain;
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   ZONAS DE ATAQUE
+   ========================================================= */
+
+.attack-zone{
+  position:absolute;
+
+  z-index:120;
+
+  border:0;
+
+  background:transparent;
+
+  cursor:pointer;
+
+  display:none;
+}
+
+
+/* PISTOLA */
+
+#gunButton{
+  left:6%;
+  top:51%;
+
+  width:35%;
+  height:27%;
+}
+
+
+/* PUÑO */
+
+#fistButton{
+  left:62%;
+  top:51%;
+
+  width:35%;
+  height:27%;
+}
+
+
+/* =========================================================
+   VIDA DEL ENEMIGO
+   ========================================================= */
+
+#enemyHp{
+  position:absolute;
+
+  z-index:125;
+
+  left:82%;
+  top:12.5%;
+
+  transform:
+    translate(-50%,-50%);
+
+  display:none;
+
+  min-width:44px;
+  height:44px;
+
+  padding:
+    0
+    10px;
+
+  border-radius:24px;
+
+  align-items:center;
+  justify-content:center;
+
+  background:
+    rgba(0,0,0,.82);
+
+  border:
+    3px solid
+    #fff;
+
+  color:#fff;
+
+  font-size:
+    clamp(
+      22px,
+      5vw,
+      34px
+    );
+
+  font-weight:900;
+
+  text-shadow:
+    2px 2px 0 #000,
+    -2px -2px 0 #000;
+
+  pointer-events:none;
+}
+
+
+#encounterCard.combat #gunButton,
+#encounterCard.combat #fistButton,
+#encounterCard.combat #enemyHp{
+  display:flex;
+}
+
+
+/* =========================================================
+   GOLPE
+   ========================================================= */
+
+#encounterCard.hit{
+  animation:
+    cardHit
+    .22s
+    ease;
+}
+
+
+@keyframes cardHit{
+
+  0%{
+    transform:scale(1);
+  }
+
+  45%{
+    transform:scale(.985);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   MENSAJES
+   ========================================================= */
+
+#message{
+  position:fixed;
+
+  left:50%;
+  top:44%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.8);
+
+  z-index:200;
+
+  min-width:240px;
+  max-width:85vw;
+
+  padding:
+    17px
+    25px;
+
+  border-radius:18px;
+
+  background:
+    rgba(15,18,22,.95);
+
+  border:
+    3px solid
+    #a8d336;
+
+  color:#fff;
+
+  font-size:
+    clamp(
+      20px,
+      4.6vw,
+      36px
+    );
+
+  font-weight:900;
+
+  line-height:1.15;
+
+  text-align:center;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.55),
+    0 0 25px rgba(168,211,54,.45);
+
+  pointer-events:none;
+}
+
+
+#message.show{
+  visibility:visible;
+
+  animation:
+    messageAnimation
+    1.35s
+    ease
+    forwards;
+}
+
+
+@keyframes messageAnimation{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translate(-50%,-20%)
+      scale(.7);
+  }
+
+  18%{
+    opacity:1;
+
+    transform:
+      translate(-50%,-50%)
+      scale(1.06);
+  }
+
+  72%{
+    opacity:1;
+
+    transform:
+      translate(-50%,-60%)
+      scale(1);
+  }
+
+  100%{
+    opacity:0;
+
+    transform:
+      translate(-50%,-95%)
+      scale(.95);
+  }
+
+}
+
+
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+
+@media(max-width:500px){
+
+  #musicButton{
+    top:8px;
+    right:8px;
+
+    min-height:40px;
+
+    padding:
+      6px
+      10px;
+
+    font-size:12px;
+  }
+
+
+  #acceptMissionButton{
+    min-width:145px;
+
+    padding:
+      11px
+      20px;
+  }
+
+}
+
+
+/* =========================================================
+   PC
+   ========================================================= */
+
+@media(min-width:900px){
+
+  #encounterCard{
+    width:
+      min(
+        58vh,
+        610px
+      );
+  }
+
+}
+
 </style>
 </head>
+
 <body>
-<div id="game"><div id="map">
-<img id="mapImage" src="FN1.png" alt="Estación espacial MPL" draggable="false">
-<button id="musicButton" type="button" aria-label="Activar música">♫ MÚSICA</button>
-<div id="roomA12" class="room" aria-label="Habitación A12"></div>
-<div id="roomB5" class="room" aria-label="Habitación B5"></div>
-<div id="roomB6" class="room" aria-label="Habitación B6"></div>
-<div id="roomB7" class="room" aria-label="Habitación B7"></div>
-<div id="scannerButton" aria-label="Escáner"></div>
-<div id="iconsLayer"></div>
-</div></div>
-<audio id="bgMusic" loop preload="auto"><source src="Bitácotas Espaciales.mp3" type="audio/mpeg"></audio>
-<div id="encounter"><div id="encounterCard">
-<img id="encounterImage" src="" alt="Encuentro" draggable="false">
-<div id="enemyHp" aria-live="polite"></div>
-<button id="gunButton" class="attack-zone" type="button" aria-label="Disparar con la pistola"></button>
-<button id="fistButton" class="attack-zone" type="button" aria-label="Golpear con el puño"></button>
-</div></div>
+
+
+<!-- =========================================================
+     INTRO
+     ========================================================= -->
+
+<div id="introOverlay">
+
+
+  <!-- PRIMER MENSAJE -->
+
+  <section
+    id="introPage1"
+    class="intro-page active"
+  >
+
+    <img
+      class="intro-image"
+      src="M01a.png"
+      alt="Mensaje entrante"
+    >
+
+  </section>
+
+
+  <!-- MISIÓN -->
+
+  <section
+    id="introPage2"
+    class="intro-page"
+  >
+
+    <img
+      class="intro-image"
+      src="M01b.png"
+      alt="Nueva misión"
+    >
+
+
+    <button
+      id="acceptMissionButton"
+      type="button"
+    >
+      ACEPTAR
+    </button>
+
+  </section>
+
+
+  <!-- ACOPLE -->
+
+  <section
+    id="dockPage"
+    class="intro-page"
+  >
+
+    <div id="dockScene">
+
+
+      <img
+        id="dockBaseImage"
+        class="dock-base"
+        src="MIa.png"
+        alt="Estación espacial"
+      >
+
+
+      <img
+        id="dockShip"
+        src="NvAstra.png"
+        alt="Nave de Astra"
+      >
+
+
+      <div id="dockFlash"></div>
+
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JUEGO
+     ========================================================= -->
+
+<div id="game">
+
+  <div id="map">
+
+
+    <!-- NUEVO MAPA -->
+
+    <img
+      id="mapImage"
+      src="MIc.png"
+      alt="Estación espacial MPL"
+      draggable="false"
+    >
+
+
+    <!-- MÚSICA -->
+
+    <button
+      id="musicButton"
+      type="button"
+      aria-label="Activar música"
+    >
+      ♫ MÚSICA
+    </button>
+
+
+    <!-- HABITACIONES -->
+
+    <div
+      id="roomA12"
+      class="room"
+      aria-label="Habitación A12"
+    ></div>
+
+
+    <div
+      id="roomB5"
+      class="room"
+      aria-label="Habitación B5"
+    ></div>
+
+
+    <div
+      id="roomB6"
+      class="room"
+      aria-label="Habitación B6"
+    ></div>
+
+
+    <div
+      id="roomB7"
+      class="room"
+      aria-label="Habitación B7"
+    ></div>
+
+
+    <!-- ESCÁNER -->
+
+    <div
+      id="scannerButton"
+      aria-label="Escáner"
+    ></div>
+
+
+    <!-- ICONOS -->
+
+    <div id="iconsLayer"></div>
+
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MÚSICA DE FONDO
+     ========================================================= -->
+
+<audio
+  id="bgMusic"
+  loop
+  preload="auto"
+>
+
+  <source
+    src="Bitácotas Espaciales.mp3"
+    type="audio/mpeg"
+  >
+
+</audio>
+
+
+
+<!-- =========================================================
+     ENCUENTRO
+     ========================================================= -->
+
+<div id="encounter">
+
+  <div id="encounterCard">
+
+
+    <img
+      id="encounterImage"
+      src=""
+      alt="Encuentro"
+      draggable="false"
+    >
+
+
+    <div
+      id="enemyHp"
+      aria-live="polite"
+    ></div>
+
+
+    <button
+      id="gunButton"
+      class="attack-zone"
+      type="button"
+      aria-label="Disparar con la pistola"
+    ></button>
+
+
+    <button
+      id="fistButton"
+      class="attack-zone"
+      type="button"
+      aria-label="Golpear con el puño"
+    ></button>
+
+
+  </div>
+
+</div>
+
+
+
 <div id="message"></div>
+
+
+
 <script>
-const DEFINITIONS={
- A12:{card:'A12E.png',icon:'ICOA12.png',type:'combat',label:'MARCIANO VERDE',hp:1,finalCard:'A12F.png'},
- B1:{card:'B1E.png',icon:'ICOB1.png',type:'simple',label:'TRAMPA DE ENERGÍA'},
- B2:{card:'B2E.png',icon:'ICOB2.png',type:'simple',label:'TRAMPA EXPLOSIVA'},
- B3:{card:'B3E.png',icon:'ICOB3.png',type:'simple',label:'OBJETO MISTERIOSO'},
- B4:{card:'B4E.png',icon:'ICOB4.png',type:'simple',label:'KIT DE CURACIÓN'},
- B5:{card:'B5E.png',icon:'ICOB5.png',type:'combat',label:'MARCIANO NARANJA',hp:3,finalCard:'B5F.png'},
- B6:{card:'B6E.png',icon:'ICOB6.png',type:'combat',label:'MARCIANO NARANJA',hp:3,finalCard:'BF6.png'},
- B7:{card:'B7E.png',icon:'ICOB7.png',type:'combat',label:'MARCIANO MORADO',hp:2,finalCard:'B7F.png'}
+
+
+/* =========================================================
+   ARCHIVOS
+   ========================================================= */
+
+const ASSETS = {
+
+  introIncoming:
+    "M01a.png",
+
+  introMission:
+    "M01b.png",
+
+  stationOnly:
+    "MIa.png",
+
+  dockedStation:
+    "MIb.png",
+
+  playerShip:
+    "NvAstra.png",
+
+  playMap:
+    "MIc.png",
+
+  playerIcon:
+    "IcoAstra.png",
+
+  scannerWave:
+    "Esc1.png",
+
+  check:
+    "icocheck.png"
+
 };
-const state={currentRoom:'ENTRADA',scannerActive:false,pendingRoom:null,encounterMode:null,combat:null,rooms:{A12:{eventId:'A12',revealed:false,completed:false},B5:{eventId:null,revealed:false,completed:false},B6:{eventId:null,revealed:false,completed:false},B7:{eventId:null,revealed:false,completed:false}}};
-const iconsLayer=document.getElementById('iconsLayer');
-const scannerButton=document.getElementById('scannerButton');
-const encounter=document.getElementById('encounter');
-const encounterCard=document.getElementById('encounterCard');
-const encounterImage=document.getElementById('encounterImage');
-const enemyHp=document.getElementById('enemyHp');
-const gunButton=document.getElementById('gunButton');
-const fistButton=document.getElementById('fistButton');
-const message=document.getElementById('message');
-const bgMusic=document.getElementById('bgMusic');
-const musicButton=document.getElementById('musicButton');
-let messageTimer=null,musicPlaying=false,combatLocked=false;
-bgMusic.volume=.32;
-function shuffle(a){const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]]}return r}
-function prepareBRooms(){const draw=shuffle(['B1','B2','B3','B4','B5','B6','B7']).slice(0,3);['B5','B6','B7'].forEach((room,i)=>state.rooms[room].eventId=draw[i])}
+
+
+
+/* =========================================================
+   ENCUENTROS
+   ========================================================= */
+
+const DEFINITIONS = {
+
+
+  /* =====================================================
+     A12 - MARCIANO VERDE
+     1 VIDA
+     ===================================================== */
+
+  A12: {
+
+    card:
+      "A12E.png",
+
+    icon:
+      "ICOA12.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO VERDE",
+
+    hp:
+      1,
+
+    finalCard:
+      "A12F.png"
+
+  },
+
+
+  /* =====================================================
+     EVENTOS SIMPLES
+     ===================================================== */
+
+  B1: {
+
+    card:
+      "B1E.png",
+
+    icon:
+      "ICOB1.png",
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA DE ENERGÍA"
+
+  },
+
+
+  B2: {
+
+    card:
+      "B2E.png",
+
+    icon:
+      "ICOB2.png",
+
+    type:
+      "simple",
+
+    label:
+      "TRAMPA EXPLOSIVA"
+
+  },
+
+
+  B3: {
+
+    card:
+      "B3E.png",
+
+    icon:
+      "ICOB3.png",
+
+    type:
+      "simple",
+
+    label:
+      "OBJETO MISTERIOSO"
+
+  },
+
+
+  B4: {
+
+    card:
+      "B4E.png",
+
+    icon:
+      "ICOB4.png",
+
+    type:
+      "simple",
+
+    label:
+      "KIT DE CURACIÓN"
+
+  },
+
+
+  /* =====================================================
+     NARANJA
+     3 VIDAS
+     ===================================================== */
+
+  B5: {
+
+    card:
+      "B5E.png",
+
+    icon:
+      "ICOB5.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO NARANJA",
+
+    hp:
+      3,
+
+    finalCard:
+      "B5F.png"
+
+  },
+
+
+  /* =====================================================
+     NARANJA
+     3 VIDAS
+
+     Se incluyen ambos posibles nombres
+     para la carta final.
+     ===================================================== */
+
+  B6: {
+
+    card:
+      "B6E.png",
+
+    icon:
+      "ICOB6.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO NARANJA",
+
+    hp:
+      3,
+
+    finalCard:
+      [
+        "B6F.png",
+        "BF6.png"
+      ]
+
+  },
+
+
+  /* =====================================================
+     MORADO
+     2 VIDAS
+     ===================================================== */
+
+  B7: {
+
+    card:
+      "B7E.png",
+
+    icon:
+      "ICOB7.png",
+
+    type:
+      "combat",
+
+    label:
+      "MARCIANO MORADO",
+
+    hp:
+      2,
+
+    finalCard:
+      "B7F.png"
+
+  }
+
+};
+
+
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+
+const state = {
+
+
+  currentRoom:
+    "ENTRADA",
+
+
+  scannerActive:
+    false,
+
+
+  pendingRoom:
+    null,
+
+
+  encounterMode:
+    null,
+
+
+  combat:
+    null,
+
+
+  rooms: {
+
+
+    A12: {
+
+      eventId:
+        "A12",
+
+      revealed:
+        false,
+
+      completed:
+        false
+
+    },
+
+
+    B5: {
+
+      eventId:
+        null,
+
+      revealed:
+        false,
+
+      completed:
+        false
+
+    },
+
+
+    B6: {
+
+      eventId:
+        null,
+
+      revealed:
+        false,
+
+      completed:
+        false
+
+    },
+
+
+    B7: {
+
+      eventId:
+        null,
+
+      revealed:
+        false,
+
+      completed:
+        false
+
+    }
+
+  }
+
+};
+
+
+
+/* =========================================================
+   ELEMENTOS DE INTRO
+   ========================================================= */
+
+const introOverlay =
+  document.getElementById(
+    "introOverlay"
+  );
+
+
+const introPage1 =
+  document.getElementById(
+    "introPage1"
+  );
+
+
+const introPage2 =
+  document.getElementById(
+    "introPage2"
+  );
+
+
+const dockPage =
+  document.getElementById(
+    "dockPage"
+  );
+
+
+const acceptMissionButton =
+  document.getElementById(
+    "acceptMissionButton"
+  );
+
+
+const dockBaseImage =
+  document.getElementById(
+    "dockBaseImage"
+  );
+
+
+const dockShip =
+  document.getElementById(
+    "dockShip"
+  );
+
+
+const dockFlash =
+  document.getElementById(
+    "dockFlash"
+  );
+
+
+
+/* =========================================================
+   ELEMENTOS DEL JUEGO
+   ========================================================= */
+
+const game =
+  document.getElementById(
+    "game"
+  );
+
+
+const mapImage =
+  document.getElementById(
+    "mapImage"
+  );
+
+
+const iconsLayer =
+  document.getElementById(
+    "iconsLayer"
+  );
+
+
+const scannerButton =
+  document.getElementById(
+    "scannerButton"
+  );
+
+
+const encounter =
+  document.getElementById(
+    "encounter"
+  );
+
+
+const encounterCard =
+  document.getElementById(
+    "encounterCard"
+  );
+
+
+const encounterImage =
+  document.getElementById(
+    "encounterImage"
+  );
+
+
+const enemyHp =
+  document.getElementById(
+    "enemyHp"
+  );
+
+
+const gunButton =
+  document.getElementById(
+    "gunButton"
+  );
+
+
+const fistButton =
+  document.getElementById(
+    "fistButton"
+  );
+
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+
+const bgMusic =
+  document.getElementById(
+    "bgMusic"
+  );
+
+
+const musicButton =
+  document.getElementById(
+    "musicButton"
+  );
+
+
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+let messageTimer =
+  null;
+
+
+let musicPlaying =
+  false;
+
+
+let combatLocked =
+  false;
+
+
+let introLocked =
+  false;
+
+
+
+bgMusic.volume =
+  .32;
+
+
+
+/* =========================================================
+   PRECARGAR IMÁGENES DE INTRO
+   ========================================================= */
+
+[
+  ASSETS.introIncoming,
+  ASSETS.introMission,
+  ASSETS.stationOnly,
+  ASSETS.dockedStation,
+  ASSETS.playerShip,
+  ASSETS.playMap
+]
+.forEach(
+  src => {
+
+    const image =
+      new Image();
+
+    image.src =
+      src;
+
+  }
+);
+
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+function showIntroPage(
+  page
+) {
+
+
+  [
+    introPage1,
+    introPage2,
+    dockPage
+  ]
+  .forEach(
+    element => {
+
+      element.classList.remove(
+        "active"
+      );
+
+    }
+  );
+
+
+  page.classList.add(
+    "active"
+  );
+
+
+}
+
+
+
+/* =========================================================
+   PRIMER MENSAJE
+
+   CUALQUIER TOQUE PASA A LA MISIÓN
+   ========================================================= */
+
+introPage1.addEventListener(
+
+  "click",
+
+  () => {
+
+
+    if (
+      introLocked
+    ) {
+
+      return;
+
+    }
+
+
+    showIntroPage(
+      introPage2
+    );
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   BOTÓN ACEPTAR
+   ========================================================= */
+
+acceptMissionButton.addEventListener(
+
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    if (
+      introLocked
+    ) {
+
+      return;
+
+    }
+
+
+    introLocked =
+      true;
+
+
+    startDockingSequence();
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   ACOPLE
+   ========================================================= */
+
+function startDockingSequence() {
+
+
+  showIntroPage(
+    dockPage
+  );
+
+
+  /*
+    Empezamos con MIa:
+    estación sin Astra.
+  */
+
+  dockBaseImage.src =
+    ASSETS.stationOnly;
+
+
+  dockShip.src =
+    ASSETS.playerShip;
+
+
+  dockShip.style.display =
+    "block";
+
+
+  dockShip.classList.remove(
+    "docking"
+  );
+
+
+  void dockShip.offsetWidth;
+
+
+  /*
+    La nave comienza a acercarse.
+  */
+
+  setTimeout(
+    () => {
+
+
+      dockShip.classList.add(
+        "docking"
+      );
+
+
+    },
+
+    180
+  );
+
+
+  /*
+    Cuando llega, reemplazamos todo
+    por MIb para asegurar que quede
+    perfectamente alineada.
+  */
+
+  setTimeout(
+    () => {
+
+
+      dockFlash.classList.remove(
+        "flash"
+      );
+
+
+      void dockFlash.offsetWidth;
+
+
+      dockFlash.classList.add(
+        "flash"
+      );
+
+
+      dockBaseImage.src =
+        ASSETS.dockedStation;
+
+
+      dockShip.style.display =
+        "none";
+
+
+    },
+
+    2450
+  );
+
+
+  /*
+    Después de una breve pausa
+    comienza el juego.
+  */
+
+  setTimeout(
+    startGame,
+
+    3150
+  );
+
+
+}
+
+
+
+/* =========================================================
+   COMENZAR PARTIDA
+   ========================================================= */
+
+function startGame() {
+
+
+  /*
+    MIc es ahora el mapa oficial
+    del juego.
+  */
+
+  mapImage.src =
+    ASSETS.playMap;
+
+
+  introOverlay.style.display =
+    "none";
+
+
+  game.style.display =
+    "block";
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+
+}
+
+
+
+/* =========================================================
+   BARAJAR
+   ========================================================= */
+
+function shuffle(
+  array
+) {
+
+
+  const result =
+    [...array];
+
+
+  for (
+    let i =
+      result.length - 1;
+
+    i > 0;
+
+    i--
+  ) {
+
+
+    const j =
+      Math.floor(
+        Math.random()
+        *
+        (i + 1)
+      );
+
+
+    [
+      result[i],
+      result[j]
+    ]
+    =
+    [
+      result[j],
+      result[i]
+    ];
+
+
+  }
+
+
+  return result;
+
+
+}
+
+
+
+/* =========================================================
+   PREPARAR SALAS B
+
+   3 EVENTOS DIFERENTES
+   DE 7 POSIBLES
+   ========================================================= */
+
+function prepareBRooms() {
+
+
+  const draw =
+    shuffle([
+
+      "B1",
+      "B2",
+      "B3",
+      "B4",
+      "B5",
+      "B6",
+      "B7"
+
+    ])
+    .slice(
+      0,
+      3
+    );
+
+
+  [
+    "B5",
+    "B6",
+    "B7"
+  ]
+  .forEach(
+    (room,index) => {
+
+
+      state.rooms[
+        room
+      ].eventId =
+        draw[index];
+
+
+    }
+  );
+
+
+}
+
+
+
 prepareBRooms();
-function showMessage(html){clearTimeout(messageTimer);message.classList.remove('show');void message.offsetWidth;message.innerHTML=html;message.classList.add('show');messageTimer=setTimeout(()=>message.classList.remove('show'),1350)}
-async function toggleMusic(){if(!musicPlaying){try{await bgMusic.play();musicPlaying=true;musicButton.classList.add('music-on');musicButton.textContent='♫ MÚSICA ON';musicButton.setAttribute('aria-label','Desactivar música')}catch(e){showMessage('NO SE PUDO<br>ACTIVAR LA MÚSICA')}return}bgMusic.pause();musicPlaying=false;musicButton.classList.remove('music-on');musicButton.textContent='♫ MÚSICA';musicButton.setAttribute('aria-label','Activar música')}
-musicButton.addEventListener('click',e=>{e.stopPropagation();toggleMusic()});
-function createAudioContext(){const C=window.AudioContext||window.webkitAudioContext;return new C()}
-function scannerSound(){try{const c=createAudioContext(),o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.setValueAtTime(480,c.currentTime);o.frequency.linearRampToValueAtTime(980,c.currentTime+.28);g.gain.setValueAtTime(.08,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.4);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.4)}catch(e){}}
-function deathSound(){try{const c=createAudioContext(),n=c.currentTime;[430,300,180,95].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain();o.type=i<2?'square':'sawtooth';o.frequency.setValueAtTime(f,n+i*.09);g.gain.setValueAtTime(.13,n+i*.09);g.gain.exponentialRampToValueAtTime(.001,n+.22+i*.09);o.connect(g);g.connect(c.destination);o.start(n+i*.09);o.stop(n+.25+i*.09)})}catch(e){}}
-function addMapIcon(id,image,room,classes){removeMapIcon(id);const icon=document.createElement('img');icon.id=id;icon.src=image;icon.draggable=false;icon.className=`map-icon pos-${room} ${classes}`;iconsLayer.appendChild(icon);return icon}
-function removeMapIcon(id){const el=document.getElementById(id);if(el)el.remove()}
-function getAdjacentRooms(room){if(room==='ENTRADA')return[{room:'A12',direction:'up'}];if(room==='A12')return[{room:'B5',direction:'up'},{room:'B6',direction:'left'},{room:'B7',direction:'right'}];if(room==='B5')return[{room:'A12',direction:'down'}];if(room==='B6')return[{room:'A12',direction:'right'}];if(room==='B7')return[{room:'A12',direction:'left'}];return[]}
-function roomIsAdjacent(roomName){return getAdjacentRooms(state.currentRoom).some(c=>c.room===roomName)}
-function roomDefinition(roomName){const r=state.rooms[roomName];return r?DEFINITIONS[r.eventId]:null}
-function refreshMarkers(){removeMapIcon('player-marker');['A12','B5','B6','B7'].forEach(r=>removeMapIcon(`check-${r}`));if(state.currentRoom!=='ENTRADA')addMapIcon('player-marker','IcoAstra.png',state.currentRoom,'player-icon');['A12','B5','B6','B7'].forEach(r=>{if(state.rooms[r].completed&&state.currentRoom!==r)addMapIcon(`check-${r}`,'icocheck.png',r,'check-icon')})}
-function moveToRoom(roomName){state.currentRoom=roomName;removeMapIcon(`event-${roomName}`);removeMapIcon(`scan-${roomName}`);refreshMarkers()}
-function turnOffScanner(){state.scannerActive=false;scannerButton.classList.remove('scanner-on');['A12','B5','B6','B7'].forEach(r=>removeMapIcon(`scan-${r}`))}
-function scanNearbyRooms(){if(state.scannerActive){turnOffScanner();return}const adjacent=getAdjacentRooms(state.currentRoom);let count=0;adjacent.forEach(({room,direction})=>{const r=state.rooms[room];if(r&&!r.completed&&!r.revealed){addMapIcon(`scan-${room}`,'Esc1.png',room,`scanner-wave dir-${direction}`);count++}});if(!count){showMessage('SIN NUEVAS<br>SEÑALES');return}state.scannerActive=true;scannerButton.classList.add('scanner-on');scannerSound()}
-scannerButton.addEventListener('click',scanNearbyRooms);
-function revealRoom(roomName){const r=state.rooms[roomName],def=roomDefinition(roomName);if(!r||!def)return;r.revealed=true;removeMapIcon(`scan-${roomName}`);addMapIcon(`event-${roomName}`,def.icon,roomName,'event-icon');showMessage(`${def.label}<br>−2 ENERGÍAS`)}
-function resetEncounterUI(){encounterCard.className='';encounterCard.style.cursor='default';enemyHp.style.display='none';gunButton.style.display='none';fistButton.style.display='none';combatLocked=false;state.combat=null}
-function openEncounter(roomName){const def=roomDefinition(roomName);if(!def)return;turnOffScanner();state.pendingRoom=roomName;state.encounterMode=def.type;resetEncounterUI();encounterImage.src=def.card;encounter.classList.add('show');if(def.type==='combat'){encounterCard.classList.add('combat');enemyHp.style.display='flex';gunButton.style.display='block';fistButton.style.display='block';state.combat={eventId:state.rooms[roomName].eventId,hp:def.hp,fists:0,shots:0};enemyHp.textContent=def.hp}else if(def.type==='simple'){encounterCard.style.cursor='pointer'}}
-function completeCurrentRoom(){const roomName=state.pendingRoom;if(!roomName)return;const r=state.rooms[roomName];r.completed=true;r.revealed=true;removeMapIcon(`event-${roomName}`);removeMapIcon(`scan-${roomName}`);encounter.classList.remove('show');state.pendingRoom=null;state.encounterMode=null;resetEncounterUI();moveToRoom(roomName)}
-function animateHit(){encounterCard.classList.remove('hit');void encounterCard.offsetWidth;encounterCard.classList.add('hit')}
-function attack(kind){if(state.encounterMode!=='combat'||combatLocked||!state.combat)return;combatLocked=true;const c=state.combat;if(kind==='fist'){c.fists++;showMessage('−1 VIDA')}else{c.shots++;showMessage('−1 ENERGÍA')}c.hp=Math.max(0,c.hp-1);enemyHp.textContent=c.hp;animateHit();setTimeout(()=>{if(c.hp>0){combatLocked=false;return}const def=DEFINITIONS[c.eventId];if(c.fists>c.shots&&def.finalCard){state.encounterMode='final';encounterCard.classList.remove('combat');enemyHp.style.display='none';gunButton.style.display='none';fistButton.style.display='none';encounterImage.src=def.finalCard;encounterCard.style.cursor='pointer';combatLocked=false;return}deathSound();setTimeout(()=>completeCurrentRoom(),450)},330)}
-gunButton.addEventListener('click',e=>{e.stopPropagation();attack('gun')});
-fistButton.addEventListener('click',e=>{e.stopPropagation();attack('fist')});
-encounterCard.addEventListener('click',()=>{if(state.encounterMode==='simple'||state.encounterMode==='final')completeCurrentRoom()});
-function handleRoomClick(roomName){const r=state.rooms[roomName];if(!r)return;if(state.currentRoom===roomName){showMessage('ESTÁS EN<br>ESTA SALA');return}if(!roomIsAdjacent(roomName))return;if(r.completed){turnOffScanner();moveToRoom(roomName);return}if(state.scannerActive&&!r.revealed){revealRoom(roomName);return}openEncounter(roomName)}
-['A12','B5','B6','B7'].forEach(r=>document.getElementById(`room${r}`).addEventListener('click',()=>handleRoomClick(r)));
-let lastTouchEnd=0;document.addEventListener('touchend',e=>{const now=Date.now();if(now-lastTouchEnd<=300)e.preventDefault();lastTouchEnd=now},{passive:false});
+
+
+
+/* =========================================================
+   MENSAJES
+   ========================================================= */
+
+function showMessage(
+  html
+) {
+
+
+  clearTimeout(
+    messageTimer
+  );
+
+
+  message.classList.remove(
+    "show"
+  );
+
+
+  void message.offsetWidth;
+
+
+  message.innerHTML =
+    html;
+
+
+  message.classList.add(
+    "show"
+  );
+
+
+  messageTimer =
+    setTimeout(
+      () => {
+
+
+        message.classList.remove(
+          "show"
+        );
+
+
+      },
+
+      1350
+    );
+
+
+}
+
+
+
+/* =========================================================
+   MÚSICA
+   ========================================================= */
+
+async function toggleMusic() {
+
+
+  if (
+    !musicPlaying
+  ) {
+
+
+    try {
+
+
+      await bgMusic.play();
+
+
+      musicPlaying =
+        true;
+
+
+      musicButton.classList.add(
+        "music-on"
+      );
+
+
+      musicButton.textContent =
+        "♫ MÚSICA ON";
+
+
+      musicButton.setAttribute(
+        "aria-label",
+        "Desactivar música"
+      );
+
+
+    }
+
+    catch(error) {
+
+
+      showMessage(
+        "NO SE PUDO<br>ACTIVAR LA MÚSICA"
+      );
+
+
+    }
+
+
+    return;
+
+
+  }
+
+
+  bgMusic.pause();
+
+
+  musicPlaying =
+    false;
+
+
+  musicButton.classList.remove(
+    "music-on"
+  );
+
+
+  musicButton.textContent =
+    "♫ MÚSICA";
+
+
+  musicButton.setAttribute(
+    "aria-label",
+    "Activar música"
+  );
+
+
+}
+
+
+
+musicButton.addEventListener(
+
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    toggleMusic();
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   SONIDOS
+   ========================================================= */
+
+function createAudioContext() {
+
+
+  const AudioContext =
+    window.AudioContext
+    ||
+    window.webkitAudioContext;
+
+
+  return new AudioContext();
+
+
+}
+
+
+
+/* ESCÁNER */
+
+function scannerSound() {
+
+
+  try {
+
+
+    const ctx =
+      createAudioContext();
+
+
+    const oscillator =
+      ctx.createOscillator();
+
+
+    const gain =
+      ctx.createGain();
+
+
+    oscillator.type =
+      "sine";
+
+
+    oscillator.frequency
+      .setValueAtTime(
+        480,
+        ctx.currentTime
+      );
+
+
+    oscillator.frequency
+      .linearRampToValueAtTime(
+        980,
+        ctx.currentTime
+        +
+        .28
+      );
+
+
+    gain.gain
+      .setValueAtTime(
+        .08,
+        ctx.currentTime
+      );
+
+
+    gain.gain
+      .exponentialRampToValueAtTime(
+        .001,
+        ctx.currentTime
+        +
+        .4
+      );
+
+
+    oscillator.connect(
+      gain
+    );
+
+
+    gain.connect(
+      ctx.destination
+    );
+
+
+    oscillator.start();
+
+
+    oscillator.stop(
+      ctx.currentTime
+      +
+      .4
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* DERROTA */
+
+function deathSound() {
+
+
+  try {
+
+
+    const ctx =
+      createAudioContext();
+
+
+    const now =
+      ctx.currentTime;
+
+
+    [
+      430,
+      300,
+      180,
+      95
+    ]
+    .forEach(
+      (frequency,index) => {
+
+
+        const oscillator =
+          ctx.createOscillator();
+
+
+        const gain =
+          ctx.createGain();
+
+
+        oscillator.type =
+          index < 2
+            ?
+            "square"
+            :
+            "sawtooth";
+
+
+        oscillator.frequency
+          .setValueAtTime(
+            frequency,
+            now
+            +
+            index * .09
+          );
+
+
+        gain.gain
+          .setValueAtTime(
+            .13,
+            now
+            +
+            index * .09
+          );
+
+
+        gain.gain
+          .exponentialRampToValueAtTime(
+            .001,
+            now
+            +
+            .22
+            +
+            index * .09
+          );
+
+
+        oscillator.connect(
+          gain
+        );
+
+
+        gain.connect(
+          ctx.destination
+        );
+
+
+        oscillator.start(
+          now
+          +
+          index * .09
+        );
+
+
+        oscillator.stop(
+          now
+          +
+          .25
+          +
+          index * .09
+        );
+
+
+      }
+    );
+
+
+  }
+
+  catch(error) {}
+
+
+}
+
+
+
+/* =========================================================
+   ICONOS
+   ========================================================= */
+
+function addMapIcon(
+  id,
+  image,
+  room,
+  classes
+) {
+
+
+  removeMapIcon(
+    id
+  );
+
+
+  const icon =
+    document.createElement(
+      "img"
+    );
+
+
+  icon.id =
+    id;
+
+
+  icon.src =
+    image;
+
+
+  icon.draggable =
+    false;
+
+
+  icon.className =
+    `map-icon pos-${room} ${classes}`;
+
+
+  iconsLayer.appendChild(
+    icon
+  );
+
+
+  return icon;
+
+
+}
+
+
+
+function removeMapIcon(
+  id
+) {
+
+
+  const element =
+    document.getElementById(
+      id
+    );
+
+
+  if (
+    element
+  ) {
+
+
+    element.remove();
+
+
+  }
+
+
+}
+
+
+
+/* =========================================================
+   CONEXIONES DEL MAPA
+   ========================================================= */
+
+function getAdjacentRooms(
+  room
+) {
+
+
+  /*
+    ENTRADA -> A12
+  */
+
+  if (
+    room ===
+    "ENTRADA"
+  ) {
+
+
+    return [
+
+      {
+
+        room:
+          "A12",
+
+        direction:
+          "up"
+
+      }
+
+    ];
+
+
+  }
+
+
+  /*
+    A12
+  */
+
+  if (
+    room ===
+    "A12"
+  ) {
+
+
+    return [
+
+
+      {
+
+        room:
+          "B5",
+
+        direction:
+          "up"
+
+      },
+
+
+      {
+
+        room:
+          "B6",
+
+        direction:
+          "left"
+
+      },
+
+
+      {
+
+        room:
+          "B7",
+
+        direction:
+          "right"
+
+      }
+
+
+    ];
+
+
+  }
+
+
+  /*
+    REGRESOS
+  */
+
+  if (
+    room ===
+    "B5"
+  ) {
+
+
+    return [
+
+      {
+
+        room:
+          "A12",
+
+        direction:
+          "down"
+
+      }
+
+    ];
+
+
+  }
+
+
+  if (
+    room ===
+    "B6"
+  ) {
+
+
+    return [
+
+      {
+
+        room:
+          "A12",
+
+        direction:
+          "right"
+
+      }
+
+    ];
+
+
+  }
+
+
+  if (
+    room ===
+    "B7"
+  ) {
+
+
+    return [
+
+      {
+
+        room:
+          "A12",
+
+        direction:
+          "left"
+
+      }
+
+    ];
+
+
+  }
+
+
+  return [];
+
+
+}
+
+
+
+/* =========================================================
+   SALA ADYACENTE
+   ========================================================= */
+
+function roomIsAdjacent(
+  roomName
+) {
+
+
+  return getAdjacentRooms(
+    state.currentRoom
+  )
+  .some(
+    connection =>
+      connection.room ===
+      roomName
+  );
+
+
+}
+
+
+
+/* =========================================================
+   DEFINICIÓN DEL EVENTO
+   ========================================================= */
+
+function roomDefinition(
+  roomName
+) {
+
+
+  const room =
+    state.rooms[
+      roomName
+    ];
+
+
+  return room
+    ?
+    DEFINITIONS[
+      room.eventId
+    ]
+    :
+    null;
+
+
+}
+
+
+
+/* =========================================================
+   ASTRA Y CHECKS
+   ========================================================= */
+
+function refreshMarkers() {
+
+
+  removeMapIcon(
+    "player-marker"
+  );
+
+
+  [
+    "A12",
+    "B5",
+    "B6",
+    "B7"
+  ]
+  .forEach(
+    room => {
+
+
+      removeMapIcon(
+        `check-${room}`
+      );
+
+
+    }
+  );
+
+
+  /*
+    Personaje en ubicación actual.
+  */
+
+  if (
+    state.currentRoom !==
+    "ENTRADA"
+  ) {
+
+
+    addMapIcon(
+
+      "player-marker",
+
+      ASSETS.playerIcon,
+
+      state.currentRoom,
+
+      "player-icon"
+
+    );
+
+
+  }
+
+
+  /*
+    Checks en cuartos ya revisados
+    que Astra abandonó.
+  */
+
+  [
+    "A12",
+    "B5",
+    "B6",
+    "B7"
+  ]
+  .forEach(
+    room => {
+
+
+      if (
+        state.rooms[
+          room
+        ].completed
+        &&
+        state.currentRoom !==
+        room
+      ) {
+
+
+        addMapIcon(
+
+          `check-${room}`,
+
+          ASSETS.check,
+
+          room,
+
+          "check-icon"
+
+        );
+
+
+      }
+
+
+    }
+  );
+
+
+}
+
+
+
+/* =========================================================
+   MOVER ASTRA
+   ========================================================= */
+
+function moveToRoom(
+  roomName
+) {
+
+
+  state.currentRoom =
+    roomName;
+
+
+  removeMapIcon(
+    `event-${roomName}`
+  );
+
+
+  removeMapIcon(
+    `scan-${roomName}`
+  );
+
+
+  refreshMarkers();
+
+
+}
+
+
+
+/* =========================================================
+   APAGAR ESCÁNER
+   ========================================================= */
+
+function turnOffScanner() {
+
+
+  state.scannerActive =
+    false;
+
+
+  scannerButton.classList.remove(
+    "scanner-on"
+  );
+
+
+  [
+    "A12",
+    "B5",
+    "B6",
+    "B7"
+  ]
+  .forEach(
+    room => {
+
+
+      removeMapIcon(
+        `scan-${room}`
+      );
+
+
+    }
+  );
+
+
+}
+
+
+
+/* =========================================================
+   ESCÁNER ON / OFF
+   ========================================================= */
+
+function scanNearbyRooms() {
+
+
+  /*
+    SEGUNDO TOQUE:
+    APAGAR.
+  */
+
+  if (
+    state.scannerActive
+  ) {
+
+
+    turnOffScanner();
+
+
+    return;
+
+
+  }
+
+
+  const adjacent =
+    getAdjacentRooms(
+      state.currentRoom
+    );
+
+
+  let count =
+    0;
+
+
+  adjacent.forEach(
+    ({
+      room,
+      direction
+    }) => {
+
+
+      const roomData =
+        state.rooms[
+          room
+        ];
+
+
+      if (
+        roomData
+        &&
+        !roomData.completed
+        &&
+        !roomData.revealed
+      ) {
+
+
+        addMapIcon(
+
+          `scan-${room}`,
+
+          ASSETS.scannerWave,
+
+          room,
+
+          `scanner-wave dir-${direction}`
+
+        );
+
+
+        count++;
+
+
+      }
+
+
+    }
+  );
+
+
+  if (
+    !count
+  ) {
+
+
+    showMessage(
+      "SIN NUEVAS<br>SEÑALES"
+    );
+
+
+    return;
+
+
+  }
+
+
+  state.scannerActive =
+    true;
+
+
+  scannerButton.classList.add(
+    "scanner-on"
+  );
+
+
+  scannerSound();
+
+
+}
+
+
+
+scannerButton.addEventListener(
+  "click",
+  scanNearbyRooms
+);
+
+
+
+/* =========================================================
+   REVELAR HABITACIÓN
+   ========================================================= */
+
+function revealRoom(
+  roomName
+) {
+
+
+  const room =
+    state.rooms[
+      roomName
+    ];
+
+
+  const definition =
+    roomDefinition(
+      roomName
+    );
+
+
+  if (
+    !room
+    ||
+    !definition
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  room.revealed =
+    true;
+
+
+  removeMapIcon(
+    `scan-${roomName}`
+  );
+
+
+  addMapIcon(
+
+    `event-${roomName}`,
+
+    definition.icon,
+
+    roomName,
+
+    "event-icon"
+
+  );
+
+
+  showMessage(
+
+    `${definition.label}<br>−2 ENERGÍAS`
+
+  );
+
+
+}
+
+
+
+/* =========================================================
+   IMÁGENES CON RESPALDO
+
+   Sirve especialmente para B6F / BF6.
+   ========================================================= */
+
+function setImageSource(
+  imageElement,
+  source
+) {
+
+
+  const sources =
+    Array.isArray(source)
+      ?
+      source
+      :
+      [source];
+
+
+  let index =
+    0;
+
+
+  imageElement.onerror =
+    () => {
+
+
+      index++;
+
+
+      if (
+        index <
+        sources.length
+      ) {
+
+
+        imageElement.src =
+          sources[index];
+
+
+      }
+
+      else {
+
+
+        imageElement.onerror =
+          null;
+
+
+      }
+
+
+    };
+
+
+  imageElement.src =
+    sources[0];
+
+
+}
+
+
+
+/* =========================================================
+   LIMPIAR ENCUENTRO
+   ========================================================= */
+
+function resetEncounterUI() {
+
+
+  encounterCard.className =
+    "";
+
+
+  encounterCard.style.cursor =
+    "default";
+
+
+  enemyHp.style.display =
+    "none";
+
+
+  gunButton.style.display =
+    "none";
+
+
+  fistButton.style.display =
+    "none";
+
+
+  combatLocked =
+    false;
+
+
+  state.combat =
+    null;
+
+
+}
+
+
+
+/* =========================================================
+   ABRIR ENCUENTRO
+   ========================================================= */
+
+function openEncounter(
+  roomName
+) {
+
+
+  const definition =
+    roomDefinition(
+      roomName
+    );
+
+
+  if (
+    !definition
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  turnOffScanner();
+
+
+  state.pendingRoom =
+    roomName;
+
+
+  state.encounterMode =
+    definition.type;
+
+
+  resetEncounterUI();
+
+
+  setImageSource(
+    encounterImage,
+    definition.card
+  );
+
+
+  encounterImage.alt =
+    definition.label;
+
+
+  encounter.classList.add(
+    "show"
+  );
+
+
+  /* =====================================================
+     COMBATE
+     ===================================================== */
+
+  if (
+    definition.type ===
+    "combat"
+  ) {
+
+
+    encounterCard.classList.add(
+      "combat"
+    );
+
+
+    enemyHp.style.display =
+      "flex";
+
+
+    gunButton.style.display =
+      "block";
+
+
+    fistButton.style.display =
+      "block";
+
+
+    state.combat = {
+
+
+      eventId:
+        state.rooms[
+          roomName
+        ].eventId,
+
+
+      hp:
+        definition.hp,
+
+
+      fists:
+        0,
+
+
+      shots:
+        0
+
+
+    };
+
+
+    enemyHp.textContent =
+      definition.hp;
+
+
+  }
+
+
+  /* =====================================================
+     EVENTO SIMPLE
+     ===================================================== */
+
+  else {
+
+
+    encounterCard.style.cursor =
+      "pointer";
+
+
+  }
+
+
+}
+
+
+
+/* =========================================================
+   COMPLETAR CUARTO
+   ========================================================= */
+
+function completeCurrentRoom() {
+
+
+  const roomName =
+    state.pendingRoom;
+
+
+  if (
+    !roomName
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  const room =
+    state.rooms[
+      roomName
+    ];
+
+
+  room.completed =
+    true;
+
+
+  room.revealed =
+    true;
+
+
+  removeMapIcon(
+    `event-${roomName}`
+  );
+
+
+  removeMapIcon(
+    `scan-${roomName}`
+  );
+
+
+  encounter.classList.remove(
+    "show"
+  );
+
+
+  state.pendingRoom =
+    null;
+
+
+  state.encounterMode =
+    null;
+
+
+  resetEncounterUI();
+
+
+  /*
+    Astra queda ubicada
+    en el cuarto resuelto.
+  */
+
+  moveToRoom(
+    roomName
+  );
+
+
+}
+
+
+
+/* =========================================================
+   ANIMACIÓN DE ATAQUE
+   ========================================================= */
+
+function animateHit() {
+
+
+  encounterCard.classList.remove(
+    "hit"
+  );
+
+
+  void encounterCard.offsetWidth;
+
+
+  encounterCard.classList.add(
+    "hit"
+  );
+
+
+}
+
+
+
+/* =========================================================
+   ATACAR
+   ========================================================= */
+
+function attack(
+  kind
+) {
+
+
+  if (
+    state.encounterMode !==
+      "combat"
+    ||
+    combatLocked
+    ||
+    !state.combat
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  combatLocked =
+    true;
+
+
+  const combat =
+    state.combat;
+
+
+  /* =====================================================
+     PUÑO
+
+     −1 VIDA DEL JUGADOR
+     ===================================================== */
+
+  if (
+    kind ===
+    "fist"
+  ) {
+
+
+    combat.fists++;
+
+
+    showMessage(
+      "−1 VIDA"
+    );
+
+
+  }
+
+
+  /* =====================================================
+     PISTOLA
+
+     −1 ENERGÍA DEL JUGADOR
+     ===================================================== */
+
+  else {
+
+
+    combat.shots++;
+
+
+    showMessage(
+      "−1 ENERGÍA"
+    );
+
+
+  }
+
+
+  /*
+    Ambos ataques quitan
+    1 vida al enemigo.
+  */
+
+  combat.hp =
+    Math.max(
+      0,
+      combat.hp - 1
+    );
+
+
+  enemyHp.textContent =
+    combat.hp;
+
+
+  animateHit();
+
+
+  setTimeout(
+    () => {
+
+
+      /*
+        Aún sigue vivo.
+      */
+
+      if (
+        combat.hp > 0
+      ) {
+
+
+        combatLocked =
+          false;
+
+
+        return;
+
+
+      }
+
+
+      const definition =
+        DEFINITIONS[
+          combat.eventId
+        ];
+
+
+      /* =================================================
+         ¿SE GANA LA PISTA?
+
+         Debe haber MÁS PUÑOS
+         que disparos.
+         ================================================= */
+
+      const earnsClue =
+
+        combat.fists >
+          combat.shots
+
+        &&
+
+        !!definition.finalCard;
+
+
+      /* =================================================
+         MOSTRAR CARTA F
+         ================================================= */
+
+      if (
+        earnsClue
+      ) {
+
+
+        state.encounterMode =
+          "final";
+
+
+        encounterCard.classList.remove(
+          "combat"
+        );
+
+
+        enemyHp.style.display =
+          "none";
+
+
+        gunButton.style.display =
+          "none";
+
+
+        fistButton.style.display =
+          "none";
+
+
+        setImageSource(
+          encounterImage,
+          definition.finalCard
+        );
+
+
+        encounterImage.alt =
+          `Pista ${combat.eventId}`;
+
+
+        encounterCard.style.cursor =
+          "pointer";
+
+
+        combatLocked =
+          false;
+
+
+        return;
+
+
+      }
+
+
+      /* =================================================
+         SIN PISTA
+         ================================================= */
+
+      deathSound();
+
+
+      setTimeout(
+        completeCurrentRoom,
+
+        450
+      );
+
+
+    },
+
+    330
+  );
+
+
+}
+
+
+
+/* =========================================================
+   BOTONES DE ATAQUE
+   ========================================================= */
+
+gunButton.addEventListener(
+
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    attack(
+      "gun"
+    );
+
+
+  }
+
+);
+
+
+
+fistButton.addEventListener(
+
+  "click",
+
+  event => {
+
+
+    event.stopPropagation();
+
+
+    attack(
+      "fist"
+    );
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   TOCAR CARTA
+   ========================================================= */
+
+encounterCard.addEventListener(
+
+  "click",
+
+  () => {
+
+
+    /*
+      EVENTO SIMPLE:
+      tocar y volver al mapa.
+    */
+
+    if (
+      state.encounterMode ===
+      "simple"
+    ) {
+
+
+      completeCurrentRoom();
+
+
+      return;
+
+
+    }
+
+
+    /*
+      CARTA DE PISTA:
+      tocar y volver al mapa.
+    */
+
+    if (
+      state.encounterMode ===
+      "final"
+    ) {
+
+
+      completeCurrentRoom();
+
+
+    }
+
+
+  }
+
+);
+
+
+
+/* =========================================================
+   TOCAR HABITACIÓN
+   ========================================================= */
+
+function handleRoomClick(
+  roomName
+) {
+
+
+  const room =
+    state.rooms[
+      roomName
+    ];
+
+
+  if (
+    !room
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  /* =====================================================
+     YA ESTAMOS ALLÍ
+     ===================================================== */
+
+  if (
+    state.currentRoom ===
+    roomName
+  ) {
+
+
+    showMessage(
+      "ESTÁS EN<br>ESTA SALA"
+    );
+
+
+    return;
+
+
+  }
+
+
+  /* =====================================================
+     DEBE SER ADYACENTE
+     ===================================================== */
+
+  if (
+    !roomIsAdjacent(
+      roomName
+    )
+  ) {
+
+
+    return;
+
+
+  }
+
+
+  /* =====================================================
+     SALA YA COMPLETADA
+
+     SOLO MOVIMIENTO.
+     ===================================================== */
+
+  if (
+    room.completed
+  ) {
+
+
+    turnOffScanner();
+
+
+    moveToRoom(
+      roomName
+    );
+
+
+    return;
+
+
+  }
+
+
+  /* =====================================================
+     ESCÁNER ENCENDIDO
+
+     TOCAR = REVELAR
+     ===================================================== */
+
+  if (
+    state.scannerActive
+    &&
+    !room.revealed
+  ) {
+
+
+    revealRoom(
+      roomName
+    );
+
+
+    return;
+
+
+  }
+
+
+  /* =====================================================
+     ESCÁNER APAGADO
+
+     ENTRAR DIRECTAMENTE,
+     AUN SIN ESCANEAR.
+     ===================================================== */
+
+  openEncounter(
+    roomName
+  );
+
+
+}
+
+
+
+/* =========================================================
+   EVENTOS DE LAS HABITACIONES
+   ========================================================= */
+
+[
+  "A12",
+  "B5",
+  "B6",
+  "B7"
+]
+.forEach(
+  room => {
+
+
+    document
+      .getElementById(
+        `room${room}`
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+
+          handleRoomClick(
+            room
+          );
+
+
+        }
+      );
+
+
+  }
+);
+
+
+
+/* =========================================================
+   EVITAR DOBLE ZOOM
+   ========================================================= */
+
+let lastTouchEnd =
+  0;
+
+
+document.addEventListener(
+
+  "touchend",
+
+  event => {
+
+
+    const now =
+      Date.now();
+
+
+    if (
+      now
+      -
+      lastTouchEnd
+      <=
+      300
+    ) {
+
+
+      event.preventDefault();
+
+
+    }
+
+
+    lastTouchEnd =
+      now;
+
+
+  },
+
+  {
+    passive:false
+  }
+
+);
+
+
 </script>
+
 </body>
 </html>
