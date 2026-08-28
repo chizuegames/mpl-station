@@ -145,14 +145,17 @@ button{
     top:112%;
     transform:translate(-50%,-50%) scale(.92);
   }
+
   22%{
     top:99%;
     transform:translate(-50%,-50%) scale(.95);
   }
+
   70%{
     top:81%;
     transform:translate(-50%,-50%) scale(.99);
   }
+
   100%{
     top:74.6%;
     transform:translate(-50%,-50%) scale(1);
@@ -268,6 +271,7 @@ button{
     opacity:0;
     scale:.35;
   }
+
   to{
     opacity:1;
     scale:1;
@@ -930,6 +934,7 @@ const ROOM_LAYOUT = {
 /* =========================================================
    CONNECTIONS
 
+   IMPORTANTE:
    B3 NO conecta con A4.
    B4 NO conecta con A5.
    ========================================================= */
@@ -1042,13 +1047,9 @@ const GRAPH = {
     "A15"
   ],
 
-  A14:[
-    "A11"
-  ],
+  A14:["A11"],
 
-  A15:[
-    "A13"
-  ]
+  A15:["A13"]
 
 };
 
@@ -1223,7 +1224,14 @@ const DEFINITIONS = {
   },
 
 
+  /* =====================================================
+     ENCUENTROS B
+
+     Estos son los 7 eventos que se van a barajar.
+     ===================================================== */
+
   B1:{
+    sourceId:"B1",
     type:"simple",
     label:"TRAMPA DE ENERGÍA",
     card:"TRE.png",
@@ -1232,6 +1240,7 @@ const DEFINITIONS = {
 
 
   B2:{
+    sourceId:"B2",
     type:"simple",
     label:"TRAMPA DE VIDA",
     card:"TRV.png",
@@ -1240,6 +1249,7 @@ const DEFINITIONS = {
 
 
   B3:{
+    sourceId:"B3",
     type:"simple",
     label:"CAJA DE OBJETO",
     card:"CJO.png",
@@ -1248,6 +1258,7 @@ const DEFINITIONS = {
 
 
   B4:{
+    sourceId:"B4",
     type:"simple",
     label:"RECUPERAR VIDA",
     card:"SDV.png",
@@ -1256,6 +1267,7 @@ const DEFINITIONS = {
 
 
   B5:{
+    sourceId:"B5",
     type:"combat",
     label:"MARCIANO ROJO",
     card:"B5E.png",
@@ -1271,6 +1283,7 @@ const DEFINITIONS = {
 
 
   B6:{
+    sourceId:"B6",
     type:"combat",
     label:"MARCIANO ROJO",
     card:"B6E.png",
@@ -1286,10 +1299,11 @@ const DEFINITIONS = {
 
 
   B7:{
+    sourceId:"B7",
     type:"combat",
     label:"MARCIANO MORADO",
     card:"B7E.png",
-    finalCard:"BF7.png",
+    finalCard:"B7F.png",
     icon:"ICOMM.png",
 
     hp:{
@@ -1300,6 +1314,198 @@ const DEFINITIONS = {
   }
 
 };
+
+
+/* =========================================================
+   RANDOMIZACIÓN DE LOS ENCUENTROS B
+   ========================================================= */
+
+const B_ROOMS = [
+  "B1",
+  "B2",
+  "B3",
+  "B4",
+  "B5",
+  "B6",
+  "B7"
+];
+
+
+/*
+  Devuelve un número aleatorio entre 0 y max-1.
+
+  Se usa crypto cuando está disponible
+  para evitar patrones demasiado repetitivos.
+*/
+
+function randomIndex(max){
+
+  if(
+    window.crypto
+    &&
+    window.crypto.getRandomValues
+  ){
+
+    const data =
+      new Uint32Array(1);
+
+    window.crypto.getRandomValues(
+      data
+    );
+
+    return data[0] % max;
+
+  }
+
+  return Math.floor(
+    Math.random() * max
+  );
+
+}
+
+
+/*
+  Baraja los 7 eventos B mediante
+  Fisher-Yates.
+*/
+
+function shuffleArray(
+  array
+){
+
+  for(
+    let i = array.length - 1;
+    i > 0;
+    i--
+  ){
+
+    const j =
+      randomIndex(
+        i + 1
+      );
+
+    [
+      array[i],
+      array[j]
+    ] = [
+      array[j],
+      array[i]
+    ];
+
+  }
+
+  return array;
+
+}
+
+
+/*
+  Cada zona B conserva su posición física
+  y sus conexiones.
+
+  Lo que cambia es el evento que contiene.
+*/
+
+function randomizeBEncounters(){
+
+  const originalEvents =
+    B_ROOMS.map(
+      room =>
+        DEFINITIONS[
+          room
+        ]
+    );
+
+
+  const shuffledEvents =
+    shuffleArray(
+      [
+        ...originalEvents
+      ]
+    );
+
+
+  /*
+    Aunque es poco probable,
+    un barajado aleatorio podría quedar
+    exactamente igual al original.
+
+    Para evitar que al probar parezca
+    que "no aleatorizó", si ocurre eso
+    desplazamos todos los eventos una posición.
+  */
+
+  const sameAsOriginal =
+    shuffledEvents.every(
+      (event,index) =>
+        event ===
+        originalEvents[
+          index
+        ]
+    );
+
+
+  if(
+    sameAsOriginal
+  ){
+
+    const first =
+      shuffledEvents.shift();
+
+    shuffledEvents.push(
+      first
+    );
+
+  }
+
+
+  /*
+    Asignar evento aleatorio a cada
+    ubicación B.
+  */
+
+  B_ROOMS.forEach(
+    (room,index) => {
+
+      DEFINITIONS[
+        room
+      ] =
+        shuffledEvents[
+          index
+        ];
+
+    }
+  );
+
+
+  /*
+    Solo para depuración.
+    No aparece visualmente en el juego.
+  */
+
+  console.log(
+    "Distribución B de esta partida:",
+    B_ROOMS.map(
+      room => ({
+        room,
+        event:
+          DEFINITIONS[
+            room
+          ].sourceId
+      })
+    )
+  );
+
+}
+
+
+/*
+  IMPORTANTE:
+  Se barajan ANTES de crear
+  el estado de las habitaciones.
+*/
+
+randomizeBEncounters();
 
 
 /* =========================================================
@@ -1460,20 +1666,14 @@ const bgMusic =
 
 
 let messageTimer = null;
-
 let musicPlaying = false;
-
 let combatLocked = false;
-
 let introLocked = false;
-
 let gameAudioContext = null;
-
 let tutorialIndex = 0;
 
 
 introMusic.volume = .34;
-
 bgMusic.volume = .32;
 
 
@@ -2130,7 +2330,6 @@ function dockingImpactSound(){
       );
 
     },
-
     170
   );
 
@@ -2146,7 +2345,6 @@ function dockingImpactSound(){
       );
 
     },
-
     270
   );
 
@@ -2305,7 +2503,6 @@ function crossfadeToGameMusic(){
         }
 
       },
-
       65
     );
 
@@ -2371,7 +2568,6 @@ function startDockingSequence(){
       );
 
     },
-
     180
   );
 
@@ -2397,7 +2593,6 @@ function startDockingSequence(){
         "none";
 
     },
-
     2450
   );
 
@@ -2610,7 +2805,6 @@ function showMessage(
         );
 
       },
-
       1400
     );
 
@@ -3489,7 +3683,12 @@ function openEncounter(
 
     state.combat = {
 
-      eventId:
+      room:
+        room,
+
+      sourceId:
+        definition.sourceId
+        ||
         room,
 
       hp:
@@ -3742,15 +3941,23 @@ function attack(
       }
 
 
+      /*
+        La definición se obtiene por la
+        HABITACIÓN física actual.
+
+        Como los B ya fueron barajados,
+        aquí carga correctamente el evento
+        que realmente quedó en esa posición.
+      */
+
       const definition =
         DEFINITIONS[
-          combat.eventId
+          combat.room
         ];
 
 
       /*
-        REGLA DE PISTA:
-
+        PISTA:
         PUÑOS >= PISTOLAS
       */
 
@@ -3794,25 +4001,21 @@ function attack(
         );
 
         encounterImage.alt =
-          `Desenlace ${combat.eventId}`;
+          `Desenlace ${combat.sourceId}`;
 
         encounterCard.style.cursor =
           "pointer";
 
+
         /*
-          IMPORTANTE:
-
-          Si A5 logró activar su pista,
-          la tarjeta llave también queda
-          obtenida.
-
-          La condición de la llave es
-          exactamente la misma condición
-          que activa A5F.
+          Solo A5 entrega la llave especial.
+          Los encuentros B no pueden activar
+          accidentalmente esta condición aunque
+          hayan sido aleatorizados.
         */
 
         if(
-          combat.eventId ===
+          combat.sourceId ===
           "A5"
         ){
 
@@ -3821,6 +4024,7 @@ function attack(
           );
 
         }
+
 
         combatLocked =
           false;
@@ -3838,7 +4042,6 @@ function attack(
       );
 
     },
-
     320
   );
 
@@ -3902,7 +4105,7 @@ encounterBackButton.addEventListener(
 
 
 /* =========================================================
-   ENCOUNTER CARD CLICK
+   ENCOUNTER CLICK
    ========================================================= */
 
 encounterCard.addEventListener(
@@ -3947,14 +4150,6 @@ encounterCard.addEventListener(
 
     }
 
-
-    /*
-      La llave A5 ya se registra
-      automáticamente cuando aparece
-      A5F.
-
-      Aquí solo cerramos el desenlace.
-    */
 
     if(
       state.encounterMode ===
