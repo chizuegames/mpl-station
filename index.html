@@ -695,12 +695,10 @@ button{
   }
 
 }
-
 </style>
 </head>
 
 <body>
-
 
 <div id="introOverlay">
 
@@ -933,10 +931,6 @@ const ROOM_LAYOUT = {
 
 /* =========================================================
    CONNECTIONS
-
-   IMPORTANTE:
-   B3 NO conecta con A4.
-   B4 NO conecta con A5.
    ========================================================= */
 
 const GRAPH = {
@@ -1194,10 +1188,16 @@ const DEFINITIONS = {
   },
 
 
+  /*
+    CORREGIDO:
+    A13 sí tiene pista.
+  */
+
   A13:{
     type:"combat",
     label:"MARCIANO VERDE",
     card:"A13E.png",
+    finalCard:"A13F.png",
     icon:"ICOMV.png",
 
     hp:{
@@ -1226,8 +1226,7 @@ const DEFINITIONS = {
 
   /* =====================================================
      ENCUENTROS B
-
-     Estos son los 7 eventos que se van a barajar.
+     Se barajan entre las posiciones B1-B7.
      ===================================================== */
 
   B1:{
@@ -1266,12 +1265,22 @@ const DEFINITIONS = {
   },
 
 
+  /*
+    Para B5 se prueban ambos nombres
+    por compatibilidad.
+  */
+
   B5:{
     sourceId:"B5",
     type:"combat",
     label:"MARCIANO ROJO",
     card:"B5E.png",
-    finalCard:"BF5.png",
+
+    finalCards:[
+      "B5F.png",
+      "BF5.png"
+    ],
+
     icon:"ICOMR.png",
 
     hp:{
@@ -1282,12 +1291,22 @@ const DEFINITIONS = {
   },
 
 
+  /*
+    CORREGIDO:
+    B6F.png es ahora la primera opción.
+  */
+
   B6:{
     sourceId:"B6",
     type:"combat",
     label:"MARCIANO ROJO",
     card:"B6E.png",
-    finalCard:"BF6.png",
+
+    finalCards:[
+      "B6F.png",
+      "BF6.png"
+    ],
+
     icon:"ICOMR.png",
 
     hp:{
@@ -1303,7 +1322,12 @@ const DEFINITIONS = {
     type:"combat",
     label:"MARCIANO MORADO",
     card:"B7E.png",
-    finalCard:"B7F.png",
+
+    finalCards:[
+      "B7F.png",
+      "BF7.png"
+    ],
+
     icon:"ICOMM.png",
 
     hp:{
@@ -1317,7 +1341,149 @@ const DEFINITIONS = {
 
 
 /* =========================================================
-   RANDOMIZACIÓN DE LOS ENCUENTROS B
+   FINAL CARD HELPERS
+   ========================================================= */
+
+/*
+  Devuelve las posibles imágenes de desenlace
+  de un encuentro.
+
+  Para encuentros A normalmente hay una sola.
+
+  Para algunos B se incluyen nombres alternativos
+  para evitar que una diferencia tipo B6F/BF6
+  rompa la pista.
+*/
+
+function getFinalCardCandidates(
+  definition
+){
+
+  if(
+    Array.isArray(
+      definition.finalCards
+    )
+  ){
+
+    return definition.finalCards
+      .filter(
+        Boolean
+      );
+
+  }
+
+  if(
+    definition.finalCard
+  ){
+
+    return [
+      definition.finalCard
+    ];
+
+  }
+
+  return [];
+
+}
+
+
+function hasFinalCard(
+  definition
+){
+
+  return (
+    getFinalCardCandidates(
+      definition
+    ).length >
+    0
+  );
+
+}
+
+
+/*
+  Intenta cargar la primera imagen.
+
+  Si no existe, prueba automáticamente
+  con la siguiente.
+*/
+
+function setEncounterImageWithFallback(
+  candidates
+){
+
+  const images =
+    Array.isArray(
+      candidates
+    )
+      ?
+      candidates.filter(
+        Boolean
+      )
+      :
+      [
+        candidates
+      ].filter(
+        Boolean
+      );
+
+
+  if(
+    !images.length
+  ){
+    return;
+  }
+
+
+  let currentIndex =
+    0;
+
+
+  function loadCurrent(){
+
+    encounterImage.onerror =
+      () => {
+
+        currentIndex++;
+
+        if(
+          currentIndex <
+          images.length
+        ){
+
+          loadCurrent();
+
+          return;
+
+        }
+
+
+        encounterImage.onerror =
+          null;
+
+
+        showMessage(
+          "NO SE ENCONTRÓ LA IMAGEN DE LA PISTA"
+        );
+
+      };
+
+
+    encounterImage.src =
+      images[
+        currentIndex
+      ];
+
+  }
+
+
+  loadCurrent();
+
+}
+
+
+/* =========================================================
+   RANDOMIZACIÓN B
    ========================================================= */
 
 const B_ROOMS = [
@@ -1331,14 +1497,9 @@ const B_ROOMS = [
 ];
 
 
-/*
-  Devuelve un número aleatorio entre 0 y max-1.
-
-  Se usa crypto cuando está disponible
-  para evitar patrones demasiado repetitivos.
-*/
-
-function randomIndex(max){
+function randomIndex(
+  max
+){
 
   if(
     window.crypto
@@ -1363,11 +1524,6 @@ function randomIndex(max){
 
 }
 
-
-/*
-  Baraja los 7 eventos B mediante
-  Fisher-Yates.
-*/
 
 function shuffleArray(
   array
@@ -1399,13 +1555,6 @@ function shuffleArray(
 }
 
 
-/*
-  Cada zona B conserva su posición física
-  y sus conexiones.
-
-  Lo que cambia es el evento que contiene.
-*/
-
 function randomizeBEncounters(){
 
   const originalEvents =
@@ -1426,13 +1575,9 @@ function randomizeBEncounters(){
 
 
   /*
-    Aunque es poco probable,
-    un barajado aleatorio podría quedar
-    exactamente igual al original.
-
-    Para evitar que al probar parezca
-    que "no aleatorizó", si ocurre eso
-    desplazamos todos los eventos una posición.
+    Si por casualidad todo queda exactamente
+    igual que el orden original, hacemos una
+    rotación para que sí cambie.
   */
 
   const sameAsOriginal =
@@ -1459,11 +1604,6 @@ function randomizeBEncounters(){
   }
 
 
-  /*
-    Asignar evento aleatorio a cada
-    ubicación B.
-  */
-
   B_ROOMS.forEach(
     (room,index) => {
 
@@ -1478,13 +1618,8 @@ function randomizeBEncounters(){
   );
 
 
-  /*
-    Solo para depuración.
-    No aparece visualmente en el juego.
-  */
-
   console.log(
-    "Distribución B de esta partida:",
+    "Distribución B:",
     B_ROOMS.map(
       room => ({
         room,
@@ -1498,12 +1633,6 @@ function randomizeBEncounters(){
 
 }
 
-
-/*
-  IMPORTANTE:
-  Se barajan ANTES de crear
-  el estado de las habitaciones.
-*/
 
 randomizeBEncounters();
 
@@ -1748,7 +1877,7 @@ buildRooms();
    PRELOAD
    ========================================================= */
 
-[
+const preloadImages = [
   ASSETS.introIncoming,
   ASSETS.introMission,
   ASSETS.stationOnly,
@@ -1756,39 +1885,69 @@ buildRooms();
   ASSETS.playerShip,
   ASSETS.map100,
   ASSETS.map60,
-  ASSETS.map20,
+  ASSETS.map20
+];
 
-  ...Object
-    .values(
-      DEFINITIONS
-    )
-    .flatMap(
-      definition => [
 
-        definition.card,
+Object
+  .values(
+    DEFINITIONS
+  )
+  .forEach(
+    definition => {
 
-        definition.finalCard,
+      if(
+        definition.card
+      ){
 
+        preloadImages.push(
+          definition.card
+        );
+
+      }
+
+      if(
         definition.icon
+      ){
 
-      ]
-    )
-    .filter(
-      Boolean
-    )
+        preloadImages.push(
+          definition.icon
+        );
 
-]
-.forEach(
-  src => {
+      }
 
-    const image =
-      new Image();
+      getFinalCardCandidates(
+        definition
+      )
+      .forEach(
+        image => {
 
-    image.src =
-      src;
+          preloadImages.push(
+            image
+          );
 
-  }
-);
+        }
+      );
+
+    }
+  );
+
+
+preloadImages
+  .filter(
+    Boolean
+  )
+  .forEach(
+    src => {
+
+      const image =
+        new Image();
+
+      image.src =
+        src;
+
+    }
+  );
 
 
 /* =========================================================
@@ -2035,7 +2194,6 @@ function lifeLossSound(){
           );
 
         },
-
         index * 60
       );
 
@@ -2114,7 +2272,6 @@ function deathSound(){
           );
 
         },
-
         index * 85
       );
 
@@ -2160,7 +2317,6 @@ function missionSound(){
           );
 
         },
-
         index * 120
       );
 
@@ -3941,15 +4097,6 @@ function attack(
       }
 
 
-      /*
-        La definición se obtiene por la
-        HABITACIÓN física actual.
-
-        Como los B ya fueron barajados,
-        aquí carga correctamente el evento
-        que realmente quedó en esa posición.
-      */
-
       const definition =
         DEFINITIONS[
           combat.room
@@ -3957,23 +4104,28 @@ function attack(
 
 
       /*
-        PISTA:
-        PUÑOS >= PISTOLAS
+        REGLA UNIVERSAL DE PISTAS
+
+        - Más puños que pistolas = pista.
+        - Igual número de puños y pistolas = pista.
+        - Más pistolas que puños = SIN pista.
       */
 
       const earnsFinal =
-
-        combat.fists >=
-          combat.shots
-
-        &&
 
         combat.fists >
           0
 
         &&
 
-        !!definition.finalCard;
+        combat.fists >=
+          combat.shots
+
+        &&
+
+        hasFinalCard(
+          definition
+        );
 
 
       if(
@@ -3996,9 +4148,21 @@ function attack(
         fistButton.style.display =
           "none";
 
-        setEncounterImage(
-          definition.finalCard
+
+        /*
+          Carga la pista correcta.
+
+          Si hay más de un nombre posible,
+          prueba automáticamente el siguiente
+          si el primero no existe.
+        */
+
+        setEncounterImageWithFallback(
+          getFinalCardCandidates(
+            definition
+          )
         );
+
 
         encounterImage.alt =
           `Desenlace ${combat.sourceId}`;
@@ -4008,10 +4172,8 @@ function attack(
 
 
         /*
-          Solo A5 entrega la llave especial.
-          Los encuentros B no pueden activar
-          accidentalmente esta condición aunque
-          hayan sido aleatorizados.
+          A5 entrega su llave siempre que
+          el combate active A5F.
         */
 
         if(
