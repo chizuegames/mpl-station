@@ -8,7 +8,7 @@
 <style>
 *{
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent
 }
 
 html,body{
@@ -19,56 +19,52 @@ html,body{
   background:#050713;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
-  touch-action:manipulation;
+  touch-action:manipulation
 }
 
 body{
   display:flex;
   justify-content:center;
-  align-items:flex-start;
+  align-items:flex-start
 }
 
 img{
   user-select:none;
-  -webkit-user-drag:none;
+  -webkit-user-drag:none
 }
 
 button{
-  font-family:inherit;
+  font-family:inherit
 }
-
-/* =========================================================
-   INTRO
-   ========================================================= */
 
 #introOverlay{
   position:relative;
   width:min(100vw,760px);
   margin:0 auto;
   background:#050713;
-  overflow:hidden;
+  overflow:hidden
 }
 
 .intro-page{
   display:none;
   position:relative;
   width:100%;
-  animation:introFade .28s ease;
+  animation:introFade .28s ease
 }
 
 .intro-page.active{
-  display:block;
+  display:block
 }
 
 .intro-image,
 .dock-base{
   display:block;
   width:100%;
-  height:auto;
+  height:auto
 }
 
 #introPage1{
-  cursor:pointer;
+  cursor:pointer
 }
 
 #acceptMissionButton{
@@ -89,22 +85,18 @@ button{
   cursor:pointer;
   box-shadow:
     0 0 0 3px rgba(0,0,0,.45),
-    0 0 22px rgba(255,142,22,.65);
+    0 0 22px rgba(255,142,22,.65)
 }
 
 #acceptMissionButton:active{
-  transform:translateX(-50%) scale(.96);
+  transform:translateX(-50%) scale(.96)
 }
-
-/* =========================================================
-   DOCKING
-   ========================================================= */
 
 #dockScene{
   position:relative;
   width:100%;
   overflow:hidden;
-  background:#050713;
+  background:#050713
 }
 
 #dockShip{
@@ -115,11 +107,11 @@ button{
   height:auto;
   transform:translate(-50%,-50%);
   filter:drop-shadow(0 0 14px rgba(255,139,30,.6));
-  z-index:5;
+  z-index:5
 }
 
 #dockShip.docking{
-  animation:dockMove 2.25s cubic-bezier(.25,.75,.25,1) forwards;
+  animation:dockMove 2.25s cubic-bezier(.25,.75,.25,1) forwards
 }
 
 #dockFlash{
@@ -128,49 +120,45 @@ button{
   z-index:8;
   background:#fff;
   opacity:0;
-  pointer-events:none;
+  pointer-events:none
 }
 
 #dockFlash.flash{
-  animation:dockFlash .28s ease;
+  animation:dockFlash .28s ease
 }
 
 @keyframes introFade{
-  from{opacity:0;}
-  to{opacity:1;}
+  from{opacity:0}
+  to{opacity:1}
 }
 
 @keyframes dockMove{
   0%{
     top:112%;
-    transform:translate(-50%,-50%) scale(.92);
+    transform:translate(-50%,-50%) scale(.92)
   }
 
   22%{
     top:99%;
-    transform:translate(-50%,-50%) scale(.95);
+    transform:translate(-50%,-50%) scale(.95)
   }
 
   70%{
     top:81%;
-    transform:translate(-50%,-50%) scale(.99);
+    transform:translate(-50%,-50%) scale(.99)
   }
 
   100%{
     top:74.6%;
-    transform:translate(-50%,-50%) scale(1);
+    transform:translate(-50%,-50%) scale(1)
   }
 }
 
 @keyframes dockFlash{
-  0%{opacity:0;}
-  45%{opacity:.35;}
-  100%{opacity:0;}
+  0%{opacity:0}
+  45%{opacity:.35}
+  100%{opacity:0}
 }
-
-/* =========================================================
-   GAME
-   ========================================================= */
 
 #game{
   display:none;
@@ -180,34 +168,34 @@ button{
   overflow:hidden;
   background:#050713;
   user-select:none;
-  -webkit-user-select:none;
+  -webkit-user-select:none
 }
 
 #map{
   position:relative;
-  width:100%;
+  width:100%
 }
 
 #mapImage{
   display:block;
   width:100%;
   height:auto;
-  pointer-events:none;
+  pointer-events:none
 }
 
 #roomsLayer,
 #iconsLayer{
   position:absolute;
-  inset:0;
+  inset:0
 }
 
 #roomsLayer{
-  z-index:20;
+  z-index:20
 }
 
 #iconsLayer{
   z-index:30;
-  pointer-events:none;
+  pointer-events:none
 }
 
 .room{
@@ -215,86 +203,78 @@ button{
   transform:translate(-50%,-50%);
   cursor:pointer;
   background:transparent;
-  border:0;
+  border:0
 }
-
-/* =========================================================
-   MAP ICONS
-   ========================================================= */
 
 .map-icon{
   position:absolute;
   transform:translate(-50%,-50%);
   pointer-events:none;
-  object-fit:contain;
+  object-fit:contain
 }
 
 .player-icon{
   width:12.5%;
   filter:drop-shadow(0 0 8px rgba(255,255,255,.35));
-  animation:pop .3s ease-out;
+  animation:pop .3s ease-out
 }
 
 .event-icon{
   width:11.5%;
-  animation:pop .3s ease-out;
+  animation:pop .3s ease-out
 }
 
 .check-icon{
   width:10%;
-  animation:pop .3s ease-out;
+  animation:pop .3s ease-out
 }
 
 .scanner-wave{
   width:8.5%;
-  animation:waveGlow 1s infinite ease-in-out;
+  animation:waveGlow 1s infinite ease-in-out
 }
 
 .dir-up{
-  transform:translate(-50%,-50%) rotate(0deg);
+  transform:translate(-50%,-50%) rotate(0)
 }
 
 .dir-right{
-  transform:translate(-50%,-50%) rotate(90deg);
+  transform:translate(-50%,-50%) rotate(90deg)
 }
 
 .dir-left{
-  transform:translate(-50%,-50%) rotate(-90deg);
+  transform:translate(-50%,-50%) rotate(-90deg)
 }
 
 .dir-down{
-  transform:translate(-50%,-50%) rotate(180deg);
+  transform:translate(-50%,-50%) rotate(180deg)
 }
 
 @keyframes pop{
   from{
     opacity:0;
-    scale:.35;
+    scale:.35
   }
 
   to{
     opacity:1;
-    scale:1;
+    scale:1
   }
 }
 
 @keyframes waveGlow{
   0%,100%{
     opacity:.58;
-    filter:brightness(.95);
+    filter:brightness(.95)
   }
 
   50%{
     opacity:1;
     filter:
       brightness(1.3)
-      drop-shadow(0 0 7px rgba(168,211,54,.65));
+      drop-shadow(0 0 7px rgba(168,211,54,.65))
   }
 }
-
-/* =========================================================
-   MAP CONTROLS
-   ========================================================= */
 
 #scannerButton{
   position:absolute;
@@ -305,11 +285,11 @@ button{
   z-index:40;
   cursor:pointer;
   background:transparent;
-  border:0;
+  border:0
 }
 
 #scannerButton.scanner-on{
-  filter:drop-shadow(0 0 12px #a8d336);
+  filter:drop-shadow(0 0 12px #a8d336)
 }
 
 #useObjectButton{
@@ -321,7 +301,7 @@ button{
   z-index:40;
   cursor:pointer;
   background:transparent;
-  border:0;
+  border:0
 }
 
 #musicButton{
@@ -338,18 +318,14 @@ button{
   font-size:20px;
   font-weight:900;
   cursor:pointer;
-  box-shadow:0 0 10px rgba(0,0,0,.5);
+  box-shadow:0 0 10px rgba(0,0,0,.5)
 }
 
 #musicButton.music-on{
   box-shadow:
     0 0 0 2px rgba(0,0,0,.4),
-    0 0 15px rgba(168,211,54,.65);
+    0 0 15px rgba(168,211,54,.65)
 }
-
-/* =========================================================
-   OXYGEN
-   ========================================================= */
 
 #oxygenCounter{
   position:absolute;
@@ -366,22 +342,18 @@ button{
   font-size:clamp(13px,2.9vw,23px);
   font-weight:900;
   text-shadow:1px 2px 2px #000;
-  pointer-events:none;
+  pointer-events:none
 }
 
 #oxygenCounter.phase60{
   border-color:#ff9140;
-  color:#ffb176;
+  color:#ffb176
 }
 
 #oxygenCounter.phase20{
   border-color:#ff4141;
-  color:#ff7777;
+  color:#ff7777
 }
-
-/* =========================================================
-   TUTORIAL
-   ========================================================= */
 
 #tutorialOverlay{
   position:fixed;
@@ -391,11 +363,11 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:rgba(0,0,0,.62);
+  background:rgba(0,0,0,.62)
 }
 
 #tutorialOverlay.show{
-  display:flex;
+  display:flex
 }
 
 #tutorialPanel{
@@ -408,14 +380,14 @@ button{
     0 0 0 3px rgba(0,0,0,.55),
     0 0 26px rgba(168,211,54,.35);
   text-align:center;
-  color:#fff;
+  color:#fff
 }
 
 #tutorialText{
   font-size:clamp(20px,4vw,31px);
   font-weight:800;
   line-height:1.25;
-  margin-bottom:20px;
+  margin-bottom:20px
 }
 
 #tutorialNext{
@@ -427,12 +399,8 @@ button{
   color:#111;
   font-size:18px;
   font-weight:900;
-  cursor:pointer;
+  cursor:pointer
 }
-
-/* =========================================================
-   ENCOUNTER
-   ========================================================= */
 
 #encounter{
   position:fixed;
@@ -448,20 +416,20 @@ button{
   transform:scale(.96);
   transition:
     opacity .18s ease,
-    transform .18s ease;
+    transform .18s ease
 }
 
 #encounter.show{
   opacity:1;
   visibility:visible;
-  transform:scale(1);
+  transform:scale(1)
 }
 
 #encounterCard{
   position:relative;
   width:min(82vw,650px);
   max-height:94vh;
-  cursor:default;
+  cursor:default
 }
 
 #encounterImage{
@@ -470,7 +438,7 @@ button{
   height:auto;
   max-height:94vh;
   object-fit:contain;
-  pointer-events:none;
+  pointer-events:none
 }
 
 .attack-zone{
@@ -479,26 +447,22 @@ button{
   border:0;
   background:transparent;
   cursor:pointer;
-  display:none;
+  display:none
 }
 
 #gunButton{
   left:6%;
   top:51%;
   width:35%;
-  height:27%;
+  height:27%
 }
 
 #fistButton{
   left:62%;
   top:51%;
   width:35%;
-  height:27%;
+  height:27%
 }
-
-/* =========================================================
-   ENEMY HP
-   ========================================================= */
 
 #enemyHp{
   position:absolute;
@@ -519,13 +483,13 @@ button{
     2px 2px 0 #000,
     -2px -2px 0 #000,
     0 0 5px #000;
-  pointer-events:none;
+  pointer-events:none
 }
 
 #encounterCard.combat #gunButton,
 #encounterCard.combat #fistButton,
 #encounterCard.combat #enemyHp{
-  display:flex;
+  display:flex
 }
 
 #encounterBackButton{
@@ -542,22 +506,18 @@ button{
   color:#fff;
   font-size:17px;
   font-weight:900;
-  cursor:pointer;
+  cursor:pointer
 }
 
 #encounterCard.hit{
-  animation:cardHit .2s ease;
+  animation:cardHit .2s ease
 }
 
 @keyframes cardHit{
-  0%{transform:scale(1);}
-  45%{transform:scale(.985);}
-  100%{transform:scale(1);}
+  0%{transform:scale(1)}
+  45%{transform:scale(.985)}
+  100%{transform:scale(1)}
 }
-
-/* =========================================================
-   MESSAGE
-   ========================================================= */
 
 #message{
   position:fixed;
@@ -581,39 +541,35 @@ button{
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
     0 0 25px rgba(168,211,54,.45);
-  pointer-events:none;
+  pointer-events:none
 }
 
 #message.show{
   visibility:visible;
-  animation:messageAnimation 1.4s ease forwards;
+  animation:messageAnimation 1.4s ease forwards
 }
 
 @keyframes messageAnimation{
   0%{
     opacity:0;
-    transform:translate(-50%,-20%) scale(.7);
+    transform:translate(-50%,-20%) scale(.7)
   }
 
   18%{
     opacity:1;
-    transform:translate(-50%,-50%) scale(1.06);
+    transform:translate(-50%,-50%) scale(1.06)
   }
 
   72%{
     opacity:1;
-    transform:translate(-50%,-60%) scale(1);
+    transform:translate(-50%,-60%) scale(1)
   }
 
   100%{
     opacity:0;
-    transform:translate(-50%,-95%) scale(.95);
+    transform:translate(-50%,-95%) scale(.95)
   }
 }
-
-/* =========================================================
-   END
-   ========================================================= */
 
 #endOverlay{
   position:fixed;
@@ -623,11 +579,11 @@ button{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:rgba(3,5,12,.95);
+  background:rgba(3,5,12,.95)
 }
 
 #endOverlay.show{
-  display:flex;
+  display:flex
 }
 
 #endPanel{
@@ -637,14 +593,14 @@ button{
   background:rgba(17,20,25,.96);
   border:4px solid #fff;
   text-align:center;
-  box-shadow:0 0 35px rgba(255,255,255,.18);
+  box-shadow:0 0 35px rgba(255,255,255,.18)
 }
 
 #endTitle{
   margin:0 0 14px;
   color:#fff;
   font-size:clamp(40px,9vw,72px);
-  font-weight:1000;
+  font-weight:1000
 }
 
 #endSubtitle{
@@ -652,48 +608,44 @@ button{
   color:#ddd;
   font-size:clamp(18px,4vw,28px);
   font-weight:700;
-  line-height:1.25;
+  line-height:1.25
 }
 
 #endOverlay.mission #endPanel{
   border-color:#a8d336;
-  box-shadow:0 0 36px rgba(168,211,54,.38);
+  box-shadow:0 0 36px rgba(168,211,54,.38)
 }
 
 #endOverlay.mission #endTitle{
-  color:#b9e84a;
+  color:#b9e84a
 }
 
 #endOverlay.gameover #endPanel{
   border-color:#ff4141;
-  box-shadow:0 0 36px rgba(255,65,65,.4);
+  box-shadow:0 0 36px rgba(255,65,65,.4)
 }
 
 #endOverlay.gameover #endTitle{
-  color:#ff5959;
+  color:#ff5959
 }
 
 @media(max-width:500px){
-
   #acceptMissionButton{
     min-width:145px;
-    padding:11px 20px;
+    padding:11px 20px
   }
 
   #musicButton{
     width:39px;
     height:39px;
-    font-size:17px;
+    font-size:17px
   }
-
 }
 
 @media(min-width:900px){
-
   #encounterCard{
-    width:min(58vh,610px);
+    width:min(58vh,610px)
   }
-
 }
 </style>
 </head>
@@ -707,17 +659,11 @@ button{
   </section>
 
   <section id="introPage2" class="intro-page">
-
     <img class="intro-image" src="M01b.png" alt="Nueva misión">
-
-    <button id="acceptMissionButton" type="button">
-      ACEPTAR
-    </button>
-
+    <button id="acceptMissionButton" type="button">ACEPTAR</button>
   </section>
 
   <section id="dockPage" class="intro-page">
-
     <div id="dockScene">
 
       <img
@@ -736,7 +682,6 @@ button{
       <div id="dockFlash"></div>
 
     </div>
-
   </section>
 
 </div>
@@ -786,11 +731,18 @@ button{
 
 
 <audio id="introMusic" loop preload="auto">
-  <source src="Echoes in the Subway.mp3" type="audio/mpeg">
+  <source
+    src="Echoes in the Subway.mp3"
+    type="audio/mpeg"
+  >
 </audio>
 
+
 <audio id="bgMusic" loop preload="auto">
-  <source src="Bitácotas Espaciales.mp3" type="audio/mpeg">
+  <source
+    src="Bitácotas Espaciales.mp3"
+    type="audio/mpeg"
+  >
 </audio>
 
 
@@ -800,7 +752,10 @@ button{
 
     <div id="tutorialText"></div>
 
-    <button id="tutorialNext" type="button">
+    <button
+      id="tutorialNext"
+      type="button"
+    >
       SIGUIENTE
     </button>
 
@@ -820,7 +775,10 @@ button{
       draggable="false"
     >
 
-    <div id="enemyHp" aria-live="polite"></div>
+    <div
+      id="enemyHp"
+      aria-live="polite"
+    ></div>
 
     <button
       id="gunButton"
@@ -836,7 +794,10 @@ button{
       aria-label="Golpear"
     ></button>
 
-    <button id="encounterBackButton" type="button">
+    <button
+      id="encounterBackButton"
+      type="button"
+    >
       VOLVER AL MAPA
     </button>
 
@@ -868,7 +829,7 @@ button{
    ASSETS
    ========================================================= */
 
-const ASSETS = {
+const ASSETS={
 
   introIncoming:"M01a.png",
   introMission:"M01b.png",
@@ -895,7 +856,7 @@ const ASSETS = {
    ROOM LAYOUT
    ========================================================= */
 
-const ROOM_LAYOUT = {
+const ROOM_LAYOUT={
 
   A1:{x:33.5,y:17.9},
   A2:{x:50.8,y:17.9},
@@ -931,13 +892,20 @@ const ROOM_LAYOUT = {
 
 /* =========================================================
    CONNECTIONS
+
+   B3 NO conecta con A4.
+   B4 NO conecta con A5.
    ========================================================= */
 
-const GRAPH = {
+const GRAPH={
 
-  ENTRADA:["A12"],
+  ENTRADA:[
+    "A12"
+  ],
 
-  A1:["A2"],
+  A1:[
+    "A2"
+  ],
 
   A2:[
     "A1",
@@ -945,7 +913,9 @@ const GRAPH = {
     "B1"
   ],
 
-  A3:["A2"],
+  A3:[
+    "A2"
+  ],
 
   B1:[
     "A2",
@@ -1041,9 +1011,13 @@ const GRAPH = {
     "A15"
   ],
 
-  A14:["A11"],
+  A14:[
+    "A11"
+  ],
 
-  A15:["A13"]
+  A15:[
+    "A13"
+  ]
 
 };
 
@@ -1052,7 +1026,7 @@ const GRAPH = {
    EVENTS
    ========================================================= */
 
-const DEFINITIONS = {
+const DEFINITIONS={
 
   A1:{
     type:"loot",
@@ -1061,7 +1035,6 @@ const DEFINITIONS = {
     finalCard:"A1F.png",
     icon:"ICOBT.png"
   },
-
 
   A2:{
     type:"combat",
@@ -1077,14 +1050,12 @@ const DEFINITIONS = {
     }
   },
 
-
   A3:{
     type:"simple",
     label:"CAJA DE OBJETO",
     card:"CJO.png",
     icon:"ICOCO.png"
   },
-
 
   A4:{
     type:"key",
@@ -1093,7 +1064,6 @@ const DEFINITIONS = {
     icon:"ICOTL.png",
     keySource:"A4"
   },
-
 
   A5:{
     type:"combat",
@@ -1109,7 +1079,6 @@ const DEFINITIONS = {
     }
   },
 
-
   A6:{
     type:"key",
     label:"TARJETA LLAVE",
@@ -1117,7 +1086,6 @@ const DEFINITIONS = {
     icon:"ICOTL.png",
     keySource:"A6"
   },
-
 
   A7:{
     type:"combat",
@@ -1133,14 +1101,12 @@ const DEFINITIONS = {
     }
   },
 
-
   A8:{
     type:"simple",
     label:"CAJA DE OBJETO",
     card:"CJO.png",
     icon:"ICOCO.png"
   },
-
 
   A9:{
     type:"combat",
@@ -1156,7 +1122,6 @@ const DEFINITIONS = {
     }
   },
 
-
   A10:{
     type:"simple",
     label:"TRAMPA DE VIDA",
@@ -1164,14 +1129,12 @@ const DEFINITIONS = {
     icon:"ICOTR.png"
   },
 
-
   A11:{
     type:"simple",
     label:"TRAMPA DE ENERGÍA",
     card:"TRE.png",
     icon:"ICOTR.png"
   },
-
 
   A12:{
     type:"combat",
@@ -1187,12 +1150,6 @@ const DEFINITIONS = {
     }
   },
 
-
-  /*
-    CORREGIDO:
-    A13 sí tiene pista.
-  */
-
   A13:{
     type:"combat",
     label:"MARCIANO VERDE",
@@ -1207,14 +1164,12 @@ const DEFINITIONS = {
     }
   },
 
-
   A14:{
     type:"simple",
     label:"CAJA DE OBJETO",
     card:"CJO.png",
     icon:"ICOCO.png"
   },
-
 
   A15:{
     type:"simple",
@@ -1225,8 +1180,7 @@ const DEFINITIONS = {
 
 
   /* =====================================================
-     ENCUENTROS B
-     Se barajan entre las posiciones B1-B7.
+     ENCUENTROS B ALEATORIOS
      ===================================================== */
 
   B1:{
@@ -1237,7 +1191,6 @@ const DEFINITIONS = {
     icon:"ICOTR.png"
   },
 
-
   B2:{
     sourceId:"B2",
     type:"simple",
@@ -1245,7 +1198,6 @@ const DEFINITIONS = {
     card:"TRV.png",
     icon:"ICOTR.png"
   },
-
 
   B3:{
     sourceId:"B3",
@@ -1255,7 +1207,6 @@ const DEFINITIONS = {
     icon:"ICOCO.png"
   },
 
-
   B4:{
     sourceId:"B4",
     type:"simple",
@@ -1263,12 +1214,6 @@ const DEFINITIONS = {
     card:"SDV.png",
     icon:"ICOV.png"
   },
-
-
-  /*
-    Para B5 se prueban ambos nombres
-    por compatibilidad.
-  */
 
   B5:{
     sourceId:"B5",
@@ -1290,12 +1235,6 @@ const DEFINITIONS = {
     }
   },
 
-
-  /*
-    CORREGIDO:
-    B6F.png es ahora la primera opción.
-  */
-
   B6:{
     sourceId:"B6",
     type:"combat",
@@ -1315,7 +1254,6 @@ const DEFINITIONS = {
       20:4
     }
   },
-
 
   B7:{
     sourceId:"B7",
@@ -1344,17 +1282,6 @@ const DEFINITIONS = {
    FINAL CARD HELPERS
    ========================================================= */
 
-/*
-  Devuelve las posibles imágenes de desenlace
-  de un encuentro.
-
-  Para encuentros A normalmente hay una sola.
-
-  Para algunos B se incluyen nombres alternativos
-  para evitar que una diferencia tipo B6F/BF6
-  rompa la pista.
-*/
-
 function getFinalCardCandidates(
   definition
 ){
@@ -1372,17 +1299,19 @@ function getFinalCardCandidates(
 
   }
 
+
   if(
     definition.finalCard
   ){
 
-    return [
+    return[
       definition.finalCard
     ];
 
   }
 
-  return [];
+
+  return[];
 
 }
 
@@ -1391,102 +1320,20 @@ function hasFinalCard(
   definition
 ){
 
-  return (
+  return(
     getFinalCardCandidates(
       definition
-    ).length >
-    0
+    ).length>0
   );
 
 }
 
 
-/*
-  Intenta cargar la primera imagen.
-
-  Si no existe, prueba automáticamente
-  con la siguiente.
-*/
-
-function setEncounterImageWithFallback(
-  candidates
-){
-
-  const images =
-    Array.isArray(
-      candidates
-    )
-      ?
-      candidates.filter(
-        Boolean
-      )
-      :
-      [
-        candidates
-      ].filter(
-        Boolean
-      );
-
-
-  if(
-    !images.length
-  ){
-    return;
-  }
-
-
-  let currentIndex =
-    0;
-
-
-  function loadCurrent(){
-
-    encounterImage.onerror =
-      () => {
-
-        currentIndex++;
-
-        if(
-          currentIndex <
-          images.length
-        ){
-
-          loadCurrent();
-
-          return;
-
-        }
-
-
-        encounterImage.onerror =
-          null;
-
-
-        showMessage(
-          "NO SE ENCONTRÓ LA IMAGEN DE LA PISTA"
-        );
-
-      };
-
-
-    encounterImage.src =
-      images[
-        currentIndex
-      ];
-
-  }
-
-
-  loadCurrent();
-
-}
-
-
 /* =========================================================
-   RANDOMIZACIÓN B
+   RANDOMIZE B ENCOUNTERS
    ========================================================= */
 
-const B_ROOMS = [
+const B_ROOMS=[
   "B1",
   "B2",
   "B3",
@@ -1507,19 +1354,20 @@ function randomIndex(
     window.crypto.getRandomValues
   ){
 
-    const data =
+    const data=
       new Uint32Array(1);
 
     window.crypto.getRandomValues(
       data
     );
 
-    return data[0] % max;
+    return data[0]%max;
 
   }
 
+
   return Math.floor(
-    Math.random() * max
+    Math.random()*max
   );
 
 }
@@ -1530,25 +1378,27 @@ function shuffleArray(
 ){
 
   for(
-    let i = array.length - 1;
-    i > 0;
+    let i=array.length-1;
+    i>0;
     i--
   ){
 
-    const j =
+    const j=
       randomIndex(
-        i + 1
+        i+1
       );
+
 
     [
       array[i],
       array[j]
-    ] = [
+    ]=[
       array[j],
       array[i]
     ];
 
   }
+
 
   return array;
 
@@ -1557,34 +1407,28 @@ function shuffleArray(
 
 function randomizeBEncounters(){
 
-  const originalEvents =
+  const original=
     B_ROOMS.map(
-      room =>
+      room=>
         DEFINITIONS[
           room
         ]
     );
 
 
-  const shuffledEvents =
+  const shuffled=
     shuffleArray(
       [
-        ...originalEvents
+        ...original
       ]
     );
 
 
-  /*
-    Si por casualidad todo queda exactamente
-    igual que el orden original, hacemos una
-    rotación para que sí cambie.
-  */
-
-  const sameAsOriginal =
-    shuffledEvents.every(
-      (event,index) =>
-        event ===
-        originalEvents[
+  const sameAsOriginal=
+    shuffled.every(
+      (event,index)=>
+        event===
+        original[
           index
         ]
     );
@@ -1594,23 +1438,20 @@ function randomizeBEncounters(){
     sameAsOriginal
   ){
 
-    const first =
-      shuffledEvents.shift();
-
-    shuffledEvents.push(
-      first
+    shuffled.push(
+      shuffled.shift()
     );
 
   }
 
 
   B_ROOMS.forEach(
-    (room,index) => {
+    (room,index)=>{
 
       DEFINITIONS[
         room
-      ] =
-        shuffledEvents[
+      ]=
+        shuffled[
           index
         ];
 
@@ -1621,12 +1462,15 @@ function randomizeBEncounters(){
   console.log(
     "Distribución B:",
     B_ROOMS.map(
-      room => ({
+      room=>({
+
         room,
+
         event:
           DEFINITIONS[
             room
           ].sourceId
+
       })
     )
   );
@@ -1641,7 +1485,7 @@ randomizeBEncounters();
    STATE
    ========================================================= */
 
-const state = {
+const state={
 
   currentRoom:"ENTRADA",
 
@@ -1670,140 +1514,209 @@ const state = {
 };
 
 
-Object
-  .keys(
-    DEFINITIONS
-  )
-  .forEach(
-    room => {
+Object.keys(
+  DEFINITIONS
+)
+.forEach(
+  room=>{
 
-      state.rooms[
-        room
-      ] = {
+    state.rooms[
+      room
+    ]={
 
-        revealed:false,
+      revealed:false,
 
-        completed:false,
+      completed:false,
 
-        visited:false
+      visited:false
 
-      };
+    };
 
-    }
-  );
+  }
+);
 
 
 /* =========================================================
    DOM
    ========================================================= */
 
-const introOverlay =
-  document.getElementById("introOverlay");
+const introOverlay=
+  document.getElementById(
+    "introOverlay"
+  );
 
-const introPage1 =
-  document.getElementById("introPage1");
+const introPage1=
+  document.getElementById(
+    "introPage1"
+  );
 
-const introPage2 =
-  document.getElementById("introPage2");
+const introPage2=
+  document.getElementById(
+    "introPage2"
+  );
 
-const dockPage =
-  document.getElementById("dockPage");
+const dockPage=
+  document.getElementById(
+    "dockPage"
+  );
 
-const acceptMissionButton =
-  document.getElementById("acceptMissionButton");
+const acceptMissionButton=
+  document.getElementById(
+    "acceptMissionButton"
+  );
 
-const dockBaseImage =
-  document.getElementById("dockBaseImage");
+const dockBaseImage=
+  document.getElementById(
+    "dockBaseImage"
+  );
 
-const dockShip =
-  document.getElementById("dockShip");
+const dockShip=
+  document.getElementById(
+    "dockShip"
+  );
 
-const dockFlash =
-  document.getElementById("dockFlash");
+const dockFlash=
+  document.getElementById(
+    "dockFlash"
+  );
 
-const game =
-  document.getElementById("game");
+const game=
+  document.getElementById(
+    "game"
+  );
 
-const mapImage =
-  document.getElementById("mapImage");
+const mapImage=
+  document.getElementById(
+    "mapImage"
+  );
 
-const roomsLayer =
-  document.getElementById("roomsLayer");
+const roomsLayer=
+  document.getElementById(
+    "roomsLayer"
+  );
 
-const iconsLayer =
-  document.getElementById("iconsLayer");
+const iconsLayer=
+  document.getElementById(
+    "iconsLayer"
+  );
 
-const scannerButton =
-  document.getElementById("scannerButton");
+const scannerButton=
+  document.getElementById(
+    "scannerButton"
+  );
 
-const useObjectButton =
-  document.getElementById("useObjectButton");
+const useObjectButton=
+  document.getElementById(
+    "useObjectButton"
+  );
 
-const musicButton =
-  document.getElementById("musicButton");
+const musicButton=
+  document.getElementById(
+    "musicButton"
+  );
 
-const oxygenCounter =
-  document.getElementById("oxygenCounter");
+const oxygenCounter=
+  document.getElementById(
+    "oxygenCounter"
+  );
 
-const tutorialOverlay =
-  document.getElementById("tutorialOverlay");
+const tutorialOverlay=
+  document.getElementById(
+    "tutorialOverlay"
+  );
 
-const tutorialText =
-  document.getElementById("tutorialText");
+const tutorialText=
+  document.getElementById(
+    "tutorialText"
+  );
 
-const tutorialNext =
-  document.getElementById("tutorialNext");
+const tutorialNext=
+  document.getElementById(
+    "tutorialNext"
+  );
 
-const encounter =
-  document.getElementById("encounter");
+const encounter=
+  document.getElementById(
+    "encounter"
+  );
 
-const encounterCard =
-  document.getElementById("encounterCard");
+const encounterCard=
+  document.getElementById(
+    "encounterCard"
+  );
 
-const encounterImage =
-  document.getElementById("encounterImage");
+const encounterImage=
+  document.getElementById(
+    "encounterImage"
+  );
 
-const enemyHp =
-  document.getElementById("enemyHp");
+const enemyHp=
+  document.getElementById(
+    "enemyHp"
+  );
 
-const gunButton =
-  document.getElementById("gunButton");
+const gunButton=
+  document.getElementById(
+    "gunButton"
+  );
 
-const fistButton =
-  document.getElementById("fistButton");
+const fistButton=
+  document.getElementById(
+    "fistButton"
+  );
 
-const encounterBackButton =
-  document.getElementById("encounterBackButton");
+const encounterBackButton=
+  document.getElementById(
+    "encounterBackButton"
+  );
 
-const message =
-  document.getElementById("message");
+const message=
+  document.getElementById(
+    "message"
+  );
 
-const endOverlay =
-  document.getElementById("endOverlay");
+const endOverlay=
+  document.getElementById(
+    "endOverlay"
+  );
 
-const endTitle =
-  document.getElementById("endTitle");
+const endTitle=
+  document.getElementById(
+    "endTitle"
+  );
 
-const endSubtitle =
-  document.getElementById("endSubtitle");
+const endSubtitle=
+  document.getElementById(
+    "endSubtitle"
+  );
 
-const introMusic =
-  document.getElementById("introMusic");
+const introMusic=
+  document.getElementById(
+    "introMusic"
+  );
 
-const bgMusic =
-  document.getElementById("bgMusic");
-
-
-let messageTimer = null;
-let musicPlaying = false;
-let combatLocked = false;
-let introLocked = false;
-let gameAudioContext = null;
-let tutorialIndex = 0;
+const bgMusic=
+  document.getElementById(
+    "bgMusic"
+  );
 
 
-introMusic.volume = .34;
-bgMusic.volume = .32;
+let messageTimer=null;
+
+let musicPlaying=false;
+
+let combatLocked=false;
+
+let introLocked=false;
+
+let gameAudioContext=null;
+
+let tutorialIndex=0;
+
+
+introMusic.volume=.34;
+
+bgMusic.volume=.32;
 
 
 /* =========================================================
@@ -1812,63 +1725,69 @@ bgMusic.volume = .32;
 
 function buildRooms(){
 
-  Object
-    .entries(
-      ROOM_LAYOUT
-    )
-    .forEach(
-      ([room,pos]) => {
+  Object.entries(
+    ROOM_LAYOUT
+  )
+  .forEach(
+    ([room,pos])=>{
 
-        const button =
-          document.createElement(
-            "button"
-          );
-
-        button.type =
-          "button";
-
-        button.className =
-          "room";
-
-        button.id =
-          `room-${room}`;
-
-        button.setAttribute(
-          "aria-label",
-          `Habitación ${room}`
+      const button=
+        document.createElement(
+          "button"
         );
 
-        button.style.left =
-          `${pos.x}%`;
 
-        button.style.top =
-          `${pos.y}%`;
+      button.type=
+        "button";
 
-        button.style.width =
-          "15.2%";
 
-        button.style.height =
-          "7.6%";
+      button.className=
+        "room";
 
-        button.addEventListener(
-          "click",
-          () => {
 
-            handleRoomClick(
-              room
-            );
+      button.id=
+        `room-${room}`;
 
-          }
-        );
 
-        roomsLayer.appendChild(
-          button
-        );
+      button.setAttribute(
+        "aria-label",
+        `Habitación ${room}`
+      );
 
-      }
-    );
+
+      button.style.left=
+        `${pos.x}%`;
+
+
+      button.style.top=
+        `${pos.y}%`;
+
+
+      button.style.width=
+        "15.2%";
+
+
+      button.style.height=
+        "7.6%";
+
+
+      button.addEventListener(
+        "click",
+        ()=>handleRoomClick(
+          room
+        )
+      );
+
+
+      roomsLayer.appendChild(
+        button
+      );
+
+    }
+  );
 
 }
+
 
 buildRooms();
 
@@ -1877,77 +1796,84 @@ buildRooms();
    PRELOAD
    ========================================================= */
 
-const preloadImages = [
+const preloadImages=[
+
   ASSETS.introIncoming,
   ASSETS.introMission,
+
   ASSETS.stationOnly,
   ASSETS.dockedStation,
+
   ASSETS.playerShip,
+
   ASSETS.map100,
   ASSETS.map60,
   ASSETS.map20
+
 ];
 
 
-Object
-  .values(
-    DEFINITIONS
-  )
-  .forEach(
-    definition => {
+Object.values(
+  DEFINITIONS
+)
+.forEach(
+  definition=>{
 
-      if(
+    if(
+      definition.card
+    ){
+
+      preloadImages.push(
         definition.card
-      ){
-
-        preloadImages.push(
-          definition.card
-        );
-
-      }
-
-      if(
-        definition.icon
-      ){
-
-        preloadImages.push(
-          definition.icon
-        );
-
-      }
-
-      getFinalCardCandidates(
-        definition
-      )
-      .forEach(
-        image => {
-
-          preloadImages.push(
-            image
-          );
-
-        }
       );
 
     }
-  );
+
+
+    if(
+      definition.icon
+    ){
+
+      preloadImages.push(
+        definition.icon
+      );
+
+    }
+
+
+    getFinalCardCandidates(
+      definition
+    )
+    .forEach(
+      image=>{
+
+        preloadImages.push(
+          image
+        );
+
+      }
+    );
+
+  }
+);
 
 
 preloadImages
-  .filter(
-    Boolean
-  )
-  .forEach(
-    src => {
+.filter(
+  Boolean
+)
+.forEach(
+  src=>{
 
-      const image =
-        new Image();
+    const image=
+      new Image();
 
-      image.src =
-        src;
 
-    }
-  );
+    image.src=
+      src;
+
+  }
+);
 
 
 /* =========================================================
@@ -1960,24 +1886,27 @@ function getAudioContext(){
     !gameAudioContext
   ){
 
-    const AudioContext =
+    const C=
       window.AudioContext
       ||
       window.webkitAudioContext;
 
-    gameAudioContext =
-      new AudioContext();
+
+    gameAudioContext=
+      new C();
 
   }
 
+
   if(
-    gameAudioContext.state ===
+    gameAudioContext.state===
     "suspended"
   ){
 
     gameAudioContext.resume();
 
   }
+
 
   return gameAudioContext;
 
@@ -1994,68 +1923,76 @@ function toneSweep(
 
   try{
 
-    const ctx =
+    const ctx=
       getAudioContext();
 
-    const oscillator =
+
+    const oscillator=
       ctx.createOscillator();
 
-    const gain =
+
+    const gain=
       ctx.createGain();
 
-    oscillator.type =
+
+    oscillator.type=
       type;
 
-    oscillator.frequency
-      .setValueAtTime(
-        startFreq,
-        ctx.currentTime
-      );
 
     oscillator.frequency
-      .exponentialRampToValueAtTime(
-        Math.max(
-          20,
-          endFreq
-        ),
-        ctx.currentTime
-        +
-        duration
-      );
+    .setValueAtTime(
+      startFreq,
+      ctx.currentTime
+    );
+
+
+    oscillator.frequency
+    .exponentialRampToValueAtTime(
+      Math.max(
+        20,
+        endFreq
+      ),
+      ctx.currentTime+
+      duration
+    );
+
 
     gain.gain
-      .setValueAtTime(
-        volume,
-        ctx.currentTime
-      );
+    .setValueAtTime(
+      volume,
+      ctx.currentTime
+    );
+
 
     gain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        duration
-      );
+    .exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+
+      duration
+    );
+
 
     oscillator.connect(
       gain
     );
 
+
     gain.connect(
       ctx.destination
     );
 
+
     oscillator.start();
 
+
     oscillator.stop(
-      ctx.currentTime
-      +
-      duration
-      +
+      ctx.currentTime+
+      duration+
       .02
     );
 
   }
+
   catch(error){}
 
 }
@@ -2065,95 +2002,108 @@ function scannerSound(){
 
   try{
 
-    const ctx =
+    const ctx=
       getAudioContext();
 
-    const oscillator1 =
+
+    const oscillator1=
       ctx.createOscillator();
 
-    const oscillator2 =
+
+    const oscillator2=
       ctx.createOscillator();
 
-    const gain =
+
+    const gain=
       ctx.createGain();
 
-    oscillator1.type =
+
+    oscillator1.type=
       "sine";
 
-    oscillator2.type =
+
+    oscillator2.type=
       "triangle";
 
-    oscillator1.frequency
-      .setValueAtTime(
-        380,
-        ctx.currentTime
-      );
 
     oscillator1.frequency
-      .linearRampToValueAtTime(
-        1240,
-        ctx.currentTime
-        +
-        .48
-      );
+    .setValueAtTime(
+      380,
+      ctx.currentTime
+    );
+
+
+    oscillator1.frequency
+    .linearRampToValueAtTime(
+      1240,
+      ctx.currentTime+
+      .48
+    );
+
 
     oscillator2.frequency
-      .setValueAtTime(
-        720,
-        ctx.currentTime
-      );
+    .setValueAtTime(
+      720,
+      ctx.currentTime
+    );
+
 
     oscillator2.frequency
-      .linearRampToValueAtTime(
-        1510,
-        ctx.currentTime
-        +
-        .48
-      );
+    .linearRampToValueAtTime(
+      1510,
+      ctx.currentTime+
+      .48
+    );
+
 
     gain.gain
-      .setValueAtTime(
-        .085,
-        ctx.currentTime
-      );
+    .setValueAtTime(
+      .085,
+      ctx.currentTime
+    );
+
 
     gain.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        .5
-      );
+    .exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+
+      .5
+    );
+
 
     oscillator1.connect(
       gain
     );
 
+
     oscillator2.connect(
       gain
     );
+
 
     gain.connect(
       ctx.destination
     );
 
+
     oscillator1.start();
 
     oscillator2.start();
 
+
     oscillator1.stop(
-      ctx.currentTime
-      +
+      ctx.currentTime+
       .5
     );
 
+
     oscillator2.stop(
-      ctx.currentTime
-      +
+      ctx.currentTime+
       .5
     );
 
   }
+
   catch(error){}
 
 }
@@ -2180,21 +2130,22 @@ function lifeLossSound(){
     128
   ]
   .forEach(
-    (frequency,index) => {
+    (frequency,index)=>{
 
       setTimeout(
-        () => {
+        ()=>{
 
           toneSweep(
             frequency,
-            frequency * .92,
+            frequency*.92,
             .11,
             .07,
             "square"
           );
 
         },
-        index * 60
+
+        index*60
       );
 
     }
@@ -2251,28 +2202,35 @@ function deathSound(){
     95
   ]
   .forEach(
-    (frequency,index) => {
+    (frequency,index)=>{
 
       setTimeout(
-        () => {
+        ()=>{
 
           toneSweep(
+
             frequency,
+
             Math.max(
               45,
-              frequency * .55
+              frequency*.55
             ),
+
             .2,
+
             .11,
-            index < 2
+
+            index<2
               ?
               "square"
               :
               "sawtooth"
+
           );
 
         },
-        index * 85
+
+        index*85
       );
 
     }
@@ -2303,21 +2261,22 @@ function missionSound(){
     1180
   ]
   .forEach(
-    (frequency,index) => {
+    (frequency,index)=>{
 
       setTimeout(
-        () => {
+        ()=>{
 
           toneSweep(
             frequency,
-            frequency * 1.02,
+            frequency*1.02,
             .22,
             .08,
             "sine"
           );
 
         },
-        index * 120
+
+        index*120
       );
 
     }
@@ -2330,135 +2289,152 @@ function dockingTravelSound(){
 
   try{
 
-    const ctx =
+    const ctx=
       getAudioContext();
 
-    const master =
+
+    const master=
       ctx.createGain();
 
-    const low =
+
+    const low=
       ctx.createOscillator();
 
-    const high =
+
+    const high=
       ctx.createOscillator();
 
-    const filter =
+
+    const filter=
       ctx.createBiquadFilter();
 
-    low.type =
+
+    low.type=
       "sawtooth";
 
-    high.type =
+
+    high.type=
       "triangle";
 
-    low.frequency
-      .setValueAtTime(
-        58,
-        ctx.currentTime
-      );
 
     low.frequency
-      .linearRampToValueAtTime(
-        98,
-        ctx.currentTime
-        +
-        2.25
-      );
+    .setValueAtTime(
+      58,
+      ctx.currentTime
+    );
+
+
+    low.frequency
+    .linearRampToValueAtTime(
+      98,
+      ctx.currentTime+
+      2.25
+    );
+
 
     high.frequency
-      .setValueAtTime(
-        118,
-        ctx.currentTime
-      );
+    .setValueAtTime(
+      118,
+      ctx.currentTime
+    );
+
 
     high.frequency
-      .linearRampToValueAtTime(
-        185,
-        ctx.currentTime
-        +
-        2.25
-      );
+    .linearRampToValueAtTime(
+      185,
+      ctx.currentTime+
+      2.25
+    );
 
-    filter.type =
+
+    filter.type=
       "lowpass";
 
-    filter.frequency
-      .setValueAtTime(
-        520,
-        ctx.currentTime
-      );
 
     filter.frequency
-      .linearRampToValueAtTime(
-        900,
-        ctx.currentTime
-        +
-        2.1
-      );
+    .setValueAtTime(
+      520,
+      ctx.currentTime
+    );
+
+
+    filter.frequency
+    .linearRampToValueAtTime(
+      900,
+      ctx.currentTime+
+      2.1
+    );
+
 
     master.gain
-      .setValueAtTime(
-        .001,
-        ctx.currentTime
-      );
+    .setValueAtTime(
+      .001,
+      ctx.currentTime
+    );
+
 
     master.gain
-      .linearRampToValueAtTime(
-        .11,
-        ctx.currentTime
-        +
-        .25
-      );
+    .linearRampToValueAtTime(
+      .11,
+      ctx.currentTime+
+      .25
+    );
+
 
     master.gain
-      .setValueAtTime(
-        .11,
-        ctx.currentTime
-        +
-        1.65
-      );
+    .setValueAtTime(
+      .11,
+      ctx.currentTime+
+      1.65
+    );
+
 
     master.gain
-      .exponentialRampToValueAtTime(
-        .001,
-        ctx.currentTime
-        +
-        2.35
-      );
+    .exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+
+      2.35
+    );
+
 
     low.connect(
       filter
     );
 
+
     high.connect(
       filter
     );
+
 
     filter.connect(
       master
     );
 
+
     master.connect(
       ctx.destination
     );
+
 
     low.start();
 
     high.start();
 
+
     low.stop(
-      ctx.currentTime
-      +
+      ctx.currentTime+
       2.4
     );
 
+
     high.stop(
-      ctx.currentTime
-      +
+      ctx.currentTime+
       2.4
     );
 
   }
+
   catch(error){}
 
 }
@@ -2474,8 +2450,9 @@ function dockingImpactSound(){
     "square"
   );
 
+
   setTimeout(
-    () => {
+    ()=>{
 
       toneSweep(
         610,
@@ -2489,8 +2466,9 @@ function dockingImpactSound(){
     170
   );
 
+
   setTimeout(
-    () => {
+    ()=>{
 
       toneSweep(
         830,
@@ -2521,7 +2499,7 @@ function showIntroPage(
     dockPage
   ]
   .forEach(
-    element => {
+    element=>{
 
       element.classList.remove(
         "active"
@@ -2529,6 +2507,7 @@ function showIntroPage(
 
     }
   );
+
 
   page.classList.add(
     "active"
@@ -2541,7 +2520,7 @@ introPage1.addEventListener(
 
   "click",
 
-  async () => {
+  async()=>{
 
     if(
       introLocked
@@ -2549,20 +2528,25 @@ introPage1.addEventListener(
       return;
     }
 
+
     getAudioContext();
+
 
     showIntroPage(
       introPage2
     );
 
+
     try{
 
-      introMusic.currentTime =
+      introMusic.currentTime=
         0;
+
 
       await introMusic.play();
 
     }
+
     catch(error){}
 
   }
@@ -2572,72 +2556,76 @@ introPage1.addEventListener(
 
 function crossfadeToGameMusic(){
 
-  bgMusic.volume =
+  bgMusic.volume=
     .03;
 
+
   bgMusic
-    .play()
-    .then(
-      () => {
+  .play()
+  .then(
+    ()=>{
 
-        musicPlaying =
-          true;
+      musicPlaying=
+        true;
 
-        musicButton.classList.add(
-          "music-on"
-        );
 
-      }
-    )
-    .catch(
-      () => {}
-    );
+      musicButton.classList.add(
+        "music-on"
+      );
 
-  const steps =
+    }
+  )
+  .catch(
+    ()=>{}
+  );
+
+
+  const steps=
     18;
 
-  let current =
+
+  let current=
     0;
 
-  const introStart =
+
+  const introStart=
     introMusic.volume;
 
-  const timer =
+
+  const timer=
     setInterval(
-      () => {
+      ()=>{
 
         current++;
 
-        const progress =
-          current
-          /
+
+        const progress=
+          current/
           steps;
 
-        introMusic.volume =
+
+        introMusic.volume=
           Math.max(
             0,
-            introStart
-            *
+            introStart*
             (
-              1
-              -
+              1-
               progress
             )
           );
 
-        bgMusic.volume =
-          .03
-          +
+
+        bgMusic.volume=
+          .03+
           (
-            .32
-            -
+            .32-
             .03
-          )
-          *
+          )*
           progress;
 
+
         if(
-          current >=
+          current>=
           steps
         ){
 
@@ -2645,15 +2633,19 @@ function crossfadeToGameMusic(){
             timer
           );
 
+
           introMusic.pause();
 
-          introMusic.currentTime =
+
+          introMusic.currentTime=
             0;
 
-          introMusic.volume =
+
+          introMusic.volume=
             .34;
 
-          bgMusic.volume =
+
+          bgMusic.volume=
             .32;
 
         }
@@ -2669,9 +2661,10 @@ acceptMissionButton.addEventListener(
 
   "click",
 
-  event => {
+  event=>{
 
     event.stopPropagation();
+
 
     if(
       introLocked
@@ -2679,14 +2672,19 @@ acceptMissionButton.addEventListener(
       return;
     }
 
-    introLocked =
+
+    introLocked=
       true;
+
 
     getAudioContext();
 
+
     crossfadeToGameMusic();
 
+
     dockingTravelSound();
+
 
     startDockingSequence();
 
@@ -2701,23 +2699,29 @@ function startDockingSequence(){
     dockPage
   );
 
-  dockBaseImage.src =
+
+  dockBaseImage.src=
     ASSETS.stationOnly;
 
-  dockShip.src =
+
+  dockShip.src=
     ASSETS.playerShip;
 
-  dockShip.style.display =
+
+  dockShip.style.display=
     "block";
+
 
   dockShip.classList.remove(
     "docking"
   );
 
+
   void dockShip.offsetWidth;
 
+
   setTimeout(
-    () => {
+    ()=>{
 
       dockShip.classList.add(
         "docking"
@@ -2727,30 +2731,37 @@ function startDockingSequence(){
     180
   );
 
+
   setTimeout(
-    () => {
+    ()=>{
 
       dockingImpactSound();
+
 
       dockFlash.classList.remove(
         "flash"
       );
 
+
       void dockFlash.offsetWidth;
+
 
       dockFlash.classList.add(
         "flash"
       );
 
-      dockBaseImage.src =
+
+      dockBaseImage.src=
         ASSETS.dockedStation;
 
-      dockShip.style.display =
+
+      dockShip.style.display=
         "none";
 
     },
     2450
   );
+
 
   setTimeout(
     startGame,
@@ -2762,26 +2773,33 @@ function startDockingSequence(){
 
 function startGame(){
 
-  mapImage.src =
+  mapImage.src=
     ASSETS.map100;
 
-  state.oxygen =
+
+  state.oxygen=
     100;
+
 
   updateOxygenUI();
 
-  introOverlay.style.display =
+
+  introOverlay.style.display=
     "none";
 
-  game.style.display =
+
+  game.style.display=
     "block";
+
 
   window.scrollTo(
     0,
     0
   );
 
+
   refreshRoomMarkers();
+
 
   showTutorial();
 
@@ -2798,14 +2816,17 @@ async function toggleMusic(){
 
       await bgMusic.play();
 
-      musicPlaying =
+
+      musicPlaying=
         true;
+
 
       musicButton.classList.add(
         "music-on"
       );
 
     }
+
     catch(error){
 
       showMessage(
@@ -2814,14 +2835,18 @@ async function toggleMusic(){
 
     }
 
+
     return;
 
   }
 
+
   bgMusic.pause();
 
-  musicPlaying =
+
+  musicPlaying=
     false;
+
 
   musicButton.classList.remove(
     "music-on"
@@ -2834,9 +2859,10 @@ musicButton.addEventListener(
 
   "click",
 
-  event => {
+  event=>{
 
     event.stopPropagation();
+
 
     toggleMusic();
 
@@ -2849,7 +2875,7 @@ musicButton.addEventListener(
    TUTORIAL
    ========================================================= */
 
-const TUTORIAL_MESSAGES = [
+const TUTORIAL_MESSAGES=[
 
   "Recuerda: tu oxígeno es limitado. Cuanto menos te quede, más difícil será combatir. Úsalo con prudencia.",
 
@@ -2862,19 +2888,23 @@ const TUTORIAL_MESSAGES = [
 
 function showTutorial(){
 
-  state.gameLocked =
+  state.gameLocked=
     true;
 
-  tutorialIndex =
+
+  tutorialIndex=
     0;
 
-  tutorialText.textContent =
+
+  tutorialText.textContent=
     TUTORIAL_MESSAGES[
       0
     ];
 
-  tutorialNext.textContent =
+
+  tutorialNext.textContent=
     "SIGUIENTE";
+
 
   tutorialOverlay.classList.add(
     "show"
@@ -2887,12 +2917,13 @@ tutorialNext.addEventListener(
 
   "click",
 
-  () => {
+  ()=>{
 
     tutorialIndex++;
 
+
     if(
-      tutorialIndex >=
+      tutorialIndex>=
       TUTORIAL_MESSAGES.length
     ){
 
@@ -2900,22 +2931,25 @@ tutorialNext.addEventListener(
         "show"
       );
 
-      state.gameLocked =
+
+      state.gameLocked=
         false;
+
 
       return;
 
     }
 
-    tutorialText.textContent =
+
+    tutorialText.textContent=
       TUTORIAL_MESSAGES[
         tutorialIndex
       ];
 
-    tutorialNext.textContent =
-      tutorialIndex ===
-      TUTORIAL_MESSAGES.length
-      -
+
+    tutorialNext.textContent=
+      tutorialIndex===
+      TUTORIAL_MESSAGES.length-
       1
         ?
         "ENTENDIDO"
@@ -2939,22 +2973,27 @@ function showMessage(
     messageTimer
   );
 
+
   message.classList.remove(
     "show"
   );
 
+
   void message.offsetWidth;
 
-  message.innerHTML =
+
+  message.innerHTML=
     html;
+
 
   message.classList.add(
     "show"
   );
 
-  messageTimer =
+
+  messageTimer=
     setTimeout(
-      () => {
+      ()=>{
 
         message.classList.remove(
           "show"
@@ -2974,18 +3013,20 @@ function showMessage(
 function oxygenPhase(){
 
   if(
-    state.oxygen <
+    state.oxygen<
     20
   ){
     return 20;
   }
 
+
   if(
-    state.oxygen <
+    state.oxygen<
     60
   ){
     return 60;
   }
+
 
   return 100;
 
@@ -3004,11 +3045,11 @@ function formatOxygen(
       value
       :
       value
-        .toFixed(1)
-        .replace(
-          ".",
-          ","
-        )
+      .toFixed(1)
+      .replace(
+        ".",
+        ","
+      )
   }%`;
 
 }
@@ -3016,36 +3057,41 @@ function formatOxygen(
 
 function updateOxygenUI(){
 
-  const phase =
+  const phase=
     oxygenPhase();
 
-  oxygenCounter.textContent =
+
+  oxygenCounter.textContent=
     formatOxygen(
       state.oxygen
     );
+
 
   oxygenCounter.classList.remove(
     "phase60",
     "phase20"
   );
 
+
   if(
-    phase ===
+    phase===
     100
   ){
 
-    mapImage.src =
+    mapImage.src=
       ASSETS.map100;
 
   }
 
+
   if(
-    phase ===
+    phase===
     60
   ){
 
-    mapImage.src =
+    mapImage.src=
       ASSETS.map60;
+
 
     oxygenCounter.classList.add(
       "phase60"
@@ -3053,13 +3099,15 @@ function updateOxygenUI(){
 
   }
 
+
   if(
-    phase ===
+    phase===
     20
   ){
 
-    mapImage.src =
+    mapImage.src=
       ASSETS.map20;
+
 
     oxygenCounter.classList.add(
       "phase20"
@@ -3080,34 +3128,36 @@ function consumeOxygen(
     return false;
   }
 
-  state.oxygen =
+
+  state.oxygen=
     Math.max(
       0,
       Math.round(
         (
-          state.oxygen
-          -
+          state.oxygen-
           amount
-        )
-        *
+        )*
         10
-      )
-      /
+      )/
       10
     );
 
+
   updateOxygenUI();
 
+
   if(
-    state.oxygen <=
+    state.oxygen<=
     0
   ){
 
     triggerGameOver();
 
+
     return false;
 
   }
+
 
   return true;
 
@@ -3123,7 +3173,7 @@ function getMovementOxygenCost(
 ){
 
   if(
-    state.currentRoom ===
+    state.currentRoom===
     "ENTRADA"
   ){
 
@@ -3131,17 +3181,19 @@ function getMovementOxygenCost(
 
   }
 
+
   if(
-    targetRoom ===
+    targetRoom===
       "A1"
     &&
-    keyCount() >=
+    keyCount()>=
       2
   ){
 
     return 0;
 
   }
+
 
   if(
     state.rooms[
@@ -3157,20 +3209,17 @@ function getMovementOxygenCost(
 
   }
 
+
   return 5;
 
 }
 
 
-/* =========================================================
-   USE OBJECT
-   ========================================================= */
-
 useObjectButton.addEventListener(
 
   "click",
 
-  () => {
+  ()=>{
 
     if(
       state.gameLocked
@@ -3184,12 +3233,15 @@ useObjectButton.addEventListener(
       return;
     }
 
+
     itemSound();
 
-    const alive =
+
+    const alive=
       consumeOxygen(
         5
       );
+
 
     if(
       alive
@@ -3212,14 +3264,13 @@ useObjectButton.addEventListener(
 
 function keyCount(){
 
-  return Object
-    .values(
-      state.keySources
-    )
-    .filter(
-      Boolean
-    )
-    .length;
+  return Object.values(
+    state.keySources
+  )
+  .filter(
+    Boolean
+  )
+  .length;
 
 }
 
@@ -3236,8 +3287,9 @@ function grantKey(
 
     state.keySources[
       source
-    ] =
+    ]=
       true;
+
 
     showMessage(
       "TARJETA LLAVE OBTENIDA"
@@ -3264,10 +3316,12 @@ function addMapIcon(
     id
   );
 
-  const position =
+
+  const position=
     ROOM_LAYOUT[
       room
     ];
+
 
   if(
     !position
@@ -3275,21 +3329,26 @@ function addMapIcon(
     return null;
   }
 
-  const icon =
+
+  const icon=
     document.createElement(
       "img"
     );
 
-  icon.id =
+
+  icon.id=
     id;
 
-  icon.src =
+
+  icon.src=
     image;
 
-  icon.draggable =
+
+  icon.draggable=
     false;
 
-  icon.className =
+
+  icon.className=
     `map-icon ${classes}${
       direction
         ?
@@ -3298,15 +3357,19 @@ function addMapIcon(
         ""
     }`;
 
-  icon.style.left =
+
+  icon.style.left=
     `${position.x}%`;
 
-  icon.style.top =
+
+  icon.style.top=
     `${position.y}%`;
+
 
   iconsLayer.appendChild(
     icon
   );
+
 
   return icon;
 
@@ -3317,10 +3380,11 @@ function removeMapIcon(
   id
 ){
 
-  const element =
+  const element=
     document.getElementById(
       id
     );
+
 
   if(
     element
@@ -3339,23 +3403,24 @@ function clearStandardMarkers(){
     "player-marker"
   );
 
-  Object
-    .keys(
-      DEFINITIONS
-    )
-    .forEach(
-      room => {
 
-        removeMapIcon(
-          `check-${room}`
-        );
+  Object.keys(
+    DEFINITIONS
+  )
+  .forEach(
+    room=>{
 
-        removeMapIcon(
-          `event-${room}`
-        );
+      removeMapIcon(
+        `check-${room}`
+      );
 
-      }
-    );
+
+      removeMapIcon(
+        `event-${room}`
+      );
+
+    }
+  );
 
 }
 
@@ -3364,8 +3429,9 @@ function refreshRoomMarkers(){
 
   clearStandardMarkers();
 
+
   if(
-    state.currentRoom !==
+    state.currentRoom!==
     "ENTRADA"
   ){
 
@@ -3378,57 +3444,61 @@ function refreshRoomMarkers(){
 
   }
 
-  Object
-    .keys(
-      DEFINITIONS
-    )
-    .forEach(
-      room => {
 
-        const roomState =
-          state.rooms[
-            room
-          ];
+  Object.keys(
+    DEFINITIONS
+  )
+  .forEach(
+    room=>{
 
-        if(
-          room ===
-          state.currentRoom
-        ){
-          return;
-        }
+      const roomState=
+        state.rooms[
+          room
+        ];
 
-        if(
-          roomState.completed
-        ){
 
-          addMapIcon(
-            `check-${room}`,
-            ASSETS.check,
-            room,
-            "check-icon"
-          );
+      if(
+        room===
+        state.currentRoom
+      ){
+        return;
+      }
 
-          return;
 
-        }
+      if(
+        roomState.completed
+      ){
 
-        if(
-          roomState.revealed
-        ){
+        addMapIcon(
+          `check-${room}`,
+          ASSETS.check,
+          room,
+          "check-icon"
+        );
 
-          addMapIcon(
-            `event-${room}`,
-            DEFINITIONS[
-              room
-            ].icon,
-            room,
-            "event-icon"
-          );
 
-        }
+        return;
 
       }
-    );
+
+
+      if(
+        roomState.revealed
+      ){
+
+        addMapIcon(
+          `event-${room}`,
+          DEFINITIONS[
+            room
+          ].icon,
+          room,
+          "event-icon"
+        );
+
+      }
+
+    }
+  );
 
 }
 
@@ -3437,13 +3507,15 @@ function moveToRoom(
   room
 ){
 
-  state.currentRoom =
+  state.currentRoom=
     room;
+
 
   state.rooms[
     room
-  ].visited =
+  ].visited=
     true;
+
 
   refreshRoomMarkers();
 
@@ -3470,9 +3542,9 @@ function isAdjacent(
 ){
 
   return adjacentRooms()
-    .includes(
-      target
-    );
+  .includes(
+    target
+  );
 
 }
 
@@ -3483,21 +3555,24 @@ function directionBetween(
 ){
 
   if(
-    from ===
+    from===
     "ENTRADA"
   ){
     return "up";
   }
 
-  const start =
+
+  const start=
     ROOM_LAYOUT[
       from
     ];
 
-  const end =
+
+  const end=
     ROOM_LAYOUT[
       to
     ];
+
 
   if(
     !start
@@ -3507,15 +3582,16 @@ function directionBetween(
     return "up";
   }
 
-  const dx =
-    end.x
-    -
+
+  const dx=
+    end.x-
     start.x;
 
-  const dy =
-    end.y
-    -
+
+  const dy=
+    end.y-
     start.y;
+
 
   if(
     Math.abs(
@@ -3527,7 +3603,7 @@ function directionBetween(
     )
   ){
 
-    return dx > 0
+    return dx>0
       ?
       "right"
       :
@@ -3535,7 +3611,8 @@ function directionBetween(
 
   }
 
-  return dy > 0
+
+  return dy>0
     ?
     "down"
     :
@@ -3546,26 +3623,27 @@ function directionBetween(
 
 function turnOffScanner(){
 
-  state.scannerActive =
+  state.scannerActive=
     false;
+
 
   scannerButton.classList.remove(
     "scanner-on"
   );
 
-  Object
-    .keys(
-      DEFINITIONS
-    )
-    .forEach(
-      room => {
 
-        removeMapIcon(
-          `scan-${room}`
-        );
+  Object.keys(
+    DEFINITIONS
+  )
+  .forEach(
+    room=>{
 
-      }
-    );
+      removeMapIcon(
+        `scan-${room}`
+      );
+
+    }
+  );
 
 }
 
@@ -3584,51 +3662,58 @@ function scanNearbyRooms(){
     return;
   }
 
+
   if(
     state.scannerActive
   ){
 
     turnOffScanner();
 
+
     return;
 
   }
 
-  let count =
+
+  let count=
     0;
 
+
   adjacentRooms()
-    .forEach(
-      room => {
+  .forEach(
+    room=>{
 
-        const roomState =
-          state.rooms[
+      const roomState=
+        state.rooms[
+          room
+        ];
+
+
+      if(
+        !roomState.completed
+        &&
+        !roomState.revealed
+      ){
+
+        addMapIcon(
+          `scan-${room}`,
+          ASSETS.scannerWave,
+          room,
+          "scanner-wave",
+          directionBetween(
+            state.currentRoom,
             room
-          ];
+          )
+        );
 
-        if(
-          !roomState.completed
-          &&
-          !roomState.revealed
-        ){
 
-          addMapIcon(
-            `scan-${room}`,
-            ASSETS.scannerWave,
-            room,
-            "scanner-wave",
-            directionBetween(
-              state.currentRoom,
-              room
-            )
-          );
-
-          count++;
-
-        }
+        count++;
 
       }
-    );
+
+    }
+  );
+
 
   if(
     !count
@@ -3638,16 +3723,20 @@ function scanNearbyRooms(){
       "SIN NUEVAS SEÑALES"
     );
 
+
     return;
 
   }
 
-  state.scannerActive =
+
+  state.scannerActive=
     true;
+
 
   scannerButton.classList.add(
     "scanner-on"
   );
+
 
   scannerSound();
 
@@ -3655,11 +3744,8 @@ function scanNearbyRooms(){
 
 
 scannerButton.addEventListener(
-
   "click",
-
   scanNearbyRooms
-
 );
 
 
@@ -3667,15 +3753,17 @@ function revealRoom(
   room
 ){
 
-  const roomState =
+  const roomState=
     state.rooms[
       room
     ];
 
-  const definition =
+
+  const definition=
     DEFINITIONS[
       room
     ];
+
 
   if(
     !roomState
@@ -3685,12 +3773,15 @@ function revealRoom(
     return;
   }
 
-  roomState.revealed =
+
+  roomState.revealed=
     true;
+
 
   removeMapIcon(
     `scan-${room}`
   );
+
 
   addMapIcon(
     `event-${room}`,
@@ -3699,7 +3790,9 @@ function revealRoom(
     "event-icon"
   );
 
+
   energyLossSound();
+
 
   showMessage(
     `${definition.label}<br>−2 ENERGÍAS`
@@ -3716,39 +3809,124 @@ function setEncounterImage(
   src
 ){
 
-  encounterImage.onerror =
+  encounterImage.onerror=
     null;
 
-  encounterImage.src =
+
+  encounterImage.src=
     src;
+
+}
+
+
+function setEncounterImageWithFallback(
+  candidates
+){
+
+  const images=
+    (
+      Array.isArray(
+        candidates
+      )
+        ?
+        candidates
+        :
+        [
+          candidates
+        ]
+    )
+    .filter(
+      Boolean
+    );
+
+
+  if(
+    !images.length
+  ){
+    return;
+  }
+
+
+  let currentIndex=
+    0;
+
+
+  function loadCurrent(){
+
+    encounterImage.onerror=
+      ()=>{
+
+        currentIndex++;
+
+
+        if(
+          currentIndex<
+          images.length
+        ){
+
+          loadCurrent();
+
+
+          return;
+
+        }
+
+
+        encounterImage.onerror=
+          null;
+
+
+        showMessage(
+          "NO SE ENCONTRÓ LA IMAGEN DE LA PISTA"
+        );
+
+      };
+
+
+    encounterImage.src=
+      images[
+        currentIndex
+      ];
+
+  }
+
+
+  loadCurrent();
 
 }
 
 
 function resetEncounterUI(){
 
-  encounterCard.className =
+  encounterCard.className=
     "";
 
-  encounterCard.style.cursor =
+
+  encounterCard.style.cursor=
     "default";
 
-  enemyHp.style.display =
+
+  enemyHp.style.display=
     "none";
 
-  gunButton.style.display =
+
+  gunButton.style.display=
     "none";
 
-  fistButton.style.display =
+
+  fistButton.style.display=
     "none";
 
-  encounterBackButton.style.display =
+
+  encounterBackButton.style.display=
     "none";
 
-  combatLocked =
+
+  combatLocked=
     false;
 
-  state.combat =
+
+  state.combat=
     null;
 
 }
@@ -3758,8 +3936,9 @@ function currentEnemyHp(
   definition
 ){
 
-  const phase =
+  const phase=
     oxygenPhase();
+
 
   return definition.hp
     ?
@@ -3776,10 +3955,11 @@ function openEncounter(
   room
 ){
 
-  const definition =
+  const definition=
     DEFINITIONS[
       room
     ];
+
 
   if(
     !definition
@@ -3787,57 +3967,74 @@ function openEncounter(
     return;
   }
 
+
   turnOffScanner();
 
-  state.pendingRoom =
+
+  state.pendingRoom=
     room;
+
 
   state.rooms[
     room
-  ].visited =
+  ].visited=
     true;
 
+
   resetEncounterUI();
+
 
   setEncounterImage(
     definition.card
   );
 
-  encounterImage.alt =
+
+  encounterImage.alt=
     definition.label;
+
 
   encounter.classList.add(
     "show"
   );
 
 
+  /* =====================================================
+     COMBAT
+     ===================================================== */
+
   if(
-    definition.type ===
+    definition.type===
     "combat"
   ){
 
-    state.encounterMode =
+    state.encounterMode=
       "combat";
+
 
     encounterCard.classList.add(
       "combat"
     );
 
-    enemyHp.style.display =
+
+    enemyHp.style.display=
       "flex";
 
-    gunButton.style.display =
+
+    gunButton.style.display=
       "block";
 
-    fistButton.style.display =
+
+    fistButton.style.display=
       "block";
 
-    const hp =
+
+    const hp=
       currentEnemyHp(
         definition
       );
 
-    state.combat = {
+
+    state.combat={
 
       room:
         room,
@@ -3854,58 +4051,76 @@ function openEncounter(
         0,
 
       shots:
-        0
+        0,
+
+      /*
+        Se guarda el último ataque realizado.
+        La pista depende únicamente de esto.
+      */
+      lastHit:
+        null
 
     };
 
-    enemyHp.textContent =
+
+    enemyHp.textContent=
       hp;
+
 
     return;
 
   }
 
 
+  /* =====================================================
+     LOOT
+     ===================================================== */
+
   if(
-    definition.type ===
+    definition.type===
     "loot"
   ){
 
     if(
-      keyCount() >=
+      keyCount()>=
       2
     ){
 
-      state.encounterMode =
+      state.encounterMode=
         "lootReady";
 
-      encounterCard.style.cursor =
+
+      encounterCard.style.cursor=
         "pointer";
 
     }
 
     else{
 
-      state.encounterMode =
+      state.encounterMode=
         "lootLocked";
 
-      encounterCard.style.cursor =
+
+      encounterCard.style.cursor=
         "pointer";
 
-      encounterBackButton.style.display =
+
+      encounterBackButton.style.display=
         "block";
 
     }
+
 
     return;
 
   }
 
 
-  state.encounterMode =
+  state.encounterMode=
     definition.type;
 
-  encounterCard.style.cursor =
+
+  encounterCard.style.cursor=
     "pointer";
 
 }
@@ -3913,8 +4128,9 @@ function openEncounter(
 
 function completeCurrentRoom(){
 
-  const room =
+  const room=
     state.pendingRoom;
+
 
   if(
     !room
@@ -3922,27 +4138,34 @@ function completeCurrentRoom(){
     return;
   }
 
-  state.rooms[
-    room
-  ].completed =
-    true;
 
   state.rooms[
     room
-  ].revealed =
+  ].completed=
     true;
+
+
+  state.rooms[
+    room
+  ].revealed=
+    true;
+
 
   encounter.classList.remove(
     "show"
   );
 
-  state.pendingRoom =
+
+  state.pendingRoom=
     null;
 
-  state.encounterMode =
+
+  state.encounterMode=
     null;
+
 
   resetEncounterUI();
+
 
   moveToRoom(
     room
@@ -3953,8 +4176,9 @@ function completeCurrentRoom(){
 
 function closeUnresolvedRoomToMap(){
 
-  const room =
+  const room=
     state.pendingRoom;
+
 
   if(
     !room
@@ -3962,22 +4186,28 @@ function closeUnresolvedRoomToMap(){
     return;
   }
 
+
   state.rooms[
     room
-  ].revealed =
+  ].revealed=
     true;
+
 
   encounter.classList.remove(
     "show"
   );
 
-  state.pendingRoom =
+
+  state.pendingRoom=
     null;
 
-  state.encounterMode =
+
+  state.encounterMode=
     null;
+
 
   resetEncounterUI();
+
 
   moveToRoom(
     room
@@ -3992,7 +4222,9 @@ function animateHit(){
     "hit"
   );
 
+
   void encounterCard.offsetWidth;
+
 
   encounterCard.classList.add(
     "hit"
@@ -4003,6 +4235,15 @@ function animateHit(){
 
 /* =========================================================
    COMBAT
+
+   NUEVA REGLA:
+
+   LA PISTA / RESOLUCIÓN APARECE SI
+   EL GOLPE QUE DEJA AL ENEMIGO EN 0
+   ES UN PUÑO.
+
+   NO IMPORTA CUÁNTOS PUÑOS O
+   PISTOLAS SE USARON ANTES.
    ========================================================= */
 
 function attack(
@@ -4010,7 +4251,7 @@ function attack(
 ){
 
   if(
-    state.encounterMode !==
+    state.encounterMode!==
       "combat"
     ||
     combatLocked
@@ -4022,26 +4263,44 @@ function attack(
     return;
   }
 
-  combatLocked =
+
+  combatLocked=
     true;
 
-  const combat =
+
+  const combat=
     state.combat;
 
 
+  /*
+    Guardamos cuál fue el ataque
+    más reciente.
+  */
+
+  combat.lastHit=
+    kind;
+
+
+  /* =====================================================
+     PUÑO
+     ===================================================== */
+
   if(
-    kind ===
+    kind===
     "fist"
   ){
 
     combat.fists++;
 
+
     punchSound();
+
 
     setTimeout(
       lifeLossSound,
       65
     );
+
 
     showMessage(
       "−1 VIDA"
@@ -4049,16 +4308,24 @@ function attack(
 
   }
 
+
+  /* =====================================================
+     PISTOLA
+     ===================================================== */
+
   else{
 
     combat.shots++;
 
+
     gunSound();
+
 
     setTimeout(
       energyLossSound,
       65
     );
+
 
     showMessage(
       "−1 ENERGÍA"
@@ -4067,59 +4334,78 @@ function attack(
   }
 
 
-  combat.hp =
+  combat.hp=
     Math.max(
       0,
-      combat.hp
-      -
+      combat.hp-
       1
     );
 
-  enemyHp.textContent =
+
+  enemyHp.textContent=
     combat.hp;
+
 
   animateHit();
 
 
   setTimeout(
-    () => {
+    ()=>{
+
+
+      /*
+        Si el enemigo todavía tiene vida,
+        continúa el combate.
+      */
 
       if(
-        combat.hp >
+        combat.hp>
         0
       ){
 
-        combatLocked =
+        combatLocked=
           false;
+
 
         return;
 
       }
 
 
-      const definition =
+      const definition=
         DEFINITIONS[
           combat.room
         ];
 
 
       /*
-        REGLA UNIVERSAL DE PISTAS
+        =================================================
+        NUEVA CONDICIÓN DE PISTA
 
-        - Más puños que pistolas = pista.
-        - Igual número de puños y pistolas = pista.
-        - Más pistolas que puños = SIN pista.
+        El ÚNICO requisito de combate es:
+
+        último golpe = PUÑO.
+
+        Ejemplos:
+
+        PISTOLA + PISTOLA + PUÑO
+        = SÍ PISTA.
+
+        PUÑO + PUÑO + PISTOLA
+        = NO PISTA.
+
+        PISTOLA + PUÑO
+        = SÍ PISTA.
+
+        PUÑO + PISTOLA
+        = NO PISTA.
+        =================================================
       */
 
-      const earnsFinal =
+      const earnsFinal=
 
-        combat.fists >
-          0
-
-        &&
-
-        combat.fists >=
-          combat.shots
+        combat.lastHit===
+          "fist"
 
         &&
 
@@ -4132,30 +4418,26 @@ function attack(
         earnsFinal
       ){
 
-        state.encounterMode =
+        state.encounterMode=
           "final";
+
 
         encounterCard.classList.remove(
           "combat"
         );
 
-        enemyHp.style.display =
-          "none";
 
-        gunButton.style.display =
-          "none";
-
-        fistButton.style.display =
+        enemyHp.style.display=
           "none";
 
 
-        /*
-          Carga la pista correcta.
+        gunButton.style.display=
+          "none";
 
-          Si hay más de un nombre posible,
-          prueba automáticamente el siguiente
-          si el primero no existe.
-        */
+
+        fistButton.style.display=
+          "none";
+
 
         setEncounterImageWithFallback(
           getFinalCardCandidates(
@@ -4164,20 +4446,26 @@ function attack(
         );
 
 
-        encounterImage.alt =
+        encounterImage.alt=
           `Desenlace ${combat.sourceId}`;
 
-        encounterCard.style.cursor =
+
+        encounterCard.style.cursor=
           "pointer";
 
 
         /*
-          A5 entrega su llave siempre que
-          el combate active A5F.
+          A5:
+          Si A5 activa su resolución,
+          también entrega la tarjeta llave.
+
+          Como la resolución ahora depende
+          del último golpe, basta con que
+          el golpe final de A5 sea PUÑO.
         */
 
         if(
-          combat.sourceId ===
+          combat.sourceId===
           "A5"
         ){
 
@@ -4188,15 +4476,22 @@ function attack(
         }
 
 
-        combatLocked =
+        combatLocked=
           false;
+
 
         return;
 
       }
 
 
+      /*
+        Murió con pistola como último golpe:
+        no hay pista.
+      */
+
       deathSound();
+
 
       setTimeout(
         completeCurrentRoom,
@@ -4214,9 +4509,10 @@ gunButton.addEventListener(
 
   "click",
 
-  event => {
+  event=>{
 
     event.stopPropagation();
+
 
     attack(
       "gun"
@@ -4231,9 +4527,10 @@ fistButton.addEventListener(
 
   "click",
 
-  event => {
+  event=>{
 
     event.stopPropagation();
+
 
     attack(
       "fist"
@@ -4248,12 +4545,13 @@ encounterBackButton.addEventListener(
 
   "click",
 
-  event => {
+  event=>{
 
     event.stopPropagation();
 
+
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "lootLocked"
     ){
 
@@ -4274,39 +4572,44 @@ encounterCard.addEventListener(
 
   "click",
 
-  () => {
+  ()=>{
 
 
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "simple"
     ){
 
       completeCurrentRoom();
 
+
       return;
 
     }
 
 
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "key"
     ){
 
-      const room =
+      const room=
         state.pendingRoom;
 
-      const definition =
+
+      const definition=
         DEFINITIONS[
           room
         ];
+
 
       grantKey(
         definition.keySource
       );
 
+
       completeCurrentRoom();
+
 
       return;
 
@@ -4314,19 +4617,20 @@ encounterCard.addEventListener(
 
 
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "final"
     ){
 
       completeCurrentRoom();
 
+
       return;
 
     }
 
 
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "lootLocked"
     ){
 
@@ -4334,25 +4638,29 @@ encounterCard.addEventListener(
         "NECESITAS 2 TARJETAS LLAVE"
       );
 
+
       return;
 
     }
 
 
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "lootReady"
     ){
 
-      state.encounterMode =
+      state.encounterMode=
         "missionFinal";
+
 
       setEncounterImage(
         DEFINITIONS.A1.finalCard
       );
 
-      encounterBackButton.style.display =
+
+      encounterBackButton.style.display=
         "none";
+
 
       return;
 
@@ -4360,15 +4668,17 @@ encounterCard.addEventListener(
 
 
     if(
-      state.encounterMode ===
+      state.encounterMode===
       "missionFinal"
     ){
 
-      state.rooms.A1.completed =
+      state.rooms.A1.completed=
         true;
 
-      state.rooms.A1.revealed =
+
+      state.rooms.A1.revealed=
         true;
+
 
       missionComplete();
 
@@ -4401,13 +4711,14 @@ function handleRoomClick(
 
 
   if(
-    room ===
+    room===
     state.currentRoom
   ){
 
     showMessage(
       "ESTÁS EN ESTA SALA"
     );
+
 
     return;
 
@@ -4424,10 +4735,17 @@ function handleRoomClick(
       "SOLO PUEDES IR A UNA SALA ALEDAÑA"
     );
 
+
     return;
 
   }
 
+
+  /*
+    Scanner:
+    primer clic revela
+    sin moverse.
+  */
 
   if(
     state.scannerActive
@@ -4441,26 +4759,28 @@ function handleRoomClick(
       room
     );
 
+
     return;
 
   }
 
 
-  const movementCost =
+  const movementCost=
     getMovementOxygenCost(
       room
     );
 
 
   if(
-    movementCost >
+    movementCost>
     0
   ){
 
-    const alive =
+    const alive=
       consumeOxygen(
         movementCost
       );
+
 
     if(
       !alive
@@ -4471,6 +4791,11 @@ function handleRoomClick(
   }
 
 
+  /*
+    Habitación ya completada:
+    solo moverse.
+  */
+
   if(
     state.rooms[
       room
@@ -4479,9 +4804,11 @@ function handleRoomClick(
 
     turnOffScanner();
 
+
     moveToRoom(
       room
     );
+
 
     return;
 
@@ -4496,7 +4823,7 @@ function handleRoomClick(
 
 
 /* =========================================================
-   END
+   GAME OVER
    ========================================================= */
 
 function triggerGameOver(){
@@ -4507,31 +4834,43 @@ function triggerGameOver(){
     return;
   }
 
-  state.ended =
+
+  state.ended=
     true;
 
-  state.gameLocked =
+
+  state.gameLocked=
     true;
+
 
   turnOffScanner();
+
 
   encounter.classList.remove(
     "show"
   );
 
+
   gameOverSound();
 
-  endOverlay.className =
+
+  endOverlay.className=
     "show gameover";
 
-  endTitle.textContent =
+
+  endTitle.textContent=
     "GAME OVER";
 
-  endSubtitle.textContent =
+
+  endSubtitle.textContent=
     "Te has quedado sin oxígeno.";
 
 }
 
+
+/* =========================================================
+   MISSION COMPLETE
+   ========================================================= */
 
 function missionComplete(){
 
@@ -4541,27 +4880,35 @@ function missionComplete(){
     return;
   }
 
-  state.ended =
+
+  state.ended=
     true;
 
-  state.gameLocked =
+
+  state.gameLocked=
     true;
+
 
   turnOffScanner();
+
 
   encounter.classList.remove(
     "show"
   );
 
+
   missionSound();
 
-  endOverlay.className =
+
+  endOverlay.className=
     "show mission";
 
-  endTitle.textContent =
+
+  endTitle.textContent=
     "MISIÓN CUMPLIDA";
 
-  endSubtitle.textContent =
+
+  endSubtitle.textContent=
     "Has abierto la bóveda y recuperado el botín.";
 
 }
@@ -4571,7 +4918,7 @@ function missionComplete(){
    MOBILE DOUBLE ZOOM
    ========================================================= */
 
-let lastTouchEnd =
+let lastTouchEnd=
   0;
 
 
@@ -4579,16 +4926,15 @@ document.addEventListener(
 
   "touchend",
 
-  event => {
+  event=>{
 
-    const now =
+    const now=
       Date.now();
 
+
     if(
-      now
-      -
-      lastTouchEnd
-      <=
+      now-
+      lastTouchEnd<=
       300
     ){
 
@@ -4596,7 +4942,8 @@ document.addEventListener(
 
     }
 
-    lastTouchEnd =
+
+    lastTouchEnd=
       now;
 
   },
