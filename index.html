@@ -37,6 +37,11 @@ button{
   font-family:inherit
 }
 
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
 #introOverlay{
   position:relative;
   width:min(100vw,760px);
@@ -91,6 +96,11 @@ button{
 #acceptMissionButton:active{
   transform:translateX(-50%) scale(.96)
 }
+
+
+/* =========================================================
+   DOCKING
+   ========================================================= */
 
 #dockScene{
   position:relative;
@@ -160,6 +170,11 @@ button{
   100%{opacity:0}
 }
 
+
+/* =========================================================
+   GAME
+   ========================================================= */
+
 #game{
   display:none;
   position:relative;
@@ -205,6 +220,11 @@ button{
   background:transparent;
   border:0
 }
+
+
+/* =========================================================
+   MAP ICONS
+   ========================================================= */
 
 .map-icon{
   position:absolute;
@@ -276,6 +296,11 @@ button{
   }
 }
 
+
+/* =========================================================
+   MAP CONTROLS
+   ========================================================= */
+
 #scannerButton{
   position:absolute;
   left:36%;
@@ -327,6 +352,11 @@ button{
     0 0 15px rgba(168,211,54,.65)
 }
 
+
+/* =========================================================
+   OXYGEN
+   ========================================================= */
+
 #oxygenCounter{
   position:absolute;
   left:5.1%;
@@ -355,6 +385,12 @@ button{
   color:#ff7777
 }
 
+
+/* =========================================================
+   TUTORIAL
+   AHORA NARANJA
+   ========================================================= */
+
 #tutorialOverlay{
   position:fixed;
   inset:0;
@@ -375,10 +411,13 @@ button{
   padding:24px 22px;
   border-radius:20px;
   background:rgba(19,22,27,.97);
-  border:3px solid #a8d336;
+
+  border:3px solid #ff8a1f;
+
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
-    0 0 26px rgba(168,211,54,.35);
+    0 0 26px rgba(255,138,31,.42);
+
   text-align:center;
   color:#fff
 }
@@ -395,12 +434,19 @@ button{
   padding:11px 22px;
   border:0;
   border-radius:14px;
-  background:#a8d336;
+
+  background:#ff8a1f;
+
   color:#111;
   font-size:18px;
   font-weight:900;
   cursor:pointer
 }
+
+
+/* =========================================================
+   ENCOUNTER
+   ========================================================= */
 
 #encounter{
   position:fixed;
@@ -464,6 +510,11 @@ button{
   height:27%
 }
 
+
+/* =========================================================
+   ENEMY HP
+   ========================================================= */
+
 #enemyHp{
   position:absolute;
   z-index:130;
@@ -519,6 +570,12 @@ button{
   100%{transform:scale(1)}
 }
 
+
+/* =========================================================
+   INFORMATIVE MESSAGE
+   AHORA NARANJA
+   ========================================================= */
+
 #message{
   position:fixed;
   left:50%;
@@ -530,7 +587,9 @@ button{
   padding:17px 25px;
   border-radius:18px;
   background:rgba(15,18,22,.96);
-  border:3px solid #a8d336;
+
+  border:3px solid #ff8a1f;
+
   color:#fff;
   font-size:clamp(19px,4.3vw,33px);
   font-weight:900;
@@ -538,9 +597,11 @@ button{
   text-align:center;
   opacity:0;
   visibility:hidden;
+
   box-shadow:
     0 0 0 3px rgba(0,0,0,.55),
-    0 0 25px rgba(168,211,54,.45);
+    0 0 25px rgba(255,138,31,.48);
+
   pointer-events:none
 }
 
@@ -570,6 +631,11 @@ button{
     transform:translate(-50%,-95%) scale(.95)
   }
 }
+
+
+/* =========================================================
+   END
+   ========================================================= */
 
 #endOverlay{
   position:fixed;
@@ -630,6 +696,7 @@ button{
 }
 
 @media(max-width:500px){
+
   #acceptMissionButton{
     min-width:145px;
     padding:11px 20px
@@ -640,17 +707,22 @@ button{
     height:39px;
     font-size:17px
   }
+
 }
 
 @media(min-width:900px){
+
   #encounterCard{
     width:min(58vh,610px)
   }
+
 }
 </style>
 </head>
 
+
 <body>
+
 
 <div id="introOverlay">
 
@@ -658,12 +730,20 @@ button{
     <img class="intro-image" src="M01a.png" alt="Mensaje entrante">
   </section>
 
+
   <section id="introPage2" class="intro-page">
+
     <img class="intro-image" src="M01b.png" alt="Nueva misión">
-    <button id="acceptMissionButton" type="button">ACEPTAR</button>
+
+    <button id="acceptMissionButton" type="button">
+      ACEPTAR
+    </button>
+
   </section>
 
+
   <section id="dockPage" class="intro-page">
+
     <div id="dockScene">
 
       <img
@@ -682,9 +762,11 @@ button{
       <div id="dockFlash"></div>
 
     </div>
+
   </section>
 
 </div>
+
 
 
 <div id="game">
@@ -699,7 +781,9 @@ button{
     >
 
     <div id="roomsLayer"></div>
+
     <div id="iconsLayer"></div>
+
 
     <button
       id="scannerButton"
@@ -707,11 +791,13 @@ button{
       aria-label="Escáner"
     ></button>
 
+
     <button
       id="useObjectButton"
       type="button"
       aria-label="Usar objeto"
     ></button>
+
 
     <button
       id="musicButton"
@@ -721,6 +807,7 @@ button{
       ♫
     </button>
 
+
     <div id="oxygenCounter">
       100%
     </div>
@@ -728,6 +815,7 @@ button{
   </div>
 
 </div>
+
 
 
 <audio id="introMusic" loop preload="auto">
@@ -744,6 +832,7 @@ button{
     type="audio/mpeg"
   >
 </audio>
+
 
 
 <div id="tutorialOverlay">
@@ -764,6 +853,7 @@ button{
 </div>
 
 
+
 <div id="encounter">
 
   <div id="encounterCard">
@@ -780,6 +870,7 @@ button{
       aria-live="polite"
     ></div>
 
+
     <button
       id="gunButton"
       class="attack-zone"
@@ -787,12 +878,14 @@ button{
       aria-label="Disparar"
     ></button>
 
+
     <button
       id="fistButton"
       class="attack-zone"
       type="button"
       aria-label="Golpear"
     ></button>
+
 
     <button
       id="encounterBackButton"
@@ -806,7 +899,9 @@ button{
 </div>
 
 
+
 <div id="message"></div>
+
 
 
 <div id="endOverlay">
@@ -832,15 +927,19 @@ button{
 const ASSETS={
 
   introIncoming:"M01a.png",
+
   introMission:"M01b.png",
 
   stationOnly:"MIa.png",
+
   dockedStation:"MIb.png",
 
   playerShip:"NvAstra.png",
 
   map100:"MIc100.png",
+
   map60:"MIc60.png",
+
   map20:"MIc20.png",
 
   playerIcon:"IcoAstra.png",
@@ -852,6 +951,7 @@ const ASSETS={
 };
 
 
+
 /* =========================================================
    ROOM LAYOUT
    ========================================================= */
@@ -859,35 +959,57 @@ const ASSETS={
 const ROOM_LAYOUT={
 
   A1:{x:33.5,y:17.9},
+
   A2:{x:50.8,y:17.9},
+
   A3:{x:68.1,y:17.9},
+
 
   B1:{x:50.8,y:27.2},
 
+
   A4:{x:33.5,y:37.9},
+
   B2:{x:50.8,y:37.9},
+
   A5:{x:68.1,y:37.9},
 
+
   A6:{x:16.4,y:47.8},
+
   B3:{x:33.5,y:47.8},
+
   A7:{x:50.8,y:47.8},
+
   B4:{x:68.1,y:47.8},
+
   A8:{x:85.2,y:47.8},
 
+
   A9:{x:16.4,y:57.6},
+
   B5:{x:50.8,y:57.6},
+
   A10:{x:85.2,y:57.6},
 
+
   A11:{x:16.4,y:67.6},
+
   B6:{x:33.5,y:67.6},
+
   A12:{x:50.8,y:67.6},
+
   B7:{x:68.1,y:67.6},
+
   A13:{x:85.2,y:67.6},
 
+
   A14:{x:16.4,y:77.5},
+
   A15:{x:85.2,y:77.5}
 
 };
+
 
 
 /* =========================================================
@@ -903,9 +1025,11 @@ const GRAPH={
     "A12"
   ],
 
+
   A1:[
     "A2"
   ],
+
 
   A2:[
     "A1",
@@ -913,18 +1037,22 @@ const GRAPH={
     "B1"
   ],
 
+
   A3:[
     "A2"
   ],
+
 
   B1:[
     "A2",
     "B2"
   ],
 
+
   A4:[
     "B2"
   ],
+
 
   B2:[
     "B1",
@@ -933,20 +1061,24 @@ const GRAPH={
     "A7"
   ],
 
+
   A5:[
     "B2"
   ],
+
 
   A6:[
     "B3",
     "A9"
   ],
 
+
   B3:[
     "A6",
     "A7",
     "B6"
   ],
+
 
   A7:[
     "B2",
@@ -955,31 +1087,37 @@ const GRAPH={
     "B5"
   ],
 
+
   B4:[
     "A7",
     "A8",
     "B7"
   ],
 
+
   A8:[
     "B4",
     "A10"
   ],
+
 
   A9:[
     "A6",
     "A11"
   ],
 
+
   B5:[
     "A7",
     "A12"
   ],
 
+
   A10:[
     "A8",
     "A13"
   ],
+
 
   A11:[
     "A9",
@@ -987,11 +1125,13 @@ const GRAPH={
     "A14"
   ],
 
+
   B6:[
     "B3",
     "A11",
     "A12"
   ],
+
 
   A12:[
     "B5",
@@ -999,11 +1139,13 @@ const GRAPH={
     "B7"
   ],
 
+
   B7:[
     "B4",
     "A12",
     "A13"
   ],
+
 
   A13:[
     "A10",
@@ -1011,9 +1153,11 @@ const GRAPH={
     "A15"
   ],
 
+
   A14:[
     "A11"
   ],
+
 
   A15:[
     "A13"
@@ -1022,25 +1166,39 @@ const GRAPH={
 };
 
 
+
 /* =========================================================
    EVENTS
    ========================================================= */
 
 const DEFINITIONS={
 
+
   A1:{
+
     type:"loot",
+
     label:"SALA DEL BOTÍN",
+
     card:"A1E.png",
+
     finalCard:"A1F.png",
+
     icon:"ICOBT.png"
+
   },
 
+
   A2:{
+
     type:"combat",
+
     label:"MARCIANO VERDE",
+
     card:"A2E.png",
+
     finalCard:"A2F.png",
+
     icon:"ICOMV.png",
 
     hp:{
@@ -1048,28 +1206,48 @@ const DEFINITIONS={
       60:3,
       20:3
     }
+
   },
+
 
   A3:{
+
     type:"simple",
+
     label:"CAJA DE OBJETO",
+
     card:"CJO.png",
+
     icon:"ICOCO.png"
+
   },
+
 
   A4:{
+
     type:"key",
+
     label:"TARJETA LLAVE",
+
     card:"TLL.png",
+
     icon:"ICOTL.png",
+
     keySource:"A4"
+
   },
 
+
   A5:{
+
     type:"combat",
+
     label:"MARCIANO ROJO",
+
     card:"A5E.png",
+
     finalCard:"A5F.png",
+
     icon:"ICOMR.png",
 
     hp:{
@@ -1077,21 +1255,35 @@ const DEFINITIONS={
       60:4,
       20:5
     }
+
   },
+
 
   A6:{
+
     type:"key",
+
     label:"TARJETA LLAVE",
+
     card:"TLL.png",
+
     icon:"ICOTL.png",
+
     keySource:"A6"
+
   },
+
 
   A7:{
+
     type:"combat",
+
     label:"MARCIANO MORADO",
+
     card:"A7E.png",
+
     finalCard:"A7F.png",
+
     icon:"ICOMM.png",
 
     hp:{
@@ -1099,20 +1291,33 @@ const DEFINITIONS={
       60:2,
       20:2
     }
+
   },
+
 
   A8:{
+
     type:"simple",
+
     label:"CAJA DE OBJETO",
+
     card:"CJO.png",
+
     icon:"ICOCO.png"
+
   },
 
+
   A9:{
+
     type:"combat",
+
     label:"MARCIANO MORADO",
+
     card:"A9E.png",
+
     finalCard:"A9F.png",
+
     icon:"ICOMM.png",
 
     hp:{
@@ -1120,27 +1325,46 @@ const DEFINITIONS={
       60:2,
       20:2
     }
+
   },
+
 
   A10:{
+
     type:"simple",
+
     label:"TRAMPA DE VIDA",
+
     card:"TRV.png",
+
     icon:"ICOTR.png"
+
   },
+
 
   A11:{
+
     type:"simple",
+
     label:"TRAMPA DE ENERGÍA",
+
     card:"TRE.png",
+
     icon:"ICOTR.png"
+
   },
+
 
   A12:{
+
     type:"combat",
+
     label:"MARCIANO VERDE",
+
     card:"A12E.png",
+
     finalCard:"A12F.png",
+
     icon:"ICOMV.png",
 
     hp:{
@@ -1148,13 +1372,20 @@ const DEFINITIONS={
       60:1,
       20:2
     }
+
   },
+
 
   A13:{
+
     type:"combat",
+
     label:"MARCIANO VERDE",
+
     card:"A13E.png",
+
     finalCard:"A13F.png",
+
     icon:"ICOMV.png",
 
     hp:{
@@ -1162,63 +1393,109 @@ const DEFINITIONS={
       60:1,
       20:2
     }
+
   },
+
 
   A14:{
+
     type:"simple",
+
     label:"CAJA DE OBJETO",
+
     card:"CJO.png",
+
     icon:"ICOCO.png"
+
   },
 
+
   A15:{
+
     type:"simple",
+
     label:"RECUPERAR VIDA",
+
     card:"SDV.png",
+
     icon:"ICOV.png"
+
   },
 
 
   /* =====================================================
-     ENCUENTROS B ALEATORIOS
+     ENCUENTROS B
      ===================================================== */
 
+
   B1:{
+
     sourceId:"B1",
+
     type:"simple",
+
     label:"TRAMPA DE ENERGÍA",
+
     card:"TRE.png",
+
     icon:"ICOTR.png"
+
   },
+
 
   B2:{
+
     sourceId:"B2",
+
     type:"simple",
+
     label:"TRAMPA DE VIDA",
+
     card:"TRV.png",
+
     icon:"ICOTR.png"
+
   },
+
 
   B3:{
+
     sourceId:"B3",
+
     type:"simple",
+
     label:"CAJA DE OBJETO",
+
     card:"CJO.png",
+
     icon:"ICOCO.png"
+
   },
+
 
   B4:{
+
     sourceId:"B4",
+
     type:"simple",
+
     label:"RECUPERAR VIDA",
+
     card:"SDV.png",
+
     icon:"ICOV.png"
+
   },
 
+
   B5:{
+
     sourceId:"B5",
+
     type:"combat",
+
     label:"MARCIANO ROJO",
+
     card:"B5E.png",
 
     finalCards:[
@@ -1233,12 +1510,18 @@ const DEFINITIONS={
       60:3,
       20:4
     }
+
   },
 
+
   B6:{
+
     sourceId:"B6",
+
     type:"combat",
+
     label:"MARCIANO ROJO",
+
     card:"B6E.png",
 
     finalCards:[
@@ -1253,12 +1536,18 @@ const DEFINITIONS={
       60:3,
       20:4
     }
+
   },
 
+
   B7:{
+
     sourceId:"B7",
+
     type:"combat",
+
     label:"MARCIANO MORADO",
+
     card:"B7E.png",
 
     finalCards:[
@@ -1273,9 +1562,11 @@ const DEFINITIONS={
       60:2,
       20:2
     }
+
   }
 
 };
+
 
 
 /* =========================================================
@@ -1316,6 +1607,7 @@ function getFinalCardCandidates(
 }
 
 
+
 function hasFinalCard(
   definition
 ){
@@ -1329,19 +1621,29 @@ function hasFinalCard(
 }
 
 
+
 /* =========================================================
    RANDOMIZE B ENCOUNTERS
    ========================================================= */
 
 const B_ROOMS=[
+
   "B1",
+
   "B2",
+
   "B3",
+
   "B4",
+
   "B5",
+
   "B6",
+
   "B7"
+
 ];
+
 
 
 function randomIndex(
@@ -1357,9 +1659,11 @@ function randomIndex(
     const data=
       new Uint32Array(1);
 
+
     window.crypto.getRandomValues(
       data
     );
+
 
     return data[0]%max;
 
@@ -1371,6 +1675,7 @@ function randomIndex(
   );
 
 }
+
 
 
 function shuffleArray(
@@ -1403,6 +1708,7 @@ function shuffleArray(
   return array;
 
 }
+
 
 
 function randomizeBEncounters(){
@@ -1478,7 +1784,9 @@ function randomizeBEncounters(){
 }
 
 
+
 randomizeBEncounters();
+
 
 
 /* =========================================================
@@ -1503,15 +1811,22 @@ const state={
 
   ended:false,
 
+
   keySources:{
+
     A4:false,
+
     A6:false,
+
     A5:false
+
   },
+
 
   rooms:{}
 
 };
+
 
 
 Object.keys(
@@ -1536,6 +1851,7 @@ Object.keys(
 );
 
 
+
 /* =========================================================
    DOM
    ========================================================= */
@@ -1545,160 +1861,192 @@ const introOverlay=
     "introOverlay"
   );
 
+
 const introPage1=
   document.getElementById(
     "introPage1"
   );
+
 
 const introPage2=
   document.getElementById(
     "introPage2"
   );
 
+
 const dockPage=
   document.getElementById(
     "dockPage"
   );
+
 
 const acceptMissionButton=
   document.getElementById(
     "acceptMissionButton"
   );
 
+
 const dockBaseImage=
   document.getElementById(
     "dockBaseImage"
   );
+
 
 const dockShip=
   document.getElementById(
     "dockShip"
   );
 
+
 const dockFlash=
   document.getElementById(
     "dockFlash"
   );
+
 
 const game=
   document.getElementById(
     "game"
   );
 
+
 const mapImage=
   document.getElementById(
     "mapImage"
   );
+
 
 const roomsLayer=
   document.getElementById(
     "roomsLayer"
   );
 
+
 const iconsLayer=
   document.getElementById(
     "iconsLayer"
   );
+
 
 const scannerButton=
   document.getElementById(
     "scannerButton"
   );
 
+
 const useObjectButton=
   document.getElementById(
     "useObjectButton"
   );
+
 
 const musicButton=
   document.getElementById(
     "musicButton"
   );
 
+
 const oxygenCounter=
   document.getElementById(
     "oxygenCounter"
   );
+
 
 const tutorialOverlay=
   document.getElementById(
     "tutorialOverlay"
   );
 
+
 const tutorialText=
   document.getElementById(
     "tutorialText"
   );
+
 
 const tutorialNext=
   document.getElementById(
     "tutorialNext"
   );
 
+
 const encounter=
   document.getElementById(
     "encounter"
   );
+
 
 const encounterCard=
   document.getElementById(
     "encounterCard"
   );
 
+
 const encounterImage=
   document.getElementById(
     "encounterImage"
   );
+
 
 const enemyHp=
   document.getElementById(
     "enemyHp"
   );
 
+
 const gunButton=
   document.getElementById(
     "gunButton"
   );
+
 
 const fistButton=
   document.getElementById(
     "fistButton"
   );
 
+
 const encounterBackButton=
   document.getElementById(
     "encounterBackButton"
   );
+
 
 const message=
   document.getElementById(
     "message"
   );
 
+
 const endOverlay=
   document.getElementById(
     "endOverlay"
   );
+
 
 const endTitle=
   document.getElementById(
     "endTitle"
   );
 
+
 const endSubtitle=
   document.getElementById(
     "endSubtitle"
   );
+
 
 const introMusic=
   document.getElementById(
     "introMusic"
   );
 
+
 const bgMusic=
   document.getElementById(
     "bgMusic"
   );
+
 
 
 let messageTimer=null;
@@ -1714,9 +2062,11 @@ let gameAudioContext=null;
 let tutorialIndex=0;
 
 
+
 introMusic.volume=.34;
 
 bgMusic.volume=.32;
+
 
 
 /* =========================================================
@@ -1789,7 +2139,9 @@ function buildRooms(){
 }
 
 
+
 buildRooms();
+
 
 
 /* =========================================================
@@ -1799,18 +2151,23 @@ buildRooms();
 const preloadImages=[
 
   ASSETS.introIncoming,
+
   ASSETS.introMission,
 
   ASSETS.stationOnly,
+
   ASSETS.dockedStation,
 
   ASSETS.playerShip,
 
   ASSETS.map100,
+
   ASSETS.map60,
+
   ASSETS.map20
 
 ];
+
 
 
 Object.values(
@@ -1858,6 +2215,7 @@ Object.values(
 );
 
 
+
 preloadImages
 .filter(
   Boolean
@@ -1874,6 +2232,7 @@ preloadImages
 
   }
 );
+
 
 
 /* =========================================================
@@ -1911,6 +2270,7 @@ function getAudioContext(){
   return gameAudioContext;
 
 }
+
 
 
 function toneSweep(
@@ -1996,6 +2356,7 @@ function toneSweep(
   catch(error){}
 
 }
+
 
 
 function scannerSound(){
@@ -2109,6 +2470,7 @@ function scannerSound(){
 }
 
 
+
 function punchSound(){
 
   toneSweep(
@@ -2120,6 +2482,7 @@ function punchSound(){
   );
 
 }
+
 
 
 function lifeLossSound(){
@@ -2154,6 +2517,7 @@ function lifeLossSound(){
 }
 
 
+
 function gunSound(){
 
   toneSweep(
@@ -2165,6 +2529,7 @@ function gunSound(){
   );
 
 }
+
 
 
 function energyLossSound(){
@@ -2180,6 +2545,7 @@ function energyLossSound(){
 }
 
 
+
 function itemSound(){
 
   toneSweep(
@@ -2191,6 +2557,7 @@ function itemSound(){
   );
 
 }
+
 
 
 function deathSound(){
@@ -2239,6 +2606,7 @@ function deathSound(){
 }
 
 
+
 function gameOverSound(){
 
   toneSweep(
@@ -2250,6 +2618,7 @@ function gameOverSound(){
   );
 
 }
+
 
 
 function missionSound(){
@@ -2283,6 +2652,7 @@ function missionSound(){
   );
 
 }
+
 
 
 function dockingTravelSound(){
@@ -2440,6 +2810,7 @@ function dockingTravelSound(){
 }
 
 
+
 function dockingImpactSound(){
 
   toneSweep(
@@ -2485,6 +2856,7 @@ function dockingImpactSound(){
 }
 
 
+
 /* =========================================================
    INTRO / MUSIC
    ========================================================= */
@@ -2514,6 +2886,7 @@ function showIntroPage(
   );
 
 }
+
 
 
 introPage1.addEventListener(
@@ -2552,6 +2925,7 @@ introPage1.addEventListener(
   }
 
 );
+
 
 
 function crossfadeToGameMusic(){
@@ -2657,6 +3031,7 @@ function crossfadeToGameMusic(){
 }
 
 
+
 acceptMissionButton.addEventListener(
 
   "click",
@@ -2691,6 +3066,7 @@ acceptMissionButton.addEventListener(
   }
 
 );
+
 
 
 function startDockingSequence(){
@@ -2771,6 +3147,7 @@ function startDockingSequence(){
 }
 
 
+
 function startGame(){
 
   mapImage.src=
@@ -2804,6 +3181,7 @@ function startGame(){
   showTutorial();
 
 }
+
 
 
 async function toggleMusic(){
@@ -2855,6 +3233,7 @@ async function toggleMusic(){
 }
 
 
+
 musicButton.addEventListener(
 
   "click",
@@ -2871,6 +3250,7 @@ musicButton.addEventListener(
 );
 
 
+
 /* =========================================================
    TUTORIAL
    ========================================================= */
@@ -2884,6 +3264,7 @@ const TUTORIAL_MESSAGES=[
   "Si necesitas usar un objeto da clic en USAR OBJETO."
 
 ];
+
 
 
 function showTutorial(){
@@ -2911,6 +3292,7 @@ function showTutorial(){
   );
 
 }
+
 
 
 tutorialNext.addEventListener(
@@ -2961,6 +3343,7 @@ tutorialNext.addEventListener(
 );
 
 
+
 /* =========================================================
    MESSAGE
    ========================================================= */
@@ -3006,6 +3389,7 @@ function showMessage(
 }
 
 
+
 /* =========================================================
    OXYGEN
    ========================================================= */
@@ -3033,6 +3417,7 @@ function oxygenPhase(){
 }
 
 
+
 function formatOxygen(
   value
 ){
@@ -3053,6 +3438,7 @@ function formatOxygen(
   }%`;
 
 }
+
 
 
 function updateOxygenUI(){
@@ -3118,6 +3504,7 @@ function updateOxygenUI(){
 }
 
 
+
 function consumeOxygen(
   amount
 ){
@@ -3162,6 +3549,7 @@ function consumeOxygen(
   return true;
 
 }
+
 
 
 /* =========================================================
@@ -3215,6 +3603,11 @@ function getMovementOxygenCost(
 }
 
 
+
+/* =========================================================
+   USE OBJECT
+   ========================================================= */
+
 useObjectButton.addEventListener(
 
   "click",
@@ -3258,6 +3651,7 @@ useObjectButton.addEventListener(
 );
 
 
+
 /* =========================================================
    KEYS
    ========================================================= */
@@ -3273,6 +3667,7 @@ function keyCount(){
   .length;
 
 }
+
 
 
 function grantKey(
@@ -3298,6 +3693,7 @@ function grantKey(
   }
 
 }
+
 
 
 /* =========================================================
@@ -3376,6 +3772,7 @@ function addMapIcon(
 }
 
 
+
 function removeMapIcon(
   id
 ){
@@ -3395,6 +3792,7 @@ function removeMapIcon(
   }
 
 }
+
 
 
 function clearStandardMarkers(){
@@ -3423,6 +3821,7 @@ function clearStandardMarkers(){
   );
 
 }
+
 
 
 function refreshRoomMarkers(){
@@ -3503,6 +3902,7 @@ function refreshRoomMarkers(){
 }
 
 
+
 function moveToRoom(
   room
 ){
@@ -3522,6 +3922,7 @@ function moveToRoom(
 }
 
 
+
 /* =========================================================
    SCANNER
    ========================================================= */
@@ -3537,6 +3938,7 @@ function adjacentRooms(){
 }
 
 
+
 function isAdjacent(
   target
 ){
@@ -3547,6 +3949,7 @@ function isAdjacent(
   );
 
 }
+
 
 
 function directionBetween(
@@ -3621,6 +4024,7 @@ function directionBetween(
 }
 
 
+
 function turnOffScanner(){
 
   state.scannerActive=
@@ -3646,6 +4050,7 @@ function turnOffScanner(){
   );
 
 }
+
 
 
 function scanNearbyRooms(){
@@ -3743,11 +4148,21 @@ function scanNearbyRooms(){
 }
 
 
+
 scannerButton.addEventListener(
   "click",
   scanNearbyRooms
 );
 
+
+
+/* =========================================================
+   REVEAL ROOM
+
+   NUEVO:
+   DESPUÉS DE ESCANEAR UNA HABITACIÓN,
+   EL ESCÁNER SE APAGA AUTOMÁTICAMENTE.
+   ========================================================= */
 
 function revealRoom(
   room
@@ -3791,6 +4206,20 @@ function revealRoom(
   );
 
 
+  /*
+    IMPORTANTE:
+
+    En cuanto se elige una habitación
+    para escanear, el escáner se apaga.
+
+    Esto elimina las demás ondas y obliga
+    a volver a pulsar el botón si se quiere
+    hacer otro escaneo.
+  */
+
+  turnOffScanner();
+
+
   energyLossSound();
 
 
@@ -3799,6 +4228,7 @@ function revealRoom(
   );
 
 }
+
 
 
 /* =========================================================
@@ -3817,6 +4247,7 @@ function setEncounterImage(
     src;
 
 }
+
 
 
 function setEncounterImageWithFallback(
@@ -3896,6 +4327,7 @@ function setEncounterImageWithFallback(
 }
 
 
+
 function resetEncounterUI(){
 
   encounterCard.className=
@@ -3932,6 +4364,7 @@ function resetEncounterUI(){
 }
 
 
+
 function currentEnemyHp(
   definition
 ){
@@ -3949,6 +4382,7 @@ function currentEnemyHp(
     0;
 
 }
+
 
 
 function openEncounter(
@@ -4053,10 +4487,6 @@ function openEncounter(
       shots:
         0,
 
-      /*
-        Se guarda el último ataque realizado.
-        La pista depende únicamente de esto.
-      */
       lastHit:
         null
 
@@ -4126,6 +4556,7 @@ function openEncounter(
 }
 
 
+
 function completeCurrentRoom(){
 
   const room=
@@ -4174,6 +4605,7 @@ function completeCurrentRoom(){
 }
 
 
+
 function closeUnresolvedRoomToMap(){
 
   const room=
@@ -4216,6 +4648,7 @@ function closeUnresolvedRoomToMap(){
 }
 
 
+
 function animateHit(){
 
   encounterCard.classList.remove(
@@ -4233,17 +4666,11 @@ function animateHit(){
 }
 
 
+
 /* =========================================================
    COMBAT
 
-   NUEVA REGLA:
-
-   LA PISTA / RESOLUCIÓN APARECE SI
-   EL GOLPE QUE DEJA AL ENEMIGO EN 0
-   ES UN PUÑO.
-
-   NO IMPORTA CUÁNTOS PUÑOS O
-   PISTOLAS SE USARON ANTES.
+   PISTA SI EL ÚLTIMO GOLPE ES PUÑO
    ========================================================= */
 
 function attack(
@@ -4271,11 +4698,6 @@ function attack(
   const combat=
     state.combat;
 
-
-  /*
-    Guardamos cuál fue el ataque
-    más reciente.
-  */
 
   combat.lastHit=
     kind;
@@ -4353,11 +4775,6 @@ function attack(
     ()=>{
 
 
-      /*
-        Si el enemigo todavía tiene vida,
-        continúa el combate.
-      */
-
       if(
         combat.hp>
         0
@@ -4379,27 +4796,9 @@ function attack(
 
 
       /*
-        =================================================
-        NUEVA CONDICIÓN DE PISTA
+        ÚNICA CONDICIÓN DE PISTA:
 
-        El ÚNICO requisito de combate es:
-
-        último golpe = PUÑO.
-
-        Ejemplos:
-
-        PISTOLA + PISTOLA + PUÑO
-        = SÍ PISTA.
-
-        PUÑO + PUÑO + PISTOLA
-        = NO PISTA.
-
-        PISTOLA + PUÑO
-        = SÍ PISTA.
-
-        PUÑO + PISTOLA
-        = NO PISTA.
-        =================================================
+        EL GOLPE FINAL DEBE SER PUÑO.
       */
 
       const earnsFinal=
@@ -4456,12 +4855,8 @@ function attack(
 
         /*
           A5:
-          Si A5 activa su resolución,
-          también entrega la tarjeta llave.
-
-          Como la resolución ahora depende
-          del último golpe, basta con que
-          el golpe final de A5 sea PUÑO.
+          SI ACTIVA LA PISTA,
+          TAMBIÉN ENTREGA LA LLAVE.
         */
 
         if(
@@ -4485,11 +4880,6 @@ function attack(
       }
 
 
-      /*
-        Murió con pistola como último golpe:
-        no hay pista.
-      */
-
       deathSound();
 
 
@@ -4503,6 +4893,7 @@ function attack(
   );
 
 }
+
 
 
 gunButton.addEventListener(
@@ -4523,6 +4914,7 @@ gunButton.addEventListener(
 );
 
 
+
 fistButton.addEventListener(
 
   "click",
@@ -4539,6 +4931,7 @@ fistButton.addEventListener(
   }
 
 );
+
 
 
 encounterBackButton.addEventListener(
@@ -4562,6 +4955,7 @@ encounterBackButton.addEventListener(
   }
 
 );
+
 
 
 /* =========================================================
@@ -4689,6 +5083,7 @@ encounterCard.addEventListener(
 );
 
 
+
 /* =========================================================
    MOVEMENT
    ========================================================= */
@@ -4742,9 +5137,14 @@ function handleRoomClick(
 
 
   /*
-    Scanner:
-    primer clic revela
-    sin moverse.
+    SI EL ESCÁNER ESTÁ ACTIVO
+    Y LA HABITACIÓN TODAVÍA NO HA
+    SIDO REVELADA:
+
+    SOLO LA ESCANEA.
+
+    revealRoom() apagará automáticamente
+    el escáner después.
   */
 
   if(
@@ -4791,11 +5191,6 @@ function handleRoomClick(
   }
 
 
-  /*
-    Habitación ya completada:
-    solo moverse.
-  */
-
   if(
     state.rooms[
       room
@@ -4820,6 +5215,7 @@ function handleRoomClick(
   );
 
 }
+
 
 
 /* =========================================================
@@ -4868,6 +5264,7 @@ function triggerGameOver(){
 }
 
 
+
 /* =========================================================
    MISSION COMPLETE
    ========================================================= */
@@ -4912,6 +5309,7 @@ function missionComplete(){
     "Has abierto la bóveda y recuperado el botín.";
 
 }
+
 
 
 /* =========================================================
